@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 0.5rem;
+      color: #fff;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="vote.html" class="nav-item">Voter Resources</a>
+      <a href="events.html" class="nav-item">Events</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <a href="arena_training.html" class="nav-item">The Arena</a>
+      <a href="issues_map.html" class="nav-item">Issues</a>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="#donate" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header" style="min-height: 30vh; padding-top: 120px;">
+    <div class="container fade-in">
+      <h1>Contact Us</h1>
+      <p>Be the first to know about change in your community. Reach out with questions, concerns, or simply to get involved.</p>
+    </div>
+  </header>
+
+  <!-- Contact Form & Info -->
+  <section class="container" style="padding-top: 0;">
+    <div class="glass-card fade-in contact-grid">
+      
+      <!-- Contact Info -->
+      <div>
+        <h2 style="text-align: left; margin-bottom: 2rem;">Headquarters</h2>
+        <p><strong>Address:</strong><br>800 N. Main St. Suite 110<br>McAllen, TX 78501</p>
+        <p style="margin-top: 1.5rem;"><strong>Phone:</strong><br><a href="tel:9563225293">(956) 322-5293</a></p>
+        <p style="margin-top: 1.5rem;"><strong>Email:</strong><br><a href="mailto:info@hidalgocountydems.com">info@hidalgocountydems.com</a></p>
+        
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem;">Office Hours</h3>
+          <p>Monday - Friday: 9am - 5pm<br>Saturday & Sunday: Closed (Unless Blockwalking!)</p>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div>
+        <form onsubmit="event.preventDefault(); alert('Form submitted! We will be in touch.');">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" required placeholder="How can we help you?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="events.html">Events & Volunteer</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

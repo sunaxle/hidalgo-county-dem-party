@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elected Officials - Hidalgo Dems</title>
+  <meta name="description" content="Directory of Hidalgo County elected officials, including federal, state, and local representatives.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .directory-section {
+      margin-top: 4rem;
+    }
+    .directory-section h2 {
+      text-align: left;
+      border-bottom: 2px solid var(--glass-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .official-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+    .official-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(34, 211, 238, 0.4);
+    }
+    .party-badge {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .badge-dem { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .badge-rep { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    
+    .official-name { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.25rem; }
+    .official-title { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+    
+    .official-links {
+      margin-top: auto;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .official-links a {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: var(--transition);
+    }
+    .official-links a:hover {
+      border-bottom-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="vote.html" class="nav-item">Resources</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="social_wall.html" class="nav-item">Social Wall</a>
+      <a href="elected_officials.html" class="nav-item" style="color:var(--accent);">Officials</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in">
+    <div>
+      <h1>Elected Officials Directory</h1>
+      <p style="max-width: 800px; margin: 0 auto;">A comprehensive list of the federal, state, and local representatives whose districts encompass parts of Hidalgo County.</p>
+    </div>
+  </header>
+
+  <!-- U.S. Congress -->
+  <section class="container" style="padding-top: 0;">
+    <div class="directory-section fade-in">
+      <h2>United States Congress</h2>
+      <div class="grid-3">
+        <!-- Senator -->
+        <div class="official-card">
+          <span class="party-badge badge-rep">Republican</span>
+          <h3 class="official-name">John Cornyn</h3>
+          <p class="official-title">U.S. Senator (Texas)</p>
+          <div class="official-links">
+            <a href="https://www.cornyn.senate.gov/" target="_blank">Official Website</a>
+            <a href="https://twitter.com/JohnCornyn" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- Senator -->
+        <div class="official-card">
+          <span class="party-badge badge-rep">Republican</span>
+          <h3 class="official-name">Ted Cruz</h3>
+          <p class="official-title">U.S. Senator (Texas)</p>
+          <div class="official-links">
+            <a href="https://www.cruz.senate.gov/" target="_blank">Official Website</a>
+            <a href="https://twitter.com/SenTedCruz" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- Representative 15 -->
+        <div class="official-card">
+          <span class="party-badge badge-rep">Republican</span>
+          <h3 class="official-name">Monica De La Cruz</h3>
+          <p class="official-title">U.S. Representative (District 15)</p>
+          <div class="official-links">
+            <a href="https://delacruz.house.gov/" target="_blank">Official Website</a>
+            <a href="https://twitter.com/RepMonicaDLC" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- Representative 28 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Henry Cuellar</h3>
+          <p class="official-title">U.S. Representative (District 28)</p>
+          <div class="official-links">
+            <a href="https://cuellar.house.gov/" target="_blank">Official Website</a>
+            <a href="https://twitter.com/RepCuellar" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- Representative 34 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Vicente Gonzalez</h3>
+          <p class="official-title">U.S. Representative (District 34)</p>
+          <div class="official-links">
+            <a href="https://gonzalez.house.gov/" target="_blank">Official Website</a>
+            <a href="https://twitter.com/RepGonzalez" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Texas Legislature -->
+    <div class="directory-section fade-in">
+      <h2>Texas Legislature</h2>
+      <div class="grid-3">
+        <!-- TX Senate D20 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Juan "Chuy" Hinojosa</h3>
+          <p class="official-title">State Senator (District 20)</p>
+          <div class="official-links">
+            <a href="https://senate.texas.gov/member.php?d=20" target="_blank">Official Website</a>
+            <a href="https://twitter.com/chuysouthtexas" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- TX Senate D27 -->
+        <div class="official-card">
+          <span class="party-badge badge-rep">Republican</span>
+          <h3 class="official-name">Adam Hinojosa</h3>
+          <p class="official-title">State Senator (District 27)</p>
+          <div class="official-links">
+            <a href="https://senate.texas.gov/member.php?d=27" target="_blank">Official Website</a>
+          </div>
+        </div>
+        <!-- TX Rep D35 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Oscar Longoria</h3>
+          <p class="official-title">State Representative (District 35)</p>
+          <div class="official-links">
+            <a href="https://house.texas.gov/members/35" target="_blank">Official Website</a>
+            <a href="https://twitter.com/OscarLongoriaTX" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- TX Rep D36 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Sergio Muñoz Jr.</h3>
+          <p class="official-title">State Representative (District 36)</p>
+          <div class="official-links">
+            <a href="https://house.texas.gov/members/36" target="_blank">Official Website</a>
+            <a href="https://twitter.com/SMunozJr" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- TX Rep D39 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Armando Martinez</h3>
+          <p class="official-title">State Representative (District 39)</p>
+          <div class="official-links">
+            <a href="https://house.texas.gov/members/39" target="_blank">Official Website</a>
+            <a href="https://twitter.com/RepMando" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- TX Rep D40 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">Terry Canales</h3>
+          <p class="official-title">State Representative (District 40)</p>
+          <div class="official-links">
+            <a href="https://house.texas.gov/members/40" target="_blank">Official Website</a>
+            <a href="https://twitter.com/TerryCanales40" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+        <!-- TX Rep D41 -->
+        <div class="official-card">
+          <span class="party-badge badge-dem">Democrat</span>
+          <h3 class="official-name">R.D. "Bobby" Guerra</h3>
+          <p class="official-title">State Representative (District 41)</p>
+          <div class="official-links">
+            <a href="https://house.texas.gov/members/41" target="_blank">Official Website</a>
+            <a href="https://twitter.com/BobbyGuerraTX" target="_blank">Twitter/X</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="social_wall.html">Social Wall</a>
+        <a href="elected_officials.html">Elected Officials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

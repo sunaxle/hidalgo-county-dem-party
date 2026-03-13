@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arena Training Room | Hidalgo Dems</title>
+  <meta name="description" content="Training modules and resources for Hidalgo County Democratic volunteers to Get Out The Vote.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .module-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .module-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+    }
+    .resource-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: var(--transition);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .resource-card:hover {
+      background: rgba(34, 211, 238, 0.1);
+      border-color: var(--accent);
+      transform: translateX(5px);
+    }
+    .resource-icon {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
+  <div class="shape shape-2" style="width: 400px; height: 400px; bottom: 10%; right: -5%;"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="vote.html" class="nav-item">Voter Resources</a>
+      <a href="events.html" class="nav-item">Events</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <a href="arena_training.html" class="nav-item" style="color: var(--accent);">The Arena</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="#donate" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in" style="padding-top: 150px; padding-bottom: 3rem;">
+    <div style="text-align: center;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;"><span style="color: transparent; background: linear-gradient(90deg, var(--accent), var(--primary)); -webkit-background-clip: text; background-clip: text;">The Arena</span> Training Room</h1>
+      <p style="max-width: 700px; margin: 0 auto; font-size: 1.25rem;">Winning elections requires discipline, preparation, and skill. Welcome to the training hub for volunteers, organizers, and candidates ready to turn out the vote.</p>
+    </div>
+  </header>
+
+  <!-- Video Modules Section -->
+  <section class="container" style="padding-top: 2rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+      <h2 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">▶️ Video Modules</h2>
+      <span class="badge" style="background: rgba(34, 211, 238, 0.2); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600;">Core Curriculum</span>
+    </div>
+    
+    <div class="grid-2">
+      <!-- Module 1 -->
+      <div class="module-card fade-in">
+        <div class="video-container" style="margin-bottom: 1.5rem;">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Module 1: Blockwalking Basics</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">Learn the fundamentals of knocking on doors, reading turf maps, and safety protocols for hitting the pavement in South Texas.</p>
+        <span style="font-size: 0.8rem; color: #94a3b8;">⏱️ 15 Min &bull; Beginner</span>
+      </div>
+      
+      <!-- Module 2 -->
+      <div class="module-card fade-in" style="transition-delay: 0.1s;">
+        <div class="video-container" style="margin-bottom: 1.5rem;">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Module 2: Persuasive Conversations</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">How to structure a conversation at the door or on the phone to move undecided voters toward Democratic candidates.</p>
+        <span style="font-size: 0.8rem; color: #94a3b8;">⏱️ 22 Min &bull; Intermediate</span>
+      </div>
+
+      <!-- Module 3 -->
+      <div class="module-card fade-in" style="transition-delay: 0.2s;">
+        <div class="video-container" style="margin-bottom: 1.5rem;">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Module 3: Phonebanking 101</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">Master dialing tools (like Scale to Win/Action Network), logging responses, and overcoming common objections over the phone.</p>
+        <span style="font-size: 0.8rem; color: #94a3b8;">⏱️ 18 Min &bull; Beginner</span>
+      </div>
+
+      <!-- Module 4 -->
+      <div class="module-card fade-in" style="transition-delay: 0.3s;">
+        <div class="video-container" style="margin-bottom: 1.5rem;">
+          <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=placeholder" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <h3 style="margin-bottom: 0.5rem;">Module 4: VDR Training Primer</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1;">A refresher on the rules and legal requirements for Volunteer Deputy Registrars registering voters in Hidalgo County.</p>
+        <span style="font-size: 0.8rem; color: #94a3b8;">⏱️ 30 Min &bull; Advanced</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Worksheets & Resources -->
+  <section class="container" style="padding-top: 4rem;">
+    <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+      <h2 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">📁 Worksheets & Scripts</h2>
+    </div>
+
+    <div class="grid-3">
+      <a href="#" class="resource-card fade-in">
+        <div class="resource-icon">📋</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">Standard GOTV Script</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">PDF Download (250kb)</p>
+        </div>
+      </a>
+      
+      <a href="#" class="resource-card fade-in" style="transition-delay: 0.1s;">
+        <div class="resource-icon">📝</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">Manual Tally Sheet</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">PDF Download (120kb)</p>
+        </div>
+      </a>
+
+      <a href="#" class="resource-card fade-in" style="transition-delay: 0.2s;">
+        <div class="resource-icon">💬</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">Objection Handling FAQ</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">PDF Download (300kb)</p>
+        </div>
+      </a>
+
+      <a href="#" class="resource-card fade-in" style="transition-delay: 0.3s;">
+        <div class="resource-icon">📱</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">Minivan App Guide</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">PDF Download (1.2mb)</p>
+        </div>
+      </a>
+      
+      <a href="#" class="resource-card fade-in" style="transition-delay: 0.4s;">
+        <div class="resource-icon">🗺️</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">Hidalgo Precinct Maps</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">Link to County Portal</p>
+        </div>
+      </a>
+      
+      <a href="#" class="resource-card fade-in" style="transition-delay: 0.5s;">
+        <div class="resource-icon">✍️</div>
+        <div>
+          <h4 style="margin: 0 0 0.25rem;">VDR Receipt Logs</h4>
+          <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">Printable Template</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Request More Training Section -->
+  <section class="container" style="margin-top: 4rem; margin-bottom: 4rem;">
+    <div class="glass-card fade-in" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(29,78,216,0.1)); position: relative; overflow: hidden;">
+      <!-- decorative background icon -->
+      <div style="position: absolute; right: -50px; top: -50px; font-size: 15rem; opacity: 0.05; transform: rotate(15deg); pointer-events: none;">🎓</div>
+      
+      <h2 style="position: relative; z-index: 1;">Need Specialized Training?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff; position: relative; z-index: 1;">Whatever you or your team needs to become better at turning out the vote, let us know. We can build custom modules for specific campaign software, data management, or digital organizing.</p>
+      
+      <form action="#" method="POST" style="max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; position: relative; z-index: 1; text-align: left;">
+        <div>
+           <label for="topic" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #e2e8f0;">Requested Topic</label>
+           <input type="text" id="topic" name="topic" placeholder="e.g., Deep dive into NGP VAN" style="width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: #fff; font-family: inherit;">
+        </div>
+        <div>
+           <label for="details" style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #e2e8f0;">Why do you need this? (Optional)</label>
+           <textarea id="details" name="details" rows="3" placeholder="Explain how this helps your GOTV efforts..." style="width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: #fff; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem; align-self: flex-start;">Submit Request &rarr;</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="events.html">Events & Volunteer</a>
+        <a href="arena_training.html" style="color:var(--accent);">The Arena</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

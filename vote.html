@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voter Resources | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    a.glass-card {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    a.glass-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+      transform: translateY(-5px);
+    }
+    .icon-wrap {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-2" style="top: -100px; right: -50px; left: auto;"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="vote.html" class="nav-item" style="color: var(--accent);">Voter Resources</a>
+      <a href="events.html" class="nav-item">Events</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <a href="arena_training.html" class="nav-item">The Arena</a>
+      <a href="issues_map.html" class="nav-item">Issues</a>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="#donate" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container fade-in">
+      <h1>Voter Resources</h1>
+      <p style="max-width: 600px; margin: 0 auto;">Everything you need to ensure your voice is heard at the ballot box. Find polling locations, register to vote, and check your status.</p>
+    </div>
+  </header>
+
+  <!-- The Essentials -->
+  <section class="container" style="padding-top: 0;">
+    <h2 style="margin-bottom: 2rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem;">The Essentials</h2>
+    <div class="grid-3">
+      <div class="glass-card fade-in">
+        <div class="icon-wrap">📝</div>
+        <h3>Register to Vote</h3>
+        <p>Just turned 18 or recently moved? Make sure you are registered to vote before the Texas deadline.</p>
+        <a href="https://www.votetexas.gov/register-to-vote/index.html" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">Register Now</a>
+      </div>
+      <div class="glass-card fade-in" style="transition-delay: 0.1s;">
+        <div class="icon-wrap">✅</div>
+        <h3>Check Status</h3>
+        <p>Verify your voter registration status or check if your address is up-to-date with the state registry.</p>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+          <a href="https://goelect.txelections.civixapps.com/ivis-mvp-ui/#/login" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem;">Verify Status</a>
+          <a href="https://txapps.texas.gov/tolapp/sos/SOSACManager" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem;">Update Info</a>
+        </div>
+      </div>
+      <div class="glass-card fade-in" style="transition-delay: 0.2s;">
+        <div class="icon-wrap">🪪</div>
+        <h3>Acceptable ID</h3>
+        <p>Ensure you bring one of the 7 approved forms of photo ID when heading to the polls as mandated by Texas law.</p>
+        <a href="https://www.votetexas.gov/voting/need-id.html" target="_blank" class="btn btn-secondary" style="margin-top: 1rem;">View ID Rules</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's on My Ballot? & Where to Vote -->
+  <section class="container">
+    <div class="grid-2">
+      <!-- What's on My Ballot -->
+      <div class="glass-card fade-in" style="padding: 2.5rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">What's on My Ballot?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Research your local candidates and propositions before you enter the voting booth.</p>
+        
+        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Official County Sample Ballots</h4>
+        <ul style="list-style: none; padding: 0; margin-bottom: 1.5rem;">
+          <li style="margin-bottom: 0.5rem;"><a href="https://apps.co.hidalgo.tx.us/SampleBallotLookup" target="_blank" style="color: #fff; text-decoration: none;">📄 Hidalgo County</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="https://www.cameroncountytx.gov/elections/index.php/sample-ballots-2" target="_blank" style="color: #fff; text-decoration: none;">📄 Cameron County</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="https://www.co.starr.tx.us/page/starr.Elections" target="_blank" style="color: #fff; text-decoration: none;">📄 Starr County</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="https://www.co.willacy.tx.us/page/willacy.Elections" target="_blank" style="color: #fff; text-decoration: none;">📄 Willacy County</a></li>
+        </ul>
+
+        <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Non-Partisan Research</h4>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <a href="https://ballotpedia.org/Sample_Ballot_Lookup" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem;">Ballotpedia</a>
+          <a href="https://www.vote411.org/" target="_blank" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem;">Vote411 (LWV)</a>
+        </div>
+      </div>
+
+      <!-- Where & When to Vote -->
+      <div class="glass-card fade-in" style="padding: 2.5rem; transition-delay: 0.1s;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Where & When to Vote</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Plan when and where you will cast your ballot in the upcoming election.</p>
+        
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+            <strong style="display: block; color: var(--accent);">Find Polling Locations</strong>
+            <span>Locate early voting and election day centers near you. (Updated 2 days before early voting).</span><br>
+            <a href="https://www.votetexas.gov/voting/where.html" target="_blank" style="color: #fff; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Search Locations &rarr;</a>
+          </li>
+          <li style="margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">
+            <strong style="display: block; color: var(--accent);">2026 Election Dates</strong>
+            <span>Add the statewide voter registration deadlines and election days to your calendar.</span><br>
+            <a href="https://www.sos.state.tx.us/elections/voter/important-election-dates.shtml#2026" target="_blank" style="color: #fff; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">View Schedule &rarr;</a>
+          </li>
+          <li style="margin-bottom: 0;">
+            <strong style="display: block; color: var(--accent);">Who Represents Me?</strong>
+            <span>Discover your current federal and state representatives based on your district.</span><br>
+            <a href="https://wrm.capitol.texas.gov/home" target="_blank" style="color: #fff; font-size: 0.9rem; margin-top: 0.5rem; display: inline-block;">Look Up Districts &rarr;</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vote By Mail -->
+  <section class="container fade-in">
+    <div class="glass-card" style="background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(29,78,216,0.1));">
+      <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+        <div style="font-size: 4rem;">✉️</div>
+        <div style="flex: 1;">
+          <h2>Vote By Mail / Absentee Ballot</h2>
+          <p style="color: var(--text-muted);">Eligible voters (65 or older, sick or disabled, out of the county, or expectant mothers) can apply to vote early by mail.</p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+            <a href="https://goelect.txelections.civixapps.com/ivis-oab-ui/#/login" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Track My Ballot</a>
+            <a href="https://www.votetexas.gov/voting-by-mail/index.html" target="_blank" class="btn btn-secondary" style="padding: 0.5rem 1rem;">State Eligibility Rules</a>
+            <a href="https://www.hidalgocounty.us/3222/Application-for-Ballot-by-Mail" target="_blank" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Hidalgo Mail App</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- County Elections Departments -->
+  <section class="container fade-in" style="margin-bottom: 4rem;">
+    <h2 style="margin-bottom: 2rem; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem;">Official County Elections Departments</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+      <a href="https://www.hidalgocounty.us/105/Elections-Department" target="_blank" class="glass-card" style="text-align: center; text-decoration: none; padding: 1.5rem; display: block;">
+        <h4 style="margin:0; color:#fff;">Hidalgo County</h4>
+        <p style="font-size: 0.8rem; color:var(--accent); margin:0.5rem 0 0;">Official Website &rarr;</p>
+      </a>
+      <a href="https://www.cameroncountytx.gov/elections" target="_blank" class="glass-card" style="text-align: center; text-decoration: none; padding: 1.5rem; display: block;">
+        <h4 style="margin:0; color:#fff;">Cameron County</h4>
+        <p style="font-size: 0.8rem; color:var(--accent); margin:0.5rem 0 0;">Official Website &rarr;</p>
+      </a>
+      <a href="https://www.co.starr.tx.us/page/starr.Elections" target="_blank" class="glass-card" style="text-align: center; text-decoration: none; padding: 1.5rem; display: block;">
+        <h4 style="margin:0; color:#fff;">Starr County</h4>
+        <p style="font-size: 0.8rem; color:var(--accent); margin:0.5rem 0 0;">Official Website &rarr;</p>
+      </a>
+      <a href="https://www.co.willacy.tx.us/page/willacy.Elections" target="_blank" class="glass-card" style="text-align: center; text-decoration: none; padding: 1.5rem; display: block;">
+        <h4 style="margin:0; color:#fff;">Willacy County</h4>
+        <p style="font-size: 0.8rem; color:var(--accent); margin:0.5rem 0 0;">Official Website &rarr;</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="events.html">Events & Volunteer</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

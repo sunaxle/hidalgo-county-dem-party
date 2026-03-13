@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Precinct Chair Directory - Hidalgo Dems</title>
+  <meta name="description" content="Find your local Hidalgo County Democratic Party Precinct Chair and Block Captains.">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Leaflet CSS for the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <style>
+    .directory-header {
+      padding: 6rem 2rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 100%, rgba(34,211,238,0.1) 0%, transparent 50%);
+    }
+    
+    .map-container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto 3rem auto;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    #map {
+        height: 500px;
+        width: 100%;
+        background: #0f172a;
+    }
+
+    .directory-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .search-box {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 1rem 1.5rem 1rem 3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(15,23,42,0.6);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 15px rgba(34,211,238,0.3);
+      background: rgba(15,23,42,0.8);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
+    }
+    
+    .table-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      max-height: 800px;
+      overflow-y: auto;
+    }
+    
+    .directory-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    
+    .directory-table th {
+      background: rgba(15, 23, 42, 0.95);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 1.2rem 1.5rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .directory-table td {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      vertical-align: middle;
+    }
+    
+    .directory-row:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    
+    .pct-badge {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-weight: 800;
+      color: #fff;
+    }
+    
+    .name-cell strong {
+      color: #e2e8f0;
+      font-size: 1.1rem;
+      display: block;
+    }
+    .name-cell span {
+        font-size: 0.85rem;
+        color: #94a3b8;
+    }
+    
+    .role-badge {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .badge-chair {
+      background: rgba(250, 204, 21, 0.15); /* Gold */
+      color: #facc15;
+      border: 1px solid rgba(250, 204, 21, 0.3);
+    }
+    
+    .badge-captain {
+      background: rgba(148, 163, 184, 0.15); /* Silver */
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+    }
+    
+    .action-cell {
+      text-align: right;
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .directory-table th:nth-child(4),
+      .directory-table td:nth-child(4) { display: none; } /* hide contact button on mobile */
+      .search-box { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="issues_map.html" class="nav-item">Issues Map</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html" style="color:var(--accent);">Precinct Chairs</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="directory-header container">
+    <h1>Precinct Chair Directory</h1>
+    <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
+      Your Precinct Chair is your neighborhood's direct link to the Hidalgo County Democratic Party. Explore the map below to find your precinct's leadership, or search the directory.
+    </p>
+  </header>
+
+  <!-- Interactive Map Section -->
+  <section class="container fade-in">
+    <div class="map-controls glass-card" style="margin-bottom: 1rem; padding: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+      <span style="font-weight: bold; color: white;">Map View:</span>
+      <button id="btn-show-all" class="btn btn-sm" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Show All</button>
+      <button id="btn-show-filled" class="btn btn-sm" style="background: rgba(59, 130, 246, 0.4); border-color: #3b82f6;">Current Chairs</button>
+      <button id="btn-show-vacant" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.4); border-color: #ef4444;">Vacant Precincts</button>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- Directory Section -->
+  <section class="container" style="margin-bottom: 5rem;">
+    
+    <div class="directory-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by Name or Precinct Number...">
+      </div>
+      <div class="filter-controls">
+         <select id="roleFilter" class="search-input" style="padding-left: 1.5rem; cursor: pointer;">
+           <option value="all">All Roles</option>
+           <option value="chair">Precinct Chairs</option>
+           <option value="captain">Block Captains</option>
+         </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table class="directory-table">
+        <thead>
+          <tr>
+            <th width="10%">Pct</th>
+            <th width="40%">Name & Info</th>
+            <th width="25%">Role</th>
+            <th width="25%" style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="directoryBody">
+            <!-- Dynamically populated by JavaScript -->
+        </tbody>
+      </table>
+      <div id="noResults" class="no-results">
+        <h3>No leaders found matching your search.</h3>
+        <p>If your precinct is vacant, <a href="volunteer.html" style="color:var(--primary);">step up and run</a>!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container fade-in" style="margin-bottom: 5rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Don't See Your Precinct?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-muted);">
+        Hidalgo County has over 200 precincts, and we need dedicated Democrats in every single one of them. Find out what it takes to become a Precinct Chair today.
+      </p>
+      <a href="volunteer.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Learn How to Run</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events</a>
+        <a href="volunteer.html">Volunteer Hub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="issues_map.html">Issues Map</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  
+  <!-- Map Data and Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
+  <script src="js/chair_data.js"></script>
+  <script src="hidalgo-election-map/map_chairs.js"></script>
+
+  <script>
+    // Dynamically build the table and Setup Live Search/Filter
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const tbody = document.getElementById('directoryBody');
+      const searchInput = document.getElementById('searchInput');
+      const roleFilter = document.getElementById('roleFilter');
+      const noResults = document.getElementById('noResults');
+
+      // Populate table
+      chairDataList.forEach(person => {
+          const row = document.createElement('tr');
+          row.className = 'directory-row';
+          row.dataset.precinct = person.precinct;
+          row.dataset.name = person.name.toLowerCase();
+          row.dataset.role = person.role.toLowerCase();
+
+          const badgeClass = person.role === 'Precinct Chair' ? 'badge-chair' : 'badge-captain';
+
+          row.innerHTML = `
+              <td><span class="pct-badge">${person.precinct}</span></td>
+              <td class="name-cell">
+                  <strong>${person.name}</strong>
+                  <span>${person.email} ${person.phone ? '| '+person.phone : ''}</span>
+              </td>
+              <td><span class="role-badge ${badgeClass}">${person.role}</span></td>
+              <td class="action-cell">
+                 <a href="mailto:${person.email}" class="btn btn-sm btn-outline">Contact</a>
+              </td>
+          `;
+          tbody.appendChild(row);
+      });
+
+      const rows = document.querySelectorAll('.directory-row');
+
+      function filterTable() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const roleTerm = roleFilter.value;
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+          const name = row.dataset.name;
+          const pct = row.dataset.precinct;
+          const role = row.dataset.role;
+          
+          const matchesSearch = name.includes(searchTerm) || pct === searchTerm;
+          const matchesRole = roleTerm === 'all' || 
+                             (roleTerm === 'chair' && role === 'precinct chair') ||
+                             (roleTerm === 'captain' && role === 'block captain');
+
+          if (matchesSearch && matchesRole) {
+            row.style.display = '';
+            visibleCount++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      searchInput.addEventListener('input', filterTable);
+      roleFilter.addEventListener('change', filterTable);
+    });
+  </script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

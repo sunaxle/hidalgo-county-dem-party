@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issues Data Map - Hidalgo Dems</title>
+  <meta name="description" content="An interactive visualization of the top issues facing South Texas Democrats at the Federal, State, County, and Precinct levels.">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      overflow-x: hidden; /* Important for the full-width map */
+    }
+    
+    .map-container {
+      position: relative;
+      width: 100%;
+      min-height: 800px;
+      padding: 4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    /* Map Levels Background Lines */
+    .map-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(to bottom, 
+        rgba(34, 211, 238, 0.8) 0%, 
+        rgba(34, 211, 238, 0.2) 50%, 
+        rgba(34, 211, 238, 0.8) 100%);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    .map-level {
+      width: 100%;
+      max-width: 1000px;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .level-title {
+      background: var(--bg-dark);
+      padding: 0.5rem 2rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 3rem;
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.2);
+      z-index: 2;
+    }
+
+    .nodes-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    /* Floating Node styling */
+    .node {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: gentle-float 6s ease-in-out infinite;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .node:nth-child(even) { animation-duration: 7s; animation-delay: 1s; }
+    .node:nth-child(3n) { animation-duration: 8s; animation-delay: 2s; }
+
+    .node:hover {
+      transform: scale(1.1) translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: inset 0 0 30px rgba(34, 211, 238, 0.2), 0 15px 40px rgba(34, 211, 238, 0.4);
+      z-index: 20;
+    }
+
+    .node-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Info Card popup on hover */
+    .node-info {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px) scale(0.9);
+      width: 300px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--accent);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      pointer-events: none;
+      text-align: left;
+    }
+
+    /* Arrow for info card */
+    .node-info::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid var(--accent);
+    }
+
+    .node:hover .node-info {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(15px) scale(1);
+    }
+
+    .info-stat {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .info-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    @keyframes gentle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Colored Borders for Levels */
+    .level-fed .node { border-top-color: #ef4444; }
+    .level-state .node { border-top-color: #eab308; }
+    .level-county .node { border-top-color: #3b82f6; }
+    .level-precinct .node { border-top-color: #10b981; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .map-container::before { left: 20px; }
+      .level-title { align-self: flex-start; margin-left: 10px; }
+      .nodes-wrapper { justify-content: flex-start; padding-left: 40px; }
+      .node { width: 140px; height: 140px; }
+      .node-title { font-size: 0.9rem; }
+      .node-info { left: 0; transform: translateX(0) translateY(20px) scale(0.9); }
+      .node-info::before { left: 20px; }
+      .node:hover .node-info { transform: translateX(0) translateY(15px) scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2" style="background: #3b82f6; width: 600px; height: 600px; top: 40%; left: -200px;"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="issues_map.html" class="nav-item" style="color:var(--accent);">Issues Map</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in" style="min-height: 30vh; padding-top: 120px; padding-bottom: 2rem;">
+    <div>
+      <h1>The Issues Data Map</h1>
+      <p style="max-width: 800px; margin: 0 auto;">Hover over the nodes to explore the interconnected policy priorities facing South Texas Democrats from Capitol Hill down to your local precinct.</p>
+    </div>
+  </header>
+
+  <!-- Map Visualization -->
+  <section class="map-container fade-in">
+    
+    <!-- LEVEL 1: FEDERAL -->
+    <div class="map-level level-fed">
+      <div class="level-title">Federal / National</div>
+      <div class="nodes-wrapper">
+        <div class="node">
+          <div class="node-title">Voting Rights</div>
+          <div class="node-info">
+            <div class="info-stat">John Lewis VRA</div>
+            <div class="info-desc">Federal protection is required to counter state-level suppression efforts targeting minority and young voters in South Texas.</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Border Commerce</div>
+          <div class="node-info">
+            <div class="info-stat">$300B+</div>
+            <div class="info-desc">Annual trade passes through Texas ports of entry. We advocate for smart border security that doesn't disrupt vital economic lifelines.</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Medicare Expansion</div>
+          <div class="node-info">
+            <div class="info-stat">1 in 5</div>
+            <div class="info-desc">Texans are uninsured. Federal incentives must be leveraged fully to force state leadership to accept healthcare expansion for working families.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL 2: STATE -->
+    <div class="map-level level-state">
+      <div class="level-title">State (Texas)</div>
+      <div class="nodes-wrapper">
+        <div class="node">
+          <div class="node-title">Public Ed Funding</div>
+          <div class="node-info">
+            <div class="info-stat">43rd</div>
+            <div class="info-desc">Texas ranks 43rd in per-student funding. We must defeat voucher schemes that drain resources from vital RGV public school districts.</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Reproductive Freedom</div>
+          <div class="node-info">
+            <div class="info-stat">Access</div>
+            <div class="info-desc">Fighting draconian state laws to restore fundamental healthcare access and bodily autonomy for millions of Texas women.</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Grid Reliability</div>
+          <div class="node-info">
+            <div class="info-stat">ERCOT</div>
+            <div class="info-desc">Holding state leadership accountable for the failing power grid and ensuring working families aren't burdened with corporate failures.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL 3: COUNTY -->
+    <div class="map-level level-county">
+      <div class="level-title">Hidalgo County</div>
+      <div class="nodes-wrapper">
+        <div class="node">
+          <div class="node-title">Property Taxes</div>
+          <div class="node-info">
+            <div class="info-stat">Relief</div>
+            <div class="info-desc">Working with the County Appraisal District to ensure fair valuations and promoting homestead exemptions to keep families in their homes.</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Regional Drainage</div>
+          <div class="node-info">
+            <div class="info-stat">Bond Props</div>
+            <div class="info-desc">Prioritizing county-wide infrastructure bonds to fix the aging drainage systems that cause severe flooding during hurricane season.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEVEL 4: PRECINCT -->
+    <div class="map-level level-precinct">
+      <div class="level-title">Local Precincts</div>
+      <div class="nodes-wrapper">
+        <div class="node">
+          <div class="node-title">Pct 42 Data</div>
+          <div class="node-info">
+            <div class="info-stat">Streetlights</div>
+            <div class="info-desc">Precinct Chair Report: "The top issue we hear at the doors in Pct 42 is the lack of working streetlights causing safety concerns on Business 83."</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Pct 108 Data</div>
+          <div class="node-info">
+            <div class="info-stat">Polling Access</div>
+            <div class="info-desc">Precinct Chair Report: "We need an early voting location re-opened at the neighborhood community center; transport is too difficult for seniors."</div>
+          </div>
+        </div>
+        <div class="node">
+          <div class="node-title">Pct 22 Data</div>
+          <div class="node-info">
+            <div class="info-stat">Potholes</div>
+            <div class="info-desc">Precinct Chair Report: "Residents are frustrated with the city patching phase. Coordination between city and county road crews is our top request."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  
+  <!-- Interactive Election Map Section -->
+  <section class="container fade-in" style="margin-top: 2rem; margin-bottom: 4rem;">
+    <div class="glass-card" style="padding: 2rem;">
+      <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--accent);">Interactive Precinct Data</h2>
+      <div id="map" style="width: 100%; height: 600px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); z-index: 1;"></div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container fade-in" style="margin-top: 2rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Help Us Map The Issues</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff;">Are you a Precinct Chair? We need your data to accurately map the pain points of every neighborhood in Hidalgo County.</p>
+      <a href="contact.html" class="btn btn-secondary" style="padding: 1rem 2rem; font-size: 1.1rem;">Submit Precinct Data</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events</a>
+        <a href="volunteer.html">Volunteer Hub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="issues_map.html">Issues Map</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
+  <script src="hidalgo-election-map/polling_locations.js"></script>
+  <script src="hidalgo-election-map/election_day_locations.js"></script>
+  <script src="hidalgo-election-map/map.js"></script>
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

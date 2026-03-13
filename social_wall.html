@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Wall - Hidalgo Dems</title>
+  <meta name="description" content="Stay informed and follow top Texas Democratic leaders on social media.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .twitter-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .twitter-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+    }
+    .profile-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .handle {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .social-btn {
+      margin-top: auto;
+      padding-top: 1.5rem;
+    }
+
+    /* Masonry Photo Gallery Styles */
+    .photo-gallery {
+      columns: 3 250px;
+      column-gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(34, 211, 238, 0.2);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+      padding: 2rem 1rem 1rem;
+      color: #fff;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    /* Facebook iframe container */
+    .fb-plugin-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Instagram Gallery Styles */
+    .insta-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .insta-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .insta-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .insta-item:hover img {
+      transform: scale(1.1);
+    }
+    .insta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(34, 211, 238, 0.4); /* primary accent mix */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .insta-item:hover .insta-overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="social_wall.html" class="nav-item" style="color:var(--accent);">Social Wall</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in">
+    <div>
+      <h1>Stay Informed. Stay Engaged.</h1>
+      <p style="max-width: 800px; margin: 0 auto;">Follow the top voices pushing for progress in Texas and the Rio Grande Valley. Join the conversation online.</p>
+    </div>
+  </header>
+
+  <!-- Top Accounts Section -->
+  <section class="container" style="padding-top: 0;">
+    <div class="fade-in">
+      <h2>Top Accounts to Follow</h2>
+    </div>
+    
+    <div class="grid-3">
+      <!-- Account 1 -->
+      <div class="twitter-card fade-in">
+        <div class="profile-img">🇺🇸</div>
+        <h3>Texas Democrats</h3>
+        <p class="handle">@texasdemocrats</p>
+        <p class="text-sm">The official account for the Texas Democratic Party fighting for hardworking families.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/texasdemocrats" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+      <!-- Account 2 -->
+      <div class="twitter-card fade-in" style="transition-delay: 0.1s;">
+        <div class="profile-img">⭐</div>
+        <h3 style="font-size: 1.25rem;">Texas House Dem Caucus</h3>
+        <p class="handle">@TexasHDC</p>
+        <p class="text-sm">Official updates from the Democrats serving in the Texas House of Representatives.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/TexasHDC" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+      <!-- Account 3 -->
+      <div class="twitter-card fade-in" style="transition-delay: 0.2s;">
+        <div class="profile-img">🌵</div>
+        <h3>Colin Allred</h3>
+        <p class="handle">@ColinAllredTX</p>
+        <p class="text-sm">U.S. Representative from Dallas and prominent voice for civil rights and voting access in Texas.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/ColinAllredTX" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+      <!-- Account 4 -->
+      <div class="twitter-card fade-in" style="transition-delay: 0.3s;">
+        <div class="profile-img">🦅</div>
+        <h3>Vicente Gonzalez</h3>
+        <p class="handle">@RepGonzalez</p>
+        <p class="text-sm">U.S. Representative for Texas's 34th District, advocating for RGV priorities in Congress.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/RepGonzalez" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+      <!-- Account 5 -->
+      <div class="twitter-card fade-in" style="transition-delay: 0.4s;">
+        <div class="profile-img">🏛️</div>
+        <h3>Sen. Juan "Chuy" Hinojosa</h3>
+        <p class="handle">@chuysouthtexas</p>
+        <p class="text-sm">Texas State Senator representing District 20, fighting for education and healthcare access.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/chuysouthtexas" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+      <!-- Account 6 -->
+      <div class="twitter-card fade-in" style="transition-delay: 0.5s;">
+        <div class="profile-img">📣</div>
+        <h3>Hidalgo County Dems</h3>
+        <p class="handle">@HidalgoCountyDP</p>
+        <p class="text-sm">Your local hub for events, blockwalks, and updates in our own backyard.</p>
+        <div class="social-btn">
+          <a href="https://twitter.com/hidalgocountydp" target="_blank" class="btn btn-primary" style="padding: 0.5rem 1rem;">Follow on X</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Work Gallery Section -->
+  <section class="container fade-in" style="padding-top: 0;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h2>Recent Work in the Community</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">A glimpse at our recent events, rallies, and blockwalks. Follow us on Instagram and Facebook to see more!</p>
+    </div>
+    
+    <div class="photo-gallery fade-in">
+      <div class="gallery-item">
+        <img src="images/community.jpg" alt="South Texas Community">
+        <div class="gallery-caption">
+          <p style="margin: 0; font-weight: 600;">Community Outreach</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/blockwalk.jpg" alt="Blockwalking">
+        <div class="gallery-caption">
+          <p style="margin: 0; font-weight: 600;">Weekend Blockwalks</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/rally.jpg" alt="Local Democratic Rally">
+        <div class="gallery-caption">
+          <p style="margin: 0; font-weight: 600;">Get Out The Vote Rally</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/meeting.jpg" alt="Townhall Strategy Meeting">
+        <div class="gallery-caption">
+          <p style="margin: 0; font-weight: 600;">Strategy Townhalls</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/volunteer.jpg" alt="Voter Registration Drive">
+        <div class="gallery-caption">
+          <p style="margin: 0; font-weight: 600;">Voter Registration Drive</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Social Feeds -->
+  <section class="container fade-in" style="padding-top: 2rem;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2>Live Social Feeds</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">See our latest posts directly from HQ without leaving the site.</p>
+    </div>
+    
+    <div class="grid-2">
+      <!-- Facebook Feed Embed -->
+      <div class="fb-plugin-container fade-in">
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fhidalgocountydems&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+      </div>
+      
+      <!-- Instagram Gateway Card -->
+      <div class="fb-plugin-container fade-in" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+         <div class="profile-img" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); margin-bottom: 2rem;">📸</div>
+         <h3>Follow @hidalgocountydems</h3>
+         <p style="color: #e2e8f0; margin-bottom: 2rem;">Tap below to follow us for daily stories and updates!</p>
+         <a href="https://instagram.com/hidalgocountydems" target="_blank" class="btn btn-primary" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border: none;">View on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instagram Highlights Gallery -->
+  <section class="container fade-in" style="padding-top: 4rem;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h2 style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><span style="color: transparent; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; background-clip: text;">Instagram</span> Highlights</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Our favorite moments from the campaign trail and community events.</p>
+    </div>
+    
+    <div class="insta-gallery fade-in">
+      <div class="insta-item"><img src="images/insta1.jpg" alt="Ig Photo 1"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta2.jpg" alt="Ig Photo 2"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta3.jpg" alt="Ig Photo 3"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta4.jpg" alt="Ig Photo 4"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta5.jpg" alt="Ig Photo 5"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta6.jpg" alt="Ig Photo 6"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta7.jpg" alt="Ig Photo 7"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta8.jpg" alt="Ig Photo 8"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta9.jpg" alt="Ig Photo 9"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta10.jpg" alt="Ig Photo 10"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta11.jpg" alt="Ig Photo 11"><div class="insta-overlay">❤️</div></div>
+      <div class="insta-item"><img src="images/insta12.jpg" alt="Ig Photo 12"><div class="insta-overlay">❤️</div></div>
+    </div>
+  </section>
+
+  <!-- Community Actions -->
+  <section class="container fade-in" style="margin-top: 2rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(29,78,216,0.1));">
+      <h2>Amplify The Message</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff;">Following is only the first step. Like, retweet, and share fact-based policies with your friends and family. Social media is our modern town square.</p>
+      <div style="display:flex; justify-content:center; gap: 1rem; flex-wrap:wrap;">
+        <a href="https://www.facebook.com/hidalgocountydems" target="_blank" class="btn btn-secondary">Connect on Facebook</a>
+        <a href="https://instagram.com/hidalgocountydems" target="_blank" class="btn btn-secondary">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="social_wall.html">Social Wall</a>
+        <a href="elected_officials.html">Elected Officials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

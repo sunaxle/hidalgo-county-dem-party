@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Inbox - Hidalgo Dems</title>
+  <meta name="description" content="A public log of anonymous feedback, inquiries, and pain points submitted by the community.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .masonry-grid {
+      column-count: 2;
+      column-gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .masonry-grid {
+        column-count: 1;
+      }
+    }
+    .inbox-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      break-inside: avoid;
+      transition: var(--transition);
+      position: relative;
+    }
+    .inbox-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34, 211, 238, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .tag-infrastructure { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .tag-voting { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .tag-general { background: rgba(167, 139, 250, 0.15); color: #c084fc; }
+    .tag-healthcare { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    
+    .message-content {
+      font-size: 1.125rem;
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .message-content::before {
+      content: '"';
+      font-size: 3rem;
+      font-family: serif;
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      opacity: 0.1;
+      color: var(--accent);
+    }
+    .submission-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .admin-response {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(34, 211, 238, 0.05);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .admin-response h4 {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .admin-response p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <a href="arena_training.html" class="nav-item">The Arena</a>
+      <a href="social_wall.html" class="nav-item">Social Wall</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item" style="color:var(--accent);">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in">
+    <div>
+      <h1>Community Inbox & Pain Points</h1>
+      <p style="max-width: 800px; margin: 0 auto;">We believe in transparency and listening to our neighbors. Below is a log of anonymous feedback, inquiries, and pain points submitted directly by Hidalgo County residents.</p>
+      
+      <div style="margin-top: 2rem;">
+        <a href="contact.html" class="btn btn-primary">Submit Anonymous Feedback</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Inbox Masonry Grid -->
+  <section class="container" style="padding-top: 0;">
+    <div class="masonry-grid">
+      
+      <!-- Submission 1 -->
+      <div class="inbox-card fade-in">
+        <span class="tag tag-infrastructure">Infrastructure</span>
+        <div class="message-content">
+          The constant flooding in east McAllen during heavy rains is becoming unbearable. It feels like every time we get a storm, the drainage systems completely fail. What are local officials doing to actually fix the underlying pipes rather than just patching the roads?
+        </div>
+        <div class="submission-meta">
+          <span>Anonymous Resident</span>
+          <span>March 2026</span>
+        </div>
+        <div class="admin-response">
+          <h4>Admin response:</h4>
+          <p>Thank you for bringing this up. The party is actively supporting local bond measures aimed at overhauling the Precinct 2 drainage systems. We are hosting a town hall on this exact topic next month.</p>
+        </div>
+      </div>
+
+      <!-- Submission 2 -->
+      <div class="inbox-card fade-in" style="transition-delay: 0.1s;">
+        <span class="tag tag-voting">Voting Access</span>
+        <div class="message-content">
+          I noticed that the polling location near the university was closed during the primary. A lot of students don't have cars and rely on that spot. We need more early voting locations on campus!
+        </div>
+        <div class="submission-meta">
+          <span>UTRGV Student</span>
+          <span>February 2026</span>
+        </div>
+      </div>
+
+      <!-- Submission 3 -->
+      <div class="inbox-card fade-in" style="transition-delay: 0.2s;">
+        <span class="tag tag-healthcare">Healthcare</span>
+        <div class="message-content">
+          With the cost of living going up, the lack of affordable healthcare options in rural parts of the county is a crisis. People are driving an hour just to afford basic pediatric care. Please make healthcare expansion a priority in Austin.
+        </div>
+        <div class="submission-meta">
+          <span>Anonymous Parent</span>
+          <span>January 2026</span>
+        </div>
+        <div class="admin-response">
+          <h4>Admin response:</h4>
+          <p>We hear you. Expanding Medicaid in Texas remains a top priority for our state delegations. Please consider joining our upcoming letter-writing campaign to the Governor's office.</p>
+        </div>
+      </div>
+
+      <!-- Submission 4 -->
+      <div class="inbox-card fade-in" style="transition-delay: 0.3s;">
+        <span class="tag tag-general">General Inquiry</span>
+        <div class="message-content">
+          I want to get involved with blockwalking but I work late shifts and weekends are usually my only free time. Do you have training sessions or groups that go out on Sunday afternoons?
+        </div>
+        <div class="submission-meta">
+          <span>Anonymous Resident</span>
+          <span>December 2025</span>
+        </div>
+        <div class="admin-response">
+          <h4>Admin response:</h4>
+          <p>Yes! We have a dedicated Sunday "Weekend Warriors" crew. Check our Events calendar to RSVP for the next Sunday afternoon session.</p>
+        </div>
+      </div>
+
+      <!-- Submission 5 -->
+      <div class="inbox-card fade-in" style="transition-delay: 0.4s;">
+        <span class="tag tag-infrastructure">Infrastructure</span>
+        <div class="message-content">
+          There are several streetlights out near the border highway that make it incredibly dangerous to drive at night. It's been like this for weeks. Who do I need to call?
+        </div>
+        <div class="submission-meta">
+          <span>Anonymous Resident</span>
+          <span>November 2025</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container fade-in" style="margin-top: 2rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Make Your Voice Heard</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff;">This party only works when we work together. If you have an issue, a pain point, or an idea, send it our way.</p>
+      <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Submit Your Thoughts</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="social_wall.html">Social Wall</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>

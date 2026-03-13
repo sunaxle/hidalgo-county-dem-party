@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South Texas Region Dashboard - Hidalgo Dems</title>
+  <meta name="description" content="A dashboard tracking the performance and Democratic party presence across the South Texas region.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+    }
+    .data-table th, .data-table td {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .data-table th {
+      background: rgba(0,0,0,0.3);
+      color: var(--accent);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      letter-spacing: 0.5px;
+    }
+    .data-table tr:hover {
+      background: rgba(255,255,255,0.03);
+    }
+    .dem-margin { color: #3b82f6; font-weight: bold; }
+    .gop-margin { color: #ef4444; font-weight: bold; }
+    .status-active { color: #10b981; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    .status-active::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .status-inactive { color: #ef4444; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+    .status-inactive::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="vote.html" class="nav-item">Resources</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item" style="color:var(--accent);">South TX</a>
+      <a href="events.html" class="nav-item">Events</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="page-header container fade-in">
+    <div>
+      <h1>South Texas Region Dashboard</h1>
+      <p style="max-width: 800px; margin: 0 auto;">Tracking the political landscape, Democratic Party presence, and historical performance from Laredo to Corpus Christi and throughout the Rio Grande Valley.</p>
+    </div>
+  </header>
+
+  <!-- Dashboard Section -->
+  <section class="container" style="padding-top: 0;">
+    <div class="fade-in">
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>County / Major City</th>
+              <th>Distance from Hidalgo</th>
+              <th>Active Dem Party</th>
+              <th>2020 President Margin</th>
+              <th>2024 President Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hidalgo</strong> (McAllen/Edinburg)</td>
+              <td>0 mi (Base)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="dem-margin">Dem +17%</td>
+              <td class="gop-margin">GOP +3%</td>
+            </tr>
+            <tr>
+              <td><strong>Cameron</strong> (Brownsville/Harlingen)</td>
+              <td>~60 mi (East)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="dem-margin">Dem +13%</td>
+              <td class="gop-margin">GOP +6%</td>
+            </tr>
+            <tr>
+              <td><strong>Starr</strong> (Rio Grande City)</td>
+              <td>~45 mi (West)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="dem-margin">Dem +5%</td>
+              <td class="gop-margin">GOP +16%</td>
+            </tr>
+            <tr>
+              <td><strong>Willacy</strong> (Raymondville)</td>
+              <td>~40 mi (Northeast)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="dem-margin">Dem +12%</td>
+              <td class="gop-margin">GOP +3%</td>
+            </tr>
+            <tr>
+              <td><strong>Webb</strong> (Laredo)</td>
+              <td>~150 mi (Northwest)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="dem-margin">Dem +15%</td>
+              <td class="gop-margin">GOP +2%</td>
+            </tr>
+            <tr>
+              <td><strong>Nueces</strong> (Corpus Christi)</td>
+              <td>~150 mi (North)</td>
+              <td><span class="status-active">Active</span></td>
+              <td class="gop-margin">GOP +3%</td>
+              <td class="gop-margin">GOP +11%</td>
+            </tr>
+            <tr>
+              <td><strong>Zapata</strong> (Zapata)</td>
+              <td>~100 mi (Northwest)</td>
+              <td><span class="status-inactive">Needs Org</span></td>
+              <td class="gop-margin">GOP +5%</td>
+              <td class="gop-margin">GOP +15%</td>
+            </tr>
+            <tr>
+              <td><strong>Brooks</strong> (Falfurrias)</td>
+              <td>~70 mi (North)</td>
+              <td><span class="status-inactive">Needs Org</span></td>
+              <td class="dem-margin">Dem +19%</td>
+              <td class="dem-margin">Dem +2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="grid-3" style="margin-top: 3rem;">
+      <div class="glass-card fade-in">
+        <h3 style="margin-bottom: 1rem;">Regional Insight</h3>
+        <p>The Rio Grande Valley and broader South Texas region saw significant shifts between 2020 and 2024. Building strong, permanent county infrastructures is critical to recovering ground and championing working-class policies.</p>
+      </div>
+      <div class="glass-card fade-in" style="transition-delay: 0.1s;">
+        <h3 style="margin-bottom: 1rem;">Distance & Logistics</h3>
+        <p>Hidalgo County serves as a central hub for the RGV. Partnering closely with Cameron, Starr, and Willacy counties ensures a united regional message that resonates across local media markets.</p>
+      </div>
+      <div class="glass-card fade-in" style="transition-delay: 0.2s;">
+        <h3 style="margin-bottom: 1rem;">Get Involved</h3>
+        <p>We need organizers in every county! If you live in an area without an active Democratic Party headquarters, reach out to us. We can help you start a precinct or county-level operation.</p>
+        <a href="contact.html" class="btn btn-secondary" style="margin-top: 1rem; padding: 0.5rem 1rem;">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="social_wall.html">Social Wall</a>
+        <a href="elected_officials.html">Elected Officials</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+</body>
+</html>
