@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3 style="margin-top:0; color:#0f172a; border-bottom: 2px solid ${status === 'filled' ? '#10b981' : '#ef4444'}; padding-bottom: 5px;">
                 Precinct ${cleanPct || 'Unknown'} <span style="font-size: 0.7em; float:right; padding: 2px 5px; border-radius: 4px; background: ${status === 'filled' ? '#d1fae5' : '#fee2e2'}; color: ${status === 'filled' ? '#065f46' : '#991b1b'};">${status.toUpperCase()}</span>
             </h3>`;
-            
+        if (pd) {
             popupContent += `
                 <div style="font-size: 0.9em; color: #334155; margin-bottom: 8px;">
                     <strong>Reg Voters:</strong> ${pd.registered_voters.toLocaleString()}<br>
