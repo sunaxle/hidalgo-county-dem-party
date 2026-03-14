@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidalgo County Democrats - Share Our Stories</title>
+  <meta name="description" content="A platform for South Texans to share their real, lived experiences regarding the issues that matter most: Cost of Living, Immigration, Economy, Abortion, and Jobs/AI.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .story-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .story-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .story-hero p {
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .issue-filter {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0;
+    }
+
+    /* Base Filter Button */
+    .filter-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    /* Active State per Issue Theme */
+    .filter-btn.active-all {
+      background: var(--accent);
+      color: var(--bg-dark);
+      border-color: var(--accent);
+    }
+    .filter-btn.active-living {
+      background: #10b981; /* Green */
+      color: #fff;
+      border-color: #10b981;
+    }
+    .filter-btn.active-immigration {
+      background: #f59e0b; /* Amber */
+      color: #fff;
+      border-color: #f59e0b;
+    }
+    .filter-btn.active-economy {
+      background: #3b82f6; /* Blue */
+      color: #fff;
+      border-color: #3b82f6;
+    }
+    .filter-btn.active-abortion {
+      background: #e11d48; /* Red/Rose */
+      color: #fff;
+      border-color: #e11d48;
+    }
+    .filter-btn.active-ai {
+      background: #8b5cf6; /* Purple */
+      color: #fff;
+      border-color: #8b5cf6;
+    }
+
+    .story-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .story-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Thematic Top Border based on Issue */
+    .theme-border-living { border-top: 4px solid #10b981; }
+    .theme-border-immigration { border-top: 4px solid #f59e0b; }
+    .theme-border-economy { border-top: 4px solid #3b82f6; }
+    .theme-border-abortion { border-top: 4px solid #e11d48; }
+    .theme-border-ai { border-top: 4px solid #8b5cf6; }
+
+    .story-badge {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .badge-living { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.5); }
+    .badge-immigration { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.5); }
+    .badge-economy { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.5); }
+    .badge-abortion { background: rgba(225, 29, 72, 0.2); color: #fda4af; border: 1px solid rgba(225, 29, 72, 0.5); }
+    .badge-ai { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); }
+
+    .story-content {
+      color: #f8fafc;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .story-content::before {
+      content: '"';
+      font-size: 2rem;
+      color: var(--text-muted);
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    .story-author {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .story-author::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--text-muted);
+    }
+
+    /* Submission Form Container */
+    .story-form-container {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-top: 5rem;
+      box-shadow: 0 10px 40px rgba(34, 211, 238, 0.1);
+    }
+
+    .story-form-container h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    select.form-control option {
+      background: var(--bg-dark);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws & Rules</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+      <a href="vote.html" class="nav-item">Resources</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span>Organizations ▼</span>
+        <div class="dropdown-content">
+          <a href="youth_organizations.html">Youth</a>
+          <a href="community_organizations.html">Community</a>
+          <a href="activist_organizations.html">Activists</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+    </div>
+  </nav>
+
+  <!-- Title Header -->
+  <header class="story-hero container fade-in">
+    <h1>Share Our <span style="color: var(--accent);">Stories.</span></h1>
+    <p>
+      Politics isn't just theory—it's profoundly personal. This board exists to amplify the real, lived experiences of South Texans regarding the five critical issues defining our community today.
+    </p>
+
+    <!-- Filter Buttons (visual only for now) -->
+    <div class="issue-filter">
+      <button class="filter-btn active-all">👁️ View All</button>
+      <button class="filter-btn">🛒 Cost of Living</button>
+      <button class="filter-btn">🛂 Immigration</button>
+      <button class="filter-btn">📈 Economy</button>
+      <button class="filter-btn">🩺 Healthcare & Abortion</button>
+      <button class="filter-btn">🤖 Jobs & A.I.</button>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <section class="container fade-in" style="padding-bottom: 5rem;">
+    
+    <div class="story-masonry">
+      
+      <!-- Cost of Living Story -->
+      <article class="story-card theme-border-living">
+        <span class="story-badge badge-living">Cost of Living</span>
+        <p class="story-content">
+          My property taxes in McAllen have skyrocketed over the last three years while my salary as a teacher has remained perfectly stagnant. We shouldn't be priced out of the neighborhoods we grew up in just to subsidize corporate tax breaks.
+        </p>
+        <span class="story-author">Maria R., Educator</span>
+      </article>
+
+      <!-- Immigration Story -->
+      <article class="story-card theme-border-immigration">
+        <span class="story-badge badge-immigration">Immigration</span>
+        <p class="story-content">
+          Using our border as a political prop in Austin hurts our local economy and degrades our binational culture. We need comprehensive reform that respects the dignity of families, stops the theater of deploying state troopers for photo-ops, and focuses on real, systemic solutions.
+        </p>
+        <span class="story-author">Javier M., Small Business Owner</span>
+      </article>
+
+      <!-- Healthcare / Abortion Story -->
+      <article class="story-card theme-border-abortion">
+        <span class="story-badge badge-abortion">Healthcare & Abortion</span>
+        <p class="story-content">
+          The sweeping bans passed by extremists in the state legislature are actively endangering women in Hidalgo County. My sister had to travel out of state for an emergency procedure to save her life. Medical decisions belong between a patient and their doctor—period.
+        </p>
+        <span class="story-author">Anonymous, Pharr</span>
+      </article>
+
+      <!-- Economy Story -->
+      <article class="story-card theme-border-economy">
+        <span class="story-badge badge-economy">Economy</span>
+        <p class="story-content">
+          Working a fast-food job used to be a stepping stone, now it's necessary for families to survive. We need to raise the minimum wage. Nobody working a full forty hours a week in South Texas should be living below the poverty line.
+        </p>
+        <span class="story-author">Carlos D., Student Worker</span>
+      </article>
+
+      <!-- Jobs & AI Story -->
+      <article class="story-card theme-border-ai">
+        <span class="story-badge badge-ai">Jobs & A.I.</span>
+        <p class="story-content">
+          As a freelance graphic designer, I am seeing entire local contracts get handed over to automated generation models. We need our representatives to start building frameworks that protect human labor and intellectual property before local artists and creatives are entirely displaced.
+        </p>
+        <span class="story-author">Elena T., Creative Professional</span>
+      </article>
+
+      <!-- Another Cost of Living Story -->
+      <article class="story-card theme-border-living">
+        <span class="story-badge badge-living">Cost of Living</span>
+        <p class="story-content">
+          The price of groceries at HEB compared to 2019 is frankly terrifying. I'm a single mother of two and trying to stretch my budget has become a daily nightmare. We need leadership that focuses on corporate price gouging instead of culture wars.
+        </p>
+        <span class="story-author">Sandra L., Edinburg</span>
+      </article>
+
+    </div>
+
+    <!-- Submit Form -->
+    <div class="story-form-container fade-in">
+      <h2>Add Your Voice to the Board</h2>
+      <p style="color: var(--text-muted); text-align: center; margin-bottom: 2rem;">
+        Your story validates others. Select a critical issue and share your perspective below. Information is verified before posting to ensure a safe, constructive platform.
+      </p>
+      
+      <form action="#" method="POST" style="max-width: 600px; margin: 0 auto;">
+        
+        <div class="form-group">
+          <label class="form-label" for="storyName">Name or Initials (Optional)</label>
+          <input type="text" id="storyName" class="form-control" placeholder="e.g. John D. or Anonymous">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="storyIssue">Select the Critical Issue</label>
+          <select id="storyIssue" class="form-control" required>
+            <option value="" disabled selected>-- Choose an Issue --</option>
+            <option value="living">Cost of Living</option>
+            <option value="immigration">Immigration & the Border</option>
+            <option value="economy">Economy & Wages</option>
+            <option value="abortion">Healthcare & Abortion</option>
+            <option value="ai">Jobs & Artificial Intelligence</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="storyText">Your Story</label>
+          <textarea id="storyText" class="form-control" rows="5" placeholder="Share your experience..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">Submit Story</button>
+
+      </form>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="bylaws.html">Bylaws & Rules</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="https://twitter.com/hidalgocountydems" target="_blank">Twitter</a>
+        <a href="https://instagram.com/hidalgocountydems" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/hidalgocountydems" target="_blank">Facebook</a>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+      <p>Pol. Adv. paid for by the Hidalgo County Democratic Party.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/theme_switcher.js"></script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
