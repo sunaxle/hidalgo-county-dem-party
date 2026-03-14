@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidalgo County Democrats - Call It Out</title>
+  <meta name="description" content="A community board highlighting critical issues, holding officials accountable, and speaking truth to power in South Texas.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .callout-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .callout-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(225, 29, 72, 0.15); /* Reddish shadow for emergency */
+    }
+
+    .callout-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(225, 29, 72, 0.2);
+      color: #fda4af;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(225, 29, 72, 0.5);
+    }
+
+    .callout-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .callout-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      color: #fff;
+    }
+
+    .callout-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .callout-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+    }
+
+    .btn-action {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-align: center;
+      flex: 1;
+    }
+
+    .btn-action:hover {
+      background: var(--accent);
+      color: var(--bg-dark);
+    }
+
+    .btn-share {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .btn-share:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+    }
+
+    .submission-box {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px dashed var(--accent);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws & Rules</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+      <a href="vote.html" class="nav-item">Resources</a>
+      <a href="volunteer.html" class="nav-item">Volunteer</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span>Organizations ▼</span>
+        <div class="dropdown-content">
+          <a href="youth_organizations.html">Youth</a>
+          <a href="community_organizations.html">Community</a>
+          <a href="activist_organizations.html">Activists</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+    </div>
+  </nav>
+
+  <!-- Title Header -->
+  <header class="page-header container fade-in" style="padding-top: 8rem; padding-bottom: 3rem; text-align: center;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Call It <span style="color: #e11d48;">Out.</span></h1>
+    <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
+      This is our community accountability board. When extreme politicians or bad actors push harmful policies, spread misinformation, or ignore the needs of South Texas, we call it out. 
+    </p>
+  </header>
+
+  <!-- Main Content Section -->
+  <section class="container fade-in" style="padding-bottom: 5rem;">
+    
+    <div class="grid-3" style="gap: 2rem;">
+      
+      <!-- Card 1 -->
+      <article class="callout-card">
+        <span class="callout-badge">Education</span>
+        <span class="callout-date">March 12, 2026</span>
+        <h3>The Private School Voucher Scam</h3>
+        <p>
+          State leadership continues to push taxpayer-funded vouchers that would defund our local Hidalgo County public schools. South Texas rural and urban districts alike stand to lose millions in funding, forcing teacher layoffs and larger class sizes, all to subsidize private academies mostly located in wealthy suburbs.
+        </p>
+        <div class="callout-actions">
+           <a href="issues_map.html" class="btn-action">Read Our Data</a>
+           <button class="btn-action btn-share">Share</button>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="callout-card">
+        <span class="callout-badge">Healthcare</span>
+        <span class="callout-date">March 08, 2026</span>
+        <h3>Refusal to Expand Medicaid</h3>
+        <p>
+          Texas has the highest number of uninsured residents in the nation, and Hidalgo County specifically suffers from a severe lack of healthcare access. Despite the federal government offering to cover 90% of the cost, our state leaders refuse to expand Medicaid, leaving hard-working South Texans without access to life-saving doctors and preventative care.
+        </p>
+        <div class="callout-actions">
+           <a href="contact.html" class="btn-action">Take Action</a>
+           <button class="btn-action btn-share">Share</button>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="callout-card">
+        <span class="callout-badge">Infrastructure</span>
+        <span class="callout-date">March 01, 2026</span>
+        <h3>Grid Instability & Utility Rate Hikes</h3>
+        <p>
+          Corporate utility monopolies continue to hike rates on everyday families while failing to winterize the Texas electrical grid. Record profits are being funneled to executives while working-class neighborhoods experience rolling blackouts during extreme weather. We demand a reliable grid and an end to price gouging.
+        </p>
+        <div class="callout-actions">
+           <a href="volunteer.html" class="btn-action">Join the Fight</a>
+           <button class="btn-action btn-share">Share</button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Submit a tip section -->
+    <div class="submission-box fade-in">
+      <h2 style="margin-bottom: 1rem; font-size: 2rem;">See Something? Say Something.</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto;">
+        Are you aware of local corruption, taxpayer waste, or policies harming your city? Send us an anonymous tip or submission, and our research team will investigate.
+      </p>
+      <a href="community_inbox.html" class="btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Submit a Call Out</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="bylaws.html">Bylaws & Rules</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <a href="https://twitter.com/hidalgocountydems" target="_blank">Twitter</a>
+        <a href="https://instagram.com/hidalgocountydems" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/hidalgocountydems" target="_blank">Facebook</a>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+      <p>Pol. Adv. paid for by the Hidalgo County Democratic Party.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/theme_switcher.js"></script>
+</body>
+</html>
