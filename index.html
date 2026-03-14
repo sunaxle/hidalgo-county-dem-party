@@ -19,6 +19,7 @@
     <div class="nav-links">
       <a href="index.html" class="nav-item">Home</a>
       <a href="about.html" class="nav-item">About Us</a>
+      <a href="bylaws.html" class="nav-item">Bylaws</a>
       <a href="vote.html" class="nav-item">Resources</a>
       <a href="volunteer.html" class="nav-item">Volunteer</a>
       <a href="arena_training.html" class="nav-item">The Arena</a>
@@ -43,7 +44,34 @@
     <div class="hero-content">
       <h1 class="hero-title" style="font-size: 3.5rem; line-height: 1.1;">Empowering South Texas<br><span style="color: var(--accent);">to build communities that represent them.</span></h1>
       <p class="hero-subtitle">We work with all members of the South Texas community to ensure that Democrats are elected to all levels of government while building unity and strength through fact-based policies. We can shape our future together.</p>
-      <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+      
+      <!-- Election Countdown Timer -->
+      <div id="countdown-container" style="margin: 2rem 0; background: var(--glass-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass-border); display: inline-block;">
+        <h3 style="margin: 0 0 1rem 0; font-size: 1.1rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">General Election Countdown</h3>
+        <div id="election-countdown" style="display: flex; gap: 1.5rem; justify-content: center; text-align: center;">
+            <div>
+                <span id="cd-days" style="display: block; font-size: 2.5rem; font-weight: bold; color: white;">00</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Days</span>
+            </div>
+            <div style="font-size: 2.5rem; font-weight: bold; color: var(--text-muted);">:</div>
+            <div>
+                <span id="cd-hours" style="display: block; font-size: 2.5rem; font-weight: bold; color: white;">00</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Hours</span>
+            </div>
+            <div style="font-size: 2.5rem; font-weight: bold; color: var(--text-muted);">:</div>
+            <div>
+                <span id="cd-minutes" style="display: block; font-size: 2.5rem; font-weight: bold; color: white;">00</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Mins</span>
+            </div>
+            <div style="font-size: 2.5rem; font-weight: bold; color: var(--text-muted);">:</div>
+            <div>
+                <span id="cd-seconds" style="display: block; font-size: 2.5rem; font-weight: bold; color: white;">00</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Secs</span>
+            </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 1rem; display: flex; gap: 1rem;">
         <a href="volunteer.html" class="btn btn-primary">Join us</a>
         <a href="about.html" class="btn btn-secondary">Learn More</a>
       </div>
@@ -183,6 +211,8 @@
 
   <script src="js/app.js"></script>
   <script src="js/news_feed.js"></script>
-<script src="js/value_counter.js"></script>
+  <script src="js/value_counter.js"></script>
+  <script src="js/theme_switcher.js"></script>
+  <script src="js/countdown.js"></script>
 </body>
 </html>
