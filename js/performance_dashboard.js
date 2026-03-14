@@ -91,12 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 Precinct ${cleanPct || 'Unknown'} <span style="font-size: 0.7em; float:right; padding: 2px 5px; border-radius: 4px; background: ${status === 'filled' ? '#d1fae5' : '#fee2e2'}; color: ${status === 'filled' ? '#065f46' : '#991b1b'};">${status.toUpperCase()}</span>
             </h3>`;
             
-        if(pd) {
             popupContent += `
                 <div style="font-size: 0.9em; color: #334155; margin-bottom: 8px;">
                     <strong>Reg Voters:</strong> ${pd.registered_voters.toLocaleString()}<br>
                     <strong>Past Primary Target:</strong> ${pd.past_primary.toLocaleString()}<br>
-                    <strong style="color: #0284c7;">Proj. Target:</strong> ${pd.target_votes.toLocaleString()}
+                    <strong style="color: #0284c7;">Proj. Target:</strong> ${Math.round(pd.past_primary * 1.15).toLocaleString()}
                 </div>
             `;
         }
@@ -176,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 totalRegistered += pd.registered_voters;
                 totalPastPrimary += pd.past_primary;
-                totalTarget += pd.target_votes;
+                totalTarget += Math.round(pd.past_primary * 1.15); // Dynamic 15% growth target
             }
         });
         

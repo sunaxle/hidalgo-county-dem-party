@@ -71,39 +71,76 @@
       <a href="contact.html" class="btn btn-primary">Contact Us</a>
     </div>
   </section>  
-  
-  <!-- Features Section -->
-  <section class="container">
+  <!-- Local News Board Section -->
+  <section class="container mt-5 fade-in">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+      <div>
+        <h2 style="margin-bottom: 0.5rem;"><span style="color: var(--accent);">Hidalgo Dems</span> Local News</h2>
+        <p style="color: var(--text-muted); margin: 0;">Internal announcements, statements, and community updates.</p>
+      </div>
+      <a href="about.html" class="btn btn-secondary btn-sm" style="display: none;">View All</a>
+    </div>
+
     <div class="grid-3">
-      <!-- Card 1 -->
-      <div class="glass-card fade-in">
-        <div class="icon-wrap">🤝</div>
-        <h3>Volunteer. Blockwalk.</h3>
-        <p>Join our grassroots efforts. Every door counts in Hidalgo County. Sign up to blockwalk, phone bank, or write letters to voters.</p>
-        <a href="events.html">Join Us &rarr;</a>
-      </div>
-      <!-- Card 2 -->
-      <div class="glass-card fade-in" style="transition-delay: 0.1s;">
-        <div class="icon-wrap">🗳️</div>
-        <h3>Your Vote Matters</h3>
-        <p>Ensure your voice is heard this November. Check your registration status, find your polling location, or request a mail-in ballot.</p>
-        <a href="vote.html">Voter Resources &rarr;</a>
-      </div>
-      <!-- Card 3 -->
-      <div class="glass-card fade-in" style="transition-delay: 0.2s;">
-        <div class="icon-wrap">🏛️</div>
-        <h3>Our Leadership</h3>
-        <p>Meet our County Chairman, Precinct Chairs, and Democratic candidates actively working to improve the quality of life in South Texas.</p>
-        <a href="about.html">Meet the Team &rarr;</a>
-      </div>
+      <!-- Local News Card 1 -->
+      <article class="glass-card" style="padding: 2rem; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent);"></div>
+        <div style="font-size: 0.8rem; color: var(--accent); font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px;">Message from the Chair</div>
+        <h3 style="margin-bottom: 1rem; line-height: 1.3;">Upcoming Headquarters Office Hours Policy Change</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          In response to requests from our Precinct Chairs, we are implementing dedicated headquarters office hours starting next month. The Democratic Headquarters will now be open with guaranteed coverage for 9 hours per week...
+        </p>
+        <div style="font-size: 0.8rem; color: #94a3b8; display: flex; justify-content: space-between;">
+          <span>By: Chairman Richard Gonzales</span>
+          <span>March 14, 2026</span>
+        </div>
+      </article>
+
+      <!-- Local News Card 2 -->
+      <article class="glass-card" style="padding: 2rem; position: relative; overflow: hidden; transition-delay: 0.1s;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #3b82f6;"></div>
+        <div style="font-size: 0.8rem; color: #3b82f6; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px;">Event Announcement</div>
+        <h3 style="margin-bottom: 1rem; line-height: 1.3;">South Texas Get Out The Vote Rally Announced</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          Join us at the McAllen Convention Center for the largest region-wide GET OUT THE VOTE rally this election cycle. We will be training volunteers on block-walking, voter registration tactics, and phone-banking tools...
+        </p>
+        <div style="font-size: 0.8rem; color: #94a3b8; display: flex; justify-content: space-between;">
+          <span>By: HCDP Executive Comm.</span>
+          <span>March 12, 2026</span>
+        </div>
+      </article>
+
+      <!-- Local News Card 3 -->
+      <article class="glass-card" style="padding: 2rem; position: relative; overflow: hidden; transition-delay: 0.2s;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #10b981;"></div>
+        <div style="font-size: 0.8rem; color: #10b981; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px;">Volunteer Spotlight</div>
+        <h3 style="margin-bottom: 1rem; line-height: 1.3;">Recognizing Top Canvassers of the Primary</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          A huge thank you to all the precinct chairs and block captains who hit the pavement this Spring. Special recognition to Precinct 15 for logging over 400 doors knocked, and Precinct 42 for registering 150 new voters...
+        </p>
+        <div style="font-size: 0.8rem; color: #94a3b8; display: flex; justify-content: space-between;">
+          <span>By: HCDP Field Office</span>
+          <span>March 10, 2026</span>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- Quote Section -->
-  <section class="container fade-in" style="text-align: center; padding: 4rem 0;">
-    <div class="glass-card" style="padding: 4rem 2rem;">
-      <h2 style="font-weight: 400; font-style: italic; margin-bottom: 1rem;">"Every accomplishment starts with the decision to try."</h2>
-      <p style="color: var(--accent); font-weight: 600;">— President John F. Kennedy</p>
+  <!-- External RSS Feed Section (Texas Tribune or TX Dems) -->
+  <section class="container fade-in" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="margin-bottom: 0.5rem;">Texas Political Newswire</h2>
+      <p style="color: var(--text-muted); margin: 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Live curated updates from the Texas Tribune and state political feeds.
+      </p>
+    </div>
+
+    <!-- Container for dynamic JS injection, styled using grid classes -->
+    <div id="rss-feed-container" class="grid-3">
+      <!-- Loading State -->
+      <div class="glass-card" style="text-align: center; padding: 3rem; grid-column: 1 / -1;">
+        <span style="font-size: 2rem; color: var(--accent); display: inline-block; animation: fade 1.5s infinite alternate;">Loading Latest Headlines...</span>
+      </div>
     </div>
   </section>
 
@@ -145,6 +182,7 @@
   </footer>
 
   <script src="js/app.js"></script>
+  <script src="js/news_feed.js"></script>
 <script src="js/value_counter.js"></script>
 </body>
 </html>
