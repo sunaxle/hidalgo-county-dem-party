@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chairman & Party Notes - Hidalgo Dems</title>
+  <meta name="description" content="A board for requests, suggestions, and feedback for the Hidalgo County Democratic Party Chairman and local party leadership.">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .notes-header {
+      padding: 6rem 2rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 100%, rgba(250,204,21,0.1) 0%, transparent 50%);
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .note-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .note-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+      border-color: rgba(250,204,21,0.4);
+    }
+    
+    .note-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+    }
+    
+    .note-urgent::before {
+      background: #ef4444; /* Red for urgent */
+    }
+
+    .note-idea::before {
+      background: #facc15; /* Yellow for ideas */
+    }
+
+    .note-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .note-author {
+      font-weight: bold;
+      color: #fff;
+    }
+    
+    .note-badge {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: bold;
+    }
+    
+    .badge-urgent { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    .badge-idea { background: rgba(250, 204, 21, 0.2); color: #facc15; }
+    .badge-request { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+
+    .note-content {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #e2e8f0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .add-note-container {
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 5rem;
+    }
+    
+    .add-note-btn {
+      background: transparent;
+      border: 2px dashed rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 1.5rem 3rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .add-note-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(34,211,238,0.05);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1" style="background: radial-gradient(circle, rgba(250,204,21,0.15) 0%, transparent 60%);"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="precinct_performance.html">Performance DB</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span>Organizations ▼</span>
+        <div class="dropdown-content">
+          <a href="youth_organizations.html">Youth Orgs</a>
+          <a href="community_organizations.html">Community Orgs</a>
+          <a href="activist_organizations.html">Activism</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="chairman_notes.html" class="nav-item" style="color:var(--accent);">Chairman Notes</a>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="notes-header container">
+    <h1>Chairman & Party Notes</h1>
+    <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
+      A dedicated space for Precinct Chairs and volunteers to post requests, suggestions, and operational feedback directly for Chairman Gonzales and party leadership.
+    </p>
+  </header>
+
+  <!-- Notes Grid Section -->
+  <section class="container fade-in">
+    <div class="notes-grid">
+      
+      <!-- Note 1 -->
+      <div class="note-card note-request">
+        <div class="note-meta">
+          <span class="note-author">Alvera</span>
+          <span class="note-badge badge-request">Tools & Tech</span>
+        </div>
+        <div class="note-content">
+          "Needs Call Hub for anyone who wants it, and wants a text blast per person."
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+          Status: <span style="color: #facc15;">Pending Review</span>
+        </div>
+      </div>
+
+      <!-- Note 2 -->
+      <div class="note-card note-idea">
+        <div class="note-meta">
+          <span class="note-author">Norma Garza, Precinct Chair</span>
+          <span class="note-badge badge-idea">Communication</span>
+        </div>
+        <div class="note-content">
+          "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged."
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+          Status: <span style="color: #facc15;">Pending Review</span>
+        </div>
+      </div>
+
+      <!-- Note 3 -->
+      <div class="note-card note-urgent">
+        <div class="note-meta">
+          <span class="note-author">Anonymous Chair</span>
+          <span class="note-badge badge-urgent">Pain Point</span>
+        </div>
+        <div class="note-content">
+          "Chairman, can you please answer the phone calls going into the office?"
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+          Status: <span style="color: #ef4444;">Needs Action</span>
+        </div>
+      </div>
+
+      <!-- Note 4 -->
+      <div class="note-card note-urgent">
+        <div class="note-meta">
+          <span class="note-author">Anonymous Chair</span>
+          <span class="note-badge badge-urgent">Operational</span>
+        </div>
+        <div class="note-content">
+          "We need dedicated office hours at the headquarters. At least 3 hours for 3 days per week (9 hours in total). How can we get this accomplished?"
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+          Status: <span style="color: #ef4444;">Needs Action</span>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="add-note-container">
+      <button class="add-note-btn" onclick="alert('Submission form coming soon. Please contact the party directly for now.')">
+        <span style="font-size: 1.5rem;">+</span> Add a Note to the Board
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="volunteer.html">Volunteer Hub</a>
+        <a href="precinct_chairs.html">Precinct Chairs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="issues_map.html">Issues Map</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

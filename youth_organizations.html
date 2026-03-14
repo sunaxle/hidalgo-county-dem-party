@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Youth Organizations - Hidalgo Dems</title>
+  <meta name="description" content="Discover and connect with allied youth Democratic organizations in Hidalgo County.">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <style>
+    .directory-header {
+      padding: 6rem 2rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 100%, rgba(34,211,238,0.1) 0%, transparent 50%);
+    }
+
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .org-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .org-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(34,211,238,0.2);
+      border-color: rgba(34,211,238,0.4);
+    }
+    
+    .org-logo-placeholder {
+      width: 90px;
+      height: 90px;
+      background: rgba(34,211,238,0.15);
+      border: 1px solid rgba(34,211,238,0.3);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .org-card h3 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .org-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      flex-grow: 1; /* Pushes button to bottom */
+    }
+    
+    .btn-block {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="precinct_performance.html">Performance DB</a>
+        </div>
+      </div>
+      <div class="nav-item dropdown">
+        <span style="color:var(--accent);">Organizations ▼</span>
+        <div class="dropdown-content">
+          <a href="youth_organizations.html" style="color:var(--accent);">Youth Orgs</a>
+          <a href="community_organizations.html">Community Orgs</a>
+          <a href="activist_organizations.html">Activism</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="chairman_notes.html" class="nav-item">Chairman Notes</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="directory-header container">
+    <h1>Youth Organizations</h1>
+    <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
+      Empowering the next generation of Democratic leaders in Hidalgo County. Find a local chapter at your high school, university, or community to get involved today.
+    </p>
+  </header>
+
+  <!-- Organizations Grid -->
+  <section class="container fade-in">
+    <div class="org-grid">
+      
+      <!-- Placeholder Card 1 -->
+      <div class="org-card">
+        <div class="org-logo-placeholder">🎓</div>
+        <h3>Hidalgo County Young Democrats</h3>
+        <p>Engaging young adults ages 18-35 in the political process through education, advocacy, mobilization, and social events across the county.</p>
+        <a href="#" class="btn btn-sm btn-outline btn-block">Visit Website</a>
+      </div>
+      
+      <!-- Placeholder Card 2 -->
+      <div class="org-card">
+        <div class="org-logo-placeholder">🏛️</div>
+        <h3>UTRGV College Democrats</h3>
+        <p>The official Democratic organization for students at the University of Texas Rio Grande Valley, focusing on campus voter registration and progressive advocacy.</p>
+        <a href="#" class="btn btn-sm btn-outline btn-block">Join on Campus</a>
+      </div>
+
+      <!-- Placeholder Card 3 -->
+      <div class="org-card">
+        <div class="org-logo-placeholder">📚</div>
+        <h3>South Texas High School Dems</h3>
+        <p>A coalition of high school chapters dedicated to youth civic engagement, organizing student-led phone banks, and encouraging early pre-registration.</p>
+        <a href="#" class="btn btn-sm btn-outline btn-block">Start a Chapter</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="volunteer.html">Volunteer Hub</a>
+        <a href="precinct_chairs.html">Precinct Chairs</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="issues_map.html">Issues Map</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/value_counter.js"></script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Precinct Performance Dashboard - Hidalgo Dems</title>
+  <meta name="description" content="View precinct performance and vote goals for Hidalgo County Democrats.">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Leaflet CSS for the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <style>
+    .directory-header {
+      padding: 6rem 2rem 3rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 100%, rgba(34,211,238,0.1) 0%, transparent 50%);
+    }
+    
+    .map-container {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto 3rem auto;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    #map {
+        height: 500px;
+        width: 100%;
+        background: #0f172a;
+    }
+    
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 1rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    
+    .btn.active {
+        box-shadow: 0 0 10px rgba(34,211,238,0.5);
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About Us</a>
+      <a href="county_websites.html" class="nav-item">TX Dems</a>
+      <a href="south_texas_region.html" class="nav-item">South TX</a>
+      <a href="issues_map.html" class="nav-item">Issues Map</a>
+      <div class="nav-item dropdown">
+        <span>Officials ▼</span>
+        <div class="dropdown-content">
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="precinct_performance.html" style="color:var(--accent);">Performance DB</a>
+        </div>
+      </div>
+      <a href="community_inbox.html" class="nav-item">Inbox</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Header -->
+  <header class="directory-header container">
+    <h1>Precinct Performance Dashboard</h1>
+    <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
+      Filter by precinct status to analyze voter registration and track our progress toward the county-wide vote goal.
+    </p>
+  </header>
+
+  <!-- Interactive Map Section -->
+  <section class="container fade-in">
+    <div class="map-controls glass-card" style="margin-bottom: 1rem; padding: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+      <span style="font-weight: bold; color: white;">Map Filter:</span>
+      <button id="btn-show-all" class="btn btn-sm" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Show All</button>
+      <button id="btn-show-filled" class="btn btn-sm" style="background: rgba(16, 185, 129, 0.4); border-color: #10b981;">Seated Precinct Chairs</button>
+      <button id="btn-show-vacant" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.4); border-color: #ef4444;">Vacant Precincts</button>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section class="container fade-in" style="margin-bottom: 5rem;">
+    <div class="dashboard-controls" style="text-align: center; margin-bottom: 2rem;">
+        <h2>Performance Metrics</h2>
+        <p style="color: var(--text-muted);">Data updates based on your map selection above.</p>
+    </div>
+    
+    <div class="charts-container" style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+        <div class="chart-card glass-card" style="flex: 1; min-width: 300px; padding: 2rem;">
+            <h3 style="margin-top:0; text-align:center;">Voter Metrics Aggregate</h3>
+            <div style="height: 300px;">
+                <canvas id="voterChart"></canvas>
+            </div>
+        </div>
+        <div class="chart-card glass-card" style="flex: 1; min-width: 300px; max-width: 400px; padding: 2rem; text-align: center;">
+            <h3 style="margin-top:0;">Vote Goal Progress</h3>
+            <p style="color: var(--text-muted); font-size: 0.9em; margin-bottom:1rem;">County-wide Default Goal: 150,000</p>
+            <div style="height: 250px; position:relative;">
+                <canvas id="goalChart"></canvas>
+            </div>
+            <div style="margin-top: 1rem;">
+                <h4 style="margin:0; color:var(--text-muted); font-weight:normal;">Projected Target Votes</h4>
+                <H2 id="goalTargetText" style="color: var(--accent); margin: 0.5rem 0; font-size: 2.5rem;">0</H2>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container fade-in" style="margin-bottom: 5rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Ready to Make an Impact?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-muted);">
+        Hitting our vote goal starts block by block. We need dedicated Precinct Chairs to get out the vote in their neighborhoods.
+      </p>
+      <a href="volunteer.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Step Up and Run</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="vote.html">Voter Resources</a>
+        <a href="events.html">Events</a>
+        <a href="volunteer.html">Volunteer Hub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Info</h4>
+        <a href="county_websites.html">Texas Dems Catalog</a>
+        <a href="south_texas_region.html">South Texas Region</a>
+        <a href="issues_map.html">Issues Map</a>
+        <a href="community_inbox.html">Community Inbox</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  
+  <!-- Map Data and Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
+  <script src="js/chair_data.js"></script>
+  <script src="js/performance_data.js"></script>
+  <script src="js/performance_dashboard.js"></script>
+
+</body>
+</html>
