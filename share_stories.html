@@ -292,6 +292,98 @@
     body.angry-mode .shape-1, body.angry-mode .shape-2 {
       background: rgba(239, 68, 68, 0.1) !important; /* Turn background red */
     }
+
+    /* Hulk Smash Solution Buttons */
+    .hulk-btn {
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid #16a34a; /* Radioactive Green */
+      color: #16a34a;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .hulk-btn:hover {
+      background: #16a34a;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(22, 163, 74, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* Full-Screen Solution Modal */
+    .solution-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .solution-modal-content {
+      background: #000;
+      border: 3px solid #16a34a;
+      border-radius: 12px;
+      padding: 3rem;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 0 40px rgba(22, 163, 74, 0.3);
+      text-align: left;
+      position: relative;
+      animation: modal-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modal-slam {
+      0% { transform: scale(3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .solution-header {
+      color: #16a34a;
+      font-size: 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed #16a34a;
+      padding-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .solution-text {
+      color: #f8fafc;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .close-modal-btn {
+      background: transparent;
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      padding: 0.5rem 1.5rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .close-modal-btn:hover {
+      background: #ef4444;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -434,30 +526,35 @@
           <span class="raw-tag">Wealth Gap & Monopolies</span>
           <p class="raw-text">"Information about how the wealth gap affects us. Statistics about the wealth gap and comparisons to the realities for working class people who rely on government employment... How to fight to change by emphasizing the Power of the People despite the power of the few who monopolize everything so as to shut us and democracy out... the billionaire, bottomless pits of greed must be reigned in. They own us."</p>
           <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_01 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Wealth Gap Protocol" data-solution="PROPOSED SOLUTION: Immediately tax billionaire unrealized gains, expand federal union protections for all workers (including gig economies), and aggressively overturn Citizens United to strip monopolistic corporate money out of local elections. Let the people govern.">HULK SMASH // VIEW SOLUTION</button>
         </div>
 
         <div class="raw-message">
           <span class="raw-tag">Veterans Services</span>
           <p class="raw-text">"Service to Vets having been cut... realities for working class people who rely on government employment (which DOGE has diminished)..."</p>
           <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_02 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Veterans Protection Directive" data-solution="PROPOSED SOLUTION: Block all attempts at VA privatization, reinstate and expand funding for federal workforce housing, and aggressively counter DOGE budget cuts that target essential services for working-class veterans and their families.">HULK SMASH // VIEW SOLUTION</button>
         </div>
 
         <div class="raw-message">
           <span class="raw-tag">Housing Crisis</span>
           <p class="raw-text">"Renters' and homeowners' challenges. Housing. Average people with extraordinary challenges need representation..."</p>
           <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_03 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Housing Intervention Plan" data-solution="PROPOSED SOLUTION: Outlaw corporate hoarding of single-family homes by hedge funds, strictly limit rent-hikes over a set percentage, and aggressively expand first-time homebuyer assistance grants. Housing is a human necessity, not a Wall Street portfolio asset.">HULK SMASH // VIEW SOLUTION</button>
         </div>
 
         <div class="raw-message">
           <span class="raw-tag">Education Interference</span>
           <p class="raw-text">"Education being dictated to conform with a white nationalist agenda... This information needs to be front and center every single day coming from Democrats and in Spanish too!"</p>
           <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_04 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Public Education Defense" data-solution="PROPOSED SOLUTION: Instantly defund all destructive voucher scams draining RGV schools, aggressively increase per-student state funding, and ban political extremists from dictating historical truth and curriculums in community classrooms.">HULK SMASH // VIEW SOLUTION</button>
         </div>
 
         <div class="raw-message">
           <span class="raw-tag">Voter Suppression (SAVE Act)</span>
           <p class="raw-text">"The SAVE act is evil. Period. And so transparently so. I don't do fb, but I looked at the feed. I don't use fb because I don't support billionaire 'business'. Closed fb acct a year after fb was born bc I could see it appeals to vanity & is a trap."</p>
           <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_05 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Voting Rights Enforcement" data-solution="PROPOSED SOLUTION: Violently oppose the SAVE Act's transparent suppression efforts. Demand immediate passage of the John Lewis Voting Rights Advancement Act and federally mandate expanded early voting locations across all Hidalgo County precincts.">HULK SMASH // VIEW SOLUTION</button>
         </div>
 
       </div>
@@ -538,9 +635,17 @@
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
-  <script src="js/theme_switcher.js"></script>
+  <!-- Hulk Smash Solution Modal -->
+  <div id="solutionModal" class="solution-modal">
+    <div class="solution-modal-content">
+      <div id="modalTitle" class="solution-header">POLICY RESOLUTION</div>
+      <p id="modalSolution" class="solution-text">Solution text injects here.</p>
+      <button class="close-modal-btn" id="closeModalBtn">Dismiss</button>
+    </div>
+  </div>
 
+  <script src="js/app.js"></script>
+  
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -580,6 +685,34 @@
           masonryGrid.style.display = 'grid';
           submitBox.style.display = 'block';
           rawBoard.style.display = 'none';
+        }
+      });
+
+      // --- Hulk Smash Modal Logic ---
+      const solutionModal = document.getElementById('solutionModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalSolution = document.getElementById('modalSolution');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const hulkBtns = document.querySelectorAll('.hulk-btn');
+
+      // Open Modal on Smash
+      hulkBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modalTitle.innerText = `[ ${btn.getAttribute('data-title')} ]`;
+          modalSolution.innerText = btn.getAttribute('data-solution');
+          solutionModal.style.display = 'flex';
+        });
+      });
+
+      // Close Modal logic
+      closeModalBtn.addEventListener('click', () => {
+        solutionModal.style.display = 'none';
+      });
+
+      // Close Modal if clicked outside the content box
+      solutionModal.addEventListener('click', (e) => {
+        if (e.target === solutionModal) {
+          solutionModal.style.display = 'none';
         }
       });
     });
