@@ -2,6 +2,9 @@
 // Injects a floating panel to test different CSS color schemes instantly
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Feature toggled off per user request
+    return;
+
     // Create the floating panel
     const panel = document.createElement('div');
     panel.style.position = 'fixed';
