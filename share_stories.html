@@ -214,6 +214,84 @@
       background: var(--bg-dark);
       color: #fff;
     }
+
+    /* --- Raw Communications Board (Angry Mode) --- */
+    #raw-communications-board {
+      display: none; /* Hidden by Default */
+      margin-top: 2rem;
+    }
+
+    /* Gritty, terminal-style layout */
+    .raw-feed-container {
+      background: #000;
+      border: 2px solid #ef4444; /* Alert Red */
+      border-radius: 8px;
+      padding: 2rem;
+      font-family: 'Courier New', Courier, monospace;
+      color: #fca5a5;
+      box-shadow: inset 0 0 30px rgba(239, 68, 68, 0.2);
+    }
+
+    .raw-message {
+      border-bottom: 1px dashed #ef4444;
+      padding: 1.5rem 0;
+    }
+
+    .raw-message:last-child {
+      border-bottom: none;
+    }
+
+    .raw-tag {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      padding: 0.2rem 0.5rem;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ef4444;
+    }
+
+    .raw-text {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    .raw-meta {
+      font-size: 0.8rem;
+      color: #7f1d1d;
+      margin-top: 0.5rem;
+    }
+
+    /* The Angry Button Toggle */
+    .angry-btn {
+      background: transparent;
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      padding: 0.8rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      margin-left: 2rem;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .angry-btn:hover, .angry-btn.engaged {
+      background: #ef4444;
+      color: #fff;
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.8);
+    }
+
+    /* Utility class injected by JS */
+    body.angry-mode .shape-1, body.angry-mode .shape-2 {
+      background: rgba(239, 68, 68, 0.1) !important; /* Turn background red */
+    }
   </style>
 </head>
 <body>
@@ -282,6 +360,7 @@
       <button class="filter-btn">📈 Economy</button>
       <button class="filter-btn">🩺 Healthcare & Abortion</button>
       <button class="filter-btn">🤖 Jobs & A.I.</button>
+      <button class="angry-btn" id="angryToggleBtn">😡 The Angry Button</button>
     </div>
   </header>
 
@@ -346,8 +425,46 @@
 
     </div>
 
+    <!-- Raw Communications Feed (Hidden by Default) -->
+    <div id="raw-communications-board">
+      <div class="raw-feed-container fade-in">
+        <h2 style="color: #ef4444; border-bottom: 2px solid #ef4444; padding-bottom: 0.5rem; margin-bottom: 1rem; font-family: sans-serif;">RAW COMMUNITY FEED // UNFILTERED</h2>
+        
+        <div class="raw-message">
+          <span class="raw-tag">Wealth Gap & Monopolies</span>
+          <p class="raw-text">"Information about how the wealth gap affects us. Statistics about the wealth gap and comparisons to the realities for working class people who rely on government employment... How to fight to change by emphasizing the Power of the People despite the power of the few who monopolize everything so as to shut us and democracy out... the billionaire, bottomless pits of greed must be reigned in. They own us."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_01 // HIGH URGENCY</div>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Veterans Services</span>
+          <p class="raw-text">"Service to Vets having been cut... realities for working class people who rely on government employment (which DOGE has diminished)..."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_02 // HIGH URGENCY</div>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Housing Crisis</span>
+          <p class="raw-text">"Renters' and homeowners' challenges. Housing. Average people with extraordinary challenges need representation..."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_03 // HIGH URGENCY</div>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Education Interference</span>
+          <p class="raw-text">"Education being dictated to conform with a white nationalist agenda... This information needs to be front and center every single day coming from Democrats and in Spanish too!"</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_04 // HIGH URGENCY</div>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Voter Suppression (SAVE Act)</span>
+          <p class="raw-text">"The SAVE act is evil. Period. And so transparently so. I don't do fb, but I looked at the feed. I don't use fb because I don't support billionaire 'business'. Closed fb acct a year after fb was born bc I could see it appeals to vanity & is a trap."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_05 // HIGH URGENCY</div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Submit Form -->
-    <div class="story-form-container fade-in">
+    <div class="story-form-container fade-in" id="submission-form-box">
       <h2>Add Your Voice to the Board</h2>
       <p style="color: var(--text-muted); text-align: center; margin-bottom: 2rem;">
         Your story validates others. Select a critical issue and share your perspective below. Information is verified before posting to ensure a safe, constructive platform.
@@ -424,12 +541,48 @@
   <script src="js/app.js"></script>
   <script src="js/theme_switcher.js"></script>
 
-  <!-- Google Translate -->
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Angry Button Toggle Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const angryBtn = document.getElementById('angryToggleBtn');
+      const masonryGrid = document.querySelector('.story-masonry');
+      const submitBox = document.getElementById('submission-form-box');
+      const rawBoard = document.getElementById('raw-communications-board');
+      
+      let isAngryMode = false;
+
+      angryBtn.addEventListener('click', () => {
+        isAngryMode = !isAngryMode;
+
+        if (isAngryMode) {
+          // Engage Angry Mode
+          angryBtn.classList.add('engaged');
+          angryBtn.innerText = "🛑 Return to Normal";
+          document.body.classList.add('angry-mode');
+          
+          masonryGrid.style.display = 'none';
+          submitBox.style.display = 'none';
+          rawBoard.style.display = 'block';
+
+        } else {
+          // Revert to Normal Mode
+          angryBtn.classList.remove('engaged');
+          angryBtn.innerText = "😡 The Angry Button";
+          document.body.classList.remove('angry-mode');
+          
+          masonryGrid.style.display = 'grid';
+          submitBox.style.display = 'block';
+          rawBoard.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
