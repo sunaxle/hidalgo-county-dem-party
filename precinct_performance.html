@@ -120,6 +120,33 @@
                 <H2 id="goalTargetText" style="color: var(--accent); margin: 0.5rem 0; font-size: 2.5rem;">0</H2>
             </div>
         </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- Vacant Precincts Table Section -->
+  <section class="container fade-in" style="margin-bottom: 5rem;" id="vacant-table-section">
+    <div class="glass-card" style="padding: 2rem;">
+        <h2 style="margin-top: 0; color: var(--accent); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 1.5rem;">Target Analysis: Vacant Precincts</h2>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;" id="vacant-precincts-table">
+                <thead>
+                    <tr style="border-bottom: 2px solid rgba(255,255,255,0.2);">
+                        <th style="padding: 1rem; color: #94a3b8; text-transform: uppercase; font-size: 0.85rem;">Precinct</th>
+                        <th style="padding: 1rem; color: #94a3b8; text-transform: uppercase; font-size: 0.85rem;">Registered Voters</th>
+                        <th style="padding: 1rem; color: #94a3b8; text-transform: uppercase; font-size: 0.85rem;">Previous Primary Turnout</th>
+                        <th style="padding: 1rem; color: #94a3b8; text-transform: uppercase; font-size: 0.85rem;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="vacant-table-body">
+                    <!-- Dynamic rows injected by JS -->
+                </tbody>
+                <tfoot id="vacant-table-foot" style="font-weight: bold; background: rgba(34, 211, 238, 0.1); border-top: 2px solid var(--accent);">
+                    <!-- Dynamic totals row injected by JS -->
+                </tfoot>
+            </table>
+        </div>
     </div>
   </section>
 

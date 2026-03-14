@@ -283,6 +283,59 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update Text with animation counter
         const targetEl = document.getElementById('goalTargetText');
         animateValue(targetEl, parseInt(targetEl.innerText.replace(/,/g, '')), stats.totalTarget, 500);
+        
+        // Update Vacant Table
+        updateVacantTable();
+    }
+    
+    // -------------------------------------------------------------
+    // 2.5. Vacant Precincts Table Logic
+    // -------------------------------------------------------------
+    function updateVacantTable() {
+        const tbody = document.getElementById('vacant-table-body');
+        const tfoot = document.getElementById('vacant-table-foot');
+        if (!tbody || !tfoot) return;
+
+        let vacantRowsHTML = '';
+        let sumRegistered = 0;
+        let sumTurnout = 0;
+        let countVacant = 0;
+
+        // Sort data by precinct number for the table
+        const sortedData = [...perfData].sort((a, b) => parseInt(a.precinct) - parseInt(b.precinct));
+
+        sortedData.forEach(pd => {
+            let status = getPrecinctStatus(pd.precinct);
+            if (status === 'vacant') {
+                countVacant++;
+                sumRegistered += pd.registered_voters;
+                sumTurnout += pd.past_primary;
+                
+                vacantRowsHTML += `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">
+                        <td style="padding: 1rem; color: white; font-weight: bold;">Pct ${pd.precinct}</td>
+                        <td style="padding: 1rem; color: var(--text-muted);">${pd.registered_voters.toLocaleString()}</td>
+                        <td style="padding: 1rem; color: var(--text-muted);">${pd.past_primary.toLocaleString()}</td>
+                        <td style="padding: 1rem;"><a href="volunteer.html" class="btn btn-sm" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; border-color: #ef4444; color: #ef4444; background: rgba(239, 68, 68, 0.1);">Recruit</a></td>
+                    </tr>
+                `;
+            }
+        });
+
+        if (countVacant === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 2rem; color: #10b981;">All precincts are currently filled! Incredible job.</td></tr>`;
+            tfoot.innerHTML = '';
+        } else {
+            tbody.innerHTML = vacantRowsHTML;
+            tfoot.innerHTML = `
+                <tr>
+                    <td style="padding: 1rem; color: var(--accent);">Cumulative Totals (${countVacant} Vacant)</td>
+                    <td style="padding: 1rem; color: white; font-size: 1.1rem;">${sumRegistered.toLocaleString()}</td>
+                    <td style="padding: 1rem; color: white; font-size: 1.1rem;">${sumTurnout.toLocaleString()}</td>
+                    <td style="padding: 1rem;"></td>
+                </tr>
+            `;
+        }
     }
     
     // Helper animation for number roll
