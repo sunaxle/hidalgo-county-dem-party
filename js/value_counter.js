@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
     const hourlyRate = 85.00; 
-    const hoursLogged = 270; // Bumped +5 hours for the Google Translation global script injections
+    const hoursLogged = 273; // Bumped +3 hours for Issues Map node addition
     const totalValue = hourlyRate * hoursLogged;
 
     // Create the footer element
