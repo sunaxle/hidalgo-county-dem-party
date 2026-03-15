@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
     const hourlyRate = 85.00; 
-    const hoursLogged = 290; // Bumped +3 hours for Grievance Procedure architecture and copy writing
+    const hoursLogged = 294; // Bumped +4 hours for 2026 News research, compilation, and custom News Carousel build.
     const totalValue = hourlyRate * hoursLogged;
 
     // Create the footer element

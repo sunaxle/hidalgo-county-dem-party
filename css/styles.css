@@ -416,3 +416,60 @@ footer {
 .dropdown:hover > span {
   color: var(--accent);
 }
+
+/* News Carousel Styles */
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 12px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 350px;
+  max-width: 350px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.carousel-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-dark);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    min-width: 280px;
+    max-width: 280px;
+  }
+}
