@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Hall of Fame | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Hall of Fame specific styles */
+    .hof-header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .tier-container {
+      margin-bottom: 4rem;
+    }
+    
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tier-header h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.8rem;
+    }
+    
+    .tier-badge {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+
+    /* Executive Leadership Cards */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .leadership-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .leadership-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .leadership-card h3 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    
+    .leadership-card p {
+      color: #94a3b8;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    /* Hall of Fame Grids (Block Walkers, Phone Bankers, etc.) */
+    .hof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .hof-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .hof-card:hover {
+      background: rgba(0, 240, 255, 0.05);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+    
+    .hof-rank {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.2);
+      min-width: 40px;
+    }
+    
+    .hof-top-3 .hof-rank {
+      color: #ffd700; /* Gold for top 3 */
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .hof-info h4 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    
+    .hof-info p {
+      margin: 0;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Spanish Translation Task Force */
+    .spanish-club-section {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.4));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .spanish-club-header {
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .spanish-club-header h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .spanish-club-header p {
+      color: #cbd5e1;
+      max-width: 600px;
+    }
+
+    .spanish-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .translator-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .translator-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .request-translation-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+    .request-translation-btn:hover {
+      background: #2563eb;
+    }
+
+    /* Decorative background icon for Spanish section */
+    .bg-icon {
+      position: absolute;
+      right: -5%;
+      bottom: -20%;
+      font-size: 15rem;
+      opacity: 0.05;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+          <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="demographic_map.html">Demographic Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Connect ▼</span>
+        <div class="dropdown-content">
+          <a href="community_inbox.html">Inbox</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1.25rem; font-size: 0.875rem;">DONATE</a>
+    </div>
+  </nav>
+
+  <main class="container fade-in">
+    <div class="hof-header">
+      <h1>Volunteer Hall of Fame</h1>
+      <p style="color: #94a3b8; max-width: 650px; margin: 0 auto;">Recognizing the grassroots organizers and dedicated party members who build the foundation of our local democracy. Track our operational metrics across all field tiers.</p>
+    </div>
+
+    <!-- Tier 1 & 2: Structural Leadership -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Executive Field Leadership</h2>
+        <span class="tier-badge">Tier 1 & 2</span>
+      </div>
+      
+      <div class="leadership-grid">
+        <div class="leadership-card">
+          <h3 id="stat-chairman">1</h3>
+          <p>County Chairman</p>
+        </div>
+        <div class="leadership-card">
+          <h3 id="stat-precinct-chairs">0</h3>
+          <p>Active Precinct Chairs</p>
+        </div>
+        <div class="leadership-card">
+          <h3 id="stat-block-captains">0</h3>
+          <p>Active Block Captains</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spanish Translation Team -->
+    <div class="spanish-club-section">
+      <div class="bg-icon">A/あ</div>
+      <div class="spanish-club-header">
+        <h2>Spanish Translation Task Force</h2>
+        <p>Our top 10 bilingual contributors who handle official party translation tasks, ensuring all Hidalgo County communications, materials, and outreach are fully accessible.</p>
+      </div>
+      
+      <div class="spanish-grid" id="spanish-team-grid">
+        <!-- Rendered via JS -->
+      </div>
+      
+      <a href="mailto:translation@hcdp.com" class="request-translation-btn">Submit Material for Translation →</a>
+    </div>
+
+    <!-- Tier 3: Block Walkers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Hall of Fame: Block Walkers</h2>
+        <span class="tier-badge">Tier 3</span>
+      </div>
+      <div class="hof-grid" id="block-walkers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Tier 4: Phone Bankers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Hall of Fame: Phone Bankers</h2>
+        <span class="tier-badge">Tier 4</span>
+      </div>
+      <div class="hof-grid" id="phone-bankers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Tier 5: Letter Writers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Letter Writers Team</h2>
+        <span class="tier-badge">Tier 5</span>
+      </div>
+      <div class="hof-grid" id="letter-writers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/chair_data.js"></script>
+  <script src="js/volunteer_dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
