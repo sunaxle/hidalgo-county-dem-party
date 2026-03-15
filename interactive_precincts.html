@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Precinct Network | Hidalgo Dems</title>
+  <meta name="description" content="Interactive visualization of local progressive issues across Hidalgo County precincts.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* D3 Canvas Container Constraints */
+    #bubble-container {
+      width: 100%;
+      height: 70vh;
+      min-height: 600px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      /* Render a soft radial glow to mimic the issues_map style */
+      background: radial-gradient(circle at center, rgba(14, 165, 233, 0.1) 0%, transparent 60%);
+      margin-top: 2rem;
+    }
+
+    /* Bouncing Physics Nodes */
+    .d3-node {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      /* Vital: offset left/top coordinates so bubble centers directly on d.x and d.y */
+      transform: translate(-50%, -50%);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+      z-index: 2;
+    }
+
+    .d3-node.dragging {
+      cursor: grabbing;
+      z-index: 50;
+      box-shadow: 0 0 30px rgba(14, 165, 233, 0.8);
+      border-color: #38bdf8;
+    }
+
+    .d3-node:hover {
+      border-color: #38bdf8; /* Cyan Glow */
+      box-shadow: 0 0 20px rgba(14, 165, 233, 0.6);
+      z-index: 10;
+    }
+
+    /* Inner Node Title */
+    .d3-node-title {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-align: center;
+      pointer-events: none;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    /* Replicated Hover Tooltip from issues_map.html */
+    .d3-node-info {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(15px);
+      width: 260px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #38bdf8;
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Small up-pointing CSS triangle for the tooltip */
+    .d3-node-info::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #38bdf8;
+    }
+
+    .d3-node:hover .d3-node-info {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(10px);
+    }
+
+    /* Tooltip Formatting */
+    .d3-info-stat {
+      color: #38bdf8;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .d3-info-desc {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
+  <div class="shape shape-2" style="width: 400px; height: 400px; bottom: 10%; right: -5%;"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Connect ▼</span>
+        <div class="dropdown-content">
+          <a href="community_inbox.html">Inbox</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1.25rem; font-size: 0.875rem; box-shadow: 0 4px 14px rgba(247, 104, 13, 0.4); background: linear-gradient(135deg, #F7680D, #d95a0b); border: none;">DONATE</a>
+    </div>
+  </nav>
+
+  <!-- Title Section -->
+  <header class="page-header container" style="padding-top: 150px; padding-bottom: 2rem; min-height: auto;">
+    <div style="text-align: center;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem; text-transform: uppercase;">
+        Live <span style="color: transparent; background: linear-gradient(90deg, #38bdf8, var(--primary)); -webkit-background-clip: text; background-clip: text;">Precinct Filter</span>
+      </h1>
+      <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: var(--text-muted); line-height: 1.6;">
+        Every active precinct captain is tracking the localized issues that matter most to their block. Toss the bubbles around and hover to explore the raw community reports.
+      </p>
+    </div>
+  </header>
+
+  <!-- Interactive Simulation Canvas -->
+  <section class="container" style="margin-bottom: 6rem;">
+    <!-- D3 Container -->
+    <div id="bubble-container"></div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container" style="margin-bottom: 4rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Fill the Gaps in the Network</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff;">Are you missing from the map? We need strong leaders to step up and report the issues impacting their neighborhoods so we can win in 2026.</p>
+      <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Run for Precinct Chair</a>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- D3.js Library -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <!-- Data Dependencies -->
+  <script src="js/chair_data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Physics Engine Script -->
+  <script src="js/bubble_physics.js"></script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
