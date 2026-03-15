@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Menu Toggle
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
 
@@ -8,6 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.toggle('active');
     });
   }
+
+  // Mobile Dropdown Toggle (Accordion)
+  const dropdowns = document.querySelectorAll('.dropdown');
+  dropdowns.forEach(dropdown => {
+    const span = dropdown.querySelector('span');
+    if (span) {
+      span.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          dropdown.classList.toggle('active');
+        }
+      });
+    }
+  });
 
   // Navbar Scroll Effect
   const navbar = document.querySelector('.navbar');

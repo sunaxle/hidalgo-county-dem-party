@@ -337,9 +337,33 @@ footer {
     flex-direction: column;
     padding: 3rem 5%;
     transition: var(--transition);
+    overflow-y: auto;
   }
   .nav-links.active {
     left: 0;
+  }
+  .dropdown {
+    width: 100%;
+  }
+  .dropdown > span {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+  }
+  .dropdown-content {
+    position: relative;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    margin-top: 10px;
+  }
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+  .dropdown.active > span {
+    color: var(--accent);
   }
 }
 
