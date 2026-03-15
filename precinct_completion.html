@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Precinct Completion Dashboard | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Dashboard-specific styling */
+    .dashboard-header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 900px) {
+      .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .metrics-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .metric-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    }
+    .metric-value {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+    .metric-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Commissioner Layouts */
+    .commissioner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    @media (max-width: 768px) {
+      .commissioner-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .commissioner-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .commissioner-card:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.1);
+    }
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      background: rgba(0,0,0,0.2);
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .vacancy-badge {
+      background: rgba(239, 68, 68, 0.2); /* Red tint for alert */
+      color: #ef4444;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .vacancy-list {
+      padding: 1.5rem;
+      display: none; /* Hidden strictly by default, handled by JS toggle */
+    }
+    .vacancy-list.active {
+      display: block;
+      animation: fadeInDown 0.3s ease;
+    }
+    .precinct-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      transition: all 0.2s ease;
+    }
+    .chip:hover {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: var(--accent);
+      cursor: default;
+    }
+    .action-row {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: flex-end;
+    }
+    .btn-organizer {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-organizer:hover {
+      background: var(--accent);
+      color: #000;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="demographic_map.html">Demographic Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Connect ▼</span>
+        <div class="dropdown-content">
+          <a href="community_inbox.html">Inbox</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1.25rem; font-size: 0.875rem;">DONATE</a>
+    </div>
+  </nav>
+
+  <main class="container fade-in">
+    <div class="dashboard-header">
+      <h1>Pathway to Precinct Completion</h1>
+      <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Real-time analysis of our grassroots infrastructure gap. Distribute the targets and organize by Commissioner boundaries below.</p>
+    </div>
+
+    <!-- Data Overview Metrics -->
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-value" id="val-total">268</div>
+        <div class="metric-label">Target Precincts</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="val-filled" style="color: #3b82f6;">0</div>
+        <div class="metric-label">Filled Chairs</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="val-vacant" style="color: #ef4444;">0</div>
+        <div class="metric-label">Vacant Seats</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="val-percent" style="color: #10b981;">0%</div>
+        <div class="metric-label">Goal Completion</div>
+      </div>
+    </div>
+
+    <!-- The Commissioner Breakdown Grid -->
+    <div class="commissioner-grid">
+      
+      <!-- Precinct 1 Container -->
+      <div class="commissioner-card">
+        <div class="card-header" onclick="toggleArea('area1')">
+          <div class="card-title">Pct 1 <span>(Weslaco/Mercedes)</span></div>
+          <div class="vacancy-badge" id="badge-area1">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="area1">
+          <div class="precinct-chips" id="chips-area1"></div>
+          <div class="action-row">
+            <a href="mailto:organizer-pct1@hcdp.com" class="btn-organizer">✉ Email Pct 1 Organizer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precinct 2 Container -->
+      <div class="commissioner-card">
+        <div class="card-header" onclick="toggleArea('area2')">
+          <div class="card-title">Pct 2 <span>(Pharr/San Juan/McAllen)</span></div>
+          <div class="vacancy-badge" id="badge-area2">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="area2">
+          <div class="precinct-chips" id="chips-area2"></div>
+          <div class="action-row">
+            <a href="mailto:organizer-pct2@hcdp.com" class="btn-organizer">✉ Email Pct 2 Organizer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precinct 3 Container -->
+      <div class="commissioner-card">
+        <div class="card-header" onclick="toggleArea('area3')">
+          <div class="card-title">Pct 3 <span>(Mission/West)</span></div>
+          <div class="vacancy-badge" id="badge-area3">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="area3">
+          <div class="precinct-chips" id="chips-area3"></div>
+          <div class="action-row">
+            <a href="mailto:organizer-pct3@hcdp.com" class="btn-organizer">✉ Email Pct 3 Organizer</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Precinct 4 Container -->
+      <div class="commissioner-card">
+        <div class="card-header" onclick="toggleArea('area4')">
+          <div class="card-title">Pct 4 <span>(Edinburg/North)</span></div>
+          <div class="vacancy-badge" id="badge-area4">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="area4">
+          <div class="precinct-chips" id="chips-area4"></div>
+          <div class="action-row">
+            <a href="mailto:organizer-pct4@hcdp.com" class="btn-organizer">✉ Email Pct 4 Organizer</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Load Global Dependencies -->
+  <script src="js/chair_data.js"></script> <!-- Required for data crunching -->
+  <script src="js/precinct_completion.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Form Toggle Logic inline for performance -->
+  <script>
+    function toggleArea(id) {
+      const el = document.getElementById(id);
+      if(el.classList.contains('active')) {
+        el.classList.remove('active');
+      } else {
+        el.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
