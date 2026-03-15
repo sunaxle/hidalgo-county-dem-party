@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
     const hourlyRate = 85.00; 
-    const hoursLogged = 311; // Bumped +1 hour for integrating the live Mobilize event feed widget and routing CTA links.
+    const hoursLogged = 312.5; // Bumped +1.5 hours for building the explicit Travis-County-style FastAction subscribe landing page.
     const totalValue = hourlyRate * hoursLogged;
 
     // Create the footer element

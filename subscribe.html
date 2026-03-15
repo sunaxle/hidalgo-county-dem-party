@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Email Updates | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background: var(--primary); /* Deep blue background matching Travis County */
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* Minimal Nav Bar for Landing Pages */
+    .minimal-nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem;
+      text-align: center;
+      z-index: 100;
+    }
+    
+    .minimal-nav .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -0.05em;
+    }
+    .minimal-nav .logo span {
+      color: var(--accent);
+    }
+
+    .signup-container {
+      max-width: 600px;
+      margin: 100px auto 4rem auto; /* Center with space for nav */
+      background: #ffffff; /* White card */
+      border-radius: 8px;
+      padding: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      color: #333; /* Dark text for readability on white */
+      position: relative;
+      z-index: 10;
+    }
+
+    .signup-container h1 {
+      font-size: 2rem;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .info-text {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .info-text a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .signup-container {
+        margin: 80px 1rem 2rem 1rem;
+        padding: 2rem 1.5rem;
+      }
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      background: #fff;
+      color: #333;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+    }
+
+    /* Checkbox Group Styling */
+    .checkbox-group {
+      margin-bottom: 1rem;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      margin-top: 0.15rem;
+      width: 18px;
+      height: 18px;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      color: #666;
+      line-height: 1.5;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #eee;
+    }
+
+    .submit-btn {
+      background: #2188ff; /* Match the bright blue submit button */
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto; /* Push to right */
+      margin-top: 1.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background: #0366d6;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Minimal Header -->
+  <div class="minimal-nav">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+  </div>
+
+  <!-- Centered White Signup Card Container -->
+  <div class="container fade-in">
+    <div class="signup-container">
+      <h1>Get Email Updates</h1>
+      
+      <div class="info-text">
+        <span>Take future action with a single click.<br><a href="#">Log in</a> or <a href="#">Sign up</a> for <strong>FastAction</strong></span>
+        <span style="color: #2188ff; font-weight: bold;">⚙ fastaction <span style="color: #999; font-size: 1.1rem; vertical-align: middle;">ⓘ</span></span>
+      </div>
+
+      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 2px solid #333; padding-bottom: 0.5rem; display: inline-block;">Contact Information</h3>
+
+      <form onsubmit="event.preventDefault(); alert('Subscribed to updates!');">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" required>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label for="zipcode">ZIP Code</label>
+          <input type="text" id="zipcode" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Mobile Phone <span style="font-weight: normal; color: #888; font-size: 0.8rem;">(Optional)</span></label>
+            <div style="display: flex; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; background: #fff;">
+                <span style="padding: 0.75rem 0.5rem; background: #f8f9fa; border-right: 1px solid #ccc; font-size: 0.9rem;">🇺🇸 ▾</span>
+                <input type="tel" id="phone" style="border: none; border-radius: 0;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-sms" checked>
+            Sign me up for SMS messages. Message and data rates may apply.*
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-email" checked>
+            Yes, sign me up for email updates!
+          </label>
+        </div>
+        
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-phone">
+            Yes, you can reach me via phone calls.
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-in-person">
+            I am open to in-person connection or canvassing.
+          </label>
+        </div>
+
+        <div class="checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-remember" checked>
+            Remember me so that I can use <em>FastAction</em> next time. 🔒
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit</button>
+
+        <p class="disclaimer">
+          * By providing your mobile phone number and signing up for SMS messages, you are agreeing to receive periodic text messages from Hidalgo County Democratic Party. Message and data rates may apply. Text HELP for more information. Text STOP to stop receiving messages.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/value_counter.js"></script>
+
+</body>
+</html>
