@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAN Resources | Hidalgo Dems</title>
+  <meta name="description" content="Technical resources, sign-ups, and training for Texas VAN and Votebuilder">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Mimic TX Dems Grid Structure (8 Squares) */
+    .van-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      margin-bottom: 4rem;
+    }
+    
+    @media (min-width: 768px) {
+      .van-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Target the 8th box to center it effectively in the 3-3-2 layout on desktop */
+    @media (min-width: 768px) {
+      .van-block:nth-child(7) {
+        grid-column: 1 / 2;
+      }
+      .van-block:nth-child(8) {
+        grid-column: 2 / 3;
+      }
+    }
+
+    /* Core VAN Grid Blocks */
+    .van-block {
+      background-color: #003057; /* Dark Blue from TX Dems */
+      color: #ffffff;
+      padding: 3rem 2rem;
+      aspect-ratio: 1 / 1; /* Force perfect squares */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0px; /* Sharp corners */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+    }
+
+    .van-block h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      color: #ffffff;
+    }
+
+    .van-block p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* Highlighted Hover State */
+    .van-block:hover {
+      background-color: #BF5700; /* Burnt Orange from TX Dems Hover */
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+      transform: translateY(-5px) scale(1.02);
+    }
+    
+    /* Dedicated Video Wrapper for the Playlist */
+    .playlist-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 1rem;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      margin-top: 3rem;
+      margin-bottom: 4rem;
+    }
+    
+    .playlist-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
+  <div class="shape shape-2" style="width: 400px; height: 400px; bottom: 10%; right: -5%;"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar scrolled">
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Connect ▼</span>
+        <div class="dropdown-content">
+          <a href="community_inbox.html">Inbox</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1.25rem; font-size: 0.875rem; box-shadow: 0 4px 14px rgba(247, 104, 13, 0.4); background: linear-gradient(135deg, #F7680D, #d95a0b); border: none;">DONATE</a>
+    </div>
+  </nav>
+
+  <!-- Hero Text -->
+  <header class="page-header container fade-in" style="padding-top: 150px; padding-bottom: 1rem;">
+    <div style="text-align: center;">
+      <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">
+        <span style="color: transparent; background: linear-gradient(90deg, var(--accent), var(--primary)); -webkit-background-clip: text; background-clip: text;">Roadmap</span> to VAN
+      </h1>
+      <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: var(--text-muted); line-height: 1.6;">
+        VAN (Voter Action Network) is the database progressive campaigns use nationally to perform critical voter persuasion and “get out the vote” operations. Here are all the resources you need to get activated on TexasVAN.
+      </p>
+    </div>
+  </header>
+
+  <!-- Core 8-Grid Section -->
+  <section class="container fade-in" style="padding-top: 2rem;">
+    <div class="van-grid">
+      <!-- Block 1 -->
+      <a href="#" class="van-block">
+        <h3>Full Texas Democratic Party Support Hub</h3>
+        <p>txdem.co/VAN-FAQ</p>
+      </a>
+
+      <!-- Block 2 -->
+      <a href="#" class="van-block">
+        <h3>Sign Up To Contact Voters</h3>
+        <p>RSVP to high priority events and events near you.</p>
+      </a>
+
+      <!-- Block 3 -->
+      <a href="#" class="van-block">
+        <h3>Request a VAN Account</h3>
+      </a>
+
+      <!-- Block 4 -->
+      <a href="#" class="van-block">
+        <h3>VAN Videos</h3>
+        <p>Watch Texas VAN Training modules directly.</p>
+      </a>
+
+      <!-- Block 5 -->
+      <a href="#" class="van-block">
+        <h3>Submit A Help Ticket</h3>
+        <p>Questions you can't find the answers to in the training manual?</p>
+      </a>
+
+      <!-- Block 6 -->
+      <a href="#" class="van-block">
+        <h3>Data Downloads</h3>
+        <p>Request specific precinct exports or targeting sheets.</p>
+      </a>
+
+      <!-- Block 7 -->
+      <a href="#" class="van-block">
+        <h3>MiniVAN Manuals</h3>
+        <p>Download comprehensive PDF guides for the mobile application.</p>
+      </a>
+
+      <!-- Block 8 -->
+      <a href="#" class="van-block">
+        <h3>Live Office Hours</h3>
+        <p>Join virtual zoom sessions to screen-share database issues.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Embedded YouTube Playlist Integration -->
+  <section class="container fade-in">
+    <div style="padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; font-size: 2rem; display: flex; align-items: center; gap: 0.5rem;">🔴 Texas VAN Video Playlist</h2>
+        <span class="badge" style="background: rgba(247, 104, 13, 0.2); color: #F7680D; padding: 0.4rem 1rem; border-radius: 999px; font-weight: bold; font-size: 0.8rem;">Official TX Dems Feed</span>
+    </div>
+    
+    <div class="playlist-container">
+        <!-- Replicated from the user instructions link -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=M3gKOK8i0Y4k15a3&amp;list=PLiN0PRacApYVE_JzQvf-VvUdtOeU7-j_S" title="Texas VAN Training Videos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h4>Hidalgo County Democrats</h4>
+        <p>Building unity and strength within the party and our local community since day one.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="about.html">Who We Are</a>
+        <a href="vote.html">Register to Vote</a>
+        <a href="events.html">Events & Volunteer</a>
+      </div>
+      <div class="footer-col">
+        <h4>Headquarters</h4>
+        <p>800 N. Main St. Suite 110</p>
+        <p>McAllen, TX 78501</p>
+        <p>(956) 322-5293</p>
+        <p>info@hidalgocountydems.com</p>
+      </div>
+    </div>
+    <div class="container footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="sitemap.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem;">Site Map</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/value_counter.js"></script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
