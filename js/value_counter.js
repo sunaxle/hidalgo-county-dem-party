@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
     const hourlyRate = 85.00; 
-    const hoursLogged = 287; // Bumped +5 hours for the Hulk Smash modal build and Theme Switcher deep clean.
+    const hoursLogged = 290; // Bumped +3 hours for Grievance Procedure architecture and copy writing
     const totalValue = hourlyRate * hoursLogged;
 
     // Create the footer element
