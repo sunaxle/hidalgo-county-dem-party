@@ -150,6 +150,31 @@
       color: #000;
       box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
     }
+    
+    /* D3 Map SVG Styling */
+    .precinct-path {
+      fill: rgba(255, 255, 255, 0.05); /* Faint baseline */
+      stroke: rgba(255, 255, 255, 0.2);
+      stroke-width: 0.5px;
+      transition: fill 0.3s ease, stroke 0.3s ease;
+    }
+    .precinct-path.active-vacancy {
+      fill: #ef4444; /* High alert red for vacant nodes */
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+    .map-container {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      margin-top: 1rem;
+      margin-bottom: 4rem;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+    }
   </style>
 </head>
 <body>
@@ -168,6 +193,7 @@
           <a href="bylaws.html">Bylaws</a>
           <a href="elected_officials.html">Elected Reps</a>
           <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="transparency.html">Transparency Portal</a>
         </div>
       </div>
 
@@ -240,12 +266,44 @@
       </div>
     </div>
 
+    <!-- The "Adopt 5" Quota & Even Spread Strategy -->
+    <div class="strategy-callout" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; margin-bottom: 3rem; margin-top: 1rem;">
+      <h2 style="color: #10b981; margin-top: 0; font-size: 1.5rem;">The "Adopt 5" Quota & Even Spread Target</h2>
+      <p style="color: #94a3b8; line-height: 1.6;">To rapidly close the final gap, <strong>County-Wide candidates</strong> facing Republican challengers are assigned to "Adopt 5" vacant precincts in their strongest areas. If they secure these chairs, the recruitment burden drastically drops for the remaining localized elected officials.</p>
+      
+      <div style="display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap;">
+        
+        <!-- County Ticket -->
+        <div style="flex: 1; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.5rem; min-width: 300px;">
+          <h3 style="margin-top:0; color:#e2e8f0; font-size:1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">County-Wide Ticket (Adopt 5)</h3>
+          <ul style="color:#cbd5e1; font-size:0.95rem; line-height: 2; padding-left: 1.2rem; margin-bottom: 0;">
+            <li><strong>Lita Leo</strong> (Treasurer) &mdash; <span style="color:#10b981;">Target: 5 Chairs</span></li>
+            <li><strong>Toribio "Terry" Palacios</strong> (D.A.) &mdash; <span style="color:#10b981;">Target: 5 Chairs</span></li>
+            <li><strong>J.E. "Eddie" Guerra</strong> (Sheriff) &mdash; <span style="color:#10b981;">Target: 5 Chairs</span></li>
+          </ul>
+          <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); color: #fff; font-weight: 600;">
+            Total Adopted: <span id="val-adopted-total" style="color: #10b981;">15</span> Target Chairs
+          </div>
+        </div>
+        
+        <!-- Even Spread Quota -->
+        <div style="flex: 1; min-width: 300px; background: rgba(0,0,0,0.3); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; border: 1px solid rgba(245, 158, 11, 0.3);">
+          <h3 style="margin-top:0; color:#e2e8f0; font-size:1.1rem;">The Local "Even Spread"</h3>
+          <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0;">With 15 precincts hypothetically secured by the County-Wide ticket above, the remaining ~20 local elected officials (Commissioners, State Reps, JPs) only need to recruit:</p>
+          <div style="font-size: 4rem; font-weight: 800; color: #f59e0b; margin: 0.5rem 0; line-height: 1;">
+            <span id="val-even-spread">...</span>
+          </div>
+          <div style="color: #f59e0b; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Chairs Each to hit 100%</div>
+        </div>
+      </div>
+    </div>
+
     <!-- The Commissioner Breakdown Grid -->
     <div class="commissioner-grid">
       
       <!-- Precinct 1 Container -->
       <div class="commissioner-card">
-        <div class="card-header" onclick="toggleArea('area1')">
+        <div class="card-header" data-target="area1">
           <div class="card-title">Pct 1 <span>(Weslaco/Mercedes)</span></div>
           <div class="vacancy-badge" id="badge-area1">0 Vacant</div>
         </div>
@@ -259,7 +317,7 @@
 
       <!-- Precinct 2 Container -->
       <div class="commissioner-card">
-        <div class="card-header" onclick="toggleArea('area2')">
+        <div class="card-header" data-target="area2">
           <div class="card-title">Pct 2 <span>(Pharr/San Juan/McAllen)</span></div>
           <div class="vacancy-badge" id="badge-area2">0 Vacant</div>
         </div>
@@ -273,7 +331,7 @@
 
       <!-- Precinct 3 Container -->
       <div class="commissioner-card">
-        <div class="card-header" onclick="toggleArea('area3')">
+        <div class="card-header" data-target="area3">
           <div class="card-title">Pct 3 <span>(Mission/West)</span></div>
           <div class="vacancy-badge" id="badge-area3">0 Vacant</div>
         </div>
@@ -287,7 +345,7 @@
 
       <!-- Precinct 4 Container -->
       <div class="commissioner-card">
-        <div class="card-header" onclick="toggleArea('area4')">
+        <div class="card-header" data-target="area4">
           <div class="card-title">Pct 4 <span>(Edinburg/North)</span></div>
           <div class="vacancy-badge" id="badge-area4">0 Vacant</div>
         </div>
@@ -300,23 +358,177 @@
       </div>
 
     </div>
+
+    <!-- State House Breakdown -->
+    <div class="dashboard-header" style="padding-top: 40px; margin-bottom: 2rem;">
+      <h2>State House Districts</h2>
+    </div>
+    <div class="commissioner-grid">
+      <!-- HD 35 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="hd35">
+          <div class="card-title">HD 35</div>
+          <div class="vacancy-badge" id="badge-hd35">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="hd35">
+          <div class="precinct-chips" id="chips-hd35"></div>
+        </div>
+      </div>
+      <!-- HD 36 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="hd36">
+          <div class="card-title">HD 36</div>
+          <div class="vacancy-badge" id="badge-hd36">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="hd36">
+          <div class="precinct-chips" id="chips-hd36"></div>
+        </div>
+      </div>
+      <!-- HD 39 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="hd39">
+          <div class="card-title">HD 39</div>
+          <div class="vacancy-badge" id="badge-hd39">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="hd39">
+          <div class="precinct-chips" id="chips-hd39"></div>
+        </div>
+      </div>
+      <!-- HD 40 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="hd40">
+          <div class="card-title">HD 40</div>
+          <div class="vacancy-badge" id="badge-hd40">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="hd40">
+          <div class="precinct-chips" id="chips-hd40"></div>
+        </div>
+      </div>
+      <!-- HD 41 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="hd41">
+          <div class="card-title">HD 41</div>
+          <div class="vacancy-badge" id="badge-hd41">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="hd41">
+          <div class="precinct-chips" id="chips-hd41"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- State Senate Breakdown -->
+    <div class="dashboard-header" style="padding-top: 40px; margin-bottom: 2rem;">
+      <h2>State Senate Districts</h2>
+    </div>
+    <div class="commissioner-grid">
+      <!-- SD 20 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="sd20">
+          <div class="card-title">SD 20</div>
+          <div class="vacancy-badge" id="badge-sd20">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="sd20">
+          <div class="precinct-chips" id="chips-sd20"></div>
+        </div>
+      </div>
+      <!-- SD 27 -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="sd27">
+          <div class="card-title">SD 27</div>
+          <div class="vacancy-badge" id="badge-sd27">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="sd27">
+          <div class="precinct-chips" id="chips-sd27"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Municipal (City) Breakdown -->
+    <div class="dashboard-header" style="padding-top: 40px; margin-bottom: 2rem;">
+      <h2>Municipal / City Targets</h2>
+      <p style="color: #94a3b8; margin-bottom: 0; max-width: 600px; margin: 0 auto;">Assign these highly-targeted urban clusters to local Mayors, City Councils, and School Boards to lift the burden off rural organizers.</p>
+    </div>
+    <div class="commissioner-grid">
+      <!-- McAllen -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-mcallen">
+          <div class="card-title">McAllen</div>
+          <div class="vacancy-badge" id="badge-city-mcallen">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-mcallen">
+          <div class="precinct-chips" id="chips-city-mcallen"></div>
+        </div>
+      </div>
+      <!-- Edinburg -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-edinburg">
+          <div class="card-title">Edinburg</div>
+          <div class="vacancy-badge" id="badge-city-edinburg">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-edinburg">
+          <div class="precinct-chips" id="chips-city-edinburg"></div>
+        </div>
+      </div>
+      <!-- Mission -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-mission">
+          <div class="card-title">Mission</div>
+          <div class="vacancy-badge" id="badge-city-mission">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-mission">
+          <div class="precinct-chips" id="chips-city-mission"></div>
+        </div>
+      </div>
+      <!-- Pharr / San Juan / Alamo -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-psja">
+          <div class="card-title">Pharr / San Juan / Alamo</div>
+          <div class="vacancy-badge" id="badge-city-psja">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-psja">
+          <div class="precinct-chips" id="chips-city-psja"></div>
+        </div>
+      </div>
+      <!-- Weslaco / Mercedes / Donna -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-midvalley">
+          <div class="card-title">Weslaco / Mercedes / Donna</div>
+          <div class="vacancy-badge" id="badge-city-midvalley">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-midvalley">
+          <div class="precinct-chips" id="chips-city-midvalley"></div>
+        </div>
+      </div>
+      <!-- Rural / Other -->
+      <div class="commissioner-card">
+        <div class="card-header" data-target="city-rural">
+          <div class="card-title">Rural / Unincorporated</div>
+          <div class="vacancy-badge" id="badge-city-rural">0 Vacant</div>
+        </div>
+        <div class="vacancy-list" id="city-rural">
+          <div class="precinct-chips" id="chips-city-rural"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Precinct Mapping Wrapper -->
+    <div class="dashboard-header" style="padding-top: 60px; margin-bottom: 2rem;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Visual Map Analysis</h2>
+      <p style="color: #94a3b8; font-size: 1.1rem;">Click any geographic grouping above to instantly highlight its vacant target precincts on the physical county layout.</p>
+    </div>
+    
+    <div class="map-container">
+      <svg id="tx-map" width="100%" height="600"></svg>
+    </div>
+
   </main>
 
   <!-- Load Global Dependencies -->
-  <script src="js/chair_data.js"></script> <!-- Required for data crunching -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/chair_data.js"></script>
+  <script src="js/precinct_mapping_data.js"></script>
+  <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
   <script src="js/precinct_completion.js"></script>
   <script src="js/app.js"></script>
-
-  <!-- Form Toggle Logic inline for performance -->
-  <script>
-    function toggleArea(id) {
-      const el = document.getElementById(id);
-      if(el.classList.contains('active')) {
-        el.classList.remove('active');
-      } else {
-        el.classList.add('active');
-      }
-    }
-  </script>
 </body>
 </html>

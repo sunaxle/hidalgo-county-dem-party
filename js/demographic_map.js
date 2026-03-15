@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     svg.call(zoom);
 
-    // Fetch the raw Hidalgo Precinct GeoJSON boundaries
-    d3.json("./hidalgo-election-map/hidalgo_precincts.geojson").then(geojson => {
+    // Use the raw Hidalgo Precinct JS object
+    try {
+        const geojson = hidalgoPrecinctsData;
         
         loadingText.innerHTML = "Projecting Geographic Polygons...";
 
@@ -132,10 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('loading').style.display = 'none';
         }, 300); // Slight delay so the UI thread doesn't fully lock during path injection
 
-    }).catch(error => {
+    } catch (error) {
         console.error("Error loading GeoJSON data:", error);
         loadingText.innerHTML = "Error loading spatial matrix.";
         loadingText.style.color = "red";
-    });
+    }
 
 });

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidalgo County Democrats - Transparency Portal</title>
+  <meta name="description" content="View official filings, budgets, meeting agendas, and high-level financial breakdowns for the Hidalgo County Democratic Party.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Transparency Specific Overrides */
+    .finance-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .metric-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .metric-card:hover {
+      transform: translateY(-5px);
+    }
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .archive-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    @media (min-width: 768px) {
+      .archive-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .archive-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .archive-header {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .archive-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .archive-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.2s;
+    }
+    
+    .archive-item:hover {
+      background: rgba(255,255,255,0.05);
+    }
+    
+    .archive-item:last-child {
+      border-bottom: none;
+    }
+    
+    .file-badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="transparency.html">Transparency Portal</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+          <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="demographic_map.html">Demographic Map</a>
+          <a href="call_it_out.html">Call It Out Board</a>
+          <a href="share_stories.html">Share Our Stories</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Connect ▼</span>
+        <div class="dropdown-content">
+          <a href="community_inbox.html">Inbox</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1.25rem; font-size: 0.875rem; box-shadow: 0 4px 14px rgba(247, 104, 13, 0.4); background: linear-gradient(135deg, #F7680D, #d95a0b); border: none;">DONATE</a>
+    </div>
+  </nav>
+
+  <!-- Title Header -->
+  <header class="page-header container fade-in" style="padding-top: 8rem; padding-bottom: 3rem; text-align: center;">
+    <h1 style="font-size: 3rem; margin-bottom: 1rem;"><span style="color: var(--accent);">Transparency</span> Portal</h1>
+    <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.6;">Our commitment to open government starts internally. Explore high-level financial data, official CEC meeting agendas, annual budgets, and past campaign finance filings in one central, publicly accessible archive.</p>
+  </header>
+
+  <!-- Main Content Section -->
+  <main class="container fade-in" style="padding-bottom: 6rem;">
+    
+    <!-- Financial Overview (ProPublica Style) -->
+    <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+      <h2 style="margin: 0; font-size: 1.8rem; display: flex; align-items: center; gap: 10px;">
+        <span>📊</span> 2026 Fiscal Overview
+      </h2>
+      <span class="file-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">Updated Last Quarter</span>
+    </div>
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Macro-level tracking of party income and expenses to ensure responsible stewardship of organizing funds.</p>
+
+    <div class="finance-overview">
+      <div class="metric-card">
+        <div style="color: #94a3b8; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">YTD Receipts</div>
+        <div class="metric-value" style="color: #10b981;">$42,500</div>
+        <div style="font-size: 0.85rem; color: rgba(16, 185, 129, 0.8);">+14% vs Q1 2024</div>
+      </div>
+      <div class="metric-card">
+        <div style="color: #94a3b8; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">YTD Disbursements</div>
+        <div class="metric-value" style="color: #ef4444;">$28,150</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Primarily HQ Rent & Field Ops</div>
+      </div>
+      <div class="metric-card" style="border-color: rgba(59, 130, 246, 0.5);">
+        <div style="color: #94a3b8; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Cash on Hand</div>
+        <div class="metric-value" style="color: #3b82f6;">$68,400</div>
+        <div style="font-size: 0.85rem; color: #94a3b8;">Liquid operating reserves</div>
+      </div>
+    </div>
+
+    <!-- The 4-Pillar Archive Grid -->
+    <div class="archive-grid">
+      
+      <!-- Box 1: Verified Budgets -->
+      <div class="archive-card">
+        <div class="archive-header">
+          <h3 style="margin: 0; color: #f8fafc; font-size: 1.25rem;">📝 Approved CEC Budgets</h3>
+          <p style="margin: 0.5rem 0 0 0; color: #94a3b8; font-size: 0.9rem;">Annual spending mandates certified by Precinct Chairs.</p>
+        </div>
+        <ul class="archive-list">
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">2026 Fiscal Year Budget</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Adopted Jan 14, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">2025 Fiscal Year Budget</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Adopted Jan 15, 2025</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">2024 General Election Ops Budget</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Adopted July 20, 2024</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Box 2: Public Filings (TEC/FEC) -->
+      <div class="archive-card">
+        <div class="archive-header">
+          <h3 style="margin: 0; color: #f8fafc; font-size: 1.25rem;">🏛 Official Campaign Filings</h3>
+          <p style="margin: 0.5rem 0 0 0; color: #94a3b8; font-size: 0.9rem;">State (TEC) and Federal (FEC) compliance reports.</p>
+        </div>
+        <ul class="archive-list">
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">TEC 8-Day Pre-Election Report</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Filed Feb 24, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">CSV</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">TEC Semiannual Report</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Filed Jan 15, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">FEC Year-End Report (Federal Acct)</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Filed Jan 31, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">Link</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Box 3: Public Agendas -->
+      <div class="archive-card">
+        <div class="archive-header">
+          <h3 style="margin: 0; color: #f8fafc; font-size: 1.25rem;">📅 CEC Agendas & Postings</h3>
+          <p style="margin: 0.5rem 0 0 0; color: #94a3b8; font-size: 0.9rem;">72-hour advance public notice for all Executive Meetings.</p>
+        </div>
+        <ul class="archive-list">
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">March 2026 Primary Canvass</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Scheduled: Mar 12, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">Agenda</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">Q1 Statutory CEC Meeting</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Held: Jan 14, 2026</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">Agenda</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">Emergency Rules Meeting</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Held: Sept 05, 2025</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">Agenda</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Box 4: Meeting Minutes -->
+      <div class="archive-card">
+        <div class="archive-header">
+          <h3 style="margin: 0; color: #f8fafc; font-size: 1.25rem;">🎤 Certified Minutes</h3>
+          <p style="margin: 0.5rem 0 0 0; color: #94a3b8; font-size: 0.9rem;">Transcripts and minutes from concluded CEC business.</p>
+        </div>
+        <ul class="archive-list">
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">Q1 2026 Statutory Minutes</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Certified: By Sec. Juan Perez</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">Q4 2025 Statutory Minutes</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Certified: By Sec. Juan Perez</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+          <li class="archive-item">
+            <div>
+              <div style="font-weight: 600; color: #e2e8f0;">2024 Endorsement Convention</div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Includes Roll Call Vote Tally</div>
+            </div>
+            <a href="#" class="btn btn-secondary btn-sm" style="padding: 0.4rem 0.8rem;">View <span class="file-badge" style="margin-left:5px;">PDF</span></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Contact & Feedback -->
+    <div style="margin-top: 4rem; text-align: center; background: rgba(30, 41, 59, 0.4); padding: 3rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+      <h3 style="margin-top: 0; color: var(--text-main); font-size: 1.5rem;">Can't find a specific document?</h3>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+        HCDP complies with all public information standards. If an official filing, agenda, or resolution from the archive is missing or unlinked, please contact the Party Secretary for expedited digital delivery.
+      </p>
+      <a href="mailto:secretary@hcdp.com" class="btn btn-primary" style="padding: 0.75rem 2rem;">Email the Secretary</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  
+  <!-- Demonstration Mode Disclaimer Banner -->
+  <div class="demo-banner" style="background-color: #ef4444; color: white; text-align: center; padding: 1rem; z-index: 50; position: relative; font-weight: 500; font-size: 0.95rem; border-top: 2px solid #b91c1c;">
+    <span style="font-size: 1.1rem; margin-right: 8px;">⚠️</span>
+    <strong>DEMONSTRATION MODE:</strong> The metrics and individual records displayed on this page are simulated mock data generated for layout testing purposes only. They do not represent official Hidalgo County Democratic Party figures or personnel.
+  </div>
+
+  <footer class="footer">
+    <!-- Simplified footer mapping to global standard -->
+    <div class="container" style="text-align: center;">
+      <p style="color: var(--text-muted);">&copy; 2026 Hidalgo County Democratic Party. Paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
