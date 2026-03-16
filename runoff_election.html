@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>May 26th Primary Runoff | Hidalgo County Democrats</title>
+  <meta name="description" content="Official Voter Guide for the May 26th Democratic Primary Runoff Election. Review candidates for Statewide offices, Texas House District 41, and Precinct Chairs.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .runoff-hero {
+      text-align: center;
+      padding-top: 150px;
+      padding-bottom: 3rem;
+    }
+    .runoff-hero span {
+      display: block;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    
+    .race-section {
+      margin-bottom: 5rem;
+    }
+    
+    .race-title {
+      font-size: 2rem;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .candidate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Candidate VS Layout */
+    .vs-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .vs-container {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .vs-badge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #0f172a;
+        color: var(--text-muted);
+        font-weight: 800;
+        font-size: 1.5rem;
+        padding: 1rem;
+        border-radius: 50%;
+        border: 2px solid var(--glass-border);
+        z-index: 10;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      }
+    }
+
+    .candidate-card {
+      flex: 1;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .candidate-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .candidate-photo {
+      width: 100%;
+      height: 250px;
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+    }
+    .candidate-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+    .candidate-photo.placeholder::after {
+      content: '📸 Photo Missing';
+      color: rgba(255,255,255,0.3);
+      font-size: 1.2rem;
+      position: absolute;
+    }
+
+    .candidate-info {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .candidate-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .candidate-info .job-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .candidate-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    
+    .precinct-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .precinct-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--glass-border);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .precinct-card h4 {
+      color: var(--accent);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .precinct-card p {
+      color: #fff;
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="transparency.html">Transparency Portal</a>
+          <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Executive Portal 🔒</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+                    <a href="volunteer.html">Volunteer</a>
+          <a href="convention.html" style="color: var(--accent); font-weight: 600;">County Convention</a>
+          <a href="runoff_election.html" style="color: var(--primary); font-weight: 600;">Runoff Election</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+          <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="community_intake.html">Community Inbox</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="county_chair_notes.html">County Chair Notes</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="https://secure.actblue.com" class="btn btn-primary" style="margin-left: 1rem;">Donate</a>
+    </div>
+  </nav>
+
+  <main class="container fade-in">
+    <section class="runoff-hero">
+      <span>Tuesday, May 26th</span>
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Primary <span style="color: var(--primary);">Runoff Election</span></h1>
+      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1.1rem;">
+        No candidate secured 50% of the vote during the March Primary in the following races. 
+        It is critical that Hidalgo County Democrats return to the polls on May 26th to definitively select our nominees for the General Election.
+      </p>
+    </section>
+
+    <!-- State House District 41 -->
+    <section class="race-section fade-in">
+      <h2 class="race-title">
+        <span style="background: rgba(247, 104, 13, 0.2); color: var(--accent); padding: 0.5rem 1rem; border-radius: 6px; font-size: 1rem; margin-right: 1rem;">HD 41</span>
+        Texas State Representative District 41
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">The seat for State Representative District 41 is open following Rep. Bobby Guerra's tenure. This runoff will determine the Democratic nominee for the Rio Grande Valley.</p>
+
+      <div class="vs-container">
+        <!-- Candidate 1 -->
+        <div class="candidate-card">
+          <div class="candidate-photo placeholder">
+            <!-- <img src="images/sebi_haddad.jpg" alt="Sebi Haddad"> -->
+          </div>
+          <div class="candidate-info">
+            <h3>Sebi Haddad</h3>
+            <div class="job-title">McAllen Mayor Pro Tem & City Commissioner</div>
+            <p>Victor "Seby" Haddad currently serves as a McAllen City Commissioner (District 5). A community banker, his campaign focuses on driving local economic development, improving infrastructure, and advocating for robust public education funding across the Rio Grande Valley. Endorsed by outgoing Rep. Bobby Guerra.</p>
+            <a href="#" class="btn btn-secondary" style="text-align: center; margin-top: auto;">Campaign Website</a>
+          </div>
+        </div>
+
+        <div class="vs-badge">VS</div>
+
+        <!-- Candidate 2 -->
+        <div class="candidate-card">
+          <div class="candidate-photo placeholder">
+            <!-- <img src="images/julio_salinas.jpg" alt="Julio Salinas"> -->
+          </div>
+          <div class="candidate-info">
+            <h3>Julio Salinas</h3>
+            <div class="job-title">Co-Chair, TDP Hispanic Caucus</div>
+            <p>Julio Salinas brings extensive Texas Legislature experience as a dedicated staffer and leader within the Texas Democratic Party Hispanic Caucus. His grassroots platform emphasizes making the Rio Grande Valley affordable for working families, defending public schools from voucher schemes, and restoring community trust.</p>
+            <a href="#" class="btn btn-secondary" style="text-align: center; margin-top: auto;">Campaign Website</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statewide Runoffs -->
+    <section class="race-section fade-in">
+      <h2 class="race-title">
+        <span style="background: rgba(34, 211, 238, 0.2); color: #22d3ee; padding: 0.5rem 1rem; border-radius: 6px; font-size: 1rem; margin-right: 1rem;">STATEWIDE</span>
+        Statewide Democratic Runoffs
+      </h2>
+      
+      <div class="candidate-grid">
+        <!-- Lieutenant Governor -->
+        <div class="candidate-card" style="border-left: 4px solid #fff;">
+          <div class="candidate-info">
+            <h4 style="color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 1rem;">Lieutenant Governor</h4>
+            <h3 style="margin-bottom: 0.2rem;">Vikki Goodwin</h3>
+            <div style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">Former Texas House Democrat</div>
+            
+            <div style="text-align: center; margin: 1rem 0; color: #444; font-weight: bold; font-style: italic;">vs</div>
+            
+            <h3 style="margin-bottom: 0.2rem;">Marcos Velez</h3>
+            <div style="font-size: 0.85rem; color: #888;">Labor Leader</div>
+          </div>
+        </div>
+
+        <!-- Attorney General -->
+        <div class="candidate-card" style="border-left: 4px solid #fff;">
+          <div class="candidate-info">
+            <h4 style="color: var(--text-muted); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 1rem;">Attorney General</h4>
+            <h3 style="margin-bottom: 0.2rem;">Nathan Johnson</h3>
+            <div style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">Texas State Senator (Dallas)</div>
+            
+            <div style="text-align: center; margin: 1rem 0; color: #444; font-weight: bold; font-style: italic;">vs</div>
+            
+            <h3 style="margin-bottom: 0.2rem;">Joe Jaworski</h3>
+            <div style="font-size: 0.85rem; color: #888;">Former Galveston Mayor / Attorney</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Precinct Chairs -->
+    <section class="race-section fade-in">
+      <h2 class="race-title">
+        <span style="background: rgba(255, 255, 255, 0.1); color: #fff; padding: 0.5rem 1rem; border-radius: 6px; font-size: 1rem; margin-right: 1rem;">LOCAL</span>
+        Precinct Chair Runoffs
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">If you live in one of the following voting precincts, you will have a runoff election for your local Democratic Precinct Chair.</p>
+      
+      <div class="precinct-grid">
+        <div class="precinct-card">
+          <h4>Precinct 103</h4>
+          <p>Candidates Pending Canvas</p>
+        </div>
+        <div class="precinct-card">
+          <h4>Precinct 164</h4>
+          <p>Candidates Pending Canvas</p>
+        </div>
+        <div class="precinct-card">
+          <h4>Precinct 214</h4>
+          <p>Candidates Pending Canvas</p>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        <strong>Not sure what precinct you live in?</strong> <a href="vote.html" style="color: var(--accent);">Check your registration status here.</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer style="text-align: center; padding: 3rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: var(--text-muted);">
+    <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+    <div style="margin-top: 1rem;">
+      <a href="https://www.facebook.com/HidalgoCountyDems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Facebook</a>
+      <a href="https://www.instagram.com/hidalgocountydems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Instagram</a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

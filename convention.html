@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>County Convention | Hidalgo County Democrats</title>
+  <meta name="description" content="Join us on Saturday, March 21st for the Hidalgo County Democratic Party Convention. Help shape our platform and elect state delegates.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .convention-hero {
+      text-align: center;
+      padding-top: 150px;
+      padding-bottom: 2rem;
+    }
+    
+    .flyer-container {
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px dashed rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin: 3rem auto;
+      max-width: 800px;
+      transition: border-color 0.3s ease;
+    }
+
+    .flyer-container:hover {
+      border-color: var(--accent);
+    }
+
+    /* Replace this class with the actual image tag once you get the flyer */
+    .flyer-placeholder {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+    .flyer-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.3);
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto 5rem auto;
+    }
+
+    .info-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .info-card h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <a href="index.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="index.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          <a href="transparency.html">Transparency Portal</a>
+          <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Executive Portal 🔒</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+                    <a href="volunteer.html">Volunteer</a>
+          <a href="convention.html" style="color: var(--accent); font-weight: 600;">County Convention</a>
+          <a href="runoff_election.html" style="color: var(--primary); font-weight: 600;">Runoff Election</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+          <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          <a href="community_intake.html">Community Inbox</a>
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="county_chair_notes.html">County Chair Notes</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="https://secure.actblue.com" class="btn btn-primary" style="margin-left: 1rem;">Donate</a>
+    </div>
+  </nav>
+
+  <main class="container fade-in">
+    <section class="convention-hero">
+      <span style="color: var(--accent); font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">Saturday, March 21st</span>
+      <h1 style="font-size: 3.5rem; margin: 1rem 0;">Hidalgo County <span style="color: var(--primary);">Convention</span></h1>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 1.1rem;">
+        Every two years, Democrats from across Hidalgo County gather to chart the course for our party. 
+        Join us to pass critical resolutions, elect state delegates, and build our grassroots power for the upcoming election.
+      </p>
+    </section>
+
+    <!-- FLYER DROP ZONE -->
+    <div class="flyer-container fade-in" style="padding: 1rem; background: transparent; border: none; max-width: 650px;">
+      <img src="images/convention_flyer.png" alt="Hidalgo County Convention Flyer - March 21" style="width: 100%; border-radius: 12px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);">
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;"><strong>Admin Note:</strong> Please save the provided flyer as <code>images/convention_flyer.png</code> to display it here.</p>
+      
+      <!-- Interactive Flyer CTAs -->
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="#" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; box-shadow: 0 4px 14px rgba(247, 104, 13, 0.4); background: linear-gradient(135deg, #F7680D, #d95a0b); border: none;">SCAN TO RSVP</a>
+        <a href="contact.html" class="btn btn-secondary" style="font-size: 1.1rem; padding: 1rem 2rem;">Booth Sponsorships</a>
+      </div>
+    </div>
+
+    <!-- Details Grid -->
+    <div class="info-grid fade-in">
+      <div class="info-card">
+        <h3>📍 Location</h3>
+        <p style="color: whitesmoke; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Lark Community Center</p>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">2601 Lark Ave<br>McAllen, TX 78504</span>
+      </div>
+      <div class="info-card">
+        <h3>⏰ Schedule</h3>
+        <p style="color: whitesmoke; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">10:00 AM - 1:00 PM</p>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Saturday<br>March 21st, 2026</span>
+      </div>
+      <div class="info-card" style="border-left: 4px solid var(--primary);">
+        <h3>⭐ Featuring</h3>
+        <p style="color: whitesmoke; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem;">Bobby Pulido</p>
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Event MC:<br>County Chair Richard Gonzales</span>
+      </div>
+    </div>
+    
+    <div class="info-grid fade-in" style="margin-top: -3rem;">
+      <div class="info-card" style="grid-column: 1 / -1;">
+        <h3>✅ Who Can Attend?</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; max-width: 600px; margin: 0 auto;">
+          Any registered voter in Hidalgo County who voted in the recent Democratic Primary (or took an oath of affiliation) is eligible to participate as a delegate.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 3rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: var(--text-muted);">
+    <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+    <div style="margin-top: 1rem;">
+      <a href="https://www.facebook.com/HidalgoCountyDems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Facebook</a>
+      <a href="https://www.instagram.com/hidalgocountydems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Instagram</a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
