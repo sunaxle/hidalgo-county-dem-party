@@ -36,8 +36,8 @@ function initBubblePhysics() {
       // Determine volume (1 to 4 issues reported by this chair)
       const issueCount = Math.floor(Math.random() * 4) + 1;
       
-      // Calculate a dynamic radius based on the amount of issues
-      const calculatedRadius = 80 + (issueCount * 22); 
+      // Calculate a smaller refined radius based on the amount of issues
+      const calculatedRadius = 20 + (issueCount * 6); 
 
       return {
         id: `Pct ${data.precinct}`,
@@ -59,11 +59,11 @@ function initBubblePhysics() {
 
     // 4. Initialize Force Simulation
     const simulation = d3.forceSimulation(nodes)
-      .force("charge", d3.forceManyBody().strength(15)) // Slight repulsion to keep bubbles from overlapping totally before collision kicks in
+      .force("charge", d3.forceManyBody().strength(3)) // Significantly reduced repulsion for tighter clustering 
       .force("center", d3.forceCenter(width / 2, height / 2)) // Attract nodes to the dead center
-      .force("collide", d3.forceCollide().radius(d => d.radius + 8).iterations(3)) // The physical collision geometry preventing overlap (+8px buffer for shadows)
-      .force("x", d3.forceX(width / 2).strength(0.06)) // Gravity pulling back to the horizontal center
-      .force("y", d3.forceY(height / 2).strength(0.06)); // Gravity pulling back to the vertical center
+      .force("collide", d3.forceCollide().radius(d => d.radius + 3).iterations(4)) // Tight collision geometry (+3px buffer)
+      .force("x", d3.forceX(width / 2).strength(0.04)) // Gravity pulling back to the horizontal center
+      .force("y", d3.forceY(height / 2).strength(0.04)); // Gravity pulling back to the vertical center
 
     // 5. Inject HTML DOM Nodes into the container
     const nodeElements = container.selectAll(".d3-node")
@@ -151,14 +151,14 @@ function initBubblePhysics() {
         // Reset to center blob
         simulation.force("y", d3.forceY(height / 2).strength(0.06));
       } else {
-        // Split gravitational Y-axis
+        // Split gravitational Y-axis and increase the strength so they snap violently into clusters
         simulation.force("y", d3.forceY(d => {
           if (d.category === targetCategory) {
-             return height * 0.25; // Pull target up!
+             return height * 0.15; // Pull target way up!
           } else {
-             return height * 0.85; // Drop everything else down!
+             return height * 0.85; // Drop everything else way down!
           }
-        }).strength(0.1)); // Slightly higher strength than normal to break them apart faster
+        }).strength(0.18)); 
       }
       
       // Kick the simulator so they start moving aggressively
