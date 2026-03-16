@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Admin Portal | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Dark, focused login theme */
+    body {
+      background: #0f172a; /* Deep slate */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: white;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: 0.3;
+    }
+
+    .login-container {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.025em;
+    }
+
+    .login-container p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .input-group {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .input-group input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.2s ease;
+      box-sizing: border-box; /* Prevent padding from blowing out width */
+    }
+
+    .input-group input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .login-btn {
+      width: 100%;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .login-btn:hover {
+      background: #2563eb;
+    }
+
+    .error-msg {
+      color: #ef4444;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+    .back-link:hover { color: white; }
+
+  </style>
+</head>
+<body>
+
+  <!-- Optional particle background for a high-tech feel -->
+  <div id="particles-js"></div>
+
+  <div class="login-container fade-in">
+    <!-- Icon or Logo placeholder -->
+    <div style="width: 50px; height: 50px; background: rgba(59, 130, 246, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; border: 1px solid rgba(59, 130, 246, 0.4);">
+      <svg style="width: 24px; height: 24px; color: #3b82f6;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+    </div>
+
+    <h1>Executive Portal</h1>
+    <p>Authorized personnel only. Please sign in.</p>
+
+    <div class="input-group">
+      <label for="passcode">Authentication Key</label>
+      <input type="password" id="passcode" placeholder="••••••••" autocomplete="off" autofocus>
+    </div>
+
+    <button id="loginBtn" class="login-btn">Secure Login</button>
+    <div id="errorMsg" class="error-msg">❌ Access Denied: Invalid configuration key.</div>
+
+    <a href="index.html" class="back-link">← Return to Public Site</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Particle JS Background Initialization
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.1, "random": false },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+        "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+      },
+      "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
+      "retina_detect": true
+    });
+
+    // Minimal Security Javascript String Check
+    document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+    document.getElementById('passcode').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') attemptLogin();
+    });
+
+    function attemptLogin() {
+      const code = document.getElementById('passcode').value;
+      const errorDiv = document.getElementById('errorMsg');
+      
+      // The simulated password gateway string
+      if (code === 'Admin2026') {
+        errorDiv.style.display = 'none';
+        
+        // Show loading state
+        const btn = document.getElementById('loginBtn');
+        btn.innerHTML = `
+          <svg style="animation: spin 1s linear infinite; height: 1.25rem; width: 1.25rem; color: white; display: inline-block; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span style="vertical-align: middle; margin-left: 0.5rem;">Decrypting...</span>
+        `;
+        
+        // Simulate network delay then route to dashboard
+        setTimeout(() => {
+          window.location.href = 'admin_dashboard.html';
+        }, 800);
+      } else {
+        errorDiv.style.display = 'block';
+        document.getElementById('passcode').value = '';
+        document.getElementById('passcode').focus();
+      }
+    }
+  </script>
+</body>
+</html>

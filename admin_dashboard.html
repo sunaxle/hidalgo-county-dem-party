@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Dashboard | Hidalgo County Democrats</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Admin Dashboard Specific Overrides */
+    body {
+      background: #0f172a; /* Slate background to match login */
+      color: white;
+    }
+
+    .admin-nav {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .admin-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logout-btn {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .logout-btn:hover { color: #ef4444; }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .welcome-header {
+      margin-bottom: 3rem;
+    }
+    .welcome-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .welcome-header p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .metric-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: #3b82f6;
+    }
+    .metric-card.green::before { background: #10b981; }
+    .metric-card.orange::before { background: #f59e0b; }
+
+    .metric-title {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    /* Database Links Grid */
+    .db-section-title {
+      font-size: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .db-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .db-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .db-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .db-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .db-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .db-card p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .db-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      width: fit-content;
+      transition: all 0.2s ease;
+    }
+
+    .db-link:hover {
+      background: #3b82f6;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Secure Top Nav -->
+  <nav class="admin-nav fade-in">
+    <div class="admin-logo">
+      <span style="color: #3b82f6;">HCDP</span> Executive Portal
+    </div>
+    <a href="admin.html" class="logout-btn">
+      <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+      Secure Logout
+    </a>
+  </nav>
+
+  <div class="dashboard-container">
+    
+    <!-- Header -->
+    <header class="welcome-header fade-in">
+      <h1>Command Center</h1>
+      <p>Live datastreams and executive access links.</p>
+    </header>
+
+    <!-- Top Level Metrics -->
+    <div class="metrics-grid fade-in" style="animation-delay: 0.1s;">
+      <div class="metric-card">
+        <div class="metric-title">Community Submissions (30D)</div>
+        <div class="metric-value counter" data-target="142">0</div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-title">New FastAction Opt-Ins</div>
+        <div class="metric-value counter" data-target="87">0</div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-title">Active Precinct Vacancies</div>
+        <div class="metric-value counter" data-target="115">0</div>
+      </div>
+    </div>
+
+    <h2 class="db-section-title fade-in" style="animation-delay: 0.2s;">Live Databases</h2>
+
+    <!-- Database Link Cards -->
+    <div class="db-grid fade-in" style="animation-delay: 0.3s;">
+      
+      <!-- Volunteer Intake DB -->
+      <div class="db-card">
+        <div class="db-icon">📊</div>
+        <h3>Volunteer & FastAction Intake</h3>
+        <p>The master Google Sheet capturing all data from `volunteer.html` and `subscribe.html`. Contains names, emails, and opt-in SMS preferences.</p>
+        <a href="https://docs.google.com/spreadsheets/d/1XexampleGsheetLink/edit?usp=sharing" target="_blank" class="db-link">
+          Open Spreadsheet 
+          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+
+      <!-- Community Hub Inbox DB -->
+      <div class="db-card">
+        <div class="db-icon">📥</div>
+        <h3>Community Hub Inbox</h3>
+        <p>The centralized repository for "Call It Out" tips, organizer stories, and general feedback submitted through the Unified Community Hub.</p>
+        <a href="#" class="db-link" style="background: rgba(255,255,255,0.05); color: #64748b; cursor: not-allowed;" title="Database Link Pending creation of the Hub">
+          Link Pending
+        </a>
+      </div>
+
+      <!-- NGP VAN Resources -->
+      <div class="db-card">
+        <div class="db-icon">🔐</div>
+        <h3>State Party VAN Portal</h3>
+        <p>Direct login link to the Texas Democratic Party's official Voter Activation Network (VAN) for downloading walk lists and reporting data.</p>
+        <a href="https://www.ngpvan.com/login" target="_blank" class="db-link" style="color: #10b981; background: rgba(16, 185, 129, 0.1);">
+          Login to VAN
+          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/value_counter.js"></script>
+
+  <!-- Dashboard Security Check (Redirects to Admin Gateway if accessed directly) -->
+  <script>
+    // In a real application, this would check a secure server session token.
+    // For this demonstration architecture, we verify the user didn't bypass the login screen blindly.
+    if(document.referrer.indexOf('admin.html') === -1) {
+      // NOTE: We disable this physical redirect for local development viewing.
+      // window.location.href = 'admin.html';
+    }
+  </script>
+
+</body>
+</html>
