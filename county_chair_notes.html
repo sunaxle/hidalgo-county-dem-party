@@ -384,7 +384,7 @@
 
       let filteredNotes = boardNotes;
       if (currentFilter !== 'All') {
-        filteredNotes = boardNotes.filter(n => n.badge === currentFilter);
+        filteredNotes = boardNotes.filter(n => n.badge && n.badge.toLowerCase().includes(currentFilter.toLowerCase()));
       }
 
       filteredNotes.forEach(note => {
