@@ -39,12 +39,56 @@
       border-color: var(--accent);
       background: rgba(255, 255, 255, 0.1);
     }
+    
+    /* Interactive Volunteer Slot Styling */
+    .volunteer-slot {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .volunteer-slot:hover {
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+      transform: translateX(5px);
+    }
+    .volunteer-slot .slot-info h4 {
+      margin: 0 0 0.25rem 0;
+      color: #fff;
+    }
+    .volunteer-slot .slot-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    @media (max-width: 600px) {
+      .volunteer-slot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .volunteer-slot button {
+        width: 100%;
+      }
+    }
   </style>
   <script src="js/gatekeeper.js"></script>
 </head>
 <body>
+    <!-- Global Office Hours Alert Banner -->
+  <div class="office-alert-banner" style="background: linear-gradient(90deg, #ef4444, #b91c1c); color: white; text-align: center; padding: 0.75rem 1rem; position: fixed; top: 0; left: 0; width: 100%; z-index: 2000; font-weight: 500; font-size: 0.9rem; border-bottom: 2px solid #7f1d1d; display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+    <span>🚨 <strong>URGENT:</strong> The Headquarters is operating By Appointment Only. We need 3-Hour Priority Shift Volunteers to keep the doors open!</span>
+    <a href="contact.html" style="background: white; color: #b91c1c; padding: 0.25rem 0.75rem; border-radius: 4px; font-weight: 700; text-decoration: none; font-size: 0.8rem; text-transform: uppercase;">Sign Up Now</a>
+  </div>
+
+
   <!-- Navigation -->
-  <nav class="navbar scrolled">
+  <nav class="navbar scrolled" style="top: 45px;">
     <a href="home.html" class="logo">Hidalgo<span>Dems</span></a>
     <button class="mobile-menu-btn">☰</button>
         <div class="nav-links">
@@ -127,8 +171,40 @@
         <p style="margin-top: 1.5rem;"><strong>Email:</strong><br><a href="mailto:info@hidalgocountydems.org">info@hidalgocountydems.org</a></p>
         
         <div style="margin-top: 3rem;">
-          <h3 style="margin-bottom: 1rem;">Office Hours</h3>
-          <p>Monday - Friday: 9am - 5pm<br>Saturday & Sunday: Closed (Unless Blockwalking!)</p>
+          <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            Office Hours 
+            <span style="font-size: 0.75rem; background: #ef4444; color: white; padding: 0.25rem 0.6rem; border-radius: 12px; font-weight: 600; letter-spacing: 0.5px;">BY APPOINTMENT ONLY</span>
+          </h3>
+          <p style="color: #94a3b8; margin-bottom: 1.5rem;">The Headquarters is running on an appointment-only basis while we recruit new volunteers to man the front desk. Can you help us keep the doors open?</p>
+          
+          <div style="margin-top: 2rem;">
+            <h4 style="color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Priority Volunteer Shifts</h4>
+            
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Tuesday Morning Shift</h4>
+                <p>9:00 AM - 12:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Thursday Afternoon Shift</h4>
+                <p>1:00 PM - 4:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Saturday Weekend Shift</h4>
+                <p>10:00 AM - 1:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+            
+          </div>
         </div>
       </div>
 
