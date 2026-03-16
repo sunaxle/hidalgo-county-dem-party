@@ -1,25 +1,41 @@
 function initBubblePhysics() {
-    // 1. Parse unique filled precincts from chairDataList
-    // We filter out any items without a valid precinct number, map to Ints, and remove duplicates.
-    const uniquePrecincts = [...new Set(chairDataList.map(item => parseInt(item.precinct)).filter(p => !isNaN(p)))].sort((a,b) => a - b);
+    // 1. Parse active chairs from the selected chairDataList toggle
+    // We filter out any items without a valid precinct number, and grab the first chair found per precinct
+    const activeNodes = [];
+    const seenPrecincts = new Set();
+    
+    chairDataList.forEach(item => {
+      const pct = parseInt(item.precinct);
+      if (!isNaN(pct) && !seenPrecincts.has(pct)) {
+        seenPrecincts.add(pct);
+        activeNodes.push({
+          precinct: pct,
+          chairName: item.name
+        });
+      }
+    });
+
+    // Sort numerically by precinct
+    activeNodes.sort((a,b) => a.precinct - b.precinct);
     
     const mockIssues = [
-      { stat: "Streetlights", desc: "Precinct Chair Report: 'The top issue we hear at the doors is the lack of working streetlights causing safety concerns.'" },
-      { stat: "Polling Access", desc: "Precinct Chair Report: 'We need an early voting location re-opened at the community center; transport is too difficult for seniors.'" },
-      { stat: "Potholes", desc: "Precinct Chair Report: 'Residents are frustrated with the city patching phase. Coordination between city and county road crews is our top request.'" },
-      { stat: "Stray Dogs", desc: "Precinct Chair Report: 'Animal control response times are too slow. Packs of loose dogs are terrifying families walking to school.'" },
-      { stat: "Drainage", desc: "Precinct Chair Report: 'Even light rain floods the corner intersections. We need county drainage bonds prioritized for our neighborhood.'" },
-      { stat: "Property Taxes", desc: "Precinct Chair Report: 'Appraisal hikes are squeezing working class families. We need to educate voters on homestead exemptions.'" },
-      { stat: "Speeding", desc: "Precinct Chair Report: 'We desperately need speed bumps installed near the elementary school drop-off zones.'" }
+      { stat: "Streetlights", text: "The top issue we hear at the doors is the lack of working streetlights causing safety concerns." },
+      { stat: "Polling Access", text: "We need an early voting location re-opened at the community center; transport is too difficult for seniors." },
+      { stat: "Potholes", text: "Residents are frustrated with the city patching phase. Coordination between city and county road crews is our top request." },
+      { stat: "Stray Dogs", text: "Animal control response times are too slow. Packs of loose dogs are terrifying families walking to school." },
+      { stat: "Drainage", text: "Even light rain floods the corner intersections. We need county drainage bonds prioritized for our neighborhood." },
+      { stat: "Property Taxes", text: "Appraisal hikes are squeezing working class families. We need to educate voters on homestead exemptions." },
+      { stat: "Speeding", text: "We desperately need speed bumps installed near the elementary school drop-off zones." }
     ];
 
     // 2. Generate node data mapped to D3 variables
-    const nodes = uniquePrecincts.map(pctNum => {
+    const nodes = activeNodes.map(data => {
       const issue = mockIssues[Math.floor(Math.random() * mockIssues.length)];
       return {
-        id: `Pct ${pctNum}`,
+        id: `Pct ${data.precinct}`,
+        chairName: data.chairName,
         stat: issue.stat,
-        desc: issue.desc,
+        desc: `${data.chairName} reporting: "${issue.text}"`,
         radius: 50 // Represents a 100px diameter CSS width
       };
     });
