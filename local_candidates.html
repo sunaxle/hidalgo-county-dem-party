@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Candidates | Hidalgo County Democrats</title>
+  <meta name="description" content="Meet the Democratic candidates running up and down the ballot in Hidalgo County and across Texas. Learn about their platforms and how to support them.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .candidates-hero {
+      text-align: center;
+      padding-top: 150px;
+      padding-bottom: 3rem;
+    }
+    .candidates-hero span {
+      display: block;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+    }
+    .filter-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+    }
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+    }
+
+    /* Candidate Grid */
+    .candidate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .candidate-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .candidate-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .candidate-photo {
+      width: 100%;
+      height: 280px;
+      background: rgba(0,0,0,0.5);
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .candidate-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+    .candidate-card:hover .candidate-photo img {
+      opacity: 1;
+    }
+    .candidate-photo.placeholder::after {
+      content: '📸 Photo Missing';
+      color: rgba(255,255,255,0.3);
+      font-size: 1.2rem;
+      position: absolute;
+    }
+    
+    .office-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .candidate-info {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .candidate-info h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .candidate-info .district {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .candidate-info p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      flex-grow: 1;
+    }
+
+    .candidate-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+    .candidate-actions .btn {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* No Results Message */
+    .no-results {
+      text-align: center;
+      padding: 4rem;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      display: none;
+      width: 100%;
+      grid-column: 1 / -1;
+      background: var(--glass-bg);
+      border-radius: 12px;
+      border: 1px dashed var(--glass-border);
+    }
+  </style>
+  <script src="js/gatekeeper.js"></script>
+</head>
+<body>
+  <!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <a href="home.html" class="logo">Hidalgo<span>Dems</span></a>
+    <button class="mobile-menu-btn">☰</button>
+    <div class="nav-links">
+      <a href="home.html" class="nav-item">Home</a>
+      
+      <div class="nav-item dropdown">
+        <span>About ▼</span>
+        <div class="dropdown-content">
+          <a href="about.html">About Us</a>
+          <a href="bylaws.html">Bylaws</a>
+          <a href="elected_officials.html">Elected Reps</a>
+          <a href="local_candidates.html" style="color: #fff;">Local Candidates</a>
+          <a href="precinct_chairs.html">Precinct Chairs</a>
+          
+          <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Executive Portal 🔒</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Action ▼</span>
+        <div class="dropdown-content">
+          <a href="volunteer.html">Volunteer</a>
+          <a href="convention.html" style="color: var(--accent); font-weight: 600;">County Convention</a>
+          <a href="runoff_election.html" style="color: var(--primary); font-weight: 600;">Runoff Election</a>
+          <a href="arena_training.html">The Arena</a>
+          <a href="van_resources.html">VAN Resources</a>
+          <a href="vote.html">Resources</a>
+          <a href="precinct_completion.html">Gap Tracker</a>
+          <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Community ▼</span>
+        <div class="dropdown-content">
+          <a href="social_wall.html">Social Wall</a>
+          
+          <a href="county_websites.html">TX Dems</a>
+          <a href="south_texas_region.html">South TX</a>
+        </div>
+      </div>
+
+      <div class="nav-item dropdown">
+        <span>Issues ▼</span>
+        <div class="dropdown-content">
+          <a href="issues_map.html">Issues Data Map</a>
+          <a href="interactive_precincts.html">Live Precinct Issues</a>
+          <a href="county_chair_notes.html">County Chair Notes</a>
+        </div>
+      </div>
+
+      <a href="contact.html" class="nav-item">Contact</a>
+      <a href="https://secure.actblue.com/donate/hidalgo" class="btn btn-primary" style="margin-left: 1rem;">Donate</a>
+    </div>
+  </nav>
+
+  <main class="container fade-in">
+    <section class="candidates-hero">
+      <span>The 2026 Downballot Engine</span>
+      <h1 style="font-size: 3.5rem; margin-bottom: 1rem;">Meet Our <span style="color: var(--primary);">Candidates</span></h1>
+      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.6; font-size: 1.1rem;">
+        From the top of the ticket to our local courtrooms and city halls, explore the Democratic champions running to represent Hidalgo County and fight for our shared South Texas values.
+      </p>
+    </section>
+
+    <!-- Jurisdictional Filters -->
+    <div class="filter-bar fade-in">
+      <button class="filter-btn active" data-filter="all">All Candidates</button>
+      <button class="filter-btn" data-filter="statewide">Statewide</button>
+      <button class="filter-btn" data-filter="legislature">Legislature & Congress</button>
+      <button class="filter-btn" data-filter="county">County-Wide</button>
+      <button class="filter-btn" data-filter="judicial">Judicial & Municipal</button>
+    </div>
+
+    <!-- The Directory Grid -->
+    <div class="candidate-grid fade-in" id="candidateDirectory">
+      
+      <!-- STATEWIDE: Gina Hinojosa -->
+      <div class="candidate-card" data-category="statewide">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">Governor</span>
+        <div class="candidate-info">
+          <h3>Gina Hinojosa</h3>
+          <div class="district">State of Texas</div>
+          <p>Running for Governor with a pledge to fully fund Texas public schools, secure our electrical grid, and restore reproductive freedom across the state.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATEWIDE: James Talarico -->
+      <div class="candidate-card" data-category="statewide">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">U.S. Senate</span>
+        <div class="candidate-info">
+          <h3>James Talarico</h3>
+          <div class="district">State of Texas</div>
+          <p>A former public school teacher fighting for working-class Texans in the U.S. Senate. Committed to lowering healthcare costs and passing common-sense gun safety laws.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEGISLATURE: Morgan LaMantia -->
+      <div class="candidate-card" data-category="legislature">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">State Senate</span>
+        <div class="candidate-info">
+          <h3>Morgan LaMantia</h3>
+          <div class="district">Senate District 27</div>
+          <p>Defending South Texas jobs and ensuring border communities receive their fair share of state resources for infrastructure and healthcare access.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- COUNTY: Terry Palacios -->
+      <div class="candidate-card" data-category="county">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">District Attorney</span>
+        <div class="candidate-info">
+          <h3>Toribio "Terry" Palacios</h3>
+          <div class="district">Hidalgo County</div>
+          <p>Incumbent District Attorney focused on modernizing the justice system, prioritizing violent crime prosecution, and maintaining community transparency.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- COUNTY: Eddie Guerra -->
+      <div class="candidate-card" data-category="county">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">Sheriff</span>
+        <div class="candidate-info">
+          <h3>J.E. "Eddie" Guerra</h3>
+          <div class="district">Hidalgo County</div>
+          <p>Working to keep Hidalgo County the safest region on the Texas border through community policing, advanced officer training, and inter-agency collaboration.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MUNICIPAL: Generic Placeholders -->
+      <div class="candidate-card" data-category="judicial">
+        <div class="candidate-photo placeholder"></div>
+        <span class="office-badge">District Judge</span>
+        <div class="candidate-info">
+          <h3>Renee Betancourt</h3>
+          <div class="district">449th District Court</div>
+          <p>Serving our youth and families with fairness and compassion on the bench of the 449th State District Court.</p>
+          <div class="candidate-actions">
+            <a href="#" class="btn btn-secondary">Website</a>
+            <a href="#" class="btn btn-primary">Donate</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fallback empty state -->
+      <div class="no-results" id="noResultsMsg">
+        No candidates currently listed in this category. Check back soon as more candidates officially file for office!
+      </div>
+
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 3rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 2rem; color: var(--text-muted);">
+    <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+    <div style="margin-top: 1rem;">
+      <a href="https://www.facebook.com/HidalgoCountyDems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Facebook</a>
+      <a href="https://www.instagram.com/hidalgocountydems/" target="_blank" style="color: #fff; margin: 0 0.5rem; text-decoration: none;">Instagram</a>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const candidateCards = document.querySelectorAll('.candidate-card');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Add to clicked button
+          btn.classList.add('active');
+          
+          const targetFilter = btn.getAttribute('data-filter');
+          let visibleCount = 0;
+
+          candidateCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            
+            if (targetFilter === 'all' || targetFilter === cardCategory) {
+              card.style.display = 'flex';
+              // Slight animation trick
+              card.style.opacity = '0';
+              setTimeout(() => card.style.opacity = '1', 50);
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Show/Hide no results message
+          if(visibleCount === 0) {
+            noResultsMsg.style.display = 'block';
+          } else {
+            noResultsMsg.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
