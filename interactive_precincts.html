@@ -223,7 +223,35 @@
     </div>
 
     <!-- D3 Container -->
-    <div id="bubble-container"></div>
+    <div id="bubble-container" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: none;"></div>
+    
+    <!-- Dynamic Graph Statistics Table -->
+    <div class="glass-card" style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; padding: 2rem; text-align: center;">
+      <div>
+        <div style="font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Total Issues</div>
+        <div id="stat-total-issues" style="font-size: 2.5rem; font-weight: 800; color: #fff;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Active Precincts</div>
+        <div id="stat-active-chairs" style="font-size: 2.5rem; font-weight: 800; color: #3b82f6;">0</div>
+      </div>
+      <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 2rem;">
+        <div style="font-size: 0.85rem; color: #facc15; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Infrastructure</div>
+        <div id="stat-infra" style="font-size: 2rem; font-weight: 800; color: #fff;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: #ef4444; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Public Safety</div>
+        <div id="stat-safety" style="font-size: 2rem; font-weight: 800; color: #fff;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: #10b981; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Economics</div>
+        <div id="stat-econ" style="font-size: 2rem; font-weight: 800; color: #fff;">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: #a855f7; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.5rem;">Logistics</div>
+        <div id="stat-logic" style="font-size: 2rem; font-weight: 800; color: #fff;">0</div>
+      </div>
+    </div>
   </section>
 
   <!-- CTA Section -->

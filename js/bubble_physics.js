@@ -36,8 +36,8 @@ function initBubblePhysics() {
       // Determine volume (1 to 4 issues reported by this chair)
       const issueCount = Math.floor(Math.random() * 4) + 1;
       
-      // Calculate a dynamic radius based on the amount of issues (Base 45)
-      const calculatedRadius = 40 + (issueCount * 12); 
+      // Calculate a dynamic radius based on the amount of issues
+      const calculatedRadius = 80 + (issueCount * 22); 
 
       return {
         id: `Pct ${data.precinct}`,
@@ -164,6 +164,28 @@ function initBubblePhysics() {
       // Kick the simulator so they start moving aggressively
       simulation.alpha(0.8).restart();
     };
+
+    // 8. Calculate and Inject Widget Statistics
+    setTimeout(() => {
+      if (document.getElementById('stat-total-issues')) {
+        let totalIssues = 0;
+        let catCounts = { "Infrastructure": 0, "Public Safety": 0, "Economics": 0, "Logistics": 0 };
+        
+        nodes.forEach(n => {
+          totalIssues += n.volume;
+          if (catCounts[n.category] !== undefined) {
+             catCounts[n.category] += n.volume;
+          }
+        });
+        
+        document.getElementById('stat-total-issues').innerText = totalIssues;
+        document.getElementById('stat-active-chairs').innerText = nodes.length;
+        document.getElementById('stat-infra').innerText = catCounts["Infrastructure"];
+        document.getElementById('stat-safety').innerText = catCounts["Public Safety"];
+        document.getElementById('stat-econ').innerText = catCounts["Economics"];
+        document.getElementById('stat-logic').innerText = catCounts["Logistics"];
+      }
+    }, 500);
 }
 
 // Fire the physics payload only after the DOM has fully parsed and sized the container limits.
