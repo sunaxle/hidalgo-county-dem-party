@@ -21,18 +21,53 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
           // Identify source page
-          const source = window.location.pathname.includes('subscribe') ? 'Subscribe' : 'Contact';
+          let source = 'Contact';
+          if (window.location.pathname.includes('subscribe')) source = 'Subscribe';
+          else if (window.location.pathname.includes('community_intake') || window.location.pathname.includes('community')) {
+            if (form.id === 'storyForm') source = 'Community - Story';
+            else if (form.id === 'issueForm') source = 'Community - Issue';
+            else if (form.id === 'eventForm') source = 'Community - Event';
+            else if (form.id === 'generalForm') source = 'Community - General';
+            else source = 'Community Inbox';
+          }
+          
+          // Dynamically concatenate custom fields into the primary 'message' column for Google Sheets
+          let combinedMessage = form.querySelector('#message')?.value || 
+                                form.querySelector('[name="story_message"]')?.value || 
+                                form.querySelector('[name="issue_message"]')?.value || 
+                                form.querySelector('[name="event_message"]')?.value || 
+                                form.querySelector('[name="general_message"]')?.value || '';
+
+          if (source.startsWith('Community')) {
+            let extras = [];
+            const title = form.querySelector('[name="story_title"]')?.value;
+            const precinct = form.querySelector('[name="precinct"]')?.value;
+            const issueType = form.querySelector('[name="issue_type"]')?.value;
+            const eventName = form.querySelector('[name="event_name"]')?.value;
+            const eventDate = form.querySelector('[name="event_date"]')?.value;
+            const subject = form.querySelector('[name="subject"]')?.value;
+            
+            if (title) extras.push('Story Title: ' + title);
+            if (precinct) extras.push('Precinct: ' + precinct);
+            if (issueType) extras.push('Issue Type: ' + issueType);
+            if (eventName) extras.push('Event Name: ' + eventName);
+            if (eventDate) extras.push('Event Date: ' + eventDate);
+            if (subject) extras.push('Subject: ' + subject);
+            
+            if (combinedMessage) extras.push('\nDetails:\n' + combinedMessage);
+            combinedMessage = extras.join('\n');
+          }
           
           // Construct Payload cleanly depending on which form was submitted
           const payload = {
             source: source,
-            name: form.querySelector('#name')?.value || '',
-            firstName: form.querySelector('#fname')?.value || '',
-            lastName: form.querySelector('#lname')?.value || '',
-            email: form.querySelector('#email')?.value || '',
-            phone: form.querySelector('#phone')?.value || '',
-            zipcode: form.querySelector('#zipcode')?.value || '',
-            message: form.querySelector('#message')?.value || '',
+            name: form.querySelector('#name')?.value || form.querySelector('[name="name"]')?.value || '',
+            firstName: form.querySelector('#fname')?.value || form.querySelector('[name="fname"]')?.value || '',
+            lastName: form.querySelector('#lname')?.value || form.querySelector('[name="lname"]')?.value || '',
+            email: form.querySelector('#email')?.value || form.querySelector('[name="email"]')?.value || '',
+            phone: form.querySelector('#phone')?.value || form.querySelector('[name="phone"]')?.value || '',
+            zipcode: form.querySelector('#zipcode')?.value || form.querySelector('[name="zipcode"]')?.value || '',
+            message: combinedMessage,
             
             // Checkboxes (Subscribe Page)
             optInSms: form.querySelector('#check-sms')?.checked || false,
