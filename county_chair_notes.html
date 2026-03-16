@@ -208,72 +208,58 @@
 
   <!-- Notes Grid Section -->
   <section class="container fade-in">
-    <div class="notes-grid">
-      
-      <!-- Note 1 -->
-      <div class="note-card note-request">
-        <div class="note-meta">
-          <span class="note-author">Alvera</span>
-          <span class="note-badge badge-request">Tools & Tech</span>
-        </div>
-        <div class="note-content">
-          "Needs Call Hub for anyone who wants it, and wants a text blast per person."
-        </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Status: <span style="color: #facc15;">Pending Review</span>
-        </div>
-      </div>
-
-      <!-- Note 2 -->
-      <div class="note-card note-idea">
-        <div class="note-meta">
-          <span class="note-author">Norma Garza, Precinct Chair</span>
-          <span class="note-badge badge-idea">Communication</span>
-        </div>
-        <div class="note-content">
-          "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged."
-        </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Status: <span style="color: #facc15;">Pending Review</span>
-        </div>
-      </div>
-
-      <!-- Note 3 -->
-      <div class="note-card note-urgent">
-        <div class="note-meta">
-          <span class="note-author">Anonymous Chair</span>
-          <span class="note-badge badge-urgent">Pain Point</span>
-        </div>
-        <div class="note-content">
-          "County Chair, can you please answer the phone calls going into the office?"
-        </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Status: <span style="color: #ef4444;">Needs Action</span>
-        </div>
-      </div>
-
-      <!-- Note 4 -->
-      <div class="note-card note-urgent">
-        <div class="note-meta">
-          <span class="note-author">Anonymous Chair</span>
-          <span class="note-badge badge-urgent">Operational</span>
-        </div>
-        <div class="note-content">
-          "We need dedicated office hours at the headquarters. At least 3 hours for 3 days per week (9 hours in total). How can we get this accomplished?"
-        </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted);">
-          Status: <span style="color: #ef4444;">Needs Action</span>
-        </div>
-      </div>
-
+    <div id="notes-container" class="notes-grid">
+      <!-- Notes are rendered via JavaScript -->
     </div>
     
     <div class="add-note-container">
-      <button class="add-note-btn" onclick="alert('Submission form coming soon. Please contact the party directly for now.')">
+      <button class="add-note-btn" onclick="openAddModal()">
         <span style="font-size: 1.5rem;">+</span> Add a Note to the Board
       </button>
     </div>
   </section>
+
+  <!-- Add Note Modal UI -->
+  <div id="addNoteModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(10px);">
+    <div style="background: #1e293b; padding: 2.5rem; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); position: relative;">
+      <h2 style="color: white; margin-bottom: 1.5rem;">Submit a Board Note</h2>
+      <input type="text" id="newNoteAuthor" placeholder="Your Name or Precinct (e.g., Alvera)" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; margin-bottom: 1rem;">
+      <select id="newNoteCategory" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; margin-bottom: 1rem;">
+        <option value="Tools & Tech">Tools & Tech (Blue)</option>
+        <option value="Communication">Communication (Yellow)</option>
+        <option value="Operational">Operational (Red)</option>
+        <option value="Pain Point">Pain Point (Red)</option>
+        <option value="General">General Suggestion (Yellow)</option>
+      </select>
+      <textarea id="newNoteText" placeholder="What do you want to request or accomplish?" rows="4" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; margin-bottom: 1.5rem;"></textarea>
+      
+      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+        <button onclick="closeAddModal()" style="padding: 0.5rem 1rem; background: transparent; color: #94a3b8; border: none; cursor: pointer;">Cancel</button>
+        <button onclick="submitNewNote()" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Post Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chairman Response Modal UI -->
+  <div id="responseModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(10px);">
+    <div style="background: #1e293b; padding: 2.5rem; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #3b82f6; position: relative;">
+      <h2 style="color: white; margin-bottom: 0.5rem;">Executive Reply</h2>
+      <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1.5rem;">Logged as: Chairman Gonzales</p>
+      
+      <select id="newResponseStatus" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; margin-bottom: 1rem;">
+        <option value="In Progress">Status: In Progress</option>
+        <option value="Resolved">Status: Resolved</option>
+        <option value="Declined">Status: Declined</option>
+      </select>
+
+      <textarea id="newResponseText" placeholder="Enter official executive reply..." rows="4" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; margin-bottom: 1.5rem;"></textarea>
+      
+      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+        <button onclick="closeResponseModal()" style="padding: 0.5rem 1rem; background: transparent; color: #94a3b8; border: none; cursor: pointer;">Cancel</button>
+        <button onclick="submitResponse()" class="btn btn-primary" style="padding: 0.5rem 1.5rem;">Attach Reply</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -322,5 +308,142 @@
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- County Chair Interactive Board Logic -->
+  <script>
+    // 1. Initial Demonstration Payload (Restoring the hardcoded HTML blocks into state)
+    const initialNotes = [
+      { id: Date.now()+1, author: "Alvera", badge: "Tools & Tech", type: "request", content: "Needs Call Hub for anyone who wants it, and wants a text blast per person.", status: "Pending Review", statusColor: "#facc15", reply: null },
+      { id: Date.now()+2, author: "Norma Garza, Precinct Chair", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", status: "Pending Review", statusColor: "#facc15", reply: null },
+      { id: Date.now()+3, author: "Anonymous Chair", badge: "Pain Point", type: "urgent", content: "County Chair, can you please answer the phone calls going into the office?", status: "Needs Action", statusColor: "#ef4444", reply: null },
+      { id: Date.now()+4, author: "Anonymous Chair", badge: "Operational", type: "urgent", content: "We need dedicated office hours at the headquarters. At least 3 hours for 3 days per week (9 hours in total). How can we get this accomplished?", status: "Needs Action", statusColor: "#ef4444", reply: null }
+    ];
+
+    // Read from memory or initialize
+    let boardNotes = JSON.parse(localStorage.getItem('chairNotesArray')) || initialNotes;
+    let targetReplyId = null;
+
+    // 2. Render Loop
+    function renderNotes() {
+      const container = document.getElementById('notes-container');
+      container.innerHTML = '';
+
+      boardNotes.forEach(note => {
+        // Map category type to CSS classes
+        let cardClass = "note-card note-idea";
+        if (note.type === "urgent") cardClass = "note-card note-urgent";
+        if (note.type === "request") cardClass = "note-card note-request";
+        
+        // Define the Chairman Reply Block (if it exists)
+        const replyBlock = note.reply ? `
+          <div style="background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: 8px; border-left: 3px solid #3b82f6; margin-top: 1.5rem;">
+            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">EXECUTIVEDECK: CHAIRMAN RICHARD</div>
+            <p style="color: #e2e8f0; font-size: 0.95rem; margin: 0; font-style: italic;">"${note.reply}"</p>
+          </div>
+        ` : ``;
+
+        // Build HTML Layout
+        const html = `
+          <div class="${cardClass}">
+            <div class="note-meta">
+              <span class="note-author">${note.author}</span>
+              <span class="note-badge badge-${note.type}">${note.badge}</span>
+            </div>
+            <div class="note-content">"${note.content}"</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted);">
+                Status: <span style="color: ${note.statusColor}; font-weight: 600;">${note.status}</span>
+              </div>
+              <button onclick="openResponseModal(${note.id})" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1; border-radius: 6px; font-size: 0.75rem; padding: 0.25rem 0.5rem; cursor: pointer;">Reply (Admin)</button>
+            </div>
+            ${replyBlock}
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+      });
+      
+      // Save state to browser so refresh doesn't wipe
+      localStorage.setItem('chairNotesArray', JSON.stringify(boardNotes));
+    }
+
+    // 3. User Input Pipeline
+    function openAddModal() { document.getElementById('addNoteModal').style.display = 'flex'; }
+    function closeAddModal() { 
+      document.getElementById('addNoteModal').style.display = 'none'; 
+      document.getElementById('newNoteAuthor').value = '';
+      document.getElementById('newNoteText').value = '';
+    }
+
+    function submitNewNote() {
+      const author = document.getElementById('newNoteAuthor').value || "Anonymous Local";
+      const catText = document.getElementById('newNoteCategory');
+      const category = catText.options[catText.selectedIndex].text.split(" (")[0];
+      const content = document.getElementById('newNoteText').value;
+      
+      if(!content) return alert("Please enter the context of your request.");
+
+      // Parse CSS coloring logic
+      let typeStyle = "idea";
+      if (document.getElementById('newNoteCategory').value.includes("Red") || category === "Operational" || category === "Pain Point") typeStyle = "urgent";
+      if (category === "Tools & Tech") typeStyle = "request";
+
+      boardNotes.push({
+        id: Date.now(),
+        author: author,
+        badge: category,
+        type: typeStyle,
+        content: content,
+        status: "Pending Review",
+        statusColor: "#facc15",
+        reply: null
+      });
+
+      closeAddModal();
+      renderNotes();
+    }
+
+    // 4. Executive Reply Pipeline
+    function openResponseModal(id) { 
+      targetReplyId = id; 
+      document.getElementById('responseModal').style.display = 'flex'; 
+    }
+    
+    function closeResponseModal() { 
+      document.getElementById('responseModal').style.display = 'none'; 
+      document.getElementById('newResponseText').value = '';
+    }
+
+    function submitResponse() {
+      const responseText = document.getElementById('newResponseText').value;
+      const statusValue = document.getElementById('newResponseStatus').value;
+      
+      if(!responseText) return alert("Please provide text for the official reply.");
+
+      // Gatekeeper Check for Richard
+      const authKey = prompt("Enter Executive Key to authorize this response:");
+      if (authKey !== "PC26") {
+        return alert("Access Denied: Invalid Executive Key.");
+      }
+
+      // Determine CSS color for the new status
+      let statColor = "#10b981"; // Resolved (Green)
+      if (statusValue.includes("Progress")) statColor = "#3b82f6"; // Blue
+      if (statusValue.includes("Decline")) statColor = "#ef4444"; // Red
+
+      // Inject the update into the specific note
+      const noteIndex = boardNotes.findIndex(n => n.id === targetReplyId);
+      if (noteIndex !== -1) {
+        boardNotes[noteIndex].status = "Executive: " + statusValue;
+        boardNotes[noteIndex].statusColor = statColor;
+        boardNotes[noteIndex].reply = responseText;
+      }
+
+      closeResponseModal();
+      renderNotes();
+    }
+
+    // Boot
+    document.addEventListener("DOMContentLoaded", renderNotes);
+  </script>
 </body>
 </html>
