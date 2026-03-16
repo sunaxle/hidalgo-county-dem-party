@@ -218,6 +218,28 @@
       <button onclick="filterNotes('Pain Point')" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Pain Points</button>
     </div>
 
+    <!-- Chronological Sorting & Timeline Filters -->
+    <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <label style="color: #94a3b8; font-size: 0.85rem;">Date Range:</label>
+        <select id="dateFilter" onchange="renderNotes()" style="background: #1e293b; color: white; border: 1px solid #334155; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; outline: none;">
+          <option value="all">All Time</option>
+          <option value="7">Last 7 Days</option>
+          <option value="14">Last 14 Days</option>
+          <option value="30">Last 30 Days</option>
+        </select>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem;">
+        <label style="color: #94a3b8; font-size: 0.85rem;">Sort By:</label>
+        <select id="sortFilter" onchange="renderNotes()" style="background: #1e293b; color: white; border: 1px solid #334155; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; outline: none;">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="urgent">Urgent Items First</option>
+        </select>
+      </div>
+    </div>
+
     <div id="notes-container" class="notes-grid">
 
       <!-- Notes are rendered via JavaScript -->
@@ -384,10 +406,56 @@
       const container = document.getElementById('notes-container');
       container.innerHTML = '';
 
-      let filteredNotes = boardNotes;
+      let filteredNotes = [...boardNotes]; // create shallow copy to avoid mutating original array on sort
+
+      // 1. Array Filter Check
       if (currentFilter !== 'All') {
-        filteredNotes = boardNotes.filter(n => n.badge && n.badge.toLowerCase().includes(currentFilter.toLowerCase()));
+        filteredNotes = filteredNotes.filter(n => n.badge && n.badge.toLowerCase().includes(currentFilter.toLowerCase()));
       }
+
+      // 2. Timeline Range Check
+      const dateRangeVal = document.getElementById('dateFilter') ? document.getElementById('dateFilter').value : 'all';
+      if (dateRangeVal !== 'all') {
+        const daysLimit = parseInt(dateRangeVal);
+        const cutoffDate = new Date();
+        cutoffDate.setDate(cutoffDate.getDate() - daysLimit);
+        
+        filteredNotes = filteredNotes.filter(n => {
+          if(!n.submittedAt) return false;
+          // Clean the string (e.g. "Mar 1, 2026 at 8:35 PM" -> "Mar 1, 2026 8:35 PM")
+          const cleanDateStr = n.submittedAt.replace(' at ', ' ');
+          let itemDate = new Date(cleanDateStr);
+          if (isNaN(itemDate.getTime())) {
+             // Fallback if parsing fails, assume it's valid so it doesn't disappear
+             return true;
+          }
+          return itemDate >= cutoffDate;
+        });
+      }
+      
+      // 3. Chronological Sort Engine
+      const sortVal = document.getElementById('sortFilter') ? document.getElementById('sortFilter').value : 'newest';
+      filteredNotes.sort((a, b) => {
+        // Urgent Override
+        if (sortVal === 'urgent') {
+          if (a.type === 'urgent' && b.type !== 'urgent') return -1;
+          if (b.type === 'urgent' && a.type !== 'urgent') return 1;
+          return 0; // If they are both urgent (or neither), fall back to standard array order
+        }
+        
+        // Date Based Sorting
+        const dateA = a.submittedAt ? new Date(a.submittedAt.replace(' at ', ' ')).getTime() : a.id;
+        const dateB = b.submittedAt ? new Date(b.submittedAt.replace(' at ', ' ')).getTime() : b.id;
+        const fallbackA = isNaN(dateA) ? a.id : dateA; // Fallback to ID if date parse fails
+        const fallbackB = isNaN(dateB) ? b.id : dateB;
+
+        if (sortVal === 'oldest') {
+          return fallbackA - fallbackB;
+        } else {
+          // Default: Newest first
+          return fallbackB - fallbackA; // Descending
+        }
+      });
 
       filteredNotes.forEach(note => {
         // Map category type to CSS classes
