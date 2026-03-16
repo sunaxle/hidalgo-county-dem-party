@@ -208,7 +208,18 @@
 
   <!-- Notes Grid Section -->
   <section class="container fade-in">
+    
+    <!-- Category Filters -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+      <button onclick="filterNotes('All')" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Show All</button>
+      <button onclick="filterNotes('Tools & Tech')" style="background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #3b82f6; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Tools & Tech</button>
+      <button onclick="filterNotes('Communication')" style="background: rgba(250, 204, 21, 0.2); border: 1px solid #facc15; color: #facc15; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Communication</button>
+      <button onclick="filterNotes('Operational')" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Operational</button>
+      <button onclick="filterNotes('Pain Point')" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer;">Pain Points</button>
+    </div>
+
     <div id="notes-container" class="notes-grid">
+
       <!-- Notes are rendered via JavaScript -->
     </div>
     
@@ -313,40 +324,95 @@
   <script>
     // 1. Initial Demonstration Payload (Restoring the hardcoded HTML blocks into state)
     const initialNotes = [
-      { id: Date.now()+1, author: "Alvera", badge: "Tools & Tech", type: "request", content: "Needs Call Hub for anyone who wants it, and wants a text blast per person.", status: "Pending Review", statusColor: "#facc15", reply: null },
-      { id: Date.now()+2, author: "Norma Garza, Precinct Chair", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", status: "Pending Review", statusColor: "#facc15", reply: null },
-      { id: Date.now()+3, author: "Anonymous Chair", badge: "Pain Point", type: "urgent", content: "County Chair, can you please answer the phone calls going into the office?", status: "Needs Action", statusColor: "#ef4444", reply: null },
-      { id: Date.now()+4, author: "Anonymous Chair", badge: "Operational", type: "urgent", content: "We need dedicated office hours at the headquarters. At least 3 hours for 3 days per week (9 hours in total). How can we get this accomplished?", status: "Needs Action", statusColor: "#ef4444", reply: null }
+      { id: 1773632153613, author: "Alvera", badge: "Tools & Tech", type: "request", content: "Needs Call Hub for anyone who wants it, and wants a text blast per person.", submittedAt: "Mar 4, 2026 at 2:35 AM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153614, author: "Norma Garza, Precinct Chair", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", submittedAt: "Mar 10, 2026 at 12:35 PM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153615, author: "Anonymous Chair", badge: "Pain Point", type: "urgent", content: "County Chair, can you please answer the phone calls going into the office?", submittedAt: "Mar 6, 2026 at 6:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153616, author: "Anonymous Chair", badge: "Operational", type: "urgent", content: "We need dedicated office hours at the headquarters. At least 3 hours for 3 days per week (9 hours in total). How can we get this accomplished?", submittedAt: "Mar 12, 2026 at 11:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153617, author: "Lisa Fernandez", badge: "Communication", type: "idea", content: "I'd like to propose a block-walking training session on Saturday mornings for new volunteers.", submittedAt: "Feb 27, 2026 at 6:35 PM", status: "Executive: Resolved", statusColor: "#10b981", reply: "This has been ordered and should arrive by next week.", repliedAt: "Mar 2, 2026 at 2:35 AM" },
+      { id: 1773632153618, author: "Mario Trevino", badge: "Communication", type: "idea", content: "I'd like to propose a block-walking training session on Saturday mornings for new volunteers.", submittedAt: "Feb 13, 2026 at 6:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "We do not have the budget for this right now, but we can revisit in Q3.", repliedAt: "Feb 16, 2026 at 8:35 AM" },
+      { id: 1773632153619, author: "Maria Lopez", badge: "General Suggestion", type: "idea", content: "County Chair, can you please answer the phone calls going into the office?", submittedAt: "Feb 21, 2026 at 12:35 AM", status: "Executive: Resolved", statusColor: "#10b981", reply: "We do not have the budget for this right now, but we can revisit in Q3.", repliedAt: "Feb 24, 2026 at 4:35 AM" },
+      { id: 1773632153620, author: "David Garcia", badge: "Communication", type: "idea", content: "Can we organize a carpool system for elderly voters in my precinct for early voting?", submittedAt: "Feb 16, 2026 at 1:35 AM", status: "Executive: Resolved", statusColor: "#10b981", reply: "I hear you. I will bring this up at the steering committee meeting next Tuesday.", repliedAt: "Feb 19, 2026 at 3:35 AM" },
+      { id: 1773632153621, author: "Norma Garza, Precinct Chair", badge: "Pain Point", type: "urgent", content: "The printer at HQ is out of toner again. Can we order a 3-pack to keep in stock?", submittedAt: "Mar 10, 2026 at 10:35 AM", status: "Executive: Declined", statusColor: "#ef4444", reply: "Good idea. Let's touch base on Friday to coordinate logistics.", repliedAt: "Mar 12, 2026 at 11:35 AM" },
+      { id: 1773632153622, author: "Norma Garza, Precinct Chair", badge: "Communication", type: "idea", content: "Needs Call Hub for anyone who wants it, and wants a text blast per person.", submittedAt: "Mar 9, 2026 at 5:35 PM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153623, author: "John Miller", badge: "General Suggestion", type: "idea", content: "Requesting Spanish-translated walk lists for Precinct 45. The English ones aren't helpful there.", submittedAt: "Mar 2, 2026 at 10:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153624, author: "Mario Trevino", badge: "Communication", type: "idea", content: "The printer at HQ is out of toner again. Can we order a 3-pack to keep in stock?", submittedAt: "Feb 20, 2026 at 6:35 PM", status: "Executive: Declined", statusColor: "#ef4444", reply: "This has been ordered and should arrive by next week.", repliedAt: "Feb 21, 2026 at 10:35 PM" },
+      { id: 1773632153625, author: "Anonymous Chair", badge: "Pain Point", type: "urgent", content: "Great job on the new website! Much easier to find the calendar now.", submittedAt: "Feb 16, 2026 at 3:35 PM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "Looking into it. Thanks for flagging.", repliedAt: "Feb 18, 2026 at 7:35 PM" },
+      { id: 1773632153626, author: "Mario Trevino", badge: "General Suggestion", type: "idea", content: "I'd like to propose a block-walking training session on Saturday mornings for new volunteers.", submittedAt: "Feb 18, 2026 at 4:35 PM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153627, author: "David Garcia", badge: "Pain Point", type: "urgent", content: "The AC was rattling really badly during the last meeting. Someone should look at it.", submittedAt: "Mar 14, 2026 at 4:35 AM", status: "Executive: Declined", statusColor: "#ef4444", reply: "I'll have the secretary update the operating procedures to reflect this change.", repliedAt: "Mar 15, 2026 at 6:35 AM" },
+      { id: 1773632153628, author: "David Garcia", badge: "General Suggestion", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", submittedAt: "Mar 8, 2026 at 12:35 AM", status: "Executive: Declined", statusColor: "#ef4444", reply: "Looking into it. Thanks for flagging.", repliedAt: "Mar 11, 2026 at 6:35 AM" },
+      { id: 1773632153629, author: "Lisa Fernandez", badge: "Communication", type: "idea", content: "Can we get more campaign yard signs for the local judicial races? My neighborhood is asking.", submittedAt: "Feb 16, 2026 at 9:35 PM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153630, author: "Maria Lopez", badge: "Communication", type: "idea", content: "Need clarification on the new proxy voting rules for the County Executive Committee meetings.", submittedAt: "Mar 1, 2026 at 12:35 PM", status: "Executive: Declined", statusColor: "#ef4444", reply: "Good idea. Let's touch base on Friday to coordinate logistics.", repliedAt: "Mar 2, 2026 at 8:35 PM" },
+      { id: 1773632153631, author: "Mario Trevino", badge: "Communication", type: "idea", content: "The AC was rattling really badly during the last meeting. Someone should look at it.", submittedAt: "Feb 23, 2026 at 8:35 PM", status: "Executive: Resolved", statusColor: "#10b981", reply: "This has been ordered and should arrive by next week.", repliedAt: "Feb 25, 2026 at 10:35 PM" },
+      { id: 1773632153632, author: "Mario Trevino", badge: "Communication", type: "idea", content: "County Chair, can you please answer the phone calls going into the office?", submittedAt: "Mar 10, 2026 at 8:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153633, author: "Alvera", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", submittedAt: "Mar 13, 2026 at 12:35 PM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153634, author: "Anonymous Chair", badge: "General Suggestion", type: "idea", content: "Can we get more campaign yard signs for the local judicial races? My neighborhood is asking.", submittedAt: "Feb 14, 2026 at 2:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "We do not have the budget for this right now, but we can revisit in Q3.", repliedAt: "Feb 17, 2026 at 3:35 AM" },
+      { id: 1773632153635, author: "Mario Trevino", badge: "Communication", type: "idea", content: "Can we organize a carpool system for elderly voters in my precinct for early voting?", submittedAt: "Mar 13, 2026 at 7:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153636, author: "Maria Lopez", badge: "General Suggestion", type: "idea", content: "The printer at HQ is out of toner again. Can we order a 3-pack to keep in stock?", submittedAt: "Mar 9, 2026 at 1:35 PM", status: "Executive: Resolved", statusColor: "#10b981", reply: "Looking into it. Thanks for flagging.", repliedAt: "Mar 10, 2026 at 7:35 PM" },
+      { id: 1773632153637, author: "Maria Lopez", badge: "Tools & Tech", type: "request", content: "Requesting Spanish-translated walk lists for Precinct 45. The English ones aren't helpful there.", submittedAt: "Feb 22, 2026 at 10:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "Looking into it. Thanks for flagging.", repliedAt: "Feb 24, 2026 at 2:35 PM" },
+      { id: 1773632153638, author: "Maria Lopez", badge: "General Suggestion", type: "idea", content: "We need better lighting in the parking lot at the new HQ before the winter meetings start.", submittedAt: "Feb 21, 2026 at 6:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "I hear you. I will bring this up at the steering committee meeting next Tuesday.", repliedAt: "Feb 22, 2026 at 12:35 PM" },
+      { id: 1773632153639, author: "John Miller", badge: "Pain Point", type: "urgent", content: "The voter registration forms we received last week were outdated. Where can I pick up the new 2026 batches?", submittedAt: "Mar 4, 2026 at 3:35 PM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153640, author: "Mario Trevino", badge: "Operational", type: "urgent", content: "The AC was rattling really badly during the last meeting. Someone should look at it.", submittedAt: "Feb 28, 2026 at 2:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153641, author: "Maria Lopez", badge: "General Suggestion", type: "idea", content: "Can we organize a carpool system for elderly voters in my precinct for early voting?", submittedAt: "Mar 13, 2026 at 9:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "Looking into it. Thanks for flagging.", repliedAt: "Mar 15, 2026 at 12:35 PM" },
+      { id: 1773632153642, author: "Sofia Reyes", badge: "Communication", type: "idea", content: "County Chair, can you please answer the phone calls going into the office?", submittedAt: "Mar 13, 2026 at 9:35 AM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "I'll have the secretary update the operating procedures to reflect this change.", repliedAt: "Mar 14, 2026 at 3:35 PM" },
+      { id: 1773632153643, author: "Sofia Reyes", badge: "Tools & Tech", type: "request", content: "Can we organize a carpool system for elderly voters in my precinct for early voting?", submittedAt: "Mar 12, 2026 at 5:35 AM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153644, author: "Maria Lopez", badge: "Operational", type: "urgent", content: "The AC was rattling really badly during the last meeting. Someone should look at it.", submittedAt: "Feb 23, 2026 at 6:35 PM", status: "Executive: Resolved", statusColor: "#10b981", reply: "Good idea. Let's touch base on Friday to coordinate logistics.", repliedAt: "Feb 25, 2026 at 10:35 PM" },
+      { id: 1773632153645, author: "Lisa Fernandez", badge: "Tools & Tech", type: "request", content: "The AC was rattling really badly during the last meeting. Someone should look at it.", submittedAt: "Feb 24, 2026 at 5:35 PM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "I'll have the secretary update the operating procedures to reflect this change.", repliedAt: "Feb 27, 2026 at 12:35 AM" },
+      { id: 1773632153646, author: "David Garcia", badge: "Tools & Tech", type: "request", content: "Great job on the new website! Much easier to find the calendar now.", submittedAt: "Mar 13, 2026 at 6:35 AM", status: "Executive: Resolved", statusColor: "#10b981", reply: "Looking into it. Thanks for flagging.", repliedAt: "Mar 14, 2026 at 12:35 PM" },
+      { id: 1773632153647, author: "Alvera", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", submittedAt: "Feb 22, 2026 at 5:35 PM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153648, author: "Maria Lopez", badge: "Pain Point", type: "urgent", content: "Is there any budget to boost our Facebook posts for the upcoming rally? The organic reach is terrible.", submittedAt: "Feb 25, 2026 at 3:35 PM", status: "Executive: In Progress", statusColor: "#3b82f6", reply: "We do not have the budget for this right now, but we can revisit in Q3.", repliedAt: "Feb 28, 2026 at 7:35 PM" },
+      { id: 1773632153649, author: "David Garcia", badge: "Tools & Tech", type: "request", content: "The voter registration forms we received last week were outdated. Where can I pick up the new 2026 batches?", submittedAt: "Feb 13, 2026 at 12:35 PM", status: "Executive: Declined", statusColor: "#ef4444", reply: "I'll have the secretary update the operating procedures to reflect this change.", repliedAt: "Feb 15, 2026 at 3:35 PM" },
+      { id: 1773632153650, author: "Mario Trevino", badge: "Pain Point", type: "urgent", content: "The printer at HQ is out of toner again. Can we order a 3-pack to keep in stock?", submittedAt: "Feb 28, 2026 at 6:35 AM", status: "Needs Action", statusColor: "#ef4444", reply: null, repliedAt: null },
+      { id: 1773632153651, author: "Norma Garza, Precinct Chair", badge: "Operational", type: "urgent", content: "Could we set up a Slack or Discord server just for Precinct Chairs? Email chains are getting too long.", submittedAt: "Mar 2, 2026 at 9:35 AM", status: "Pending Review", statusColor: "#facc15", reply: null, repliedAt: null },
+      { id: 1773632153652, author: "Maria Lopez", badge: "Communication", type: "idea", content: "Wants to write a newsletter for her precinct chairs and send it out to keep everyone informed and engaged.", submittedAt: "Mar 1, 2026 at 8:35 PM", status: "Executive: Resolved", statusColor: "#10b981", reply: "Good idea. Let's touch base on Friday to coordinate logistics.", repliedAt: "Mar 4, 2026 at 12:35 AM" }
     ];
 
     // Read from memory or initialize
     let boardNotes = JSON.parse(localStorage.getItem('chairNotesArray')) || initialNotes;
     let targetReplyId = null;
 
+    let currentFilter = 'All';
+
+    function filterNotes(category) {
+      currentFilter = category;
+      renderNotes();
+    }
+
     // 2. Render Loop
     function renderNotes() {
       const container = document.getElementById('notes-container');
       container.innerHTML = '';
 
-      boardNotes.forEach(note => {
+      let filteredNotes = boardNotes;
+      if (currentFilter !== 'All') {
+        filteredNotes = boardNotes.filter(n => n.badge === currentFilter);
+      }
+
+      filteredNotes.forEach(note => {
         // Map category type to CSS classes
         let cardClass = "note-card note-idea";
         if (note.type === "urgent") cardClass = "note-card note-urgent";
         if (note.type === "request") cardClass = "note-card note-request";
         
+        const subTime = note.submittedAt ? `<div style="font-size: 0.70rem; color: #64748b; margin-top: 0.25rem;">${note.submittedAt}</div>` : "";
+        const repTime = note.repliedAt ? `<div style="font-size: 0.70rem; color: #64748b; margin-top: 0.5rem; text-align: right;">${note.repliedAt}</div>` : "";
+
         // Define the Chairman Reply Block (if it exists)
         const replyBlock = note.reply ? `
           <div style="background: rgba(15, 23, 42, 0.5); padding: 1rem; border-radius: 8px; border-left: 3px solid #3b82f6; margin-top: 1.5rem;">
             <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">EXECUTIVEDECK: CHAIRMAN RICHARD</div>
             <p style="color: #e2e8f0; font-size: 0.95rem; margin: 0; font-style: italic;">"${note.reply}"</p>
+            ${repTime}
           </div>
         ` : ``;
 
         // Build HTML Layout
         const html = `
           <div class="${cardClass}">
-            <div class="note-meta">
-              <span class="note-author">${note.author}</span>
+            <div class="note-meta" style="align-items: flex-start;">
+              <div>
+                <span class="note-author">${note.author}</span>
+                ${subTime}
+              </div>
               <span class="note-badge badge-${note.type}">${note.badge}</span>
             </div>
             <div class="note-content">"${note.content}"</div>
