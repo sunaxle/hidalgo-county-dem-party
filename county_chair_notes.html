@@ -367,7 +367,9 @@
     ];
 
     // Read from memory or initialize
-    let boardNotes = JSON.parse(localStorage.getItem('chairNotesArray')) || initialNotes;
+    // DEV MODE: Force override local cache (purge memory)
+    localStorage.removeItem('chairNotesArray');
+    let boardNotes = initialNotes;
     let targetReplyId = null;
 
     let currentFilter = 'All';
