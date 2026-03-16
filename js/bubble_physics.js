@@ -19,24 +19,35 @@ function initBubblePhysics() {
     activeNodes.sort((a,b) => a.precinct - b.precinct);
     
     const mockIssues = [
-      { stat: "Streetlights", text: "The top issue we hear at the doors is the lack of working streetlights causing safety concerns." },
-      { stat: "Polling Access", text: "We need an early voting location re-opened at the community center; transport is too difficult for seniors." },
-      { stat: "Potholes", text: "Residents are frustrated with the city patching phase. Coordination between city and county road crews is our top request." },
-      { stat: "Stray Dogs", text: "Animal control response times are too slow. Packs of loose dogs are terrifying families walking to school." },
-      { stat: "Drainage", text: "Even light rain floods the corner intersections. We need county drainage bonds prioritized for our neighborhood." },
-      { stat: "Property Taxes", text: "Appraisal hikes are squeezing working class families. We need to educate voters on homestead exemptions." },
-      { stat: "Speeding", text: "We desperately need speed bumps installed near the elementary school drop-off zones." }
+      { category: "Infrastructure", color: "#facc15", stat: "Streetlights", text: "The top issue we hear at the doors is the lack of working streetlights causing safety concerns." },
+      { category: "Infrastructure", color: "#facc15", stat: "Potholes", text: "Residents are frustrated with the city patching phase. Coordination between city and county road crews is our top request." },
+      { category: "Infrastructure", color: "#facc15", stat: "Drainage", text: "Even light rain floods the corner intersections. We need county drainage bonds prioritized for our neighborhood." },
+      { category: "Public Safety", color: "#ef4444", stat: "Stray Dogs", text: "Animal control response times are too slow. Packs of loose dogs are terrifying families walking to school." },
+      { category: "Public Safety", color: "#ef4444", stat: "Speeding", text: "We desperately need speed bumps installed near the elementary school drop-off zones." },
+      { category: "Economics", color: "#10b981", stat: "Property Taxes", text: "Appraisal hikes are squeezing working class families. We need to educate voters on homestead exemptions." },
+      { category: "Logistics", color: "#a855f7", stat: "Polling Access", text: "We need an early voting location re-opened at the community center; transport is too difficult for seniors." }
     ];
 
     // 2. Generate node data mapped to D3 variables
     const nodes = activeNodes.map(data => {
-      const issue = mockIssues[Math.floor(Math.random() * mockIssues.length)];
+      // Pick a random primary issue to define the node's category
+      const rootIssue = mockIssues[Math.floor(Math.random() * mockIssues.length)];
+      
+      // Determine volume (1 to 4 issues reported by this chair)
+      const issueCount = Math.floor(Math.random() * 4) + 1;
+      
+      // Calculate a dynamic radius based on the amount of issues (Base 45)
+      const calculatedRadius = 40 + (issueCount * 12); 
+
       return {
         id: `Pct ${data.precinct}`,
         chairName: data.chairName,
-        stat: issue.stat,
-        desc: `${data.chairName} reporting: "${issue.text}"`,
-        radius: 50 // Represents a 100px diameter CSS width
+        category: rootIssue.category,
+        clusterColor: rootIssue.color,
+        volume: issueCount,
+        stat: rootIssue.stat,
+        desc: `${data.chairName} reporting ${issueCount === 1 ? '1 issue' : issueCount + ' issues.'} Primary concern: "${rootIssue.text}"`,
+        radius: calculatedRadius
       };
     });
 
@@ -59,6 +70,10 @@ function initBubblePhysics() {
       .data(nodes)
       .enter().append("div")
       .attr("class", "d3-node")
+      .style("width", d => (d.radius * 2) + "px")
+      .style("height", d => (d.radius * 2) + "px")
+      .style("border-color", d => d.clusterColor)
+      .style("box-shadow", d => `0 0 10px ${d.clusterColor}40`)
       .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
@@ -72,11 +87,13 @@ function initBubblePhysics() {
 
     // Invisible tooltip hover box
     const nodeInfo = nodeElements.append("div")
-      .attr("class", "d3-node-info");
+      .attr("class", "d3-node-info")
+      .style("border-color", d => d.clusterColor); // Match tooltip border exactly to category color
 
     // Tooltip Statistic Header
     nodeInfo.append("div")
       .attr("class", "d3-info-stat")
+      .style("color", d => d.clusterColor)
       .text(d => d.stat);
 
     // Tooltip Description
@@ -127,6 +144,26 @@ function initBubblePhysics() {
       d.fy = null;
       d3.select(this).classed("dragging", false);
     }
+    // Expose a public API to external HTML buttons for triggering the categorical magnetic fields.
+    // If we click "Infrastructure", we pull all matching items up. Everything else gets dropped down.
+    window.sortBubbles = function(targetCategory) {
+      if (targetCategory === 'All') {
+        // Reset to center blob
+        simulation.force("y", d3.forceY(height / 2).strength(0.06));
+      } else {
+        // Split gravitational Y-axis
+        simulation.force("y", d3.forceY(d => {
+          if (d.category === targetCategory) {
+             return height * 0.25; // Pull target up!
+          } else {
+             return height * 0.85; // Drop everything else down!
+          }
+        }).strength(0.1)); // Slightly higher strength than normal to break them apart faster
+      }
+      
+      // Kick the simulator so they start moving aggressively
+      simulation.alpha(0.8).restart();
+    };
 }
 
 // Fire the physics payload only after the DOM has fully parsed and sized the container limits.

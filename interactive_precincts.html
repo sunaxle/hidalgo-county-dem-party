@@ -213,6 +213,15 @@
 
   <!-- Interactive Simulation Canvas -->
   <section class="container" style="margin-bottom: 6rem;">
+    <!-- Category Filter Magnets -->
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+      <button onclick="sortBubbles('All')" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Center All Active</button>
+      <button onclick="sortBubbles('Infrastructure')" style="background: rgba(250, 204, 21, 0.2); border: 1px solid #facc15; color: #facc15; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Infrastructure</button>
+      <button onclick="sortBubbles('Public Safety')" style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #ef4444; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Public Safety</button>
+      <button onclick="sortBubbles('Economics')" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Economics</button>
+      <button onclick="sortBubbles('Logistics')" style="background: rgba(168, 85, 247, 0.2); border: 1px solid #a855f7; color: #a855f7; padding: 0.5rem 1.25rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">Logistics</button>
+    </div>
+
     <!-- D3 Container -->
     <div id="bubble-container"></div>
   </section>
