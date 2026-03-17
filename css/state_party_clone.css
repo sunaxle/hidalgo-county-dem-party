@@ -1,0 +1,356 @@
+:root {
+  --tx-navy: #002D54;
+  --tx-orange: #FD5F00;
+  --tx-sky: #00AEF3;
+  --tx-light-blue: #A8C5DA;
+  --tx-white: #FFFFFF;
+}
+
+body.tx-clone {
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  background-color: var(--tx-white);
+  color: var(--tx-navy);
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav Header */
+.tx-clone-nav {
+  background-color: var(--tx-white);
+  padding: 1rem 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.tx-clone-nav-accent-bar {
+  height: 8px;
+  background-color: #0088cc; /* The sky blue accent line under the nav */
+  width: 100%;
+}
+
+.tx-clone-nav-socials {
+  display: flex;
+  gap: 15px;
+  color: var(--tx-navy);
+  flex: 1;
+}
+
+.tx-clone-nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 3;
+}
+
+.tx-clone-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--tx-navy);
+  margin-bottom: 0.2rem;
+}
+
+.tx-clone-logo-text-left, .tx-clone-logo-text-right {
+  font-family: 'Alfa Slab One', 'Rockwell', 'Courier Bold', serif;
+  font-size: 3.2rem;
+  font-weight: 400; /* Alfa Slab One is naturally heavy */
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+}
+
+.tx-clone-logo-img {
+  height: 90px;
+  margin: 0 -5px;
+  margin-top: -10px; /* Offset the white padding in the generated image */
+  object-fit: cover;
+}
+
+.tx-clone-nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.tx-clone-nav-links a {
+  color: #555;
+  text-decoration: none;
+  font-weight: 400; /* Slim font matched from reference */
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease;
+}
+
+.tx-clone-nav-links a.active {
+  border-bottom: 2px solid #999;
+}
+
+.tx-clone-nav-links a:hover {
+  color: var(--tx-navy);
+}
+
+.tx-clone-nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tx-clone-btn-donate {
+  background-color: var(--tx-orange);
+  color: white;
+  padding: 0.8rem 1.8rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.tx-clone-btn-donate:hover {
+  background-color: #e65600;
+}
+
+/* Hero */
+.tx-clone-hero {
+  background-image: linear-gradient(rgba(0, 45, 84, 0.7), rgba(0, 45, 84, 0.8)), url('../images/hidalgo-exterior-d2100-675.avif');
+  background-size: cover;
+  background-position: center;
+  padding: 8rem 5%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+  min-height: 80vh;
+}
+
+.tx-clone-hero-left, .tx-clone-hero-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.tx-clone-hero-left {
+  max-width: 450px;
+  background-color: white; /* Changed from glass to solid white for crispness */
+  color: var(--tx-navy);
+  padding: 3.5rem 2.5rem;
+  border-radius: 8px; /* Sharper corners */
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.tx-clone-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.tx-clone-hero-left input {
+  width: 100%;
+  padding: 1.25rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  background: #f9f9f9;
+  outline: none;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  transition: border-color 0.3s ease;
+}
+
+.tx-clone-hero-left input:focus {
+  border-color: var(--tx-navy);
+  background: white;
+}
+
+.tx-clone-btn-submit {
+  width: 100%;
+  background-color: var(--tx-sky);
+  color: white;
+  padding: 1.25rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.25rem;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.2s;
+}
+
+.tx-clone-btn-submit:hover {
+  background-color: #009ce0;
+}
+
+.tx-clone-hero-right h1 {
+  font-size: 5rem;
+  line-height: 1.1;
+  margin-bottom: 2.5rem;
+  color: white;
+  font-weight: 800;
+  text-transform: capitalize;
+  background: none;
+  -webkit-text-fill-color: white;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.tx-clone-hero-btns {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tx-clone-btn-outline {
+  border: 3px solid white;
+  color: white;
+  padding: 1.2rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(0, 45, 84, 0.4);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.tx-clone-btn-outline:hover {
+  background: white;
+  color: var(--tx-navy);
+  text-decoration: none;
+}
+
+/* Donation Section - Split Layout */
+.tx-clone-donation {
+  background-color: var(--tx-light-blue);
+  padding: 8rem 5%;
+}
+
+.tx-clone-donation-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.tx-clone-donation-left {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.tx-clone-donation-left h2 {
+  color: var(--tx-navy);
+  margin-bottom: 0;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.tx-clone-donation-right {
+  flex: 1.5;
+  min-width: 350px;
+}
+
+.tx-clone-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .tx-clone-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tx-clone-donation-left h2 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+}
+
+.tx-clone-amount {
+  background-color: var(--tx-orange);
+  color: white;
+  padding: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  letter-spacing: 1px;
+}
+
+.tx-clone-amount:hover {
+  background-color: #e65600;
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(253, 95, 0, 0.3);
+  text-decoration: none;
+}
+
+.tx-clone-donation-disclaimer {
+  font-size: 0.95rem;
+  color: var(--tx-navy);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Content */
+.tx-clone-content {
+  background-color: white; /* Changed from light blue back to white for crisp look */
+  padding: 8rem 5%;
+  text-align: center;
+  color: var(--tx-navy);
+}
+
+.tx-clone-content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tx-clone-content h2 {
+  font-size: 3.5rem;
+  margin-bottom: 2.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.tx-clone-content p {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--tx-navy);
+  font-weight: 500;
+}
+
+/* Footer */
+.tx-clone-footer {
+  background-color: var(--tx-navy);
+  color: white;
+  padding: 5rem 5%;
+  text-align: center;
+}
+
+.tx-clone-footer-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.tx-clone-footer p {
+  color: #A8C5DA;
+  margin-bottom: 0.5rem;
+}
