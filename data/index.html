@@ -212,8 +212,19 @@
         </div>
     </div>
 
+    </div>
+
     <div class="card">
-        <h2>Uncontested & Vacant Precincts Variance (Scatter Plot)</h2>
+        <h2>Congressional District Density Explorer</h2>
+        <p style="margin-bottom: 1rem; color: #cbd5e1;">Toggle between US Congressional Districts 15 and 28 to instantly recalculate the localized Contested vs Vacant Density Distributions. This isolates the geographic variance inside these specific brackets to see which localized campaigns (e.g. Pulido vs Ramirez in 15 or Cuellar vs various challengers in 28) yielded larger organic Turnout Premiums down the ballot.</p>
+        <select id="cdToggle" onchange="updateCDBellCurve()" style="margin-bottom: 1rem; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(168, 85, 247, 0.4); color: #e2e8f0; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9rem; outline: none;">
+            <option value="15">US Congressional District 15</option>
+            <option value="28">US Congressional District 28</option>
+        </select>
+        <div class="chart-container" style="position: relative;">
+            <canvas id="cdBellCurveChart"></canvas>
+        </div>
+    </div>
         <p style="margin-bottom: 1rem; color: #cbd5e1;">A dedicated scatter plot for <strong>Uncontested / Vacant</strong> precincts to visualize how their baseline turnout variance compares to the identical County Mean.</p>
         <div class="chart-container">
             <canvas id="uncontestedScatterChart"></canvas>
@@ -505,6 +516,126 @@
                     }
                 }
             }
+        });
+
+        // --- CD DYNAMIC BELL CURVE OVERLAY ---
+        let cdBellCurveChart;
+        function updateCDBellCurve() {
+            const cdVal = document.getElementById('cdToggle').value;
+            
+            // Filter raw data arrays using String matching
+            const cdContested = precinctData.filter(d => d.CD === cdVal);
+            const cdUncontested = uncontestedData.filter(d => d.CD === cdVal);
+            
+            // Re-bin
+            const allT = [...cdContested, ...cdUncontested].map(d => d.norm_turnout);
+            const cMinT = allT.length ? Math.floor(Math.min(...allT)) : 0;
+            const cMaxT = allT.length ? Math.ceil(Math.max(...allT)) : 100;
+            const cBins = 10;
+            const cBinWidth = cMaxT > cMinT ? (cMaxT - cMinT) / cBins : 1;
+            
+            const cCounts = Array(cBins).fill(0);
+            const uCounts = Array(cBins).fill(0);
+            const cLabels = [];
+            
+            for (let i = 0; i < cBins; i++) {
+                let s = cMinT + i * cBinWidth;
+                let e = s + cBinWidth;
+                cLabels.push(`${s.toFixed(1)}% - ${e.toFixed(1)}%`);
+            }
+            
+            cdContested.forEach(p => {
+                let binIndex = Math.floor((p.norm_turnout - cMinT) / cBinWidth);
+                if (binIndex >= cBins) binIndex = cBins - 1;
+                if (binIndex < 0) binIndex = 0;
+                cCounts[binIndex]++;
+            });
+
+            cdUncontested.forEach(p => {
+                let binIndex = Math.floor((p.norm_turnout - cMinT) / cBinWidth);
+                if (binIndex >= cBins) binIndex = cBins - 1;
+                if (binIndex < 0) binIndex = 0;
+                uCounts[binIndex]++;
+            });
+            
+            const cFreq = cCounts.map(count => cdContested.length ? (count / cdContested.length) * 100 : 0);
+            const vFreq = uCounts.map(count => cdUncontested.length ? (count / cdUncontested.length) * 100 : 0);
+
+            if (cdBellCurveChart) {
+                cdBellCurveChart.data.labels = cLabels;
+                cdBellCurveChart.data.datasets[0].data = cFreq;
+                cdBellCurveChart.data.datasets[1].data = vFreq;
+                cdBellCurveChart.data.datasets[2].data = cFreq;
+                cdBellCurveChart.data.datasets[3].data = vFreq;
+                cdBellCurveChart.update();
+            } else {
+                const ctxCD = document.getElementById('cdBellCurveChart').getContext('2d');
+                cdBellCurveChart = new Chart(ctxCD, {
+                    type: 'bar',
+                    data: {
+                        labels: cLabels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Contested Density Curve',
+                                data: cFreq,
+                                borderColor: '#38bdf8',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                fill: false,
+                                pointRadius: 0
+                            },
+                            {
+                                type: 'line',
+                                label: 'Vacant Density Curve',
+                                data: vFreq,
+                                borderColor: '#f59e0b',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                fill: false,
+                                pointRadius: 0
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Contested Distribution (% of set)',
+                                data: cFreq,
+                                backgroundColor: 'rgba(56, 189, 248, 0.3)',
+                                borderColor: 'rgba(56, 189, 248, 0.8)',
+                                borderWidth: 1,
+                                barPercentage: 1.0,
+                                categoryPercentage: 0.5
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Vacant Distribution (% of set)',
+                                data: vFreq,
+                                backgroundColor: 'rgba(245, 158, 11, 0.3)',
+                                borderColor: 'rgba(245, 158, 11, 0.8)',
+                                borderWidth: 1,
+                                barPercentage: 1.0,
+                                categoryPercentage: 0.5
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        color: '#cbd5e1',
+                        scales: {
+                            x: { title: { display: true, text: 'Normalized Turnout Range', color: '#94a3b8' }, grid: { display: false } },
+                            y: { title: { display: true, text: 'Relative Frequency (%)', color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#e2e8f0' } }
+                        }
+                    }
+                });
+            }
+        }
+        
+        // Render Initial Toggle State when DOM loads
+        document.addEventListener("DOMContentLoaded", function() {
+            updateCDBellCurve();
         });
         
         // --- UNCONTESTED SCATTER CHART EXHAUST ---
