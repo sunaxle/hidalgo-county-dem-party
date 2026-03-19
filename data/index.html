@@ -681,9 +681,7 @@
                                         for (let i = 0; i < list.length; i += 8) {
                                             chunked.push(list.slice(i, i + 8).join(', '));
                                         }
-                                        return `Precincts: 
-  • ` + chunked.join('
-  • ');
+                                        return `Precincts: \n  • ` + chunked.join('\n  • ');
                                     }
                                 }
                             }
