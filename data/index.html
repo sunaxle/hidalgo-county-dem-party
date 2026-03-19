@@ -58,9 +58,9 @@
             0%, 100% { transform: translateY(0); box-shadow: 0 10px 25px -5px rgba(56,189,248,0.2); }
             50% { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(56,189,248,0.4); }
         }
-        @keyframes bounceLeft {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(-15px); }
+        @keyframes bounceAngle {
+            0%, 100% { transform: translate(0, 0) rotate(-45deg); }
+            50% { transform: translate(-15px, 15px) rotate(-45deg); }
         }
     </style>
 </head>
@@ -136,8 +136,8 @@
             
             <!-- MAGIC HAPPENS OVERLAY -->
             <div style="position: absolute; top: 15%; right: 5%; width: 280px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.25rem; border-radius: 12px; z-index: 10; animation: pulseFloat 4s infinite ease-in-out;">
-                <div style="font-size: 2.5rem; color: #38bdf8; position: absolute; left: -45px; top: 15px; animation: bounceLeft 2s infinite;">←</div>
-                <h3 style="color: #38bdf8; margin-top: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(56,189,248,0.2); padding-bottom: 0.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Where the Magic Happens</h3>
+                <div style="font-size: 3rem; color: #c084fc; position: absolute; left: -50px; top: 50px; transform: rotate(-45deg); animation: bounceAngle 2s infinite; text-shadow: 0 0 15px rgba(192, 132, 252, 0.6);">←</div>
+                <h3 style="color: #c084fc; margin-top: 0; font-size: 1.05rem; border-bottom: 1px solid rgba(192,132,252,0.2); padding-bottom: 0.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;">Where the Magic Happens</h3>
                 <p style="color: #e2e8f0; font-size: 0.9rem; margin: 0; line-height: 1.5;">Notice how the blue Contested curve bulges severely to the right compared to the orange Vacant curve. This right-leaning skew physically represents active precinct chairs dragging their voters off the couch—yielding +2,137 total votes.</p>
             </div>
         </div>
@@ -306,9 +306,57 @@
         const contestedFreq = contestedCounts.map(count => (count / precinctData.length) * 100);
         const uncontestedFreq = uncontestedCounts.map(count => (count / uncontestedData.length) * 100);
 
+        const lassoPlugin = {
+            id: 'lassoPlugin',
+            afterDraw: (chart) => {
+                const ctx = chart.ctx;
+                const metaContested = chart.getDatasetMeta(0);
+                const metaVacant = chart.getDatasetMeta(1);
+                
+                if (!metaContested.data.length || !metaVacant.data.length) return;
+                
+                let pointsToLasso = [];
+                for (let i = Math.floor(chart.data.labels.length / 2); i < chart.data.labels.length; i++) {
+                    const cPoint = metaContested.data[i];
+                    const vPoint = metaVacant.data[i];
+                    // If the blue contested curve is higher (meaning lower Y value on canvas)
+                    if (cPoint && vPoint && cPoint.y < vPoint.y) {
+                        pointsToLasso.push(cPoint);
+                    }
+                }
+                
+                if (pointsToLasso.length > 0) {
+                    const xs = pointsToLasso.map(p => p.x);
+                    const ys = pointsToLasso.map(p => p.y);
+                    const minX = Math.min(...xs) - 25;
+                    const maxX = Math.max(...xs) + 25;
+                    const minY = Math.min(...ys) - 35; 
+                    const maxY = Math.max(...ys) + 35;
+                    
+                    const centerX = (minX + maxX) / 2;
+                    const centerY = (minY + maxY) / 2;
+                    const radiusX = (maxX - minX) / 2;
+                    const radiusY = (maxY - minY) / 2;
+                    
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.setLineDash([8, 6]);
+                    ctx.strokeStyle = 'rgba(192, 132, 252, 0.8)';
+                    ctx.lineWidth = 3;
+                    ctx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI);
+                    
+                    ctx.shadowColor = 'rgba(192, 132, 252, 0.6)';
+                    ctx.shadowBlur = 12;
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        };
+
         const ctx2 = document.getElementById('bellCurveChart').getContext('2d');
         const bellCurveChart = new Chart(ctx2, {
             type: 'bar',
+            plugins: [lassoPlugin],
             data: {
                 labels: binLabels,
                 datasets: [
