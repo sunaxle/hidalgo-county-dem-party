@@ -556,6 +556,10 @@
             
             const cCounts = Array(cBins).fill(0);
             const uCounts = Array(cBins).fill(0);
+            // New arrays to store numeric precinct IDs
+            const cPctLists = Array.from({length: cBins}, () => []);
+            const uPctLists = Array.from({length: cBins}, () => []);
+            
             const cLabels = [];
             
             for (let i = 0; i < cBins; i++) {
@@ -569,6 +573,7 @@
                 if (binIndex >= cBins) binIndex = cBins - 1;
                 if (binIndex < 0) binIndex = 0;
                 cCounts[binIndex]++;
+                cPctLists[binIndex].push(p.precinct);
             });
 
             cdUncontested.forEach(p => {
@@ -576,6 +581,7 @@
                 if (binIndex >= cBins) binIndex = cBins - 1;
                 if (binIndex < 0) binIndex = 0;
                 uCounts[binIndex]++;
+                uPctLists[binIndex].push(p.precinct);
             });
             
             const cFreq = cCounts.map(count => cdContested.length ? (count / cdContested.length) * 100 : 0);
@@ -586,7 +592,11 @@
                 cdBellCurveChart.data.datasets[0].data = cFreq;
                 cdBellCurveChart.data.datasets[1].data = vFreq;
                 cdBellCurveChart.data.datasets[2].data = cFreq;
+                cdBellCurveChart.data.datasets[2].pctLists = cPctLists;
+                cdBellCurveChart.data.datasets[2].rawCounts = cCounts;
                 cdBellCurveChart.data.datasets[3].data = vFreq;
+                cdBellCurveChart.data.datasets[3].pctLists = uPctLists;
+                cdBellCurveChart.data.datasets[3].rawCounts = uCounts;
                 cdBellCurveChart.update();
             } else {
                 const ctxCD = document.getElementById('cdBellCurveChart').getContext('2d');
@@ -619,6 +629,8 @@
                                 type: 'bar',
                                 label: 'Contested Distribution (% of set)',
                                 data: cFreq,
+                                pctLists: cPctLists,
+                                rawCounts: cCounts,
                                 backgroundColor: 'rgba(56, 189, 248, 0.3)',
                                 borderColor: 'rgba(56, 189, 248, 0.8)',
                                 borderWidth: 1,
@@ -629,6 +641,8 @@
                                 type: 'bar',
                                 label: 'Vacant Distribution (% of set)',
                                 data: vFreq,
+                                pctLists: uPctLists,
+                                rawCounts: uCounts,
                                 backgroundColor: 'rgba(245, 158, 11, 0.3)',
                                 borderColor: 'rgba(245, 158, 11, 0.8)',
                                 borderWidth: 1,
@@ -646,7 +660,33 @@
                             y: { title: { display: true, text: 'Relative Frequency (%)', color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' }, beginAtZero: true }
                         },
                         plugins: {
-                            legend: { labels: { color: '#e2e8f0' } }
+                            legend: { labels: { color: '#e2e8f0' } },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        // Only show tooltip over the Bar representations (index 2 & 3)
+                                        if (ctx.datasetIndex === 0 || ctx.datasetIndex === 1) return '';
+                                        const dataset = ctx.dataset;
+                                        const count = dataset.rawCounts[ctx.dataIndex];
+                                        return `Precinct Count: ${count} (${ctx.parsed.y.toFixed(1)}%)`;
+                                    },
+                                    afterLabel: function(ctx) {
+                                        if (ctx.datasetIndex === 0 || ctx.datasetIndex === 1) return '';
+                                        const dataset = ctx.dataset;
+                                        const list = dataset.pctLists[ctx.dataIndex];
+                                        if (!list || list.length === 0) return 'No Precincts';
+                                        
+                                        // Chunk array visually for readable hover tooltip
+                                        const chunked = [];
+                                        for (let i = 0; i < list.length; i += 8) {
+                                            chunked.push(list.slice(i, i + 8).join(', '));
+                                        }
+                                        return `Precincts: 
+  • ` + chunked.join('
+  • ');
+                                    }
+                                }
+                            }
                         }
                     }
                 });
