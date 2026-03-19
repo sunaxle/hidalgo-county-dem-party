@@ -328,10 +328,11 @@
                 if (pointsToLasso.length > 0) {
                     const xs = pointsToLasso.map(p => p.x);
                     const ys = pointsToLasso.map(p => p.y);
-                    const minX = Math.min(...xs) - 25;
-                    const maxX = Math.max(...xs) + 25;
-                    const minY = Math.min(...ys) - 35; 
-                    const maxY = Math.max(...ys) + 35;
+                    // Expanded padding mathematically to ensure the 21-23% turnout cluster is engulfed
+                    const minX = Math.min(...xs) - 55;
+                    const maxX = Math.max(...xs) + 55;
+                    const minY = Math.min(...ys) - 65; 
+                    const maxY = Math.max(...ys) + 50;
                     
                     const centerX = (minX + maxX) / 2;
                     const centerY = (minY + maxY) / 2;
