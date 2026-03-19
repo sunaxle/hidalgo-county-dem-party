@@ -62,6 +62,32 @@
             0%, 100% { transform: translate(0, 0) rotate(-45deg); }
             50% { transform: translate(-15px, 15px) rotate(-45deg); }
         }
+        
+        /* Mobile Overlay Rules */
+        .mobile-warning {
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-warning { display: block; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .chart-container { height: 350px; margin-bottom: 1.5rem; }
+            .card { padding: 1rem; margin-bottom: 1.5rem; }
+            body { padding: 1rem; font-size: 0.95rem; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+            .metric-value { font-size: 1.75rem; }
+            .controls { flex-direction: column; align-items: stretch; margin-bottom: 1.5rem; }
+            .controls button { margin-bottom: 0.5rem; width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -75,6 +101,12 @@
     </script>
     
     <h1>Normalized Precinct Analysis Dashboard & Impact Projection</h1>
+    
+    <div class="mobile-warning">
+        <strong>Mobile Optimization Notice</strong><br>
+        For the most accurate analytical read, please rotate your device sideways (landscape) and scroll down. This prevents dynamic charts and massive data matrices from squishing or overlapping on vertical screens.
+    </div>
+
     <p>Using <strong>Bayesian Shrinkage</strong> to normalize percentages. Small precincts with extreme raw percentages are pulled toward the County Mean, ensuring rankings strictly reflect true overperformance rather than low-sample size anomalies.</p>
 
     <!-- IMPACT METRICS -->
@@ -260,21 +292,23 @@
         </div>
     </div>
 
-    <table id="dataTable">
-        <thead>
-            <tr>
-                <th onclick="sortTable('precinct')">Precinct ↕</th>
-                <th onclick="sortTable('registered')">Registered Size ↕</th>
-                <th onclick="sortTable('raw_turnout')">Raw Turnout % ↕</th>
-                <th onclick="sortTable('norm_turnout')">Normalized Turnout ⭐ ↕</th>
-                <th onclick="sortTable('raw_talarico')">Raw Talarico % ↕</th>
-                <th onclick="sortTable('norm_talarico')">Normalized Talarico ⭐ ↕</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- Populated by JS -->
-        </tbody>
-    </table>
+    <div style="overflow-x: auto; width: 100%; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 2rem;">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable('precinct')">Precinct ↕</th>
+                    <th onclick="sortTable('registered')">Registered Size ↕</th>
+                    <th onclick="sortTable('raw_turnout')">Raw Turnout % ↕</th>
+                    <th onclick="sortTable('norm_turnout')">Normalized Turnout ⭐ ↕</th>
+                    <th onclick="sortTable('raw_talarico')">Raw Talarico % ↕</th>
+                    <th onclick="sortTable('norm_talarico')">Normalized Talarico ⭐ ↕</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Populated by JS -->
+            </tbody>
+        </table>
+    </div>
 
     <!-- 100% COVERAGE PROJECTION FLOOR CARD -->
     <div class="card" style="border: 2px solid rgba(168, 85, 247, 0.6); background: rgba(59, 7, 100, 0.3); margin-top: 3rem;">
