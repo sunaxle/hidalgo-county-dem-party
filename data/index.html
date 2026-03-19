@@ -217,6 +217,25 @@
     <div class="card">
         <h2>Congressional District Density Explorer</h2>
         <p style="margin-bottom: 1rem; color: #cbd5e1;">Toggle between US Congressional Districts 15 and 28 to instantly recalculate the localized Contested vs Vacant Density Distributions. This isolates the geographic variance inside these specific brackets to see which localized campaigns yielded larger organic Turnout Premiums down the ballot.</p>
+        
+        <div style="border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; overflow: hidden; margin: 1.5rem 0; background: rgba(15, 23, 42, 0.4);">
+            <div style="padding: 1rem 1.5rem; border-bottom: 1px solid rgba(56, 189, 248, 0.1); background: rgba(15, 23, 42, 0.6);">
+                <h3 style="color: #38bdf8; margin: 0; font-size: 1.1rem;">Key Finding: Identical Regional Baselines</h3>
+            </div>
+            <div class="grid-2" style="padding: 1.5rem; gap: 1.5rem;">
+                <div class="metric-box" style="background: rgba(15, 23, 42, 0.8); margin: 0;">
+                    <div class="metric-value" style="color: #eab308;">19.02%</div>
+                    <div class="metric-label">CD-15 Mean Turnout</div>
+                    <div class="subtext">Raw Turnout Average across district borders</div>
+                </div>
+                <div class="metric-box" style="background: rgba(15, 23, 42, 0.8); margin: 0;">
+                    <div class="metric-value" style="color: #eab308;">19.04%</div>
+                    <div class="metric-label">CD-28 Mean Turnout</div>
+                    <div class="subtext">Raw Turnout Average across district borders</div>
+                </div>
+            </div>
+        </div>
+
         <select id="cdToggle" onchange="updateCDBellCurve()" style="margin-bottom: 1rem; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(168, 85, 247, 0.4); color: #e2e8f0; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 500; font-size: 0.9rem; outline: none;">
             <option value="15">US Congressional District 15</option>
             <option value="28">US Congressional District 28</option>
@@ -296,7 +315,7 @@
             <li style="margin-bottom: 0.5rem;"><strong style="color: #e2e8f0;">Engagement Density:</strong> Visually, it looked like CD-28 had more contested races, but the math proves that CD-15 actually had MORE (21.4% vs 16.7%).</li>
             <li><strong style="color: #e2e8f0;">Turnout Premium:</strong> A Contested Precinct Chair in CD-15 dragged their neighborhood up by a meager <strong>+0.29%</strong> against the local baseline. But a Contested Chair in CD-28 dragged their neighborhood up by a massive <strong>+3.00%</strong> against the local baseline.</li>
         </ul>
-        <p style="color: #e2e8f0; font-size: 0.95rem; font-style: italic; background: rgba(0,0,0,0.2); padding: 1rem; border-left: 3px solid #60a5fa;"><strong>Conclusion:</strong> CD-15 organizers essentially rode the naturally existing turnout wave, whereas CD-28 organizers fundamentally altered their baseline and dragged highly abnormal numbers of people out to vote!</p>
+        <p style="color: #e2e8f0; font-size: 0.95rem; font-style: italic; background: rgba(0,0,0,0.2); padding: 1rem; border-left: 3px solid #60a5fa;"><strong>Conclusion:</strong> While CD-15 organizers matched their regional baseline, CD-28 organizers actively exceeded their baseline and consistently overperformed natural expectations within their micro-geographies.</p>
     </div>
 
     <!-- JS ENGINE -->
