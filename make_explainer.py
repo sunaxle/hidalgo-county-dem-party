@@ -11,7 +11,7 @@ footer_split = parts[1].split('<!-- Footer -->')
 footer = '<!-- Footer -->' + footer_split[1]
 
 body = """
-  <main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px; max-width: 100vw; overflow-x: hidden; box-sizing: border-box;">
+  <main class="container" style="padding-top: 120px; padding-bottom: 60px; max-width: 100vw; overflow-x: hidden; box-sizing: border-box;">
     <div style="text-align: center; max-width: 900px; margin: 0 auto 4rem auto; padding: 0 1rem;">
       <h1 style="color: var(--accent); font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 1rem; line-height:1.1;">Democracy Coded:</h1>
       <h2 style="color: #fff; font-size: clamp(1.4rem, 5vw, 2rem); margin-top:0;">The Architecture of Grassroots Power</h2>
