@@ -3,169 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Site Map - Hidalgo Dems</title>
-  <meta name="description" content="Visual map of all pages and features on the Hidalgo County Democratic Party website.">
+  <title>Community Standards & Disclaimers | Hidalgo County Democrats</title>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .sitemap-container {
-      padding: 4rem 2rem;
-      position: relative;
-    }
-
-    .tree-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 3rem;
-      position: relative;
-    }
-
-    /* Primary Tier 1 Styling */
-    .tier-1 {
-      background: rgba(34, 211, 238, 0.1);
-      border: 2px solid var(--accent);
-      padding: 1.5rem 3rem;
-      border-radius: 999px;
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
-      z-index: 10;
-      position: relative;
-    }
-
-    /* Vertical line dropping from Home */
-    .tree-trunk {
-      width: 2px;
-      height: 60px;
-      background: var(--accent);
-      margin: 0 auto;
-    }
-
-    /* Horizontal line spreading to Tier 2 */
-    .tree-branch-horiz {
-      width: 75%;
-      height: 2px;
-      background: var(--accent);
-      margin: 0 auto;
-    }
-
-    /* Tier 2 Grid (Core Pages) */
-    .tier-2-wrapper {
-      display: flex;
-      justify-content: space-between;
-      width: 75%;
-      margin: 0 auto;
-      direction: rtl; /* For visual layout flowing left to right appropriately */
-    }
-
-    .tier-2-leg {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      direction: ltr; /* Reset text direction inside */
-    }
-
-    /* Line dropping into Tier 2 cards */
-    .tier-2-leg::before {
-      content: '';
-      width: 2px;
-      height: 30px;
-      background: var(--accent);
-    }
-
-    .tier-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      width: 200px;
-      text-align: center;
-      transition: var(--transition);
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      z-index: 10;
-    }
-
-    .tier-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-      box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
-    }
-
-    .tier-card h3 {
-      font-size: 1.1rem;
-      margin: 0;
-      color: #fff;
-    }
-
-    /* Sub-branches (Tier 3) */
-    .tier-sub {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 2rem;
-      position: relative;
-    }
-    
-    .tier-sub::before {
-      content: '';
-      position: absolute;
-      top: -2rem;
-      left: 50%;
-      width: 2px;
-      height: 2rem;
-      background: rgba(255,255,255,0.2);
-      transform: translateX(-50%);
-    }
-
-    .tier-sub .tier-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px dashed rgba(255,255,255,0.3);
-      width: 180px;
-      margin-bottom: 1rem;
-    }
-    .tier-sub .tier-card:hover {
-      border-style: solid;
-      background: rgba(34, 211, 238, 0.05);
-    }
-
-    .tier-sub-title {
-      font-size: 0.8rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: var(--bg-dark);
-      padding: 0.2rem 1rem;
-      border-radius: 999px;
-      border: 1px solid var(--accent);
-      z-index: 5;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-      .tier-2-wrapper { width: 95%; }
-      .tier-card { width: 160px; }
-      .tier-sub .tier-card { width: 150px; }
-    }
-
-    @media (max-width: 768px) {
-      .tree-branch-horiz, .tier-2-leg::before, .tree-trunk { display: none; }
-      .tier-2-wrapper { 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 2rem; 
-      }
-      .tier-card, .tier-sub .tier-card { width: 280px; }
-      .tier-sub::before { display: none; }
-    }
-  </style>
   <script src="js/gatekeeper.js"></script>
 
   <!-- Fonts -->
@@ -178,8 +17,7 @@
 </head>
 <body class="tx-clone">
 <!-- Dynamic Background Shapes -->
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
+  <div class="shape shape-1" style="left: -100px; right: auto;"></div>
 
   <!-- Navigation -->
       <nav class="tx-clone-nav">
@@ -259,79 +97,57 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <!-- Hero Section -->
-  <header class="page-header container fade-in" style="min-height: 20vh; padding-top: 120px; padding-bottom: 0;">
-    <div>
-      <h1>Site Architecture</h1>
-      <p>A visual map of how you can navigate the data, features, and action hubs of the Hidalgo County Democratic Party website.</p>
-    </div>
-  </header>
-
-  <!-- Site Map Tree Visualization -->
-  <section class="sitemap-container container fade-in">
-    <div class="tree-container">
+  <main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h1 style="color: var(--accent); font-size: 3.5rem; margin-bottom: 3rem; line-height:1.1; text-align:center;">Disclaimers &<br/>Community Standards</h1>
       
-      <!-- Tier 1 -->
-      <a href="home.html" class="tier-1" style="text-decoration: none;">1. Front Door (Home)</a>
-      <div class="tree-trunk"></div>
-      <div class="tree-branch-horiz"></div>
+      <div style="background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+         
+         <div style="margin-bottom: 3rem;">
+            <h3 style="color: #38bdf8; font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid rgba(56,189,248,0.3); padding-bottom: 0.5rem;">1. The Decentralized "Sandbox" Environment</h3>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>Expect Messiness.</strong> This platform is purposefully engineered as a non-hierarchical, decentralized sandbox driven directly by grassroots Precinct Chairs and local volunteers. Because data is sourced actively from the ground-up—rather than filtered perfectly through top-down leadership—the information ecosystem is constantly shifting. 
+            </p>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>Nothing Here is Binding.</strong> Please take everything you read, including meeting times and localized announcements, with a grain of salt. Do not hold any single post or dashboard as absolute, official truth. While we strive for accuracy, the experimental nature of crowd-sourced civic organizing means human error and outdated information will occur.
+            </p>
+         </div>
 
-      <!-- Tier 2 Wrapper -->
-      <div class="tier-2-wrapper">
-        
-        <!-- Pillar 1: Contact Pipeline -->
-        <div class="tier-2-leg">
-          <a href="contact.html" class="tier-card"><h3>Contact Forms</h3></a>
-          <div class="tier-sub">
-            <div class="tier-sub-title">Public Feeds</div>
-            <a href="community_inbox.html" class="tier-card"><h3>Community Inbox</h3></a>
-            <a href="county_chair_notes.html" class="tier-card"><h3>County Chair Notes</h3></a>
-          </div>
-        </div>
+         <div style="margin-bottom: 3rem;">
+            <h3 style="color: #10b981; font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid rgba(16,185,129,0.3); padding-bottom: 0.5rem;">2. Data Privacy & Protection</h3>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>Protect Your Information.</strong> Please be incredibly mindful of the data you submit into the universal intake forms, contact pages, and public profile hubs. Protect your personal privacy to whatever degree you deem necessary. Do not post highly sensitive, secure, or unencrypted identifiable information if you are not comfortable having it cataloged or displayed in party databases. 
+            </p>
+         </div>
 
-        <!-- Pillar 2: Info & Action Pipeline -->
-        <div class="tier-2-leg">
-          <a href="volunteer.html" class="tier-card"><h3>Volunteer Hub</h3></a>
-          <div class="tier-sub">
-            <div class="tier-sub-title">Action Tools</div>
-            <a href="events.html" class="tier-card"><h3>Events Calendar</h3></a>
-            <a href="vote.html" class="tier-card"><h3>Voter Resources</h3></a>
-            <a href="arena_training.html" class="tier-card"><h3>The Arena Training</h3></a>
-          </div>
-        </div>
+         <div style="margin-bottom: 3rem;">
+            <h3 style="color: #f59e0b; font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid rgba(245,158,11,0.3); padding-bottom: 0.5rem;">3. Clean & Respectful Baseline</h3>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>No Profanity Allowed.</strong> We fundamentally understand that fighting for democracy is exhausting, and civic organizing can generate immense frustration. Regardless, this website is a public platform accessible to children, families, and community members of all ages.
+            </p>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              We require everyone to maintain a clean, courteous, and respectful environment at all times. Do not use bad words, hostile attacks, or abusive language in your submissions or on the "Share Our Stories" portal.
+            </p>
+         </div>
 
-        <!-- Pillar 3: Data & Explore Pipeline -->
-        <div class="tier-2-leg">
-          <a href="about.html" class="tier-card"><h3>About Us</h3></a>
-          <div class="tier-sub">
-            <div class="tier-sub-title">Governance</div>
-            <a href="bylaws.html" class="tier-card"><h3>Bylaws & Rules</h3></a>
-          </div>
-          <div class="tier-sub">
-            <div class="tier-sub-title">Data Dashboards</div>
-            <a href="south_texas_region.html" class="tier-card"><h3>South TX Map</h3></a>
-            <a href="issues_map.html" class="tier-card"><h3>Issues Data Map</h3></a>
-          
-            <a href="county_websites.html" class="tier-card"><h3>TX Dems Catalog</h3></a>
-            <a href="elected_officials.html" class="tier-card"><h3>Elected Officials</h3></a>
-            <a href="precinct_chairs.html" class="tier-card"><h3>Precinct Chairs</h3></a>
-            <a href="precinct_performance.html" class="tier-card"><h3>Performance DB</h3></a>
-            <a href="social_wall.html" class="tier-card"><h3>Social Hub</h3></a>
-          </div>
-          
-          <div class="tier-sub">
-            <div class="tier-sub-title">Allied Organizations</div>
-            <a href="youth_organizations.html" class="tier-card"><h3>Youth Orgs</h3></a>
-            <a href="community_organizations.html" class="tier-card"><h3>Community Orgs</h3></a>
-            <a href="activist_organizations.html" class="tier-card"><h3>Activism</h3></a>
-          </div>
-        </div>
+         <div style="margin-bottom: 3rem;">
+            <h3 style="color: #ef4444; font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid rgba(239,68,68,0.3); padding-bottom: 0.5rem;">4. Accountability & Enforcement (Banning)</h3>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>Your Access Can Be Revoked.</strong> The webmasters and Party Administration reserve the absolute right to ban users, block IP addresses, and permanently revoke digital access for any individual who violates these community standards. Harassment, spam submission algorithms, and continuous disruption of the digital infrastructure will result in automatic bans.
+            </p>
+         </div>
+
+         <div>
+            <h3 style="color: #a855f7; font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid rgba(168,85,247,0.3); padding-bottom: 0.5rem;">5. Independent Fact-Checking</h3>
+            <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+              <strong>Verify Before You Commute.</strong> Volunteers are highly encouraged to independently verify all precinct rally times, venue locations, and election law deadlines outlined by individual chairs. While this infrastructure empowers local leaders, the Hidalgo County Democratic Party assumes no liability for local scheduling miscommunications.
+            </p>
+         </div>
 
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
+  </main>
+<!-- Footer -->
   <footer class="tx-clone-footer">
     <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
     <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
