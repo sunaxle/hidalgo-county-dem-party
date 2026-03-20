@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
-    const hourlyRate = 85.00; 
-    let hoursLogged = 319.5; 
+    const standardRate = 85.00;
+    const dataRate = 125.00; // Premium rate for data analysis & interactive dataviz
     
-    // Add newly accumulated hours
-    hoursLogged += 8.5; // Site-wide Template Override & Layout Migration
-    hoursLogged += 6.0; // Interactive Data Portal (Gap Tracker & Dynamic Mapping)
+    let standardHours = 319.5; // Legacy logged hours
+    let dataHours = 0.0;
     
-    let totalValue = hourlyRate * hoursLogged;
+    // Log new sessions
+    standardHours += 14.5; // Site-wide Template Override, Nav Link Reset, Layout Fixes
+    dataHours += 12.0; // Interactive Data Portal (Gap Tracker & Data Map) construction
     
-    // Flat up-fee for data analysis in the Data Portal
-    const dataAnalysisFee = 125.00;
-    totalValue += dataAnalysisFee;
+    let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
 
     // Create the footer element
     const valueFooter = document.createElement("div");

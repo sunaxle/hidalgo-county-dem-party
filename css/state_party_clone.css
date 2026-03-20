@@ -150,6 +150,7 @@ body.tx-clone {
 
 .tx-clone-hero-left input {
   width: 100%;
+  box-sizing: border-box;
   padding: 1.25rem;
   border: 2px solid #ddd;
   border-radius: 4px;
@@ -167,6 +168,7 @@ body.tx-clone {
 
 .tx-clone-btn-submit {
   width: 100%;
+  box-sizing: border-box;
   background-color: var(--tx-sky);
   color: white;
   padding: 1.25rem;
