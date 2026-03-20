@@ -8,8 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let dataHours = 0.0;
     
     // Log new sessions
-    standardHours += 14.5; // Site-wide Template Override, Nav Link Reset, Layout Fixes
-    dataHours += 12.0; // Interactive Data Portal (Gap Tracker & Data Map) construction
+    standardHours += 23.5; // Site-wide template, Dynamic Routing System, Phase 2 Google Sheets CRM
+    dataHours += 20.0; // Data Portal maps, Gap Tracker algorithms, D3 Volunteer physics engine
     
     let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
 
