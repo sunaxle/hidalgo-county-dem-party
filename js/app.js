@@ -147,24 +147,31 @@ document.addEventListener('DOMContentLoaded', () => {
     <div style="margin-top:0.8rem; text-align:center; font-size:0.85rem; color:#94a3b8;">📱 (956) 638-7581</div>
   `;
 
-  // Button
+  // Button - Subtle & Faded State
   const wmBtn = document.createElement('div');
-  wmBtn.style.background = 'var(--accent, #38bdf8)';
-  wmBtn.style.color = '#020617';
-  wmBtn.style.padding = '12px 24px';
+  wmBtn.style.background = 'rgba(15, 23, 42, 0.5)';
+  wmBtn.style.color = 'rgba(203, 213, 225, 0.6)'; // Muted text
+  wmBtn.style.padding = '8px 16px'; // smaller internal padding
+  wmBtn.style.fontSize = '0.85rem'; // smaller font size
   wmBtn.style.borderRadius = '30px';
-  wmBtn.style.fontWeight = '800';
+  wmBtn.style.fontWeight = '600';
   wmBtn.style.cursor = 'pointer';
-  wmBtn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+  wmBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
   wmBtn.style.display = 'flex';
   wmBtn.style.alignItems = 'center';
-  wmBtn.style.gap = '8px';
-  wmBtn.style.transition = 'transform 0.2s, box-shadow 0.2s';
-  wmBtn.style.border = '2px solid rgba(255,255,255,0.2)';
+  wmBtn.style.gap = '6px';
+  wmBtn.style.opacity = '0.6'; // extremely faded initially
+  wmBtn.style.backdropFilter = 'blur(4px)';
+  wmBtn.style.transition = 'all 0.3s ease';
+  wmBtn.style.border = '1px solid rgba(255,255,255,0.1)';
   wmBtn.innerHTML = `🛠️ Webmaster`;
 
   wmBtn.addEventListener('mouseenter', () => {
-      wmBtn.style.transform = 'scale(1.05)';
+      wmBtn.style.background = 'var(--accent, #38bdf8)';
+      wmBtn.style.color = '#020617';
+      wmBtn.style.opacity = '1';
+      wmBtn.style.border = '1px solid rgba(255,255,255,0.4)';
+      wmBtn.style.transform = 'scale(1.1)';
       wmBtn.style.boxShadow = '0 4px 20px rgba(56, 189, 248, 0.6)';
       wmTooltip.style.opacity = '1';
       wmTooltip.style.visibility = 'visible';
@@ -172,8 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   wmContainer.addEventListener('mouseleave', () => {
+      wmBtn.style.background = 'rgba(15, 23, 42, 0.5)';
+      wmBtn.style.color = 'rgba(203, 213, 225, 0.6)';
+      wmBtn.style.opacity = '0.6';
+      wmBtn.style.border = '1px solid rgba(255,255,255,0.1)';
       wmBtn.style.transform = 'scale(1)';
-      wmBtn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+      wmBtn.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
       wmTooltip.style.opacity = '0';
       wmTooltip.style.visibility = 'hidden';
       wmTooltip.style.transform = 'translateY(10px)';
