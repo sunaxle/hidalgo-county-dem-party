@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <span style="color: var(--accent); font-weight: bold; font-size: 1.1rem;">
                 Estimated Market Value: $${totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} 
             </span> 
-            <span style="font-size: 0.8rem; opacity: 0.8;">
-                (${hoursLogged} hrs @ $${hourlyRate}/hr)
+            <span style="font-size: 0.8rem; opacity: 0.8; margin-left: 0.5rem;">
+                (${(standardHours + dataHours).toLocaleString()} total hrs)
             </span>
         </div>
     `;
