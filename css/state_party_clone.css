@@ -119,36 +119,57 @@ body.tx-clone {
 @media (max-width: 768px) {
   .tx-clone-nav {
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    z-index: 5000;
   }
+  
+  /* Demote translate overlay */
+  #google_translate_element {
+    z-index: 1 !important;
+  }
+  
   .tx-clone-nav-socials {
     justify-content: center;
     width: 100%;
-    margin-top: 1.5rem; /* Room for Google Translate widget */
+    margin-top: 2rem; 
+    pointer-events: none; /* Prevent static icons from capturing erroneous taps */
   }
   .tx-clone-nav-center {
     width: 100%;
+    position: relative;
+    z-index: 9000;
   }
   .tx-clone-logo-img {
-    height: 70px; /* shrink logo slightly */
+    height: 70px;
   }
   .tx-clone-nav-links {
     flex-wrap: wrap;
-    gap: 1rem 0.5rem;
+    gap: 1.25rem 0.75rem;
     margin-top: 1rem;
     justify-content: center;
+    position: relative;
+    z-index: 9999;
   }
   .tx-clone-nav-links a, 
   .tx-clone-nav-links .nav-item, 
   .tx-clone-nav-links .dropdown > span {
-    font-size: 0.85rem; /* Shrink text to fit more inline */
-    padding: 0.25rem 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.6rem;
+    touch-action: manipulation; /* Eliminate iOS tap highlight delay/blocking */
+  }
+  .tx-clone-nav-links .dropdown-content {
+    z-index: 10000 !important;
   }
   .tx-clone-nav-right {
     justify-content: center;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 10; /* Drop the Donate button behind the dropdown menus */
+  }
+  .tx-clone-btn-donate {
+    touch-action: manipulation;
   }
 }
 
