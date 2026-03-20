@@ -150,6 +150,8 @@ body.tx-clone {
     justify-content: center;
     position: relative;
     z-index: 9999;
+    -webkit-user-select: none;
+    user-select: none;
   }
   .tx-clone-nav-links a, 
   .tx-clone-nav-links .nav-item, 
@@ -160,6 +162,11 @@ body.tx-clone {
   }
   .tx-clone-nav-links .dropdown-content {
     z-index: 10000 !important;
+  }
+  
+  /* Fallback for JS manual toggle */
+  .tx-clone-nav-links .dropdown.active .dropdown-content {
+    display: block !important;
   }
   .tx-clone-nav-right {
     justify-content: center;
