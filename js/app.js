@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
   dropdowns.forEach(dropdown => {
     const span = dropdown.querySelector('span');
     if (span) {
+      // Force hardware constraints dynamically for iOS Safari caches
+      span.style.webkitUserSelect = 'none';
+      span.style.userSelect = 'none';
+      span.style.webkitTouchCallout = 'none';
+      span.style.cursor = 'pointer';
+      span.style.webkitTapHighlightColor = 'transparent';
+
       span.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
           e.preventDefault();

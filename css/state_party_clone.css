@@ -150,8 +150,6 @@ body.tx-clone {
     justify-content: center;
     position: relative;
     z-index: 9999;
-    -webkit-user-select: none;
-    user-select: none;
   }
   .tx-clone-nav-links a, 
   .tx-clone-nav-links .nav-item, 
@@ -159,6 +157,11 @@ body.tx-clone {
     font-size: 0.95rem;
     padding: 0.4rem 0.6rem;
     touch-action: manipulation; /* Eliminate iOS tap highlight delay/blocking */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
   .tx-clone-nav-links .dropdown-content {
     z-index: 10000 !important;
