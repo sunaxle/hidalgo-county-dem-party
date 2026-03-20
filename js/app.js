@@ -194,4 +194,55 @@ document.addEventListener('DOMContentLoaded', () => {
   wmContainer.appendChild(wmBtn);
   document.body.appendChild(wmContainer);
 
+  // --- Mobile Experience Warning Popup ---
+  if (window.innerWidth <= 768 && !sessionStorage.getItem('mobile_warning_seen')) {
+    const warningOverlay = document.createElement('div');
+    warningOverlay.style.position = 'fixed';
+    warningOverlay.style.top = '0';
+    warningOverlay.style.left = '0';
+    warningOverlay.style.width = '100vw';
+    warningOverlay.style.height = '100vh';
+    warningOverlay.style.backgroundColor = 'rgba(2, 6, 23, 0.85)';
+    warningOverlay.style.backdropFilter = 'blur(8px)';
+    warningOverlay.style.webkitBackdropFilter = 'blur(8px)';
+    warningOverlay.style.zIndex = '10000';
+    warningOverlay.style.display = 'flex';
+    warningOverlay.style.justifyContent = 'center';
+    warningOverlay.style.alignItems = 'center';
+    warningOverlay.style.padding = '2rem';
+    warningOverlay.style.boxSizing = 'border-box';
+
+    const warningBox = document.createElement('div');
+    warningBox.style.background = 'linear-gradient(145deg, #1e293b, #0f172a)';
+    warningBox.style.border = '1px solid #38bdf8';
+    warningBox.style.borderRadius = '16px';
+    warningBox.style.padding = '2.5rem 2rem';
+    warningBox.style.textAlign = 'center';
+    warningBox.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.7)';
+    warningBox.style.maxWidth = '400px';
+
+    warningBox.innerHTML = `
+      <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚠️</div>
+      <h3 style="color: #38bdf8; font-size: 1.5rem; margin-bottom: 1rem; margin-top:0;">Mobile Optimization In Progress</h3>
+      <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+        Welcome to the new platform! This is the first week of deployment and many user experience updates are still being finalized for mobile devices.
+        <br><br>
+        For the best possible experience today, please open this site on an <strong>iPad or Desktop Computer</strong>.
+      </p>
+      <button id="closeMobileWarning" style="background: #38bdf8; color: #020617; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; width: 100%; transition: background 0.3s; text-transform: uppercase;">Continue Anyway</button>
+    `;
+
+    warningOverlay.appendChild(warningBox);
+    document.body.appendChild(warningOverlay);
+
+    document.getElementById('closeMobileWarning').addEventListener('click', () => {
+      warningOverlay.style.opacity = '0';
+      warningOverlay.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => {
+        warningOverlay.remove();
+      }, 400);
+      sessionStorage.setItem('mobile_warning_seen', 'true');
+    });
+  }
+
 });
