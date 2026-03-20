@@ -270,6 +270,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             btn.style.padding = "0.6rem 1.2rem";
             btn.style.fontSize = "0.95rem";
             btn.style.fontWeight = "bold";
+            btn.style.touchAction = "manipulation";
             if (districtStr === 'ALL') btn.classList.add("active");
 
             btn.onclick = () => {
