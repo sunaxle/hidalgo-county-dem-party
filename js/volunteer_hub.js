@@ -229,6 +229,28 @@ document.addEventListener("DOMContentLoaded", async () => {
        }
     };
 
+    // Construct Zip Code Master Filter
+    const zipCodeFilterDiv = document.getElementById("zipcode-filter");
+    if(zipCodeFilterDiv) {
+        const uniqueZips = [...new Set(data.map(d => (d.zipcode || "").trim()).filter(z => z !== "" && z.length >= 5))].sort();
+
+        uniqueZips.forEach(zip => {
+            const btn = document.createElement("button");
+            btn.innerText = zip;
+            btn.className = "alphabet-btn zip-btn";
+            btn.style.padding = "0.5rem 1rem";
+            btn.style.fontSize = "0.9rem";
+            btn.onclick = () => {
+                document.querySelectorAll(".alphabet-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                
+                const filtered = data.filter(d => (d.zipcode || "").trim() === zip);
+                renderBubbles(filtered, `Volunteers from Zip Code ${zip}`);
+            };
+            zipCodeFilterDiv.appendChild(btn);
+        });
+    }
+
     // Construct Alphabet 'Gravity Filter' Bar
     const alphabetFilterDiv = document.getElementById("alphabet-filter");
     if(alphabetFilterDiv) {
