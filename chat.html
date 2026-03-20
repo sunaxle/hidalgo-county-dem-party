@@ -161,10 +161,10 @@
         });
 
         // Initialize mock state using LocalStorage for the prototype demonstration
-        let chatHistory = JSON.parse(localStorage.getItem("hcdp_sandbox_chat")) || [
+        let chatHistory = JSON.parse(localStorage.getItem("hcdp_sandbox_chat_v2")) || [
             {
                 name: "System Admin",
-                msg: "Welcome to the Hidalgo County Sandbox Chat. This is a live demonstration prototype deployed by the Antigravity Engine.",
+                msg: "Welcome to the Hidalgo County Sandbox Chat. This is a live demonstration prototype.",
                 timestamp: new Date().getTime(),
                 isSystem: true
             }
@@ -247,7 +247,7 @@
             });
 
             // Persist to local cache for overnight viewing
-            localStorage.setItem("hcdp_sandbox_chat", JSON.stringify(chatHistory));
+            localStorage.setItem("hcdp_sandbox_chat_v2", JSON.stringify(chatHistory));
 
             msgInput.value = "";
             renderChat();
@@ -261,7 +261,7 @@
                          timestamp: new Date().getTime(),
                          isSystem: false
                      });
-                     localStorage.setItem("hcdp_sandbox_chat", JSON.stringify(chatHistory));
+                     localStorage.setItem("hcdp_sandbox_chat_v2", JSON.stringify(chatHistory));
                      renderChat();
                  }, 2500);
             }
