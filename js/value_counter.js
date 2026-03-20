@@ -2,8 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Value Calculation variables
     // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
     const hourlyRate = 85.00; 
-    const hoursLogged = 319.5; // Bumped +7 hours for the Downballot Candidates engine, Python nav automation loops, and the Javascript PC26 Maintenance Shield.
-    const totalValue = hourlyRate * hoursLogged;
+    let hoursLogged = 319.5; 
+    
+    // Add newly accumulated hours
+    hoursLogged += 8.5; // Site-wide Template Override & Layout Migration
+    hoursLogged += 6.0; // Interactive Data Portal (Gap Tracker & Dynamic Mapping)
+    
+    let totalValue = hourlyRate * hoursLogged;
+    
+    // Flat up-fee for data analysis in the Data Portal
+    const dataAnalysisFee = 125.00;
+    totalValue += dataAnalysisFee;
 
     // Create the footer element
     const valueFooter = document.createElement("div");
@@ -31,6 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
+    const sustainingBanner = document.createElement("div");
+    sustainingBanner.className = "sustaining-member-banner";
+    sustainingBanner.innerHTML = `
+        <div style="text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, #1e3a8a, #0f172a); color: white; border-top: 2px solid var(--accent); position: relative; z-index: 10;">
+            <h3 style="margin: 0 0 0.5rem 0; font-size: 1.4rem; color: #fff;">Become a Sustaining Member</h3>
+            <p style="margin: 0 auto 1.5rem auto; font-size: 1rem; max-width: 600px; color: #cbd5e1;">
+                To keep powering this website, our precinct viewers, and crucial gap trackers, we need your continuous support. Chip in $5 a month to fund this multi-year battle.
+            </p>
+            <a href="sustaining_members.html" class="btn btn-primary" style="background: var(--accent); color: #020617; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 0.8rem 2rem; border-radius: 999px; box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);">Chip In $5/month</a>
+        </div>
+    `;
+
     // Append to the very end of the body
+    document.body.appendChild(sustainingBanner);
     document.body.appendChild(valueFooter);
 });

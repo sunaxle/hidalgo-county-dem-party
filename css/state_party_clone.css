@@ -14,7 +14,6 @@ body.tx-clone {
   padding: 0;
 }
 
-/* Nav Header */
 .tx-clone-nav {
   background-color: var(--tx-white);
   padding: 1rem 3%;
@@ -22,12 +21,15 @@ body.tx-clone {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index: 1050;
 }
 
 .tx-clone-nav-accent-bar {
   height: 8px;
   background-color: #0088cc; /* The sky blue accent line under the nav */
   width: 100%;
+  position: relative;
+  z-index: 1050;
 }
 
 .tx-clone-nav-socials {
@@ -353,4 +355,59 @@ body.tx-clone {
 .tx-clone-footer p {
   color: #A8C5DA;
   margin-bottom: 0.5rem;
+}
+
+.tx-clone-nav-links .nav-item,
+.tx-clone-nav-links .dropdown > span {
+  color: #555;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.tx-clone-nav-links .dropdown:hover > span,
+.tx-clone-nav-links .nav-item:hover {
+  color: var(--tx-navy);
+}
+
+/* Enforce Dropdown Display Mechanics */
+.tx-clone-nav-links .dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.tx-clone-nav-links .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  min-width: 200px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  z-index: 1000;
+  padding: 0.5rem 0;
+}
+
+.tx-clone-nav-links .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.tx-clone-nav-links .dropdown-content a {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.tx-clone-nav-links .dropdown-content a:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
 }

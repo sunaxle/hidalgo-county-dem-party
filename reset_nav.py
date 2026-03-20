@@ -1,48 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upcoming Events | Hidalgo County Democrats</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .event-item {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      border-bottom: 1px solid var(--glass-border);
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
-    }
-    .event-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    .event-date {
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 1.25rem;
-    }
-    .event-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #fff;
-    }
-  </style>
-  <script src="js/gatekeeper.js"></script>
+import os
+import re
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/state_party_clone.css" />
-
-</head>
-<body class="tx-clone">
-<!-- Navigation -->
-      <nav class="tx-clone-nav">
+perfect_nav = """  <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
@@ -109,69 +68,54 @@
             <a href="contact.html">Contact Us</a>
           </div>
         </div>
-
+<!-- TOGGLE_PLACEHOLDER -->
       </div>
     </div>
     <div class="tx-clone-nav-right">
       <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank">DONATE</a>
     </div>
   </nav>
-  <div class="tx-clone-nav-accent-bar"></div>
+  <div class="tx-clone-nav-accent-bar"></div>"""
 
-  <!-- Page Header -->
-  <header class="page-header" style="min-height: 30vh; padding-top: 120px;">
-    <div class="container fade-in">
-      <h1>Upcoming Events</h1>
-      <p style="max-width: 600px; margin: 0 auto;">Join us as we host events, blockwalking opportunities, and county-wide Democratic gatherings.</p>
-    </div>
-  </header>
+toggle_html = """        <div class="nav-item dropdown" style="margin-left: 1rem; border: 1px solid rgba(255,255,255,0.2); padding: 0.25rem 0.5rem; border-radius: 8px; background: rgba(255,255,255,0.05);">
+          <span id="term-toggle-label" style="font-size: 0.85rem; color: #b3c6ff;">Term: 2026-2028 ▼</span>
+          <div class="dropdown-content" style="min-width: 150px;">
+            <a href="#" onclick="toggleTerm('2026')">2026-2028 (300+ Members)</a>
+            <a href="#" onclick="toggleTerm('2024')">2024-2026 (97 Members)</a>
+          </div>
+        </div>"""
 
-  <!-- Events List Section -->
-  <section class="container" style="padding-top: 0;">
-    <div class="glass-card fade-in">
-      
-      <div style="text-align: center; margin-bottom: 2.5rem;">
-        <h2 style="color: var(--accent); margin-bottom: 0.5rem;">Live Volunteer Feed</h2>
-        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto;">Sign up for phone banks, community blockwalks, and training sessions directly through our live Mobilize calendar below.</p>
-        <div style="margin-top: 1.5rem;">
-            <a href="https://www.mobilize.us/hidalgocountydemocraticparty/" target="_blank" class="btn btn-primary">Open in Mobilize Mobile App</a>
-        </div>
-      </div>
+def fix_all():
+    nav_regex = re.compile(r'<nav class="tx-clone-nav">.*?</nav>\s*<div class="tx-clone-nav-accent-bar".*?></div>', re.DOTALL)
+    
+    updated = 0
+    for root, dirs, files in os.walk('.'):
+        if '.git' in dirs: dirs.remove('.git')
+        if 'node_modules' in dirs: dirs.remove('node_modules')
+        
+        for file in files:
+            if file.endswith('.html'):
+                path = os.path.join(root, file)
+                with open(path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                original = content
+                
+                if nav_regex.search(content):
+                    custom_nav = perfect_nav
+                    if file == 'precinct_chairs.html':
+                        custom_nav = custom_nav.replace('<!-- TOGGLE_PLACEHOLDER -->', '\n' + toggle_html)
+                    else:
+                        custom_nav = custom_nav.replace('<!-- TOGGLE_PLACEHOLDER -->', '')
+                        
+                    content = nav_regex.sub(custom_nav, content, count=1)
+                
+                if content != original:
+                    with open(path, 'w', encoding='utf-8') as f:
+                        f.write(content)
+                    updated += 1
 
-      <!-- Mobilize Iframe Widget -->
-      <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: #ffffff;">
-        <iframe src="https://www.mobilize.us/hidalgocountydemocraticparty/" 
-                style="width: 100%; height: 800px; border: 0;" 
-                title="Mobilize Events Calendar"
-                scrolling="yes"
-                allowfullscreen></iframe>
-      </div>
+    print(f"Completely reset nav avoiding regex duplication on {updated} files.")
 
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="tx-clone-footer">
-    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
-    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
-      <p>info@hidalgocountydems.org</p>
-      <p>800 N. Main St. Suite 110</p>
-      <p>McAllen, TX 78501</p>
-      <p>(956) 322-5293</p>
-    </div>
-    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
-  </footer>
-
-  <script src="js/app.js"></script>
-<script src="js/value_counter.js"></script>
-
-  <!-- Google Translate -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-</body>
-</html>
+if __name__ == '__main__':
+    fix_all()

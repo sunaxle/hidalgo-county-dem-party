@@ -1,0 +1,46 @@
+{
+  "101": {
+    "precinct": "101",
+    "chair_name": "Maria Gonzales",
+    "photo_url": "images/community.jpg",
+    "bio": "Maria has been serving Precinct 101 for over 10 years, advocating for better schools and voter turnout. She believes in grassroots organizing and building a stronger community together.",
+    "email": "m.gonzales101@hidalgocountydems.org",
+    "phone": "(956) 555-0101",
+    "social": {
+      "facebook": "#",
+      "twitter": "#"
+    },
+    "announcement": "Join us this Saturday for our monthly precinct block walk! Meet at the local park at 9 AM. Bring water and walking shoes.",
+    "meeting_time": "1st Tuesday of the month, 6:00 PM",
+    "meeting_location": "McAllen Public Library, Room B"
+  },
+  "102": {
+    "precinct": "102",
+    "chair_name": "James Smith",
+    "photo_url": "images/meeting.jpg",
+    "bio": "James is a retired teacher who is passionate about getting out the vote and registering new voters in our area. He loves helping people understand the ballot.",
+    "email": "jsmith102@hidalgocountydems.org",
+    "phone": "(956) 555-0102",
+    "social": {
+      "facebook": "#",
+      "instagram": "#"
+    },
+    "announcement": "Next week's precinct meeting is moved to the community center due to renovations at our usual spot.",
+    "meeting_time": "2nd Wednesday of the month, 7:00 PM",
+    "meeting_location": "Edinburg Community Center"
+  },
+  "103": {
+    "precinct": "103",
+    "chair_name": "Elena Rodriguez",
+    "photo_url": "images/blockwalk.jpg",
+    "bio": "Elena focuses on youth engagement and community outreach within Precinct 103. She is a powerhouse when it comes to organizing local events.",
+    "email": "erodriguez103@hidalgocountydems.org",
+    "phone": "(956) 555-0103",
+    "social": {
+      "instagram": "#"
+    },
+    "announcement": "Looking for 5 more volunteers for our upcoming voter registration drive at the high school. Please email me if you can help!",
+    "meeting_time": "3rd Thursday of the month, 6:30 PM",
+    "meeting_location": "Mission City Hall Plaza"
+  }
+}

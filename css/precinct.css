@@ -1,0 +1,151 @@
+/* Precinct Page Specific Styles */
+.p-header {
+  background-color: var(--tx-light-blue);
+  padding: 4rem 5%;
+  text-align: center;
+  border-bottom: 6px solid var(--tx-sky);
+}
+
+.p-header h1 {
+  font-family: 'Alfa Slab One', serif;
+  color: var(--tx-navy);
+  font-size: 4rem;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.p-main-section {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 5%;
+  gap: 4rem;
+}
+
+.p-profile {
+  flex: 1;
+  min-width: 300px;
+  text-align: center;
+}
+
+.p-profile img {
+  width: 100%;
+  max-width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 5px solid var(--tx-orange);
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.p-profile h2 {
+  color: var(--tx-navy);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.p-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.p-social-button {
+  background-color: var(--tx-navy);
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.p-social-button:hover {
+  background-color: var(--tx-sky);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.p-info {
+  flex: 2;
+  min-width: 300px;
+}
+
+.p-info h3 {
+  color: var(--tx-orange);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid var(--tx-light-blue);
+  padding-bottom: 0.5rem;
+}
+
+.p-info > p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 2.5rem;
+  font-weight: 500;
+}
+
+.p-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.p-box {
+  background-color: #f7fbff;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 5px solid var(--tx-sky);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.p-box h4 {
+  color: var(--tx-navy);
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.p-box p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.p-box strong {
+  color: var(--tx-navy);
+  font-weight: 800;
+}
+
+.p-box a {
+  color: var(--tx-sky);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.p-box a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .p-header h1 {
+    font-size: 2.5rem;
+  }
+  .p-main-section {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
