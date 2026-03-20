@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const nameSearchInput = document.getElementById("name-search-input");
   const nameErrorMsg = document.getElementById("name-search-error");
   
+  // -- Load Congressional Districts --
+  let cd15List = [];
+  let cd28List = [];
+  try {
+      const cd15Res = await fetch('data/cd15_precincts.json');
+      cd15List = await cd15Res.json();
+      const cd28Res = await fetch('data/cd28_precincts.json');
+      cd28List = await cd28Res.json();
+  } catch(e) { console.error("Filter API Error:", e); }
+
   // Precinct Box Redirect
   if (searchBtn) {
     searchBtn.addEventListener("click", () => {
@@ -245,10 +255,54 @@ document.addEventListener("DOMContentLoaded", async () => {
                 btn.classList.add("active");
                 
                 const filtered = data.filter(d => (d.zipcode || "").trim() === zip);
-                renderBubbles(filtered, `Volunteers from Zip Code ${zip}`);
             };
             zipCodeFilterDiv.appendChild(btn);
         });
+    }
+
+    // Construct Congressional District Filters
+    const cdFilterDiv = document.getElementById("cd-filter");
+    if(cdFilterDiv) {
+        const createCDBtn = (label, districtStr) => {
+            const btn = document.createElement("button");
+            btn.innerText = label;
+            btn.className = "alphabet-btn cd-btn";
+            btn.style.padding = "0.6rem 1.2rem";
+            btn.style.fontSize = "0.95rem";
+            btn.style.fontWeight = "bold";
+            if (districtStr === 'ALL') btn.classList.add("active");
+
+            btn.onclick = () => {
+                // Wipe active state on other CD buttons
+                document.querySelectorAll(".cd-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                // Clear other global filters visually (A-Z and Zip)
+                document.querySelectorAll(".zip-btn, [class*='alphabet-btn']:not(.cd-btn)").forEach(b => b.classList.remove("active"));
+                
+                let filtered = data;
+                if (districtStr === '15') {
+                    filtered = data.filter(d => {
+                        const pctInt = parseInt(d.precinct, 10);
+                        return cd15List.includes(pctInt);
+                    });
+                    renderBubbles(filtered, `Volunteers in Congressional District 15`);
+                } else if (districtStr === '28') {
+                    filtered = data.filter(d => {
+                        const pctInt = parseInt(d.precinct, 10);
+                        return cd28List.includes(pctInt);
+                    });
+                    renderBubbles(filtered, `Volunteers in Congressional District 28`);
+                } else {
+                    renderBubbles(data, `All County Volunteers (${data.length} Total)`);
+                }
+            };
+            return btn;
+        };
+
+        cdFilterDiv.appendChild(createCDBtn("All Districts", "ALL"));
+        cdFilterDiv.appendChild(createCDBtn("District 15", "15"));
+        cdFilterDiv.appendChild(createCDBtn("District 28", "28"));
     }
 
     // Construct Alphabet 'Gravity Filter' Bar

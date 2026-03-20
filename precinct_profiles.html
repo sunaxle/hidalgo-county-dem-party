@@ -105,7 +105,21 @@
       </p>
       
       <!-- Dynamic Search -->
+      <!-- Dynamic Search & Filters -->
       <div style="margin-top: 3rem; background: rgba(0,0,0,0.3); padding: 3rem 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        
+        <!-- Congressional District Toggle -->
+        <h3 style="margin-top: 0; color: #fff; font-size: 1.5rem; margin-bottom: 1rem;">Filter by Congressional District</h3>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.5rem;">For convention caucusing, isolate chairs by their federal federal district map lines.</p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
+            <button class="cd-filter-btn active-cd" onclick="window.filterGridByCD('ALL', this)" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4);">All Districts</button>
+            <button class="cd-filter-btn" onclick="window.filterGridByCD('15', this)" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">TX-15 Only</button>
+            <button class="cd-filter-btn" onclick="window.filterGridByCD('28', this)" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">TX-28 Only</button>
+        </div>
+
+        <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 3rem;"></div>
+
         <h3 style="margin-top: 0; color: #fff; font-size: 1.5rem;">Find Your Precinct</h3>
         <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2rem;">Search by Precinct Number to locate your leadership.</p>
         
