@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   wmBtn.style.border = '1px solid rgba(255,255,255,0.1)';
   wmBtn.innerHTML = `🛠️ Webmaster`;
 
-  wmBtn.addEventListener('mouseenter', () => {
+  const activateWM = () => {
       wmBtn.style.background = 'var(--accent, #38bdf8)';
       wmBtn.style.color = '#020617';
       wmBtn.style.opacity = '1';
@@ -176,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
       wmTooltip.style.opacity = '1';
       wmTooltip.style.visibility = 'visible';
       wmTooltip.style.transform = 'translateY(0)';
-  });
+  };
 
-  wmContainer.addEventListener('mouseleave', () => {
+  const deactivateWM = () => {
       wmBtn.style.background = 'rgba(15, 23, 42, 0.5)';
       wmBtn.style.color = 'rgba(203, 213, 225, 0.6)';
       wmBtn.style.opacity = '0.6';
@@ -188,6 +188,25 @@ document.addEventListener('DOMContentLoaded', () => {
       wmTooltip.style.opacity = '0';
       wmTooltip.style.visibility = 'hidden';
       wmTooltip.style.transform = 'translateY(10px)';
+  };
+
+  // Desktop Hover Paths
+  wmBtn.addEventListener('mouseenter', () => { if (window.innerWidth > 768) activateWM(); });
+  wmContainer.addEventListener('mouseleave', () => { if (window.innerWidth > 768) deactivateWM(); });
+
+  // Mobile Tap-to-Toggle Path
+  wmBtn.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+          e.stopPropagation();
+          (wmBtn.style.opacity === '1') ? deactivateWM() : activateWM();
+      }
+  });
+
+  // Tap outside to close on mobile
+  document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && !wmContainer.contains(e.target)) {
+          deactivateWM();
+      }
   });
 
   wmContainer.appendChild(wmTooltip);
