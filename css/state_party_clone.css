@@ -115,6 +115,43 @@ body.tx-clone {
   background-color: #e65600;
 }
 
+/* Mobile Responsiveness for Navigation */
+@media (max-width: 768px) {
+  .tx-clone-nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .tx-clone-nav-socials {
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem; /* Room for Google Translate widget */
+  }
+  .tx-clone-nav-center {
+    width: 100%;
+  }
+  .tx-clone-logo-img {
+    height: 70px; /* shrink logo slightly */
+  }
+  .tx-clone-nav-links {
+    flex-wrap: wrap;
+    gap: 1rem 0.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  .tx-clone-nav-links a, 
+  .tx-clone-nav-links .nav-item, 
+  .tx-clone-nav-links .dropdown > span {
+    font-size: 0.85rem; /* Shrink text to fit more inline */
+    padding: 0.25rem 0.5rem;
+  }
+  .tx-clone-nav-right {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
 /* Hero */
 .tx-clone-hero {
   background-image: linear-gradient(rgba(0, 45, 84, 0.7), rgba(0, 45, 84, 0.8)), url('../images/hidalgo-exterior-d2100-675.avif');
