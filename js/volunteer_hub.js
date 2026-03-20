@@ -94,8 +94,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     // Sort entire database alphabetically by Last Name
     data.sort((a, b) => {
-       const aName = a["Last Name"] ? a["Last Name"].trim().toLowerCase() : "";
-       const bName = b["Last Name"] ? b["Last Name"].trim().toLowerCase() : "";
+       const aName = a["last_name"] ? a["last_name"].trim().toLowerCase() : "";
+       const bName = b["last_name"] ? b["last_name"].trim().toLowerCase() : "";
        return aName.localeCompare(bName);
     });
 
@@ -136,20 +136,18 @@ document.addEventListener("DOMContentLoaded", async () => {
        // Format node object for D3
        const nodes = profilesData.map((vol, i) => {
            let badgeColor = "#94a3b8";
-           if (vol["Role"] === "Block Captain") badgeColor = "#3b82f6";
-           else if (vol["Role"] === "Precinct Chair") badgeColor = "#10b981";
 
-           let initials = (vol["First Name"] && vol["First Name"].charAt(0) ? vol["First Name"].charAt(0) : "") + 
-                          (vol["Last Name"] && vol["Last Name"].charAt(0) ? vol["Last Name"].charAt(0) : "");
+           let initials = (vol["first_name"] && vol["first_name"].charAt(0) ? vol["first_name"].charAt(0) : "") + 
+                          (vol["last_name"] && vol["last_name"].charAt(0) ? vol["last_name"].charAt(0) : "");
 
            return {
                id: i,
-               fname: vol["First Name"],
-               lname: vol["Last Name"],
-               role: vol["Role"],
-               precinct: vol["Precinct Number"],
+               fname: vol["first_name"] || "",
+               lname: vol["last_name"] || "",
+               role: "Volunteer",
+               zip: vol["zipcode"] || "N/A",
                color: badgeColor,
-               initials: initials,
+               initials: initials.toUpperCase(),
                radius: baseRadius + (Math.random() * 8) // Tiny random size jitter
            };
        });
@@ -201,7 +199,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
        nodeInfo.append("div")
          .style("color", "#94a3b8")
-         .text(d => "Precinct " + d.precinct);
+         .text(d => "Zip Code: " + d.zip);
 
        currentSimulation.on("tick", () => {
          nodeElements
@@ -257,7 +255,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 btn.classList.add("active");
                 
                 const filtered = data.filter(d => {
-                    const ln = d["Last Name"] ? d["Last Name"].trim().toUpperCase() : "";
+                    const ln = d["last_name"] ? d["last_name"].trim().toUpperCase() : "";
                     return ln.startsWith(letter);
                 });
                 renderBubbles(filtered, `Volunteers: Last Name "${letter}"`);
@@ -284,7 +282,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           document.querySelectorAll(".alphabet-btn").forEach(b => b.classList.remove("active"));
           
           const matches = data.filter(d => 
-            (d["First Name"].trim() + " " + d["Last Name"].trim()).toLowerCase().includes(val)
+            ((d["first_name"] || "") + " " + (d["last_name"] || "")).toLowerCase().includes(val)
           );
           
           renderBubbles(matches, `Search Results for "${nameSearchInput.value}"`);

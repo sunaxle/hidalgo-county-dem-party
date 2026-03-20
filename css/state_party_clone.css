@@ -21,7 +21,7 @@ body.tx-clone {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  z-index: 1050;
+  z-index: 2000;
 }
 
 .tx-clone-nav-accent-bar {
@@ -391,7 +391,7 @@ body.tx-clone {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   border: 1px solid #e2e8f0;
   border-radius: 6px;
-  z-index: 1000;
+  z-index: 2000;
   padding: 0.5rem 0;
 }
 

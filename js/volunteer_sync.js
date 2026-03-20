@@ -3,7 +3,7 @@
  * Fetches and parses the published Google Sheet CSV (or locally mocked CSV).
  */
 
-const GOOGLE_SHEET_CSV_URL = "data/mock_volunteers.csv"; // Replace with real public Google Sheet CSV link in production
+const GOOGLE_SHEET_CSV_URL = "data/prepped_old_volunteer_list.csv"; // Authenticated legacy target
 
 async function fetchVolunteerData() {
     try {
