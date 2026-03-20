@@ -443,6 +443,9 @@ body.tx-clone {
   position: relative;
   cursor: pointer;
 }
+.tx-clone-nav-links .dropdown:hover {
+  z-index: 9999;
+}
 
 .tx-clone-nav-links .dropdown-content {
   display: none;
