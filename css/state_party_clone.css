@@ -227,6 +227,32 @@ body.tx-clone {
   text-decoration: none;
 }
 
+/* Mobile Responsiveness for Hero */
+@media (max-width: 768px) {
+  .tx-clone-hero {
+    flex-direction: column-reverse;
+    padding: 6rem 5% 4rem 5%;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  .tx-clone-hero-left {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  .tx-clone-hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tx-clone-hero-right h1 {
+    font-size: 3rem;
+  }
+  .tx-clone-hero-btns {
+    justify-content: center;
+  }
+}
+
 /* Donation Section - Split Layout */
 .tx-clone-donation {
   background-color: var(--tx-light-blue);
