@@ -112,4 +112,75 @@ document.addEventListener('DOMContentLoaded', () => {
   // Safety check on initial load (in case they reload the page and the cookie is already set)
   setTimeout(checkLanguageState, 1500);
 
+  // --- Floating Webmaster Button ---
+  const wmContainer = document.createElement('div');
+  wmContainer.style.position = 'fixed';
+  wmContainer.style.bottom = '20px';
+  wmContainer.style.right = '20px';
+  wmContainer.style.zIndex = '9999';
+  wmContainer.style.display = 'flex';
+  wmContainer.style.flexDirection = 'column';
+  wmContainer.style.alignItems = 'flex-end';
+  wmContainer.style.fontFamily = "'Inter', sans-serif";
+
+  // Tooltip
+  const wmTooltip = document.createElement('div');
+  wmTooltip.style.background = 'rgba(15, 23, 42, 0.95)';
+  wmTooltip.style.color = '#cbd5e1';
+  wmTooltip.style.padding = '1.2rem';
+  wmTooltip.style.borderRadius = '12px';
+  wmTooltip.style.border = '1px solid #38bdf8';
+  wmTooltip.style.boxShadow = '0 10px 30px rgba(0,0,0,0.6)';
+  wmTooltip.style.marginBottom = '10px';
+  wmTooltip.style.width = '280px';
+  wmTooltip.style.fontSize = '0.9rem';
+  wmTooltip.style.lineHeight = '1.5';
+  wmTooltip.style.opacity = '0';
+  wmTooltip.style.visibility = 'hidden';
+  wmTooltip.style.transform = 'translateY(10px)';
+  wmTooltip.style.transition = 'opacity 0.3s ease, transform 0.3s ease, visibility 0.3s';
+  wmTooltip.innerHTML = `
+    <strong style="color: #fff; font-size: 1.1rem; display:block; margin-bottom:0.5rem;">Site Suggestions?</strong>
+    If you have any suggestions, insights, or specific web updates for this platform, please send a WhatsApp voice memo or text to:
+    <br/><br/>
+    <a href="https://wa.me/19566387581" target="_blank" style="display:inline-block; background:#25D366; color:#fff; text-decoration:none; padding:0.6rem 1rem; border-radius:6px; font-weight:800; width:100%; text-align:center; box-sizing:border-box;">Message Webmaster</a>
+    <div style="margin-top:0.8rem; text-align:center; font-size:0.85rem; color:#94a3b8;">📱 (956) 638-7581</div>
+  `;
+
+  // Button
+  const wmBtn = document.createElement('div');
+  wmBtn.style.background = 'var(--accent, #38bdf8)';
+  wmBtn.style.color = '#020617';
+  wmBtn.style.padding = '12px 24px';
+  wmBtn.style.borderRadius = '30px';
+  wmBtn.style.fontWeight = '800';
+  wmBtn.style.cursor = 'pointer';
+  wmBtn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+  wmBtn.style.display = 'flex';
+  wmBtn.style.alignItems = 'center';
+  wmBtn.style.gap = '8px';
+  wmBtn.style.transition = 'transform 0.2s, box-shadow 0.2s';
+  wmBtn.style.border = '2px solid rgba(255,255,255,0.2)';
+  wmBtn.innerHTML = `🛠️ Webmaster`;
+
+  wmBtn.addEventListener('mouseenter', () => {
+      wmBtn.style.transform = 'scale(1.05)';
+      wmBtn.style.boxShadow = '0 4px 20px rgba(56, 189, 248, 0.6)';
+      wmTooltip.style.opacity = '1';
+      wmTooltip.style.visibility = 'visible';
+      wmTooltip.style.transform = 'translateY(0)';
+  });
+
+  wmContainer.addEventListener('mouseleave', () => {
+      wmBtn.style.transform = 'scale(1)';
+      wmBtn.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+      wmTooltip.style.opacity = '0';
+      wmTooltip.style.visibility = 'hidden';
+      wmTooltip.style.transform = 'translateY(10px)';
+  });
+
+  wmContainer.appendChild(wmTooltip);
+  wmContainer.appendChild(wmBtn);
+  document.body.appendChild(wmContainer);
+
 });
