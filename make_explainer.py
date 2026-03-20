@@ -11,10 +11,10 @@ footer_split = parts[1].split('<!-- Footer -->')
 footer = '<!-- Footer -->' + footer_split[1]
 
 body = """
-  <main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px;">
-    <div style="text-align: center; max-width: 900px; margin: 0 auto 4rem auto;">
-      <h1 style="color: var(--accent); font-size: 3.5rem; margin-bottom: 1rem; line-height:1.1;">Democracy Coded:</h1>
-      <h2 style="color: #fff; font-size: 2rem; margin-top:0;">The Architecture of Grassroots Power</h2>
+  <main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px; max-width: 100vw; overflow-x: hidden; box-sizing: border-box;">
+    <div style="text-align: center; max-width: 900px; margin: 0 auto 4rem auto; padding: 0 1rem;">
+      <h1 style="color: var(--accent); font-size: clamp(2.2rem, 8vw, 3.5rem); margin-bottom: 1rem; line-height:1.1;">Democracy Coded:</h1>
+      <h2 style="color: #fff; font-size: clamp(1.4rem, 5vw, 2rem); margin-top:0;">The Architecture of Grassroots Power</h2>
       <p style="color: #cbd5e1; font-size: 1.2rem; line-height: 1.7; margin-top: 2rem;">
         This platform represents a fundamental shift in political organizing. We have stripped away traditional hierarchical bottlenecks and engineered a completely autonomous sandbox environment—directly driven by the organizers themselves. No input required from the top; raw empowerment given to the base.
       </p>
