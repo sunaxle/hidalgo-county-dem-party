@@ -3,43 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Texas Region Dashboard - Hidalgo Dems</title>
-  <meta name="description" content="A dashboard tracking the performance and Democratic party presence across the South Texas region.">
+  <title>Live Election Results | Hidalgo County Democrats</title>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-radius: 1rem;
-      overflow: hidden;
-      border: 1px solid var(--glass-border);
-    }
-    .data-table th, .data-table td {
-      padding: 1rem 1.5rem;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .data-table th {
-      background: rgba(0,0,0,0.3);
-      color: var(--accent);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      letter-spacing: 0.5px;
-    }
-    .data-table tr:hover {
-      background: rgba(255,255,255,0.03);
-    }
-    .dem-margin { color: #3b82f6; font-weight: bold; }
-    .gop-margin { color: #ef4444; font-weight: bold; }
-    .status-active { color: #10b981; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
-    .status-active::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
-    .status-inactive { color: #ef4444; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
-    .status-inactive::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; }
-  </style>
   <script src="js/gatekeeper.js"></script>
 
   <!-- Fonts -->
@@ -52,8 +17,7 @@
 </head>
 <body class="tx-clone">
 <!-- Dynamic Background Shapes -->
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
+  <div class="shape shape-1" style="left: -100px; right: auto;"></div>
 
   <!-- Navigation -->
       <nav class="tx-clone-nav">
@@ -137,104 +101,22 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <!-- Hero Section -->
-  <header class="page-header container fade-in">
-    <div>
-      <h1>South Texas Region Dashboard</h1>
-      <p style="max-width: 800px; margin: 0 auto;">Tracking the political landscape, Democratic Party presence, and historical performance from Laredo to Corpus Christi and throughout the Rio Grande Valley.</p>
+  <!-- Page Header -->
+  <header class="page-header" style="min-height: 40vh;">
+    <div class="container fade-in">
+      <h1>Live Election Results</h1>
+      <p style="max-width: 700px; margin: 0 auto;">Real-time county reporting feed provided natively through the official polling vendors.</p>
     </div>
   </header>
 
-  <!-- Dashboard Section -->
-  <section class="container" style="padding-top: 0;">
-    <div class="fade-in">
-      <div style="overflow-x: auto;">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>County / Major City</th>
-              <th>Distance from Hidalgo</th>
-              <th>Active Dem Party</th>
-              <th>2020 President Margin</th>
-              <th>2024 President Margin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Hidalgo</strong> (McAllen/Edinburg)</td>
-              <td>0 mi (Base)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="dem-margin">Dem +17%</td>
-              <td class="gop-margin">GOP +3%</td>
-            </tr>
-            <tr>
-              <td><strong>Cameron</strong> (Brownsville/Harlingen)</td>
-              <td>~60 mi (East)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="dem-margin">Dem +13%</td>
-              <td class="gop-margin">GOP +6%</td>
-            </tr>
-            <tr>
-              <td><strong>Starr</strong> (Rio Grande City)</td>
-              <td>~45 mi (West)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="dem-margin">Dem +5%</td>
-              <td class="gop-margin">GOP +16%</td>
-            </tr>
-            <tr>
-              <td><strong>Willacy</strong> (Raymondville)</td>
-              <td>~40 mi (Northeast)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="dem-margin">Dem +12%</td>
-              <td class="gop-margin">GOP +3%</td>
-            </tr>
-            <tr>
-              <td><strong>Webb</strong> (Laredo)</td>
-              <td>~150 mi (Northwest)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="dem-margin">Dem +15%</td>
-              <td class="gop-margin">GOP +2%</td>
-            </tr>
-            <tr>
-              <td><strong>Nueces</strong> (Corpus Christi)</td>
-              <td>~150 mi (North)</td>
-              <td><span class="status-active">Active</span></td>
-              <td class="gop-margin">GOP +3%</td>
-              <td class="gop-margin">GOP +11%</td>
-            </tr>
-            <tr>
-              <td><strong>Zapata</strong> (Zapata)</td>
-              <td>~100 mi (Northwest)</td>
-              <td><span class="status-inactive">Needs Org</span></td>
-              <td class="gop-margin">GOP +5%</td>
-              <td class="gop-margin">GOP +15%</td>
-            </tr>
-            <tr>
-              <td><strong>Brooks</strong> (Falfurrias)</td>
-              <td>~70 mi (North)</td>
-              <td><span class="status-inactive">Needs Org</span></td>
-              <td class="dem-margin">Dem +19%</td>
-              <td class="dem-margin">Dem +2%</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- Live Results iFrame -->
+  <section class="container" style="padding-top: 0; padding-bottom: 2rem;">
+    <div class="glass-card fade-in" style="padding: 1rem; text-align: center; border-color: var(--accent);">
+      <iframe src="https://results.enr.clarityelections.com/TX/Hidalgo/125934/web.345435/#/summary?category=C_2" style="width: 100%; height: 75vh; border: none; border-radius: 8px; background: #fff;" allowfullscreen></iframe>
+      <div style="margin-top: 2rem; margin-bottom: 1rem;">
+        <a href="https://results.enr.clarityelections.com/TX/Hidalgo/125934/web.345435/#/summary?category=C_2" target="_blank" class="btn btn-primary" style="font-weight: 800; font-size: 1.1rem; padding: 1rem 2rem; width: 100%; max-width: 400px; display: inline-block; box-sizing: border-box;">OPEN IN NEW TAB</a>
       </div>
-    </div>
-    
-    <div class="grid-3" style="margin-top: 3rem;">
-      <div class="glass-card fade-in">
-        <h3 style="margin-bottom: 1rem;">Regional Insight</h3>
-        <p>The Rio Grande Valley and broader South Texas region saw significant shifts between 2020 and 2024. Building strong, permanent county infrastructures is critical to recovering ground and championing working-class policies.</p>
-      </div>
-      <div class="glass-card fade-in" style="transition-delay: 0.1s;">
-        <h3 style="margin-bottom: 1rem;">Distance & Logistics</h3>
-        <p>Hidalgo County serves as a central hub for the RGV. Partnering closely with Cameron, Starr, and Willacy counties ensures a united regional message that resonates across local media markets.</p>
-      </div>
-      <div class="glass-card fade-in" style="transition-delay: 0.2s;">
-        <h3 style="margin-bottom: 1rem;">Get Involved</h3>
-        <p>We need organizers in every county! If you live in an area without an active Democratic Party headquarters, reach out to us. We can help you start a precinct or county-level operation.</p>
-        <a href="contact.html" class="btn btn-secondary" style="margin-top: 1rem; padding: 0.5rem 1rem;">Contact Us</a>
-      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">If the dashboard fails to load due to vendor security constraints, click the button above to view directly on the Clarity Elections portal.</p>
     </div>
   </section>
 
