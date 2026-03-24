@@ -170,6 +170,7 @@
           <span>Community ▼</span>
           <div class="dropdown-content">
             <a href="chat.html" style="color: #2dd4bf; font-weight: 800;">Grassroots Live Chat ⚡</a>
+            <a href="civics_101.html" style="color: #fcd34d; font-weight: 800;">Civics 101 📚</a>
             <a href="social_wall.html">Social Wall</a>
             <a href="county_websites.html">TX Dems</a>
             <a href="south_texas_region.html">South TX</a>
@@ -253,22 +254,97 @@
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="skills-section fade-in">
-    <div class="container">
-      <h2 style="margin-bottom: 1rem;">Have a specific skill?</h2>
-      <p style="text-align: center; max-width: 700px; margin: 0 auto;">When you fill out our volunteer form, be sure to let us know if you have background experience in any of the following areas. We always need specialized help!</p>
-      
-      <div class="skills-grid">
-        <div class="skill-tag">Bilingual (Eng/Spa)</div>
-        <div class="skill-tag">VAN / Data Entry</div>
-        <div class="skill-tag">Graphic Design</div>
-        <div class="skill-tag">Social Media Management</div>
-        <div class="skill-tag">Event Planning</div>
-        <div class="skill-tag">Legal Observer / Lawyer</div>
-        <div class="skill-tag">Carpentry / Sign Making</div>
-        <div class="skill-tag">Video Editing</div>
+  <!-- Volunteer Intake Form (Component Gallery Showcase) -->
+  <section class="container fade-in" style="margin-top: 5rem; margin-bottom: 5rem; max-width: 800px;">
+    
+    <!-- Skeleton Loading State -->
+    <div id="form-skeleton" style="display: block;">
+      <h2 style="text-align: left; margin-bottom: 2rem;">Loading Intake Form...</h2>
+      <div class="form-card" style="margin-top: 0;">
+        <div class="skeleton-text"></div>
+        <div class="skeleton-text short"></div>
+        <div class="skeleton-box" style="height: 50px; margin-top: 2rem;"></div>
+        <div class="skeleton-box" style="height: 50px; margin-top: 1.5rem;"></div>
+        <div class="skeleton-box" style="height: 120px; margin-top: 2rem;"></div>
       </div>
+    </div>
+
+    <!-- Actual Form -->
+    <div id="volunteer-form-container" style="display: none;">
+      <h2 style="text-align: left; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem; margin-bottom: 1rem;">Complete Your Profile</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us how and when you'd like to get involved. Our data team will securely sync your preferences with the VAN.</p>
+      
+      <form id="volunteer-form" class="form-card" style="margin-top: 0;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Jane" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="e.g. Doe" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="jane@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Preferred Region</label>
+          <select class="form-select">
+            <option>McAllen / Mission / Edinburg</option>
+            <option>Pharr / San Juan / Alamo</option>
+            <option>Weslaco / Donna / Mercedes</option>
+            <option>Deep South (Progreso, etc.)</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 2.5rem;">
+          <label class="form-label" style="font-size: 1.1rem; color: #fff;">Specialized Skills</label>
+          <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Select any areas where you have professional experience.</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <label class="form-check-group">
+              <input type="checkbox"> Bilingual (Eng/Spa)
+            </label>
+            <label class="form-check-group">
+              <input type="checkbox"> VAN / Data Entry
+            </label>
+            <label class="form-check-group">
+              <input type="checkbox"> Graphic Design
+            </label>
+            <label class="form-check-group">
+              <input type="checkbox"> Social Media Mgmt
+            </label>
+            <label class="form-check-group">
+              <input type="checkbox"> Legal / Lawyer
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 2.5rem;">
+          <label class="form-label">Additional Comments</label>
+          <textarea class="form-textarea" rows="4" placeholder="Anything else we should know?"></textarea>
+        </div>
+
+        <div class="form-toggle-wrapper" style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 1.5rem; border: 1px solid var(--glass-border); border-radius: 8px; background: rgba(0,0,0,0.2);">
+          <label class="form-toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+          <div>
+            <strong style="display: block; color: #fff;">Receive SMS Updates</strong>
+            <span style="font-size: 0.85rem;">Standard msg & data rates may apply.</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem;" id="submit-btn">
+          <span class="spinner"></span>
+          <span class="btn-text">Submit Profile</span>
+        </button>
+      </form>
     </div>
   </section>
 
@@ -295,6 +371,43 @@
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Component Gallery Form Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Skeleton loader demo
+      setTimeout(() => {
+        document.getElementById('form-skeleton').style.display = 'none';
+        const formContainer = document.getElementById('volunteer-form-container');
+        formContainer.style.display = 'block';
+        formContainer.classList.add('fade-in');
+        
+        // Trigger reflow to restart animation
+        void formContainer.offsetWidth;
+        formContainer.classList.add('visible');
+      }, 1500);
+
+      // Submit Spinner demo
+      const form = document.getElementById('volunteer-form');
+      const submitBtn = document.getElementById('submit-btn');
+      
+      if(form && submitBtn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            submitBtn.classList.remove('loading');
+            submitBtn.innerHTML = '<span class="btn-text" style="opacity: 1;">✔️ Profile Submitted</span>';
+            submitBtn.style.background = '#10b981'; // Success green
+            submitBtn.style.color = '#fff';
+            form.reset();
+          }, 2000);
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>

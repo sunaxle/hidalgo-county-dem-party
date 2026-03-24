@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup A: Tap-to-Action Reskin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { background: #020617; color: #fff; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+    .header { padding: 2.5rem 1.5rem 1.5rem; text-align: center; background: rgba(15,23,42,0.8); backdrop-filter: blur(16px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .header h1 { margin: 0; font-size: 1.6rem; color: #fff; font-weight: 800; letter-spacing: -0.5px; }
+    .header p { color: #94a3b8; font-size: 0.95rem; margin: 0.5rem 0 0 0; }
+    .search-bar { width: 100%; padding: 1.2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: #fff; margin-top: 1.5rem; box-sizing: border-box; font-size: 1rem; outline: none; transition: border-color 0.3s; }
+    .search-bar:focus { border-color: #38bdf8; }
+    .container { padding: 1.5rem; padding-bottom: 150px; max-width: 600px; margin: 0 auto; }
+    .card { background: rgba(30,30,40,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .pct-badge { background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05)); color: #38bdf8; padding: 0.6rem 1.2rem; border-radius: 12px; font-weight: 800; font-size: 1.4rem; border: 1px solid rgba(56,189,248,0.3); }
+    .name-block { flex: 1; margin-left: 1.5rem; }
+    .name-block h2 { margin: 0; font-size: 1.4rem; font-weight: 800; color: #f8fafc; }
+    .name-block span { color: #94a3b8; font-size: 0.95rem; display: block; margin-top: 0.3rem; }
+    .role-badge { display: inline-block; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(250, 204, 21, 0.1); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); margin-top: 0.8rem; }
+    .action-row { display: flex; gap: 0.8rem; }
+    .action-btn { flex: 1; padding: 1.2rem; text-align: center; border-radius: 14px; font-weight: 700; font-size: 1.1rem; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 0.5rem; transition: transform 0.2s, opacity 0.2s; }
+    .action-btn:active { transform: scale(0.97); opacity: 0.9; }
+    .btn-call { background: #22c55e; color: #fff; box-shadow: 0 4px 15px rgba(34,197,94,0.3); }
+    .btn-text { background: #3b82f6; color: #fff; box-shadow: 0 4px 15px rgba(59,130,246,0.3); }
+    .btn-email { background: transparent; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.15); box-shadow: none; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Hidalgo Dems Directory</h1>
+    <p>Tap a button below to instantly connect.</p>
+    <input type="text" class="search-bar" placeholder="🔍 Search precinct or name...">
+  </div>
+  <div class="container">
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="pct-badge">101</div>
+        <div class="name-block">
+          <h2>Jane Doe</h2>
+          <span>Pharr, TX</span>
+          <div class="role-badge">Precinct Chair</div>
+        </div>
+      </div>
+      <div class="action-row">
+        <a href="tel:5551234567" class="action-btn btn-call">📞 Call</a>
+        <a href="sms:5551234567" class="action-btn btn-text">💬 Text</a>
+      </div>
+      <a href="mailto:jane@example.com" class="action-btn btn-email">✉️ Email jane@example.com</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="pct-badge" style="color:#cbd5e1; border-color:rgba(255,255,255,0.1); background:rgba(255,255,255,0.05);">102</div>
+        <div class="name-block">
+          <h2>John Smith</h2>
+          <span>McAllen, TX</span>
+          <div class="role-badge" style="background: rgba(148, 163, 184, 0.1); color: #cbd5e1; border-color: rgba(148, 163, 184, 0.3);">Block Captain</div>
+        </div>
+      </div>
+      <div class="action-row">
+        <a href="tel:5559876543" class="action-btn btn-call">📞 Call</a>
+        <a href="sms:5559876543" class="action-btn btn-text">💬 Text</a>
+      </div>
+      <a href="mailto:john@example.com" class="action-btn btn-email">✉️ Email john@example.com</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,10 +2,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
 
-  if (menuBtn) {
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+  if (menuBtn && navLinks) {
+    // Inject Drawer Backdrop
+    const backdrop = document.createElement('div');
+    backdrop.className = 'nav-backdrop';
+    document.body.appendChild(backdrop);
+
+    // Inject Close Button
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'nav-close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.setAttribute('aria-label', 'Close menu');
+    navLinks.prepend(closeBtn);
+
+    const toggleDrawer = (e) => {
+      if (e) e.preventDefault();
+      const isActive = navLinks.classList.contains('active');
+      if (isActive) {
+        navLinks.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        navLinks.classList.add('active');
+        backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    menuBtn.addEventListener('click', toggleDrawer);
+    closeBtn.addEventListener('click', toggleDrawer);
+    backdrop.addEventListener('click', toggleDrawer);
   }
 
   // Mobile Dropdown Toggle (Accordion)
@@ -32,10 +58,63 @@ document.addEventListener('DOMContentLoaded', () => {
   // Navbar Scroll Effect
   const navbar = document.querySelector('.navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    if (navbar && window.scrollY > 50) {
       navbar.classList.add('scrolled');
-    } else {
+    } else if (navbar) {
       navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Tabs Toggle Logic
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  if (tabBtns.length > 0) {
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active class from all
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // Add active class to clicked tab and corresponding content
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) targetContent.classList.add('active');
+      });
+    });
+  }
+
+  // System Alert Dismiss Logic
+  const alertCloseBtns = document.querySelectorAll('.system-alert-close');
+  alertCloseBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const alert = e.target.closest('.system-alert');
+      if (alert) {
+        alert.style.opacity = '0';
+        alert.style.transform = 'translateY(-10px)';
+        alert.style.transition = 'all 0.3s ease';
+        setTimeout(() => alert.remove(), 300);
+      }
+    });
+  });
+
+  // Global Accordion Component Logic
+  const accordions = document.querySelectorAll('.accordion');
+  accordions.forEach(acc => {
+    const header = acc.querySelector('.accordion-header');
+    if (header) {
+      header.addEventListener('click', () => {
+        acc.classList.toggle('active');
+        const content = acc.querySelector('.accordion-content');
+        if (content) {
+          if (acc.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          } else {
+            content.style.maxHeight = '0';
+          }
+        }
+      });
     }
   });
 

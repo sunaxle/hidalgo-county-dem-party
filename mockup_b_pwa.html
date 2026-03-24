@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup B: PWA Directory CRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: #f8fafc; color: #0f172a; font-family: 'Inter', sans-serif; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+    .app-header { background: #ffffff; padding: 3rem 1.5rem 1.5rem; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .header-top h1 { margin: 0; font-size: 1.4rem; font-weight: 700; color: #0f172a; }
+    .status-indicator { display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; color: #059669; font-weight: 600; background: #d1fae5; padding: 0.4rem 1rem; border-radius: 999px; }
+    .status-dot { width: 8px; height: 8px; background: #059669; border-radius: 50%; box-shadow: 0 0 0 2px rgba(16,185,129,0.2); }
+    .search { width: 100%; padding: 1rem 1.2rem; background: #f1f5f9; border: 1px solid transparent; border-radius: 12px; font-size: 1.05rem; font-family: inherit; box-sizing: border-box; transition: all 0.2s; }
+    .search:focus { background: #fff; border-color: #0ea5e9; box-shadow: 0 0 0 4px rgba(14,165,233,0.1); outline: none; }
+    .list { padding: 1.5rem; padding-bottom: 120px; max-width: 600px; margin: 0 auto; }
+    .section-title { font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; margin-top: 1rem; }
+    .list-item { background: #ffffff; padding: 1.2rem; border-radius: 16px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; display: flex; align-items: center; transition: transform 0.2s; }
+    .list-item:active { transform: scale(0.98); }
+    .avatar { width: 56px; height: 56px; border-radius: 50%; background: #e0f2fe; color: #0284c7; display: flex; justify-content: center; align-items: center; font-weight: 700; font-size: 1.2rem; margin-right: 1.2rem; flex-shrink: 0; }
+    .info { flex: 1; }
+    .info h3 { margin: 0 0 0.3rem 0; font-size: 1.15rem; color: #0f172a; }
+    .info p { margin: 0; color: #64748b; font-size: 0.95rem; }
+    .update-btn { padding: 0.6rem 1.2rem; background: #f8fafc; color: #334155; border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; }
+    .update-btn:active { background: #e2e8f0; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid #e2e8f0; padding: 1rem; display: flex; justify-content: space-around; padding-bottom: max(1rem, env(safe-area-inset-bottom)); box-shadow: 0 -10px 20px rgba(0,0,0,0.03); z-index: 100;}
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: #94a3b8; font-size: 0.75rem; font-weight: 600; text-decoration: none; }
+    .nav-item.active { color: #0ea5e9; }
+    .nav-icon { font-size: 1.6rem; }
+    .modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 200; justify-content: center; align-items: flex-end; }
+    .modal-content { background: #ffffff; width: 100%; border-radius: 28px 28px 0 0; padding: 2rem; box-sizing: border-box; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -20px 40px rgba(0,0,0,0.1); }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .modal h2 { margin-top: 0; color: #0f172a; font-size: 1.5rem; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; font-size: 0.9rem; color: #475569; margin-bottom: 0.6rem; font-weight: 600; }
+    .form-group input { width: 100%; padding: 1.2rem; border: 1px solid #cbd5e1; border-radius: 12px; box-sizing: border-box; font-size: 1rem; color: #0f172a; background: #f8fafc; }
+    .form-group input:focus { border-color: #0ea5e9; background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(14,165,233,0.1); }
+    .btn-primary { width: 100%; padding: 1.2rem; background: #0ea5e9; color: #fff; border: none; border-radius: 14px; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; box-shadow: 0 10px 20px rgba(14,165,233,0.3); }
+    .btn-primary:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+  <div class="app-header">
+    <div class="header-top">
+      <h1>Contacts CRM</h1>
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        Synced
+      </div>
+    </div>
+    <input type="text" class="search" placeholder="🔍 Find someone...">
+  </div>
+  
+  <div class="list">
+    <div class="section-title">Precinct Chairs</div>
+    <div class="list-item">
+      <div class="avatar">101</div>
+      <div class="info">
+        <h3>Jane Doe</h3>
+        <p>Pharr • 555-123-4567</p>
+      </div>
+      <button class="update-btn" onclick="document.getElementById('updateModal').style.display='flex'">Edit Info</button>
+    </div>
+    <div class="list-item">
+      <div class="avatar" style="background:#fef08a; color:#a16207;">102</div>
+      <div class="info">
+        <h3>John Smith</h3>
+        <p>McAllen • 555-987-6543</p>
+      </div>
+      <button class="update-btn" onclick="document.getElementById('updateModal').style.display='flex'">Edit Info</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#" class="nav-item active"><span class="nav-icon">👥</span>Directory</a>
+    <a href="#" class="nav-item"><span class="nav-icon">📊</span>Metrics</a>
+    <a href="#" class="nav-item"><span class="nav-icon">⚙️</span>Settings</a>
+  </div>
+
+  <div class="modal" id="updateModal">
+    <div class="modal-content">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+        <h2 style="margin:0;">Update Record</h2>
+        <span style="font-size:2rem; color:#94a3b8; cursor:pointer;" onclick="document.getElementById('updateModal').style.display='none'">&times;</span>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" value="555-123-4567">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" value="jane@example.com">
+      </div>
+      <button class="btn-primary" onclick="alert('Sent to Google Sheets API! (Mock)'); document.getElementById('updateModal').style.display='none'">Save to Database</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup C: Aggressive Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { background: #050505; color: #fff; font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; }
+    .hero { padding: 5rem 2rem 3rem; background: linear-gradient(135deg, #450a0a 0%, #000 100%); border-bottom: 2px solid #ef4444; position: relative; overflow: hidden; }
+    .hero::after { content: ''; position: absolute; top:0; left:0; right:0; bottom:0; background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M0 100 L100 0" stroke="rgba(239,68,68,0.1)" stroke-width="2"/></svg>') repeat; z-index: 1; pointer-events: none; }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .stat-huge { font-size: 6rem; font-weight: 900; color: #ef4444; line-height: 1; text-shadow: 0 0 30px rgba(239,68,68,0.5); margin: 0; }
+    .stat-label { font-size: 1.2rem; font-weight: 700; color: #fca5a5; text-transform: uppercase; letter-spacing: 3px; }
+    .container { padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+    .section-title { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; border-bottom: 1px solid #222; padding-bottom: 1rem; margin-bottom: 2rem; color: #fff; letter-spacing: 1px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.5rem; }
+    .pct-box { background: #111; border: 1px solid #222; border-radius: 12px; padding: 2rem; text-align: center; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+    .pct-box.vacant { border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.05); }
+    .pct-box.vacant:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(239,68,68,0.2); border-color: #ef4444; }
+    .pct-box.filled { border-color: #166534; background: transparent; opacity: 0.5; filter: grayscale(1); }
+    .pct-number { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .vacant .pct-number { color: #ef4444; }
+    .filled .pct-number { color: #22c55e; }
+    .btn-recruit { display: block; width: 100%; padding: 0.8rem; background: #ef4444; color: #fff; border: none; border-radius: 8px; font-weight: 900; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; cursor: pointer; text-decoration: none; margin-top: 1.5rem; transition: background 0.2s; }
+    .btn-recruit:hover { background: #dc2626; }
+    .filled-info { font-size: 0.85rem; color: #9ca3af; margin-top: 1rem; font-weight: 700; }
+    .alert-banner { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-left: 6px solid #ef4444; color: #fff; padding: 1.5rem; margin-bottom: 3rem; display: flex; align-items: flex-start; gap: 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .alert-icon { font-size: 2rem; line-height: 1; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <p class="stat-label">Critical Vacancies</p>
+      <h1 class="stat-huge">42</h1>
+      <p style="color: #fca5a5; font-size: 1.2rem; max-width: 500px; margin-top: 1.5rem; line-height: 1.6;">We are missing representation in 42 highly sensitive precincts. This is a five-alarm fire for neighborhood turnout.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="alert-banner">
+      <span class="alert-icon">⚠️</span>
+      <div>
+        <strong style="font-size: 1.2rem; display: block; margin-bottom: 0.5rem;">Target Priority: Precinct 103</strong>
+        <div style="font-size: 1rem; color: #fca5a5; line-height: 1.5;">Highest Democratic turnout density without an active chair. <strong>Proceed to recruitment protocol immediately.</strong></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Action Board</h2>
+    <div class="grid">
+      <div class="pct-box vacant">
+        <div class="pct-number">103</div>
+        <div style="color: #fca5a5; font-size: 0.9rem; font-weight: 900; letter-spacing: 2px;">VACANT</div>
+        <a href="#" class="btn-recruit">Recruit</a>
+      </div>
+      <div class="pct-box vacant">
+        <div class="pct-number">108</div>
+        <div style="color: #fca5a5; font-size: 0.9rem; font-weight: 900; letter-spacing: 2px;">VACANT</div>
+        <a href="#" class="btn-recruit">Recruit</a>
+      </div>
+      <div class="pct-box vacant">
+        <div class="pct-number">215</div>
+        <div style="color: #fca5a5; font-size: 0.9rem; font-weight: 900; letter-spacing: 2px;">VACANT</div>
+        <a href="#" class="btn-recruit">Recruit</a>
+      </div>
+      <!-- Filled states faded out in background -->
+      <div class="pct-box filled">
+        <div class="pct-number">101</div>
+        <div class="filled-info">JANE DOE<br>555-1234</div>
+      </div>
+      <div class="pct-box filled">
+        <div class="pct-number">102</div>
+        <div class="filled-info">JOHN SMITH<br>555-9876</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
