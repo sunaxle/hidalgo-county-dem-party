@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civics 102 | Hidalgo Democrats</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  <style>
+    :root {
+      --civics-bg: #0f172a;
+      --civics-card-bg: rgba(30, 41, 59, 0.7);
+      --civics-card-border: rgba(255, 255, 255, 0.1);
+      --civics-accent-1: #38bdf8;
+      --civics-accent-2: #818cf8;
+      --civics-accent-3: #f472b6;
+      --civics-accent-4: #34d399;
+    }
+
+    body.tx-clone {
+      background-color: var(--civics-bg);
+      color: #f8fafc;
+      overflow-x: hidden; /* Prevent horizontal scroll when modal opens */
+    }
+
+    .civics-hero {
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.8)), url('images/hero_bg_placeholder.jpg') center/cover;
+      position: relative;
+    }
+
+    .civics-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .civics-hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .civics-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .civics-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-1), var(--civics-accent-2));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .civics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .civics-card {
+      background: var(--civics-card-bg);
+      border: 1px solid var(--civics-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .civics-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .civics-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .civics-card:hover::before {
+      opacity: 1;
+    }
+
+    .civics-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .civics-card p {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+
+    .civics-card .status-action {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.05);
+      color: #cbd5e1;
+      align-self: flex-start;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    
+    .civics-card:hover .status-action {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .status-action span { margin-right: 0.5rem; }
+
+    /* specific accents for sections */
+    .party-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2)); }
+    .gov-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-3), var(--civics-accent-4)); }
+
+    .gov-section .civics-section-title {
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-3), var(--civics-accent-4));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .start-badge {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: linear-gradient(45deg, #ef4444, #f97316);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+      animation: pulse-badge 2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse-badge {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Modals */
+    .civics-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .civics-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%) scale(0.95);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      z-index: 2001;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .civics-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .civics-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .civics-modal-header {
+      padding: 2.5rem 2.5rem 1.5rem;
+      position: relative;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+    }
+    
+    .civics-modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      color: #94a3b8;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .civics-modal-close:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .civics-modal-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .civics-modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+    }
+
+    .civics-modal-body {
+      padding: 0 2.5rem 3rem;
+      overflow-y: auto;
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    .civics-modal-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-modal-body ul, .civics-modal-body ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .civics-modal-body li {
+      margin-bottom: 0.75rem;
+    }
+
+    .civics-modal-body strong {
+      color: white;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body class="tx-clone">
+
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        <a href="data/index.html" class="nav-item" style="color: #c084fc; font-weight: 600;">Data 🔒</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="elected_officials.html">Elected Reps</a>
+            <a href="local_candidates.html" style="color: #fff;">Local Candidates</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+            <a href="precinct_profiles.html" style="color: var(--accent); font-weight: 600;">Precinct Profiles</a>
+            <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Portal 🌻</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <a href="live_results.html" style="color: #60a5fa; font-weight: 800;">Live Results 🗳️</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="van_resources.html">VAN Resources</a>
+            <a href="vote.html">Resources</a>
+            <a href="precinct_completion.html">Gap Tracker</a>
+            <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+            <a href="volunteer_roster.html" style="color: #4ade80; font-weight: 600;">Volunteer Roster</a>
+            <a href="sustaining_members.html" style="color: #f59e0b; font-weight: 600;">Sustaining Members ⭐</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span style="color: #fff; font-weight: 800;">Community ▼</span>
+          <div class="dropdown-content">
+            <a href="civics_101.html" style="color: #c084fc; font-weight: 800;">Civics 101 🏛️</a>
+            <a href="chat.html" style="color: #2dd4bf; font-weight: 800;">Grassroots Live Chat ⚡</a>
+            <a href="social_wall.html">Social Wall</a>
+            <a href="county_websites.html">TX Dems</a>
+            <a href="south_texas_region.html">South TX</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="issues_map.html">Issues Data Map</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="share_stories.html">Share Our Stories</a>
+            <a href="county_chair_notes.html">County Chair Notes</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="community_inbox.html">Inbox</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Section -->
+  <header class="civics-hero">
+    <h1>Civics 102</h1>
+    <p>Advanced topics for deeper engagement: VDR transfers, Caucuses, and Party Leadership. Take your advocacy to the next level.</p>
+  </header>
+
+  <main class="civics-container">
+    
+    <nav class="breadcrumbs fade-in">
+      <a href="home.html">Home</a>
+      <span>/</span>
+      <a href="community.html">Community</a>
+      <span>/</span>
+      <span style="color: #fff;">Civics 102</span>
+    </nav>
+
+    <blockquote class="system-quote fade-in">
+      "The most important political office is that of the private citizen."
+      <footer>— Louis Brandeis</footer>
+    </blockquote>
+    
+    <!-- Section 1: Advanced Party Concepts -->
+    <div class="party-section">
+      <h2 class="civics-section-title">Party Leadership & Caucuses</h2>
+      <div class="civics-grid">
+        
+        <div class="civics-card" data-lesson="state_of_party">
+          <div class="start-badge">START HERE</div>
+          <div class="civics-card-icon">📈</div>
+          <h3>State of the Party</h3>
+          <p>Current nationwide and state status, including national and state democratic leadership.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="caucuses">
+          <div class="civics-card-icon">✊🏽</div>
+          <h3>The Power of Caucuses</h3>
+          <p>Understanding different caucuses (e.g., Hispanic, Black, Progressive) and the voting block power they hold.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="vdr_transfers">
+          <div class="civics-card-icon">📜</div>
+          <h3>VDR County Transfers</h3>
+          <p>How Volunteer Deputy Registrar (VDR) certificates can be transferred between Texas counties.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="run_for_office">
+          <div class="civics-card-icon">🏛️</div>
+          <h3>Running for Office</h3>
+          <p>Basic requirements to run for office, distinguishing types of offices, and why local offices matter most.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <a href="vdr_portal.html" class="civics-card" style="text-decoration: none;">
+          <div class="civics-card-icon">💻</div>
+          <h3>VDR Portal</h3>
+          <p>Access the dedicated VDR Portal for certification dates, tracking, and voter registration resources.</p>
+          <div class="status-action"><span>▶</span> Visit Portal</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Back to 101 Link -->
+    <div style="text-align: center; margin-top: 5rem; margin-bottom: 2rem;" class="fade-in">
+      <a href="civics_101.html" style="display: inline-block; padding: 1rem 3rem; background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1.1rem; text-decoration: none; transition: all 0.3s ease;">
+        &larr; Back to Civics 101
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="civics-backdrop" id="civicsBackdrop"></div>
+  <div class="civics-modal" id="civicsModal">
+    <div class="civics-modal-header">
+      <button class="civics-modal-close" id="civicsClose">&times;</button>
+      <div class="civics-modal-icon" id="modalIcon"></div>
+      <h2 class="civics-modal-title" id="modalTitle"></h2>
+    </div>
+    <div class="civics-modal-body" id="modalContent"></div>
+  </div>
+
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 672-7274</p>
+      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
+      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+  <!-- Lesson Content & Modal Logic -->
+  <script>
+    const lessonsData = {
+      state_of_party: {
+        icon: '📈',
+        title: 'State of the Party',
+        content: `
+          <p>The Democratic Party has strong leadership guiding its strategy at both the national and state levels:</p>
+          <ul>
+            <li><strong>National (DNC):</strong> Currently led by Jaime Harrison, the Democratic National Committee coordinates the national strategy, funding, and the presidential nominating process.</li>
+            <li><strong>State (TDP):</strong> In Texas, the party is led by Gilberto Hinojosa, focusing on turning Texas blue, organizing massive grassroots efforts, and supporting down-ballot candidates across 254 counties.</li>
+          </ul>
+          <p>Understanding the current leadership and strategic goals helps local activists align their efforts with broader party objectives for maximum impact.</p>
+        `
+      },
+      caucuses: {
+        icon: '✊🏽',
+        title: 'The Power of Caucuses',
+        content: `
+          <p>A Caucus is a group of members of a given political party or organization who share common interests, demographics, or policy goals.</p>
+          <ul>
+            <li><strong>Hispanic Caucus, Black Caucus, LGBTQ+ Caucus, etc.:</strong> These groups organize to ensure their specific community issues are prioritized in the party platform and to support candidates who represent them.</li>
+            <li><strong>Progressive Caucus, Labor Caucus:</strong> Formed around ideological or economic priorities, these caucuses negotiate legislation as a unified voting block.</li>
+          </ul>
+          <p><strong>Voting Block Power:</strong> Caucuses hold massive power because they vote together. If a bill needs a majority to pass and a caucus refuses to vote 'yes' until their demands are met, they can force the rest of the party to negotiate. This makes caucuses effective tools for pushing specific agendas.</p>
+        `
+      },
+      vdr_transfers: {
+        icon: '📜',
+        title: 'VDR County Transfers',
+        content: `
+          <p>Being a Volunteer Deputy Registrar (VDR) is powerful, but in Texas, your certification is typically only valid in the specific county where you were trained—unless you transfer it!</p>
+          <p><strong>How to Transfer Your VDR Certificate:</strong></p>
+          <ol>
+            <li>If you are certified in one Texas county, you can request to be appointed as a VDR in another county <em>without having to take the training again</em>.</li>
+            <li>Contact the Voter Registrar's office of the new county and present your valid VDR certificate from your home county.</li>
+            <li>The new county will review your status and issue you a new certificate and receipt books valid for their jurisdiction.</li>
+          </ol>
+          <p><a href="vdr_portal.html" style="color: #38bdf8; font-weight: bold; text-decoration: underline;">Visit the VDR Portal</a> for more details and resources.</p>
+        `
+      },
+      run_for_office: {
+        icon: '🏛️',
+        title: 'Running for Office',
+        content: `
+          <p>Elections don't just happen at the national level. Local offices have the most direct impact on our daily lives, and the barrier to entry is lower than you think!</p>
+          <p><strong>Types of Offices & Why They Matter:</strong></p>
+          <ul>
+            <li><strong>School Board (ISD):</strong> Manages multimillion-dollar budgets, property taxes, and school curriculum. Often these races have shockingly low turnout, meaning every vote counts.</li>
+            <li><strong>City Council / Mayor:</strong> Controls local zoning, police/fire department funding, city parks, and municipal ordinances. They determine what gets built in your neighborhood.</li>
+            <li><strong>County Commissioners Court:</strong> Manages county hospitals, elections, emergency services, and county roads.</li>
+            <li><strong>State Legislature:</strong> State Representatives/Senators write state laws (like voting rights, reproductive rights, public education funding).</li>
+          </ul>
+          <p><strong>Basic Requirements to Run:</strong></p>
+          <ul>
+            <li>For most local offices (City Council, School Board), you typically need to be a US Citizen, 18+ years old, a registered voter, and a resident of the district for at least 6 months to 1 year prior to the filing deadline.</li>
+            <li>There is usually a modest filing fee or a requirement to gather a certain number of petition signatures from registered voters in the district.</li>
+          </ul>
+          <p>If you're interested in running, the first step is to contact the party to learn about campaign training resources like "The Arena" or local candidate bootcamps!</p>
+        `
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.civics-card');
+      const backdrop = document.getElementById('civicsBackdrop');
+      const modal = document.getElementById('civicsModal');
+      const closeBtn = document.getElementById('civicsClose');
+      
+      const modalIcon = document.getElementById('modalIcon');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+
+      function openModal(lessonKey) {
+        const data = lessonsData[lessonKey];
+        if (!data) return;
+
+        modalIcon.textContent = data.icon;
+        modalTitle.textContent = data.title;
+        modalContent.innerHTML = data.content;
+
+        backdrop.classList.add('show');
+        modal.classList.add('show');
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('show');
+        modal.classList.remove('show');
+        
+        // Let animation finish before clearing content
+        setTimeout(() => {
+          if (!modal.classList.contains('show')) {
+            modalIcon.textContent = '';
+            modalTitle.textContent = '';
+            modalContent.innerHTML = '';
+          }
+        }, 400);
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const lesson = card.getAttribute('data-lesson');
+          if (lesson) openModal(lesson);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+
+      // Escape key to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+    });
+  </script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
