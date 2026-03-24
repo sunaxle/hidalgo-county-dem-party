@@ -6,12 +6,14 @@
   --tx-white: #FFFFFF;
 }
 
-body.tx-clone {
+html, body.tx-clone {
   font-family: 'Montserrat', 'Inter', sans-serif;
   background-color: var(--tx-white);
   color: var(--tx-navy);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 .tx-clone-nav {
@@ -163,8 +165,22 @@ body.tx-clone {
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
   }
+  .tx-clone-nav-links .dropdown {
+    width: 100%;
+    text-align: center;
+  }
+  .tx-clone-nav-links .dropdown > span {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0;
+  }
   .tx-clone-nav-links .dropdown-content {
     z-index: 10000 !important;
+    position: static !important;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    background: transparent;
   }
   
   /* Fallback for JS manual toggle */

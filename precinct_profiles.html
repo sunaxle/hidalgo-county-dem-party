@@ -122,16 +122,13 @@
         <div style="width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 3rem;"></div>
 
         <h3 style="margin-top: 0; color: #fff; font-size: 1.5rem;">Find Your Precinct</h3>
-        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2rem;">Search by Precinct Number to locate your leadership.</p>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2rem;">Search by Name or Precinct Number to instantly find your leadership.</p>
         
         <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px; margin: 0 auto;">
-            <!-- Precinct Search -->
             <div>
                 <div style="display: flex; gap: 1rem;">
-                  <input type="number" id="precinct-search-input" placeholder="e.g. 14" style="flex: 1; padding: 1rem 1.5rem; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 1.1rem; outline: none;">
-                  <button id="precinct-search-btn" class="btn btn-primary" style="border: none; cursor: pointer; padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; background: var(--accent); color: #020617;">Go</button>
+                  <input type="text" id="dir-search-input" placeholder="e.g. 14 or John Doe..." style="flex: 1; padding: 1rem 1.5rem; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 1.1rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 10px rgba(34,211,238,0.2)';" onblur="this.style.borderColor='#334155'; this.style.boxShadow='none';">
                 </div>
-                <div id="precinct-search-error" style="color: #ef4444; margin-top: 0.5rem; display: none; font-weight: 600; text-align:left;"></div>
             </div>
         </div>
       </div>
@@ -139,7 +136,7 @@
 
     <!-- Active Profiles Hook -->
     <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4rem; margin-top: 5rem;">
-      <h2 style="text-align: center; color: #fff; margin-bottom: 3rem;">Recent Leadership Elected</h2>
+      <h2 style="text-align: center; color: #fff; margin-bottom: 3rem;">Precinct Directory</h2>
       <div id="recent-profiles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
         <p style="color: #94a3b8; text-align: center; grid-column: 1/-1;">Loading live data...</p>
       </div>

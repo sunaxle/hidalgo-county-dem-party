@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Civics 101 | Hidalgo Democrats</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  <style>
+    :root {
+      --civics-bg: #0f172a;
+      --civics-card-bg: rgba(30, 41, 59, 0.7);
+      --civics-card-border: rgba(255, 255, 255, 0.1);
+      --civics-accent-1: #38bdf8;
+      --civics-accent-2: #818cf8;
+      --civics-accent-3: #f472b6;
+      --civics-accent-4: #34d399;
+    }
+
+    body.tx-clone {
+      background-color: var(--civics-bg);
+      color: #f8fafc;
+      overflow-x: hidden; /* Prevent horizontal scroll when modal opens */
+    }
+
+    .civics-hero {
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.8)), url('images/hero_bg_placeholder.jpg') center/cover;
+      position: relative;
+    }
+
+    .civics-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .civics-hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .civics-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .civics-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-1), var(--civics-accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .civics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .civics-card {
+      background: var(--civics-card-bg);
+      border: 1px solid var(--civics-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .civics-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .civics-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .civics-card:hover::before {
+      opacity: 1;
+    }
+
+    .civics-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .civics-card p {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+
+    .civics-card .status-action {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.05);
+      color: #cbd5e1;
+      align-self: flex-start;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    
+    .civics-card:hover .status-action {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .status-action span { margin-right: 0.5rem; }
+
+    /* specific accents for sections */
+    .party-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2)); }
+    .gov-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-3), var(--civics-accent-4)); }
+
+    .gov-section .civics-section-title {
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-3), var(--civics-accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .start-badge {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: linear-gradient(45deg, #ef4444, #f97316);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+      animation: pulse-badge 2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse-badge {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Modals */
+    .civics-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .civics-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%) scale(0.95);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      z-index: 2001;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .civics-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .civics-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .civics-modal-header {
+      padding: 2.5rem 2.5rem 1.5rem;
+      position: relative;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+    }
+    
+    .civics-modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      color: #94a3b8;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .civics-modal-close:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .civics-modal-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .civics-modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+    }
+
+    .civics-modal-body {
+      padding: 0 2.5rem 3rem;
+      overflow-y: auto;
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    .civics-modal-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-modal-body ul, .civics-modal-body ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .civics-modal-body li {
+      margin-bottom: 0.75rem;
+    }
+
+    .civics-modal-body strong {
+      color: white;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body class="tx-clone">
+
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        <a href="data/index.html" class="nav-item" style="color: #c084fc; font-weight: 600;">Data 🔒</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="elected_officials.html">Elected Reps</a>
+            <a href="local_candidates.html" style="color: #fff;">Local Candidates</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+            <a href="precinct_profiles.html" style="color: var(--accent); font-weight: 600;">Precinct Profiles</a>
+            <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Portal 🌻</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <a href="live_results.html" style="color: #60a5fa; font-weight: 800;">Live Results 🗳️</a>
+            <a href="volunteer.html">Volunteer</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="van_resources.html">VAN Resources</a>
+            <a href="vote.html">Resources</a>
+            <a href="precinct_completion.html">Gap Tracker</a>
+            <a href="volunteer_dashboard.html">Volunteer Metrics</a>
+            <a href="volunteer_roster.html" style="color: #4ade80; font-weight: 600;">Volunteer Roster</a>
+            <a href="sustaining_members.html" style="color: #f59e0b; font-weight: 600;">Sustaining Members ⭐</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span style="color: #fff; font-weight: 800;">Community ▼</span>
+          <div class="dropdown-content">
+            <a href="civics_101.html" style="color: #c084fc; font-weight: 800;">Civics 101 🏛️</a>
+            <a href="chat.html" style="color: #2dd4bf; font-weight: 800;">Grassroots Live Chat ⚡</a>
+            <a href="social_wall.html">Social Wall</a>
+            <a href="county_websites.html">TX Dems</a>
+            <a href="south_texas_region.html">South TX</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="issues_map.html">Issues Data Map</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="share_stories.html">Share Our Stories</a>
+            <a href="county_chair_notes.html">County Chair Notes</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="community_inbox.html">Inbox</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Section -->
+  <header class="civics-hero">
+    <h1>Civics 101</h1>
+    <p>Everything you need to know to effectively interact with your government and the Democratic Party. Empowerment starts with education.</p>
+  </header>
+
+  <main class="civics-container">
+    
+    <!-- Section 1: The Party -->
+    <div class="party-section">
+      <h2 class="civics-section-title">The Democratic Party 101</h2>
+      <div class="civics-grid">
+        
+        <div class="civics-card" data-lesson="precinct">
+          <div class="start-badge">START HERE</div>
+          <div class="civics-card-icon">🏘️</div>
+          <h3>What is a Precinct?</h3>
+          <p>The building block of our democracy. Learn what a Precinct Chair does, why they matter, and how neighborhoods organize for power.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="convention">
+          <div class="civics-card-icon">🏛️</div>
+          <h3>The Convention Process</h3>
+          <p>From your local precinct to the National stage. Understand how County, State, and National conventions work and how to become a delegate.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="structure">
+          <div class="civics-card-icon">🌳</div>
+          <h3>Party Structure</h3>
+          <p>Demystify the acronyms: CEC (County Executive Committee), SDEC (State Democratic Executive Committee), and how the party makes decisions.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="involved">
+          <div class="civics-card-icon">✋</div>
+          <h3>How to Get Involved</h3>
+          <p>Beyond voting: Deep dive into block walking, phone banking, poll greeting, and becoming a Volunteer Deputy Registrar (VDR).</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="primary">
+          <div class="civics-card-icon">🗳️</div>
+          <h3>Primary vs. General</h3>
+          <p>Why the primary election is arguably the most critical election in Texas, and how open vs. closed primaries function.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="jargon">
+          <div class="civics-card-icon">🔤</div>
+          <h3>Decode the Jargon</h3>
+          <p>GOTV? VAN? VDR? Politics is full of confusing acronyms. Here is your ultimate newcomer cheat sheet to sound like a pro.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="toolbox">
+          <div class="civics-card-icon">🛠️</div>
+          <h3>The Campaign Toolbox</h3>
+          <p>What is the VAN? How do campaigns actually turn out voters? Learn the standard operating procedures of modern campaigns.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Section 2: The Government -->
+    <div class="gov-section">
+      <h2 class="civics-section-title">Government 101</h2>
+      <div class="civics-grid">
+        
+        <div class="civics-card" data-lesson="levels">
+          <div class="civics-card-icon">🇺🇸</div>
+          <h3>Levels of Government</h3>
+          <p>Federal, State, County, and City/Local. A breakdown of who handles what responsibilities and how money is allocated.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="represent">
+          <div class="civics-card-icon">🔍</div>
+          <h3>Who Represents Me?</h3>
+          <p>A guide on how to find your specific elected officials at every level of government, and how to effectively communicate with them.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="process">
+          <div class="civics-card-icon">📜</div>
+          <h3>The Legislative Process</h3>
+          <p>How a bill becomes a law in the great state of Texas. Understanding reading schedules, committees, and the Governor's desk.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="local">
+          <div class="civics-card-icon">🏢</div>
+          <h3>Navigating Local Gov</h3>
+          <p>City Council, County Commissioners Court, and School Boards. When they meet, what budgets they control, and why they matter most.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="county_resolution">
+          <div class="civics-card-icon">📄</div>
+          <h3>Pass a County Resolution</h3>
+          <p>The exact steps on how citizens can propose, legally draft, and effectively pass a formal resolution through the County Commissioners Court.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+        <div class="civics-card" data-lesson="voice">
+          <div class="civics-card-icon">🎤</div>
+          <h3>Make Your Voice Heard</h3>
+          <p>How to register to vote, ID requirements, how to sign up to speak at public meetings, and tracking key legislation or ordinances.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="civics-backdrop" id="civicsBackdrop"></div>
+  <div class="civics-modal" id="civicsModal">
+    <div class="civics-modal-header">
+      <button class="civics-modal-close" id="civicsClose">&times;</button>
+      <div class="civics-modal-icon" id="modalIcon"></div>
+      <h2 class="civics-modal-title" id="modalTitle"></h2>
+    </div>
+    <div class="civics-modal-body" id="modalContent"></div>
+  </div>
+
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 672-7274</p>
+      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
+      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+  <!-- Lesson Content & Modal Logic -->
+  <script>
+    const lessonsData = {
+      precinct: {
+        icon: '🏘️',
+        title: 'What is a Precinct?',
+        content: `
+          <p>A precinct is the smallest political subdivision at the county level. Think of it as your political neighborhood! Every voter in a precinct votes at the same polling locations on Election Day.</p>
+          <p><strong>Precinct Chairs</strong> are the elected neighborhood leaders who organize local Democrats, maximize voter turnout, and serve as the direct contact between you and the Party. They act as the vital link connecting grassroots voters to the larger party apparatus.</p>
+          <p>By getting to know your Precinct Chair, you gain a direct line to party resources, volunteer opportunities, and local political intel. When a precinct is effectively organized by a strong Chair, it can swing elections by driving up turnout in key neighborhoods.</p>
+        `
+      },
+      convention: {
+        icon: '🏛️',
+        title: 'The Convention Process',
+        content: `
+          <p>The Democratic Party is built from the ground up through conventions! Everything from the platform rules to the delegates representing the state are decided here.</p>
+          <ul>
+            <li><strong>Precinct Conventions:</strong> Held in March, this is where you can present resolutions (policy ideas) and elect delegates to the County Convention.</li>
+            <li><strong>County / Senatorial District Conventions:</strong> Delegates gather to debate resolutions, elect leadership, and choose delegates to proceed to the State Convention.</li>
+            <li><strong>State Convention:</strong> Thousands of Texas Democrats assemble to adopt the state party platform and rules, and elect the SDEC and National delegates.</li>
+            <li><strong>National Convention:</strong> The major, televised event where the presidential nominee is formally chosen and the national party platform is adopted.</li>
+          </ul>
+          <p>Participating in the convention process is arguably the best way to directly shape the party's future and influence its core values.</p>
+        `
+      },
+      structure: {
+        icon: '🌳',
+        title: 'Party Structure',
+        content: `
+          <p>The Democratic Party operates at multiple levels, each with its own governing body:</p>
+          <ul>
+            <li><strong>County Executive Committee (CEC):</strong> Comprises all elected Precinct Chairs and the County Chair. They govern local party operations, manage the local primary, and vote on county-level party rules.</li>
+            <li><strong>State Democratic Executive Committee (SDEC):</strong> Manages the party statewide. It consists of two representatives (one man, one woman) from every state senatorial district, plus statewide party officers. They execute the policies adopted at the State Convention.</li>
+            <li><strong>Democratic National Committee (DNC):</strong> The principal organization governing the United States Democratic Party on a day-to-day basis, coordinating strategy to support Democratic candidates throughout the country.</li>
+          </ul>
+          <p>Understanding this structure helps you know who to contact when you want to effect change within the party apparatus, secure funding for initiatives, or elevate local issues.</p>
+        `
+      },
+      involved: {
+        icon: '✋',
+        title: 'How to Get Involved',
+        content: `
+          <p>Voting is just the baseline. Real change requires active participation in the democratic process. Here are the most common ways to get involved:</p>
+          <ul>
+            <li><strong>Block Walking (Canvassing):</strong> Statistically the most effective way to turn out voters. You walk your neighborhood, knock on doors, and have brief conversations with neighbors about upcoming elections and core issues.</li>
+            <li><strong>Phone Banking / Text Banking:</strong> Calling or texting voters from the comfort of your home or a campaign center to remind them to vote, identify their issues, or recruit volunteers.</li>
+            <li><strong>Poll Greeting:</strong> Standing outside polling locations during early voting or on Election Day to distribute slate cards, recommend candidates, and answer voter questions.</li>
+            <li><strong>Volunteer Deputy Registrar (VDR):</strong> Take a short certification class from the county elections department to be legally empowered to register your neighbors to vote anywhere in the county!</li>
+            <li><strong>Serving as an Election Clerk/Judge:</strong> Getting paid by the county to run the actual voting machines and check-in tables on Election Day.</li>
+          </ul>
+        `
+      },
+      primary: {
+        icon: '🗳️',
+        title: 'Primary vs. General',
+        content: `
+          <p>Every election cycle typically consists of two main phases: The Primary and the General.</p>
+          <p><strong>The Primary Election (Spring):</strong> This is where voters decide <em>who</em> will represent the Democratic Party in the fall. In Texas, we have an "open primary" system, meaning you don't register by party when you vote. You simply choose which party's primary you want to vote in when you arrive at the polling location. Because many districts in Texas lean heavily in one direction, the primary election is often where the actual outcome of the race is decided! It is critical to vote in the primary to ensure the best candidates make it to the general ballot.</p>
+          <p><strong>The General Election (Fall):</strong> The final showdown between the Democratic nominee, the Republican nominee, and any third-party candidates. This determines who actually takes office and holds the power to make laws.</p>
+        `
+      },
+      jargon: {
+        icon: '🔤',
+        title: 'Decode the Jargon',
+        content: `
+          <p>When you walk into a campaign office or a party meeting, it can feel like everyone is speaking a secret language. Here is your ultimate lifeline!</p>
+          <ul>
+            <li><strong>GOTV (Get Out The Vote):</strong> The pivotal 2-week period right before Election Day where persuasion completely stops. The pure focus shifts to making sure your known supporters physically go to the polls.</li>
+            <li><strong>VAN (Voter Activation Network):</strong> The massive, nationwide Democratic database containing the public voting history of every registered voter. It's the engine that powers every Democratic campaign.</li>
+            <li><strong>VDR (Volunteer Deputy Registrar):</strong> A citizen officially certified by the county to legally register other people to vote.</li>
+            <li><strong>Block Walking / Canvassing:</strong> Knocking on doors to talk to targeted voters face-to-face. This is statistically the most effective way to win elections.</li>
+            <li><strong>Phone Banking:</strong> Calling targeted voters from a specific list to persuade them or remind them to vote.</li>
+            <li><strong>Turf:</strong> A specific list and map of houses assigned to a volunteer for block walking. ("Hey, can you knock this turf today?")</li>
+            <li><strong>Hard ID:</strong> A voter who has explicitly confirmed to a volunteer that they are voting for your candidate.</li>
+            <li><strong>SDEC & CEC:</strong> State Democratic Executive Committee and County Executive Committee (the party's governing groups).</li>
+          </ul>
+        `
+      },
+      toolbox: {
+        icon: '🛠️',
+        title: 'The Campaign Toolbox',
+        content: `
+          <p>Have you ever wondered how campaigns "magically" know you are a Democrat when they knock on your door? Welcome to modern campaigning.</p>
+          <p><strong>The Baseline: The VAN</strong></p>
+          <p>The Democratic Party uses a nationwide, highly-secured database called the VAN (Voter Activation Network). It records your public voting history—not <em>who</em> you voted for, but <em>when</em> you voted and which party's primary you chose. This allows campaigns to generate highly targeted lists (e.g., "Give me a list of women under 40 who vote in every primary but missed the last local election").</p>
+          <p><strong>The Execution: Block Walking</strong></p>
+          <p>Once a target list is generated, volunteers download an app (like MiniVAN) directly to their phones. The app shows dots on a map representing only those targeted houses. When a volunteer knocks, they aren't guessing—they are looking for a specific person with a specific script tailored to their likely interests.</p>
+          <p><strong>The Finale: GOTV Shutdown</strong></p>
+          <p>In the final weeks of an election, the campaign pivots to "GOTV" (Get Out The Vote). They stop trying to change minds and focus 100% of their time, money, and volunteers on contacting their "Hard IDs" (known supporters) to literally drag them to the polls via calls, texts, doors, and rides.</p>
+        `
+      },
+      levels: {
+        icon: '🇺🇸',
+        title: 'Levels of Government',
+        content: `
+          <p>Government in the United States is distributed across several levels, each with distinct responsibilities and powers over your life:</p>
+          <ul>
+            <li><strong>Federal:</strong> Handles national defense, foreign policy, interstate commerce, federal courts, and sweeping national legislation (e.g., civil rights, federal income tax, Medicare/Medicaid funding).</li>
+            <li><strong>State:</strong> Defines education standards, manages state highways, oversees the state police (DPS), sets state laws (criminal and civil codes), and determines rules for state elections. State government has massive power over local jurisdictions in Texas.</li>
+            <li><strong>County:</strong> Manages county roads, public health initiatives, county courts and the local jail system, property tax appraisals, and conducts elections within the county borders.</li>
+            <li><strong>City/Municipal:</strong> Local police and fire departments, trash collection, local zoning rules (what can be built where), city parks, water infrastructure, and municipal courts.</li>
+          </ul>
+          <p>Knowing which level of government handles an issue is the first step to successfully advocating for change. Don't yell at the Mayor about a Federal interstate issue!</p>
+        `
+      },
+      represent: {
+        icon: '🔍',
+        title: 'Who Represents Me?',
+        content: `
+          <p>You have dozens of elected officials representing you! From the President of the United States down to your local Water Board member or Justice of the Peace.</p>
+          <p><strong>How to find them:</strong> The easiest way in Texas is to use the "Who Represents Me?" tool provided by the Texas Tribune or the Texas Legislature Online website. By entering your physical address, you will find:</p>
+          <ul>
+            <li>Your US Senators and US Representative (Federal)</li>
+            <li>Your State Senator, State Representative, and State Board of Education Member (State)</li>
+            <li>Your County Judge and County Commissioner (County)</li>
+            <li>Your Mayor and City Council Members (City/Local)</li>
+          </ul>
+          <p><strong>Pro Tip:</strong> Save their office numbers in your phone—they work for you, and their staff literally tallies every single phone call they get from constituents on key issues!</p>
+        `
+      },
+      process: {
+        icon: '📜',
+        title: 'The Legislative Process',
+        content: `
+          <p>How does a bill become a law in Texas? It's a grueling process explicitly designed to effectively kill most legislation before it sees the light of day!</p>
+          <ol>
+            <li><strong>Introduction:</strong> A State Representative or State Senator files a bill.</li>
+            <li><strong>Committee:</strong> The bill is assigned to a specific committee (like Public Health or Transportation). This is the most crucial phase. The committee holds a public hearing where citizens can testify for or against it. The vast majority of bills die here without ever getting a vote.</li>
+            <li><strong>Calendars & Floor Vote:</strong> If it passes committee, it goes to the Calendars committee (in the House) to be scheduled, then the full chamber votes on the floor.</li>
+            <li><strong>The Other Chamber:</strong> The entire process repeats in the opposite chamber (e.g., from House to Senate).</li>
+            <li><strong>The Governor:</strong> If both chambers pass the exact same text of a bill, it goes to the Governor to sign, veto, or let it become law without a signature.</li>
+          </ol>
+          <p><em>Note: The Texas Legislature only meets for 140 days every two years! (Odd-numbered years, from January to May). Time is always running out.</em></p>
+        `
+      },
+      local: {
+        icon: '🏢',
+        title: 'Navigating Local Gov',
+        content: `
+          <p>While federal politics gets all the massive TV coverage, local government has the most immediate, direct impact on your daily life, your property values, and your safety.</p>
+          <ul>
+            <li><strong>City Council:</strong> Decides property tax rates for the city, zoning ordinances, police and fire department budgets, and local codes (noise, parking, etc.).</li>
+            <li><strong>County Commissioners Court:</strong> Not an actual courtroom! This is the governing body of the county (consisting of 4 Commissioners and 1 County Judge). They manage the massive county budget, road maintenance in unincorporated areas, county health/clinics, and the county jail.</li>
+            <li><strong>School Boards (ISD):</strong> Independent School Districts are their own taxing entities. They set the curriculum (within state guidelines), hire the superintendent, manage billion-dollar school bonds, and set the property tax rate for the school district.</li>
+          </ul>
+          <p>Local elections often have incredibly low turnout (sometimes single digits), meaning your vote and your organized voice carry exponential weight here!</p>
+        `
+      },
+      county_resolution: {
+        icon: '📄',
+        title: 'Pass a County Resolution',
+        content: `
+          <p>A "County Resolution" is a formal expression of opinion, will, or intent voted on by the County Commissioners Court. While it does not create a binding county law (ordinance), it formally establishes the County's official stance on a critical issue and is a powerful tool to pressure State or Federal lawmakers to act.</p>
+          <p><strong>Step-by-Step Guide to Passing a Resolution:</strong></p>
+          <ol>
+            <li><strong>Draft the Document:</strong> Unlike a bill, resolutions follow a specific format using "WHEREAS" (stating the facts and problems) and "BE IT RESOLVED" (stating the requested action). Keep it under two pages. <em>Tip: Find a similar resolution passed by a neighboring county and use it as a template!</em></li>
+            <li><strong>Find a Sponsoring Commissioner:</strong> The Commissioners Court will not vote on something brought only by a citizen. You must find at least one County Commissioner (usually the one representing your precinct) or the County Judge willing to "sponsor" the resolution and place it on the official Tuesday agenda.</li>
+            <li><strong>Build a Coalition:</strong> Before the vote, gather letters of support from local non-profits, unions, or community leaders. One voice can be ignored; a unified coalition cannot.</li>
+            <li><strong>Show Up to the Court:</strong> Resolutions are voted on during the public Commissioners Court meetings (typically Tuesday mornings). You and your coalition must sign up for "Public Comment" before the meeting begins.</li>
+            <li><strong>Testify & Vote:</strong> Use your 3 minutes of public comment to powerfully argue why the County must take this stance. The Commissioners will then debate and vote on the resolution on the record!</li>
+          </ol>
+        `
+      },
+      voice: {
+        icon: '🎤',
+        title: 'Make Your Voice Heard',
+        content: `
+          <p>Advocacy doesn't stop at the ballot box. Voting is the minimum requirement. Here is how you can continuously push for the policies you believe in:</p>
+          <ul>
+            <li><strong>Testifying at Public Meetings:</strong> City Councils, Commissioners Courts, and School Boards all have "Public Comment" sections on their agendas. You usually get exactly 3 minutes to speak your mind on the public record. It is intimidating but incredibly powerful when done as an organized group.</li>
+            <li><strong>Calling Your Reps:</strong> A phone call is worth 100 emails. Call their local district office, state your name, your zip code, your issue, and exactly how you want them to vote. Be polite to the young staffer taking the message, but be firm on your position!</li>
+            <li><strong>Tracking Legislation:</strong> Use tools like <em>Texas Legislature Online (TLO)</em> to set up email alerts for bills you care about so you know exactly when they are scheduled for a hearing and when you need to mobilize.</li>
+          </ul>
+        `
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.civics-card');
+      const backdrop = document.getElementById('civicsBackdrop');
+      const modal = document.getElementById('civicsModal');
+      const closeBtn = document.getElementById('civicsClose');
+      
+      const modalIcon = document.getElementById('modalIcon');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalContent = document.getElementById('modalContent');
+
+      function openModal(lessonKey) {
+        const data = lessonsData[lessonKey];
+        if (!data) return;
+
+        modalIcon.textContent = data.icon;
+        modalTitle.textContent = data.title;
+        modalContent.innerHTML = data.content;
+
+        backdrop.classList.add('show');
+        modal.classList.add('show');
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('show');
+        modal.classList.remove('show');
+        
+        // Let animation finish before clearing content
+        setTimeout(() => {
+          if (!modal.classList.contains('show')) {
+            modalIcon.textContent = '';
+            modalTitle.textContent = '';
+            modalContent.innerHTML = '';
+          }
+        }, 400);
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const lesson = card.getAttribute('data-lesson');
+          openModal(lesson);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+
+      // Escape key to close
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+      });
+    });
+  </script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>

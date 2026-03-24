@@ -11,6 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     standardHours += 23.5; // Site-wide template, Dynamic Routing System, Phase 2 Google Sheets CRM
     dataHours += 20.0; // Data Portal maps, Gap Tracker algorithms, D3 Volunteer physics engine
     
+    // Recent Work logging
+    standardHours += 32.0; // Mobile Responsiveness UI Audit, Grassroots Chat Upgrades, CRM Pages & Pipeline Dashboard, AI Logos, Theme Customization
+    dataHours += 8.0; // Dashboard Data Population, Combining Precinct Data
+    
     let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
 
     // Create the footer element
