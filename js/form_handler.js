@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Identify source page
           let source = 'Contact';
           if (window.location.pathname.includes('subscribe')) source = 'Subscribe';
+          else if (window.location.pathname.includes('join')) source = 'Join the Party';
           else if (window.location.pathname.includes('community_intake') || window.location.pathname.includes('community')) {
             if (form.id === 'storyForm') source = 'Community - Story';
             else if (form.id === 'issueForm') source = 'Community - Issue';
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 form.querySelector('[name="event_message"]')?.value || 
                                 form.querySelector('[name="general_message"]')?.value || '';
 
-          if (source.startsWith('Community')) {
+          if (source.startsWith('Community') || source === 'Join the Party') {
             let extras = [];
             const title = form.querySelector('[name="story_title"]')?.value;
             const precinct = form.querySelector('[name="precinct"]')?.value;
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const eventName = form.querySelector('[name="event_name"]')?.value;
             const eventDate = form.querySelector('[name="event_date"]')?.value;
             const subject = form.querySelector('[name="subject"]')?.value;
+            const referredBy = form.querySelector('[name="referred_by"]')?.value;
             
             if (title) extras.push('Story Title: ' + title);
             if (precinct) extras.push('Precinct: ' + precinct);
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (eventName) extras.push('Event Name: ' + eventName);
             if (eventDate) extras.push('Event Date: ' + eventDate);
             if (subject) extras.push('Subject: ' + subject);
+            if (referredBy) extras.push('Referred by: ' + referredBy);
             
             if (combinedMessage) extras.push('\nDetails:\n' + combinedMessage);
             combinedMessage = extras.join('\n');
