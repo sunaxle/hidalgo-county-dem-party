@@ -322,6 +322,19 @@
         <button class="cd-filter-btn" data-district="28" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">TX-28 Only</button>
     </div>
 
+    <!-- City Filter Toggle -->
+    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 50; touch-action: manipulation;">
+        <button class="city-filter-btn" data-city="ALL" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4); touch-action: manipulation;">All Cities</button>
+        <button class="city-filter-btn" data-city="Edinburg" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Edinburg</button>
+        <button class="city-filter-btn" data-city="McAllen" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">McAllen</button>
+        <button class="city-filter-btn" data-city="Mission" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Mission</button>
+        <button class="city-filter-btn" data-city="Pharr" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Pharr</button>
+        <button class="city-filter-btn" data-city="Weslaco" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Weslaco</button>
+        <button class="city-filter-btn" data-city="Alamo" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Alamo</button>
+        <button class="city-filter-btn" data-city="Donna" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Donna</button>
+        <button class="city-filter-btn" data-city="San Juan" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">San Juan</button>
+    </div>
+
     <div class="directory-controls">
       <div class="search-box">
         <span class="search-icon">🔍</span>
@@ -385,6 +398,7 @@
   
   <!-- Map Data and Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/precinct_mapping_data.js"></script>
   <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
   <script src="js/chair_data.js"></script>
   <script src="hidalgo-election-map/map_chairs.js"></script>
@@ -401,6 +415,7 @@
       let cd15List = [];
       let cd28List = [];
       let activeDistrict = 'ALL';
+      let activeCity = 'ALL';
 
       // Fetch district mapping data
       Promise.all([
@@ -457,7 +472,17 @@
           if (activeDistrict === '15') matchesDistrict = cd15List.includes(pctInt);
           if (activeDistrict === '28') matchesDistrict = cd28List.includes(pctInt);
 
-          if (matchesSearch && matchesRole && matchesDistrict) {
+          let matchesCity = true;
+          if (activeCity !== 'ALL') {
+              const precinctMapData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
+              if (precinctMapData) {
+                  matchesCity = (precinctMapData.CITY === activeCity);
+              } else {
+                  matchesCity = false;
+              }
+          }
+
+          if (matchesSearch && matchesRole && matchesDistrict && matchesCity) {
             row.style.display = '';
             visibleCount++;
           } else {
@@ -475,6 +500,27 @@
               activeDistrict = btn.dataset.district;
               // Reset styling
               cdBtns.forEach(b => {
+                  b.style.background = 'rgba(255,255,255,0.05)';
+                  b.style.color = '#94a3b8';
+                  b.style.borderColor = 'rgba(255,255,255,0.1)';
+                  b.style.boxShadow = 'none';
+              });
+              // Activate selected
+              btn.style.background = 'var(--accent)';
+              btn.style.color = '#020617';
+              btn.style.borderColor = 'var(--accent)';
+              btn.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
+              filterTable();
+          });
+      });
+
+      // Bind City buttons
+      const cityBtns = document.querySelectorAll('.city-filter-btn');
+      cityBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+              activeCity = btn.dataset.city;
+              // Reset styling
+              cityBtns.forEach(b => {
                   b.style.background = 'rgba(255,255,255,0.05)';
                   b.style.color = '#94a3b8';
                   b.style.borderColor = 'rgba(255,255,255,0.1)';
