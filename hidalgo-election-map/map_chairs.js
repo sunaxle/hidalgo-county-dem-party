@@ -40,6 +40,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let status = getPrecinctStatus(pct);
+        let pctInt = parseInt(pct, 10);
+        
+        let matchesDistrict = true;
+        if (window.activeDistrict === '15' && window.cd15List) matchesDistrict = window.cd15List.includes(pctInt);
+        if (window.activeDistrict === '28' && window.cd28List) matchesDistrict = window.cd28List.includes(pctInt);
+
+        let matchesCity = true;
+        if (window.activeCity && window.activeCity !== 'ALL' && typeof precinctDistricts !== 'undefined') {
+            // precinctDistricts is from precinct_mapping_data.js
+            const precinctMapData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
+            if (precinctMapData) {
+                matchesCity = (precinctMapData.CITY === window.activeCity);
+            } else {
+                matchesCity = false;
+            }
+        }
+
+        let isFilteredOut = !(matchesDistrict && matchesCity);
+        let hasActiveTableFilter = (window.activeDistrict && window.activeDistrict !== 'ALL') || (window.activeCity && window.activeCity !== 'ALL');
         
         let style = { 
             fillColor: '#3b82f6', 
@@ -47,6 +66,28 @@ document.addEventListener("DOMContentLoaded", () => {
             weight: 1, 
             fillOpacity: 0.2
         };
+
+        if (isFilteredOut) {
+            style.fillColor = '#94a3b8'; // Grayed out entirely
+            style.fillOpacity = 0.05;
+            style.color = 'rgba(255,255,255,0.05)';
+            return style;
+        }
+
+        // If a city/district filter is active, highlight filled seats in bright blue.
+        if (hasActiveTableFilter && currentFilter === 'all') {
+            if (status === 'filled') {
+                style.fillColor = '#3b82f6'; // Bright blue
+                style.fillOpacity = 0.7;
+                style.color = '#2563eb';
+                style.weight = 2;
+            } else {
+                style.fillColor = '#94a3b8'; // Vacant
+                style.fillOpacity = 0.15;
+                style.color = '#cbd5e1';
+            }
+            return style;
+        }
 
         if (currentFilter === 'filled') {
             if (status === 'filled') {
@@ -74,6 +115,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return style;
     }
+
+    window.updateMapFromFilters = function() {
+        if(geojsonLayer) {
+            geojsonLayer.setStyle(styleFeature);
+            updateLabels();
+        }
+    };
 
     function onEachFeature(feature, layer) {
         let pct = feature.properties.PREC || feature.properties.ID; // Assuming precinct number is in ID property based on tooltip data
@@ -157,11 +205,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             let status = getPrecinctStatus(pct);
+            let pctInt = parseInt(pct, 10);
+            
+            let matchesDistrict = true;
+            if (window.activeDistrict === '15' && window.cd15List) matchesDistrict = window.cd15List.includes(pctInt);
+            if (window.activeDistrict === '28' && window.cd28List) matchesDistrict = window.cd28List.includes(pctInt);
+
+            let matchesCity = true;
+            if (window.activeCity && window.activeCity !== 'ALL' && typeof precinctDistricts !== 'undefined') {
+                const precinctMapData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
+                if (precinctMapData) {
+                    matchesCity = (precinctMapData.CITY === window.activeCity);
+                } else {
+                    matchesCity = false;
+                }
+            }
+
+            let isFilteredOut = !(matchesDistrict && matchesCity);
             
             let showLabel = false;
-            if (currentFilter === 'all') showLabel = true;
-            else if (currentFilter === 'filled' && status === 'filled') showLabel = true;
-            else if (currentFilter === 'vacant' && status === 'vacant') showLabel = true;
+            if (!isFilteredOut) {
+                if (currentFilter === 'all') showLabel = true;
+                else if (currentFilter === 'filled' && status === 'filled') showLabel = true;
+                else if (currentFilter === 'vacant' && status === 'vacant') showLabel = true;
+            }
 
             if (showLabel) {
                 if (!layer.getTooltip()) {

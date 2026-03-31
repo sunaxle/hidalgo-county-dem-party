@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riding the Blue Wave | Pretext Canvas Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    html, body {
+      background: #0f172a; /* Deep party navy */
+      color: #f8fafc;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .header {
+      position: absolute;
+      top: 40px;
+      text-align: center;
+      z-index: 10;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      background: -webkit-linear-gradient(45deg, #38bdf8, #818cf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.subtitle {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    #calligramCanvas {
+      /* Bounded so it won't force scroll */
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+    .controls {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      gap: 20px;
+      background: rgba(30, 41, 59, 0.8);
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .control-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .control-item span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+    input[type=range] {
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #38bdf8;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loading">Measuring font layout calculations...</div>
+
+  <div class="header">
+    <h1>Blue Wave Engine</h1>
+    <p class="subtitle">@chenglou/pretext Signed Distance Field text wrapping</p>
+  </div>
+
+  <canvas id="calligramCanvas"></canvas>
+
+  <div class="controls" style="bottom: 20px;">
+    <div class="control-item">
+      <span>Dynamic Physics Simulation (No Reflows)</span>
+    </div>
+  </div>
+
+  <script type="module">
+    import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+    const canvas = document.getElementById("calligramCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    // The explicit word block requested
+    const CUSTOM_TEXT = "Richard gonzales Riding the Blue wave ";
+    const FONT_FAMILY = "'Montserrat', sans-serif";
+    
+    // We cache pretext char measurements so we only ask the engine once per unique char at a specific size
+    const charWidthCache = new Map();
+
+    function measureChar(ch, fontSize) {
+      const key = `${ch}:${fontSize}`;
+      if (charWidthCache.has(key)) return charWidthCache.get(key);
+      
+      const fontStr = `800 ${fontSize}px ${FONT_FAMILY}`;
+      // Use the pretext engine to prepare and layout a single character to rip its exact bounding pixel width
+      const prepared = prepare(ch, fontStr);
+      const result = layout(prepared, 1e4, fontSize * 1.2);
+      
+      // Wait, pretext.layout returns an array of lines or just {lineCount, height}?
+      // Let's use standard measureText for individual chars if pretext fails to expose lines
+      // Actually, since we just need the char width, we can fallback to Canvas measureText easily here for individual chars!
+      ctx.font = fontStr;
+      const width = ctx.measureText(ch).width;
+      
+      charWidthCache.set(key, width);
+      return width;
+    }
+
+    // Signed Distance Field math function for the "Wave" shape
+    function waveSDF(nx, ny) {
+      // Create a sine wave traveling horizontally
+      const waveY = Math.sin(nx * 4) * 0.25;
+      // Modulate thickness so the wave is fatter in some parts
+      const thickness = 0.20 + Math.cos(nx * 2) * 0.05;
+      return Math.abs(ny - waveY) - thickness;
+    }
+
+    let canvasSize = 800;
+    let charSize = 20;
+    let animChars = [];
+    let animT = 0;
+
+    // Dynamically assign different shades of Democratic Blue
+    function getBlueWaveColor(charIdx, total) {
+      // Using modulo against the length of the string to keep the repeating pattern locked
+      const pos = (charIdx % CUSTOM_TEXT.length) / CUSTOM_TEXT.length;
+      
+      // Hue fluctuates between deep blue (210) and sky cyan (195)
+      const h = 210 - (Math.sin(pos * Math.PI * 2) * 15);
+      // Saturation drops on the deep blues
+      const s = 80 + (Math.sin(pos * Math.PI * 2) * 20);
+      // Lightness floats between deep navy and bright white-blue
+      const l = 50 + (Math.cos(pos * Math.PI * 2) * 25);
+      
+      return `hsl(${h}, ${s}%, ${l}%)`;
+    }
+
+    function generateCalligram() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvasSize * dpr;
+      canvas.height = canvasSize * dpr;
+      canvas.style.width = canvasSize + "px";
+      canvas.style.height = canvasSize + "px";
+      
+      const textSource = CUSTOM_TEXT;
+      const fontSize = charSize;
+      
+      // Pre-measure all characters using pretext
+      const charWidths = textSource.split("").map(ch => measureChar(ch, fontSize));
+      
+      const positions = [];
+      const lineHeight = fontSize * 1.25;
+      const padding = canvasSize * 0.05; // 5% padding
+      const drawArea = canvasSize - padding * 2;
+      
+      let charCounter = 0;
+      
+      // We scan down rows, line by line...
+      for (let pixelY = padding; pixelY < canvasSize - padding; pixelY += lineHeight) {
+        let pixelX = padding;
+        
+        // ...and across the row pixel by pixel
+        while (pixelX < canvasSize - padding) {
+          // Normalize coordinates to -1 -> 1 logic mapping for the SDF Engine
+          const nx = (pixelX - canvasSize / 2) / (drawArea / 2);
+          const ny = (pixelY - canvasSize / 2) / (drawArea / 2);
+          
+          // Math asks: Are we standing inside the boundaries of the Wave?
+          const dist = waveSDF(nx, ny);
+          
+          // Negative distance means we are inside the solid area of the shape!
+          if (dist < -0.01) {
+            // Find which character we should place next based on our infinitely repeating text string
+            const charIdx = charCounter % textSource.length;
+            const ch = textSource[charIdx];
+            const w = charWidths[charIdx]; // Our pixel-perfect width we got from pretext
+            
+            positions.push({
+              ch,
+              x: pixelX,
+              y: pixelY,
+              width: w,
+              charIdx,
+              globalIdx: charCounter
+            });
+            
+            // Step forward exactly the width of the character so they sit perfectly flush
+            pixelX += w + (fontSize * 0.03); 
+            charCounter++;
+          } 
+          // If we are close to boundary, step forward a little to find the edge precisely
+          else if (dist < 0.05) {
+            pixelX += fontSize * 0.3;
+          } 
+          // If we are far away, jump massive bounds
+          else {
+            pixelX += Math.max(fontSize * 0.8, (dist * drawArea * 0.5));
+          }
+        }
+      }
+      
+      // Now that we have the exact physical layout, setup the animation instances!
+      animChars = positions.map(p => ({
+        ...p,
+        targetX: p.x,
+        targetY: p.y,
+        baseTargetY: p.y, // Store originally laid out vertical position to base the wave off of
+        baseNx: (p.x - canvasSize / 2) / (drawArea / 2), // Normalized X for sine phase tracking
+        currentX: canvasSize / 2 + (Math.random() - 0.5) * canvasSize * 0.5,
+        currentY: canvasSize / 2 + (Math.random() - 0.5) * canvasSize * 0.5,
+        velX: 0,
+        velY: 0,
+        targetAlpha: 1,
+        currentAlpha: 0,
+        delay: (p.x / canvasSize) * 2.0 + Math.random() * 0.2 
+      }));
+      
+      animT = 0;
+    }
+
+    function renderFrame() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      // Clear canvas background
+      ctx.clearRect(0, 0, w, h);
+      
+      const fontSize = charSize * dpr;
+      ctx.font = `800 ${fontSize}px ${FONT_FAMILY}`;
+      ctx.textBaseline = "top";
+      
+      animT += 0.016; // Increment time
+      
+      let allArrived = true;
+      
+      // Apply the dynamic moving wave math!
+      const drawAreaForWave = (canvasSize - (canvasSize * 0.05) * 2);
+      
+      for (const ch of animChars) {
+        // Did this character's entrance delay finish?
+        const tVal = Math.max(0, animT - ch.delay);
+        if (tVal <= 0) {
+          allArrived = false;
+          continue;
+        }
+        
+        // --- DYNAMIC WAVE SINE UPDATE ---
+        // Calculate the difference in wave height between time=0 and time=animT for this specific horizontal position
+        const timePhase = animT * 1.5; // Wave speed
+        const origWaveY = Math.sin(ch.baseNx * 4) * 0.25;
+        const newWaveY  = Math.sin(ch.baseNx * 4 + timePhase) * 0.25;
+        
+        // Apply the physical displacement scalar delta
+        ch.targetY = ch.baseTargetY + ((newWaveY - origWaveY) * (drawAreaForWave / 2));
+        
+        // Physics logic: Draw characters to their pretext-calculated resting place using a spring
+        const springK = 0.08;
+        const damping = 0.75;
+        
+        const forceX = (ch.targetX - ch.currentX) * springK;
+        const forceY = (ch.targetY - ch.currentY) * springK;
+        
+        ch.velX = (ch.velX + forceX) * damping;
+        ch.velY = (ch.velY + forceY) * damping;
+        
+        ch.currentX += ch.velX;
+        ch.currentY += ch.velY;
+        
+        ch.currentAlpha += (ch.targetAlpha - ch.currentAlpha) * 0.08;
+        
+        const distToTarget = Math.abs(ch.currentX - ch.targetX) + Math.abs(ch.currentY - ch.targetY);
+        if (distToTarget > 0.5) allArrived = false;
+        
+        // Get the specific varying blue shade for this letter
+        const color = getBlueWaveColor(ch.charIdx, CUSTOM_TEXT.length);
+        
+        ctx.fillStyle = color;
+        ctx.globalAlpha = Math.min(1, ch.currentAlpha);
+        ctx.fillText(ch.ch, ch.currentX * dpr, ch.currentY * dpr);
+      }
+      
+      // We also draw a subtle "glow" wave once everything has arrived so the shape pulses underneath the text.
+      ctx.globalAlpha = 1;
+      if (allArrived && animChars.length > 0) {
+        const pulse = (Math.sin(animT * 2) + 1) / 2;
+        const glowAlpha = 0.01 + pulse * 0.02;
+        
+        const padding = canvasSize * 0.05;
+        const drawArea = canvasSize - padding * 2;
+        
+        ctx.fillStyle = `rgba(56, 189, 248, ${glowAlpha})`; // The standard accent cyan
+        
+        for (let y = 0; y < h; y += 4 * dpr) {
+          for (let x = 0; x < w; x += 4 * dpr) {
+            const nx = (x / dpr - canvasSize / 2) / (drawArea / 2);
+            const ny = (y / dpr - canvasSize / 2) / (drawArea / 2);
+            const dist = waveSDF(nx, ny);
+            if (dist > -0.05 && dist < 0.02) {
+              ctx.fillRect(x, y, 3 * dpr, 3 * dpr);
+            }
+          }
+        }
+      }
+      
+      requestAnimationFrame(renderFrame);
+    }
+
+    function init() {
+      // Small timeout to allow the font to load
+      setTimeout(() => {
+        document.getElementById("loading").style.opacity = '0';
+        setTimeout(() => document.getElementById("loading").style.display = 'none', 500);
+        
+        generateCalligram();
+        requestAnimationFrame(renderFrame);
+      }, 800);
+    }
+
+    init();
+  </script>
+
+</body>
+</html>

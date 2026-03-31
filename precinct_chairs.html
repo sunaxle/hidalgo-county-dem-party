@@ -413,18 +413,18 @@
       const roleFilter = document.getElementById('roleFilter');
       const noResults = document.getElementById('noResults');
       
-      let cd15List = [];
-      let cd28List = [];
-      let activeDistrict = 'ALL';
-      let activeCity = 'ALL';
+      window.cd15List = [];
+      window.cd28List = [];
+      window.activeDistrict = 'ALL';
+      window.activeCity = 'ALL';
 
       // Fetch district mapping data
       Promise.all([
           fetch('data/cd15_precincts.json').then(r => r.json()),
           fetch('data/cd28_precincts.json').then(r => r.json())
       ]).then(data => {
-          cd15List = data[0];
-          cd28List = data[1];
+          window.cd15List = data[0];
+          window.cd28List = data[1];
       }).catch(e => console.error("Filter API Error:", e));
 
       // Populate table
@@ -470,14 +470,14 @@
                              (roleTerm === 'captain' && role === 'block captain');
                              
           let matchesDistrict = true;
-          if (activeDistrict === '15') matchesDistrict = cd15List.includes(pctInt);
-          if (activeDistrict === '28') matchesDistrict = cd28List.includes(pctInt);
+          if (window.activeDistrict === '15') matchesDistrict = window.cd15List.includes(pctInt);
+          if (window.activeDistrict === '28') matchesDistrict = window.cd28List.includes(pctInt);
 
           let matchesCity = true;
-          if (activeCity !== 'ALL') {
+          if (window.activeCity !== 'ALL') {
               const precinctMapData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
               if (precinctMapData) {
-                  matchesCity = (precinctMapData.CITY === activeCity);
+                  matchesCity = (precinctMapData.CITY === window.activeCity);
               } else {
                   matchesCity = false;
               }
@@ -498,7 +498,7 @@
       const cdBtns = document.querySelectorAll('.cd-filter-btn');
       cdBtns.forEach(btn => {
           btn.addEventListener('click', () => {
-              activeDistrict = btn.dataset.district;
+              window.activeDistrict = btn.dataset.district;
               // Reset styling
               cdBtns.forEach(b => {
                   b.style.background = 'rgba(255,255,255,0.05)';
@@ -512,6 +512,7 @@
               btn.style.borderColor = 'var(--accent)';
               btn.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
               filterTable();
+              if(window.updateMapFromFilters) window.updateMapFromFilters();
           });
       });
 
@@ -519,7 +520,7 @@
       const cityBtns = document.querySelectorAll('.city-filter-btn');
       cityBtns.forEach(btn => {
           btn.addEventListener('click', () => {
-              activeCity = btn.dataset.city;
+              window.activeCity = btn.dataset.city;
               // Reset styling
               cityBtns.forEach(b => {
                   b.style.background = 'rgba(255,255,255,0.05)';
@@ -533,6 +534,7 @@
               btn.style.borderColor = 'var(--accent)';
               btn.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
               filterTable();
+              if(window.updateMapFromFilters) window.updateMapFromFilters();
           });
       });
 

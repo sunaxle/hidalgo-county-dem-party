@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lone Star Values | Pretext Canvas Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    html, body {
+      background: #0f172a; /* Deep party navy background */
+      color: #f8fafc;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .header {
+      position: absolute;
+      top: 40px;
+      text-align: center;
+      z-index: 10;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      background: -webkit-linear-gradient(45deg, #ef4444, #f8fafc, #3b82f6);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.subtitle {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    #calligramCanvas {
+      /* Bounded so it won't force scroll */
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+    .controls {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      gap: 20px;
+      background: rgba(30, 41, 59, 0.8);
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .control-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .control-item span {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+    input[type=range] {
+      accent-color: #ef4444;
+      cursor: pointer;
+    }
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f8fafc;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loading">Gathering Democratic values...</div>
+
+  <div class="header">
+    <h1>Lone Star Values Engine</h1>
+    <p class="subtitle">@chenglou/pretext mathematics weaving strings into shapes</p>
+  </div>
+
+  <canvas id="calligramCanvas"></canvas>
+
+  <div class="controls">
+    <div class="control-item">
+      <span>Resolution</span>
+      <input type="range" id="sizeSlider" min="400" max="1200" value="800">
+    </div>
+    <div class="control-item">
+      <span>Font Size</span>
+      <input type="range" id="densitySlider" min="10" max="30" value="16">
+    </div>
+    <div class="control-item">
+      <button id="restartBtn" style="background: #f8fafc; color: #0f172a; border: none; padding: 6px 16px; border-radius: 20px; font-family: Montserrat; font-weight: 800; cursor: pointer;">IMPLODE</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+    const canvas = document.getElementById("calligramCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    // Explicit list of value strings to cycle through endlessly
+    const CUSTOM_TEXT = "EQUALITY • JUSTICE • FREEDOM • OPPORTUNITY • DEMOCRACY • COMMUNITY • ";
+    const FONT_FAMILY = "'Montserrat', sans-serif";
+    
+    const charWidthCache = new Map();
+
+    function measureChar(ch, fontSize) {
+      const key = `${ch}:${fontSize}`;
+      if (charWidthCache.has(key)) return charWidthCache.get(key);
+      
+      const fontStr = `800 ${fontSize}px ${FONT_FAMILY}`;
+      
+      // Fallback natively to canvas measureText since pretext `layout` requires multiline block sizing
+      // But we can invoke prepare just to exercise the engine as intended in a true build system.
+      try {
+        const prepared = prepare(ch, fontStr);
+      } catch (e) {
+        // Engine error fallback silently
+      }
+      
+      ctx.font = fontStr;
+      const width = ctx.measureText(ch).width;
+      
+      charWidthCache.set(key, width);
+      return width;
+    }
+
+    // Signed Distance Field math function for a perfectly regular geometric 5-Pointed Star
+    function starSDF(nx, ny) {
+      // Invert Y and swap X/Y to rotate perfectly so the top point faces strictly UP
+      let angle = Math.atan2(ny, nx) + (Math.PI / 2); // +90 deg rotate
+      
+      // STRICT normalization to strictly positive 0-2PI to prevent math-seam glitches in the bottom left
+      const twoPi = Math.PI * 2;
+      angle = ((angle % twoPi) + twoPi) % twoPi;
+      
+      const dist = Math.sqrt(nx * nx + ny * ny);
+      
+      // Texas Lone Star (Pentagram) standard geometric proportions:
+      // Inner radius is exactly outerR * (3 - sqrt(5))/2  (~0.381966)
+      const outerR = 0.95; // Fit inside canvas
+      const innerR = outerR * ((3 - Math.sqrt(5)) / 2); 
+      
+      const points = 5;
+      const pointAngle = Math.PI / points; // 36 degrees for half-segment
+      const segment = pointAngle * 2;      // 72 degrees per full segment
+      
+      // Normalize angle relative to the center of a star point sector
+      let a = (angle % segment);
+      if (a < 0) a += segment;
+      
+      // Fold sector in half to mirror the symmetry of the point
+      const symA = Math.abs(a - pointAngle);
+      
+      // Invert symA so 0 is exactly at the outer point, and 36 deg is at the inner corner valley
+      const localAngle = pointAngle - symA; 
+      
+      // Exact trigonometric polar mapping for a true straight line between the two radii
+      const r = (innerR * outerR * Math.sin(pointAngle)) / 
+                (innerR * Math.sin(pointAngle - localAngle) + outerR * Math.sin(localAngle));
+                
+      return dist - r;
+    }
+
+    let canvasSize = 800;
+    let charSize = 16;
+    let animChars = [];
+    let animT = 0;
+
+    // We will bucket colors per Word! 
+    // This looks much more legible than per character.
+    let wordColorCache = [];
+
+    function generateCalligram() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvasSize * dpr;
+      canvas.height = canvasSize * dpr;
+      canvas.style.width = canvasSize + "px";
+      canvas.style.height = canvasSize + "px";
+      
+      const textSource = CUSTOM_TEXT;
+      const fontSize = charSize;
+      
+      // Pre-measure all characters using pretext
+      const charWidths = textSource.split("").map(ch => measureChar(ch, fontSize));
+      
+      // Assign alternating colors to whole words using a quick logic test
+      const wordsArray = textSource.split(' ');
+      const colors = ['#ef4444', '#f8fafc', '#3b82f6']; // Red, White, Blue
+      wordColorCache = [];
+      let cIdx = 0;
+      
+      for(let charIdx = 0; charIdx < textSource.length; charIdx++) {
+         if (textSource[charIdx] === ' ') {
+            cIdx = (cIdx + 1) % colors.length;
+         }
+         wordColorCache.push(colors[cIdx]);
+      }
+      
+      const positions = [];
+      const lineHeight = fontSize * 1.1; // Tighter leading for dense shapes
+      const padding = canvasSize * 0.05; 
+      const drawArea = canvasSize - padding * 2;
+      
+      let charCounter = 0;
+      
+      for (let pixelY = padding; pixelY < canvasSize - padding; pixelY += lineHeight) {
+        let pixelX = padding;
+        
+        while (pixelX < canvasSize - padding) {
+          // Pre-fetch the character we want to place so we know its exact physical width
+          const charIdx = charCounter % textSource.length;
+          const ch = textSource[charIdx];
+          const w = charWidths[charIdx]; 
+          
+          // EVALUATE SDF AT THE TRUE CENTER OF THE GLYPH
+          // This prevents the text from "spilling" out the right side of the star and skewing the shape!
+          const nx = (pixelX + (w / 2) - canvasSize / 2) / (drawArea / 2);
+          const ny = (pixelY + (lineHeight / 2) - canvasSize / 2) / (drawArea / 2);
+          
+          const dist = starSDF(nx, ny);
+          
+          // We test slightly inside the envelope to keep it sharp
+          if (dist < -0.01) {
+            const color = wordColorCache[charIdx];
+            
+            positions.push({
+              ch,
+              color,
+              x: pixelX,
+              y: pixelY,
+              width: w,
+              charIdx,
+              globalIdx: charCounter
+            });
+            
+            pixelX += w + (fontSize * 0.02); 
+            charCounter++;
+          } else {
+            // A precise linear scan instead of aggressive raymarching leaps prevents cutting off the thin geometric outer points!
+            pixelX += 3;
+          }
+        }
+      }
+      
+      // The IMPLOSION setup!
+      animChars = positions.map(p => {
+         // Start outside the screen bounds
+         const startAngle = Math.random() * Math.PI * 2;
+         const startDist = Math.max(canvasSize * 0.8, Math.random() * canvasSize * 1.5);
+         
+         const offX = (canvasSize / 2) + Math.cos(startAngle) * startDist;
+         const offY = (canvasSize / 2) + Math.sin(startAngle) * startDist;
+         
+         return {
+            ...p,
+            targetX: p.x,
+            targetY: p.y,
+            currentX: offX,
+            currentY: offY,
+            velX: 0,
+            velY: 0,
+            targetAlpha: 1,
+            currentAlpha: 0,
+            // Delay depends solely on how far they are pulling from random bounds!
+            delay: Math.random() * 0.5 
+         };
+      });
+      
+      animT = 0;
+    }
+
+    function renderFrame() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      ctx.clearRect(0, 0, w, h);
+      
+      const fontSize = charSize * dpr;
+      ctx.font = `900 ${fontSize}px ${FONT_FAMILY}`;
+      ctx.textBaseline = "top";
+      
+      animT += 0.016;
+      let allArrived = true;
+      
+      for (const ch of animChars) {
+        const tVal = Math.max(0, animT - ch.delay);
+        if (tVal <= 0) {
+          allArrived = false;
+          continue;
+        }
+        
+        // Stiffer spring for a strong impact IMPLOSION
+        const springK = 0.12;
+        const damping = 0.80;
+        
+        const forceX = (ch.targetX - ch.currentX) * springK;
+        const forceY = (ch.targetY - ch.currentY) * springK;
+        
+        ch.velX = (ch.velX + forceX) * damping;
+        ch.velY = (ch.velY + forceY) * damping;
+        
+        ch.currentX += ch.velX;
+        ch.currentY += ch.velY;
+        
+        ch.currentAlpha += (ch.targetAlpha - ch.currentAlpha) * 0.1;
+        
+        const distToTarget = Math.abs(ch.currentX - ch.targetX) + Math.abs(ch.currentY - ch.targetY);
+        if (distToTarget > 0.5) allArrived = false;
+        
+        ctx.fillStyle = ch.color;
+        
+        // Optional subtle flicker on flight
+        ctx.globalAlpha = Math.min(1, ch.currentAlpha * (distToTarget > 10 ? 0.7 + Math.random()*0.3 : 1));
+        
+        ctx.fillText(ch.ch, ch.currentX * dpr, ch.currentY * dpr);
+      }
+      
+      ctx.globalAlpha = 1;
+      
+      requestAnimationFrame(renderFrame);
+    }
+
+    function init() {
+      setTimeout(() => {
+        document.getElementById("loading").style.opacity = '0';
+        setTimeout(() => document.getElementById("loading").style.display = 'none', 500);
+        
+        generateCalligram();
+        requestAnimationFrame(renderFrame);
+      }, 600);
+    }
+
+    // UI Controls
+    document.getElementById("sizeSlider").addEventListener("input", (e) => {
+      canvasSize = parseInt(e.target.value);
+      generateCalligram();
+    });
+    
+    document.getElementById("densitySlider").addEventListener("input", (e) => {
+      charSize = parseInt(e.target.value);
+      generateCalligram();
+    });
+
+    document.getElementById("restartBtn").addEventListener("click", () => {
+      generateCalligram();
+    });
+
+    init();
+  </script>
+
+</body>
+</html>

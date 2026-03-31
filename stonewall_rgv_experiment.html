@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stonewall RGV Pride Heart | Pretext Canvas Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    html, body {
+      background: #0f172a; 
+      color: #f8fafc;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .header {
+      position: absolute;
+      top: 40px;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none; /* Let clicks pass through to the canvas link */
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      /* Rainbow gradient text! */
+      background: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #24408e, #732982);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.subtitle {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    
+    /* The interactive container */
+    #heroLink {
+      display: block;
+      cursor: pointer;
+      border-radius: 50%; /* Just so hover effects bleed nicely */
+      transition: transform 0.2s ease;
+    }
+    #heroLink:hover {
+      transform: scale(1.02); /* Slight hover pop on the whole thing */
+    }
+    
+    #calligramCanvas {
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f8fafc;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loading">Calculating Stonewall geometry...</div>
+
+  <div class="header">
+    <h1>STONEWALL RGV</h1>
+    <p class="subtitle">Click the breathing Heart to visit the Stonewall site!</p>
+  </div>
+
+  <a href="https://hidalgotxdemocrats.org/stonewall-rgv" id="heroLink" target="_blank">
+    <canvas id="calligramCanvas"></canvas>
+  </a>
+
+  <script type="module">
+    import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+    const canvas = document.getElementById("calligramCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    // Explicit continuous values string 
+    const CUSTOM_TEXT = "STONEWALL DEMOCRATS OF THE RIO GRANDE VALLEY • EQUALITY • PRIDE • VISIBILITY • COMMUNITY • ";
+    const FONT_FAMILY = "'Montserrat', sans-serif";
+    
+    const charWidthCache = new Map();
+
+    function measureChar(ch, fontSize) {
+      const key = `${ch}:${fontSize}`;
+      if (charWidthCache.has(key)) return charWidthCache.get(key);
+      
+      const fontStr = `800 ${fontSize}px ${FONT_FAMILY}`;
+      
+      try {
+        const prepared = prepare(ch, fontStr);
+      } catch (e) { }
+      
+      ctx.font = fontStr;
+      const width = ctx.measureText(ch).width;
+      
+      charWidthCache.set(key, width);
+      return width;
+    }
+
+    // Exact Mathematical algebraic Signed Distance Field for a true vector Heart!
+    function heartSDF(nx, ny) {
+      // Invert Y because canvas Y points down, cartesian Y points up.
+      // Scale coordinates outwardly (zoom out) by 1.5 so the top lobes of the Quilez shape do not clip past the canvas bounds.
+      let scale = 1.5;
+      let x = nx * scale;
+      let y = -ny * scale;
+      
+      // Shift the shape mathematically DOWN the grid so its visual weight lies perfectly centered.
+      y += 0.25; 
+      
+      // Heart symmetry mapping
+      x = Math.abs(x);
+      
+      // Upper lobes test
+      if (y + x > 1.0) {
+        const dx = x - 0.25;
+        const dy = y - 0.75;
+        return Math.sqrt(dx * dx + dy * dy) - (Math.SQRT2 / 4.0);
+      }
+      
+      // Main lower cone/body
+      const uX = x - 0.00;
+      const uY = y - 1.00;
+      
+      const k = 0.5 * Math.max(x + y, 0.0);
+      const vX = x - k;
+      const vY = y - k;
+      
+      const dotU = uX * uX + uY * uY;
+      const dotV = vX * vX + vY * vY;
+      
+      // The distance mapped into an inside=negative sign check
+      const dist = Math.sqrt(Math.min(dotU, dotV));
+      return dist * Math.sign(x - y);
+    }
+
+    const canvasSize = 800;
+    const charSize = 16;
+    let animChars = [];
+    let animT = 0;
+
+    function generateCalligram() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvasSize * dpr;
+      canvas.height = canvasSize * dpr;
+      canvas.style.width = canvasSize + "px";
+      canvas.style.height = canvasSize + "px";
+      
+      const textSource = CUSTOM_TEXT;
+      const fontSize = charSize;
+      
+      const charWidths = textSource.split("").map(ch => measureChar(ch, fontSize));
+      
+      // 6-Stripe Pride flag exact hex colors!
+      const colors = ['#e40303', '#ff8c00', '#ffed00', '#008026', '#24408e', '#732982']; 
+      
+      // Assign words exactly to colors in a looping cycle
+      const wordColorCache = [];
+      let cIdx = 0;
+      for (let i = 0; i < textSource.length; i++) {
+         if (textSource[i] === ' ') {
+            cIdx = (cIdx + 1) % colors.length;
+         }
+         wordColorCache.push(colors[cIdx]);
+      }
+      
+      const positions = [];
+      const lineHeight = fontSize * 1.15; 
+      const padding = canvasSize * 0.05; 
+      const drawArea = canvasSize - padding * 2;
+      
+      let charCounter = 0;
+      
+      for (let pixelY = padding; pixelY < canvasSize - padding; pixelY += lineHeight) {
+        let pixelX = padding;
+        
+        while (pixelX < canvasSize - padding) {
+          const charIdx = charCounter % textSource.length;
+          const ch = textSource[charIdx];
+          const w = charWidths[charIdx]; 
+          
+          // Test the true geometric center of the specific character to perfectly straddle the bounding envelope
+          const nx = (pixelX + (w / 2) - canvasSize / 2) / (drawArea / 2);
+          const ny = (pixelY + (lineHeight / 2) - canvasSize / 2) / (drawArea / 2);
+          
+          const dist = heartSDF(nx, ny);
+          
+          // Using -0.01 tests if the character center is definitely inside the mathematically solid Heart space
+          if (dist < -0.01) {
+            const color = wordColorCache[charIdx];
+            
+            positions.push({
+              ch,
+              color,
+              x: pixelX,
+              y: pixelY,
+              width: w,
+              charIdx,
+              globalIdx: charCounter
+            });
+            
+            // Step forward exactly the width of the freshly placed letter plus kerning
+            pixelX += w + (fontSize * 0.02); 
+            charCounter++;
+          } else {
+            // Precise linear scan: NEVER jump aggressively, never skip the sharp tail!
+            pixelX += 3;
+          }
+        }
+      }
+      
+      animChars = positions.map(p => {
+         // Explode randomly outwards, but very far away
+         const an = Math.random() * Math.PI * 2;
+         const rr = Math.random() * canvasSize * 1.2 + (canvasSize * 0.8);
+         return {
+            ...p,
+            baseTargetX: p.x,   // Store physical layout position
+            baseTargetY: p.y,   
+            targetX: p.x,
+            targetY: p.y,
+            currentX: canvasSize / 2 + Math.cos(an) * rr, // Outer explosion ring
+            currentY: canvasSize / 2 + Math.sin(an) * rr,
+            velX: 0,
+            velY: 0,
+            targetAlpha: 1,
+            currentAlpha: 0,
+            delay: Math.random() * 0.6 // Random shower timing
+         };
+      });
+      
+      animT = 0;
+    }
+
+    function renderFrame() {
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      ctx.clearRect(0, 0, w, h);
+      
+      const fontSize = charSize * dpr;
+      ctx.font = `900 ${fontSize}px ${FONT_FAMILY}`;
+      ctx.textBaseline = "top";
+      
+      animT += 0.016; // 60fps clock 
+      
+      // Calculate biological Heartbeat Rhythm (the classic lub-dub medical pattern)!
+      // Pow(sin, 16) makes ultra sharp, fast spikes of expansion
+      const phase = animT * 3.0; // Pumping speed
+      const lubDub = Math.pow(Math.sin(phase), 16) + Math.pow(Math.sin(phase + 0.5), 32) * 0.4;
+      
+      // The Heart letters will physically expand 6% outwards during the beat
+      const beatScale = 1.0 + (lubDub * 0.06); 
+      
+      for (const ch of animChars) {
+        const tVal = Math.max(0, animT - ch.delay);
+        if (tVal <= 0) continue;
+        
+        // --- DYNAMIC PULSE MATH ---
+        // Dynamically recalculate exactly where this letter should be right now based on the beat!
+        ch.targetX = (canvasSize / 2) + ((ch.baseTargetX - canvasSize / 2) * beatScale);
+        ch.targetY = (canvasSize / 2) + ((ch.baseTargetY - canvasSize / 2) * beatScale);
+        
+        // Run physics spring on target
+        const springK = 0.15; // Tight medical spring
+        const damping = 0.85;
+        
+        const forceX = (ch.targetX - ch.currentX) * springK;
+        const forceY = (ch.targetY - ch.currentY) * springK;
+        
+        ch.velX = (ch.velX + forceX) * damping;
+        ch.velY = (ch.velY + forceY) * damping;
+        
+        ch.currentX += ch.velX;
+        ch.currentY += ch.velY;
+        
+        ch.currentAlpha += (ch.targetAlpha - ch.currentAlpha) * 0.1;
+        
+        ctx.fillStyle = ch.color;
+        
+        // Add a tiny bit of brightness flicker during the heartbeat!
+        if (lubDub * ch.currentAlpha > 0.1) {
+          ctx.shadowColor = ch.color;
+          ctx.shadowBlur = 10 * lubDub;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        
+        ctx.globalAlpha = Math.min(1, ch.currentAlpha);
+        ctx.fillText(ch.ch, ch.currentX * dpr, ch.currentY * dpr);
+      }
+      
+      requestAnimationFrame(renderFrame);
+    }
+
+    function init() {
+      setTimeout(() => {
+        document.getElementById("loading").style.opacity = '0';
+        setTimeout(() => document.getElementById("loading").style.display = 'none', 500);
+        
+        generateCalligram();
+        requestAnimationFrame(renderFrame);
+      }, 600);
+    }
+
+    init();
+  </script>
+</body>
+</html>

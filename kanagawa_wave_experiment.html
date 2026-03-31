@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Great Wave of Kanagawa | Pretext Canvas Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    html, body {
+      background: #0f172a; 
+      color: #f8fafc;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .header {
+      position: absolute;
+      top: 40px;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #f8fafc, #3b82f6, #1e3a8a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.subtitle {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+    
+    #calligramCanvas {
+      width: 100vw;
+      height: 80vh;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f8fafc;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loading">Sculpting Ocean Geography...</div>
+
+  <div class="header">
+    <h1>THE GREAT WAVE</h1>
+    <p class="subtitle">Sculpted Boolean Distance Fields</p>
+  </div>
+
+  <canvas id="calligramCanvas"></canvas>
+
+  <script type="module">
+    import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+    const canvas = document.getElementById("calligramCanvas");
+    const ctx = canvas.getContext("2d");
+    
+    // A long repeating string of the wave texture!
+    const CUSTOM_TEXT = "Richard gonzales Riding the Blue wave ";
+    const FONT_FAMILY = "'Montserrat', sans-serif";
+    
+    const charWidthCache = new Map();
+
+    function measureChar(ch, fontSize) {
+      const key = `${ch}:${fontSize}`;
+      if (charWidthCache.has(key)) return charWidthCache.get(key);
+      
+      const fontStr = `800 ${fontSize}px ${FONT_FAMILY}`;
+      try { const prepared = prepare(ch, fontStr); } catch (e) { }
+      
+      ctx.font = fontStr;
+      const width = ctx.measureText(ch).width;
+      charWidthCache.set(key, width);
+      return width;
+    }
+
+    // Mathematical Smooth Minimum (Quilez Polynomials). Melts geometry together like liquid drops.
+    function smin(a, b, k) {
+        let h = Math.max(k - Math.abs(a - b), 0.0) / k;
+        return Math.min(a, b) - h * h * k * (1.0 / 4.0);
+    }
+
+    // Mathematical Smooth Maximum. Bites chunks out of liquids smoothly (like an ice cream scoop).
+    function smax(a, b, k) {
+        let h = Math.max(k - Math.abs(a - b), 0.0) / k;
+        return Math.max(a, b) + h * h * k * (1.0 / 4.0);
+    }
+    
+    function len(dx, dy) {
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // The Hokusai Boolean Algorithm
+    // This evaluates a completely seamless infinite repeating ocean space.
+    function kanagawaSDF(nx_in, ny) {
+        // We repeat the domain every 2.4 physical units.
+        const period = 2.4;
+        let nx = ((nx_in % period) + period) % period - (period / 2); // Ranges [-1.2, 1.2]
+        
+        // Primitive 1: Base sea line. Represents still water at ny = 0.3
+        let dBase = ny - 0.3;
+        
+        // Primitive 2: Massive Swell pushing up the water. Center right.
+        let dSwell = len(nx - 0.2, ny - 1.1) - 1.25;
+        // Smoothly meld the swell hill into the flat sea
+        let dWave = smin(dBase, dSwell, 0.5);
+        
+        // Primitive 3: The terrifying Trough! 
+        // We hollow a giant bite out of the left face of the swell using a spherical scoop.
+        let dFace = len(nx + 0.4, ny - 0.1) - 0.85;
+        // The smax subtracts mathematically! Giving a beautiful sweeping crescent face.
+        dWave = smax(dWave, -dFace, 0.25);
+        
+        // Primitive 4: The Overhanging Lip/Claw!
+        let dLip = len(nx + 0.05, ny + 0.6) - 0.15;
+        dWave = smin(dWave, dLip, 0.15); // Melt it to the very tip of the crashing face
+        
+        // Primitive 5: Hollow out the underside of the lip to curl it.
+        let dHollow = len(nx - 0.08, ny + 0.65) - 0.15;
+        dWave = smax(dWave, -dHollow, 0.08); // Final aggressive bite!
+        
+        return dWave;
+    }
+
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    const charSize = 18;
+    let animChars = [];
+    let animT = 0;
+    
+    const DRAW_AREA_SCALAR = 450; // Use a fixed spatial scalar so ratio stays intact horizontally!
+
+    function generateCalligram() {
+      const dpr = window.devicePixelRatio || 1;
+      
+      // Full screen 
+      canvasWidth = window.innerWidth;
+      canvasHeight = window.innerHeight * 0.8; // Match CSS
+      
+      canvas.width = canvasWidth * dpr;
+      canvas.height = canvasHeight * dpr;
+      
+      const charWidths = CUSTOM_TEXT.split("").map(ch => measureChar(ch, charSize));
+      
+      const positions = [];
+      const lineHeight = charSize * 1.15; 
+      
+      // Build a snapshot of the math space slightly off-screen in both directions to allow endless panning
+      const panBuffer = DRAW_AREA_SCALAR * 1.2;
+      const startX = -panBuffer;
+      const endX = canvasWidth + panBuffer;
+      
+      let charCounter = 0;
+      
+      // Sweep the canvas pixel space exactly like a cathode ray tube
+      for (let pixelY = 0; pixelY < canvasHeight; pixelY += lineHeight) {
+        let pixelX = startX;
+        
+        while (pixelX < endX) {
+          const charIdx = charCounter % CUSTOM_TEXT.length;
+          const ch = CUSTOM_TEXT[charIdx];
+          const w = charWidths[charIdx]; 
+          
+          // Natively scale to standard Cartesian grid!
+          const nx = (pixelX + (w / 2) - canvasWidth / 2) / DRAW_AREA_SCALAR;
+          const ny = (pixelY + (lineHeight / 2) - canvasHeight / 2) / DRAW_AREA_SCALAR;
+          
+          const dist = kanagawaSDF(nx, ny);
+          
+          if (dist < -0.01) {
+            positions.push({
+              ch,
+              x: pixelX,
+              y: pixelY,
+              width: w,
+              charIdx,
+              ny // Store ny to texture the color based on wave height!
+            });
+            pixelX += w + (charSize * 0.03); 
+            charCounter++;
+          } else {
+            // Strict linear ray scan prevents missing sharp geometric claws!
+            pixelX += 4;
+          }
+        }
+      }
+      
+      animChars = positions.map(p => ({
+         ...p,
+         originalX: p.x, 
+         currentX: p.x,
+         velY: 0
+      }));
+    }
+
+    let globalShift = 0;
+
+    function renderFrame() {
+      const dpr = window.devicePixelRatio || 1;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      const fontSize = charSize * dpr;
+      ctx.font = `900 ${fontSize}px ${FONT_FAMILY}`;
+      ctx.textBaseline = "top";
+      
+      const dt = 1/60;
+      const panSpeed = 90; // Pixels per second translation
+      
+      // Accumulate the shift
+      globalShift += panSpeed * dt;
+      
+      // When we have shifted exactly one full physical wave period, teleport seamlessly back!
+      // This creates an infinite, flawless continuous ocean scroll.
+      const periodPixels = 2.4 * DRAW_AREA_SCALAR; 
+      if (globalShift >= periodPixels) {
+          globalShift -= periodPixels;
+      }
+      
+      for (const ch of animChars) {
+        // Shift every letter perfectly linearly
+        let drawX = ch.originalX - globalShift;
+
+        // Foam Shader (identical vertical mapping based on original ny)
+        let foamRatio = Math.max(0, Math.min(1, (ch.ny + 0.6) / 0.8)); 
+        foamRatio = 1.0 - foamRatio; 
+        const curve = Math.pow(foamRatio, 4); 
+        
+        const h = 220 - (curve * 20);
+        const s = 80 - (curve * 40);
+        const l = 20 + (curve * 75);
+        ctx.fillStyle = `hsl(${h}, ${s}%, ${l}%)`;
+        
+        // Culling optimization
+        if (drawX > -50 && drawX < canvasWidth + 50) {
+            ctx.fillText(ch.ch, drawX * dpr, ch.y * dpr);
+        }
+      }
+      
+      requestAnimationFrame(renderFrame);
+    }
+
+    function init() {
+      setTimeout(() => {
+        document.getElementById("loading").style.opacity = '0';
+        setTimeout(() => document.getElementById("loading").style.display = 'none', 500);
+        
+        generateCalligram();
+        requestAnimationFrame(renderFrame);
+      }, 700);
+    }
+    
+    // Natively handle window resizes for fluid layouts
+    window.addEventListener('resize', () => {
+        generateCalligram();
+    });
+
+    init();
+  </script>
+</body>
+</html>

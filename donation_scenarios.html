@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donation Scenarios - Hidalgo Democrats</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  
+  <style>
+    /* Custom Scenarios Page Styling */
+    .scenario-header {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: white;
+    }
+    
+    .scenario-header h1 {
+      font-size: 3.5rem;
+      font-family: 'Alfa Slab One', cursive;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .scenario-header p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .tier-divider {
+      text-align: center;
+      max-width: 800px;
+      margin: 4rem auto 2rem auto;
+      padding-top: 2rem;
+      border-top: 2px dashed #cbd5e1;
+    }
+
+    .tier-divider.first {
+      border-top: none;
+      margin-top: 2rem;
+      padding-top: 0;
+    }
+
+    .tier-divider h2 {
+      font-size: 2.5rem;
+      font-family: 'Alfa Slab One', cursive;
+      color: #1e3a8a;
+      margin: 0;
+    }
+
+    .tier-divider p {
+      font-size: 1.25rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .scenarios-container {
+      max-width: 1200px;
+      margin: 0 auto 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media(max-width: 900px) {
+      .scenarios-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .scenario-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s;
+    }
+    
+    .scenario-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .scenario-card-header {
+      padding: 1.5rem;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .scenario-card-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
+      font-size: 1.3rem;
+    }
+    
+    .scenario-card-header .subtitle {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-top: 0.25rem;
+    }
+
+    .scenario-card-body {
+      padding: 1.5rem;
+      flex: 1;
+    }
+
+    .participation-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .participation-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed #cbd5e1;
+      font-family: 'Inter', sans-serif;
+      color: #334155;
+    }
+    
+    .participation-list li:last-child {
+      border-bottom: none;
+    }
+
+    .participation-list .role {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .participation-list .count {
+      color: #0ea5e9;
+      font-weight: 800;
+    }
+
+    .total-line {
+      background: #f1f5f9;
+      padding: 1rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .budget-impact {
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .budget-impact.emerald { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .budget-impact.amber   { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .budget-impact.indigo  { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+    .budget-impact.rose    { background: linear-gradient(135deg, #e11d48 0%, #be123c 100%); }
+
+    .budget-impact .label {
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      font-weight: 600;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+
+    .budget-impact .amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      font-family: 'Alfa Slab One', cursive;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .budget-impact .yearly {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .reality-filter {
+      max-width: 1200px;
+      margin: 0 auto 1rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .reality-box {
+      background: #fffbfa;
+      border-left: 6px solid #f43f5e;
+      padding: 2rem;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .reality-header h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #9f1239;
+      margin: 0 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .reality-header p {
+      color: #475569;
+      margin: 0;
+    }
+
+    .reality-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media(max-width: 768px) {
+      .reality-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .reality-item {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #ffe4e6;
+    }
+
+    .reality-item h4 {
+      margin: 0 0 0.5rem 0;
+      color: #881337;
+      font-size: 1.1rem;
+    }
+
+    .reality-item .val {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #e11d48;
+    }
+    
+    .reality-item .subval {
+      color: #64748b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .call-to-action {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: #f1f5f9;
+      margin-top: 4rem;
+    }
+
+    .call-to-action h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-massive {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      padding: 1rem 3rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+    }
+    
+    .btn-massive:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23);
+      color: white;
+    }
+  </style>
+</head>
+<body class="tx-clone">
+
+  <!-- Desktop Navigation (Simplified version matching main site) -->
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-center" style="justify-content: flex-start; padding-left: 2rem;">
+      <a href="index.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links" style="margin-left: 2rem;">
+        <a href="index.html" class="nav-item">← Back Home</a>
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank">DONATE NOW</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Header -->
+  <header class="scenario-header">
+    <h1>The Power of Small Actions</h1>
+    <p>What happens if our entire network commits to a small recurring monthly donation? It quickly builds a war chest capable of taking back Hidalgo County year-round.</p>
+  </header>
+
+  <!-- ================= TIER 1: $5 ================= -->
+  <div class="tier-divider first">
+    <h2>Tier 1: $5 a Month</h2>
+    <p>The price of a gallon of gas ⛽</p>
+  </div>
+  
+  <div class="scenarios-container">
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 1: The Core Network</h2>
+        <div class="subtitle">100% participation from our existing leaders and active volunteers.</div>
+      </div>
+      <div class="scenario-card-body">
+        <ul class="participation-list">
+          <li><span class="role">🏢 Precinct Chairs</span><span class="count">~150</span></li>
+          <li><span class="role">🏘️ Precinct Block Captains</span><span class="count">~50</span></li>
+          <li><span class="role">🤝 Elected Officials</span><span class="count">~60</span></li>
+          <li><span class="role">🔥 Active Volunteers</span><span class="count">~1,200</span></li>
+        </ul>
+        <div class="total-line"><span>Total Monthly Donors</span><span>1,460</span></div>
+        <div class="budget-impact emerald">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$7,300</div>
+          <div class="yearly">or $87,600 per year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 2: Plus 5 Friends Each</h2>
+        <div class="subtitle">Every member of the core network finds just 5 friends to donate $5/month.</div>
+      </div>
+      <div class="scenario-card-body">
+        <ul class="participation-list">
+          <li><span class="role">🌟 Core Network</span><span class="count">1,460</span></li>
+          <li><span class="role">👥 Friends & Family (x5)</span><span class="count">7,300</span></li>
+        </ul>
+        <div class="total-line"><span>Total Monthly Donors</span><span>8,760</span></div>
+        <div class="budget-impact amber">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$43,800</div>
+          <div class="yearly">or $525,600 per year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reality-filter">
+    <div class="reality-box">
+      <div class="reality-header">
+        <h3>🔍 Reality Filter: The 50% Mark</h3>
+        <p>100% participation is rare. But even at half of our goals, the financial impact fundamentally changes what the local party can achieve year-round.</p>
+      </div>
+      <div class="reality-grid">
+        <div class="reality-item">
+          <h4>Scenario 1 at 50%</h4>
+          <div class="val">$3,650 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$43,800 / year • <span style="font-weight: 400;">730 recurring donors</span></div>
+        </div>
+        <div class="reality-item">
+          <h4>Scenario 2 at 50%</h4>
+          <div class="val">$21,900 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$262,800 / year • <span style="font-weight: 400;">4,380 recurring donors</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= TIER 2: $10 ================= -->
+  <div class="tier-divider">
+    <h2>Tier 2: $10 a Month</h2>
+    <p>The price of a burger 🍔</p>
+  </div>
+  
+  <div class="scenarios-container">
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 1: The Core Network</h2>
+        <div class="subtitle">100% participation from our existing leaders and active volunteers.</div>
+      </div>
+      <div class="scenario-card-body">
+        <div class="total-line" style="margin-top: 2rem;"><span>Total Monthly Donors</span><span>1,460</span></div>
+        <div class="budget-impact indigo">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$14,600</div>
+          <div class="yearly">or $175,200 per year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 2: Plus 5 Friends Each</h2>
+        <div class="subtitle">Every member of the core network finds just 5 friends to donate $10/month.</div>
+      </div>
+      <div class="scenario-card-body">
+        <div class="total-line" style="margin-top: 2rem;"><span>Total Monthly Donors</span><span>8,760</span></div>
+        <div class="budget-impact rose">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$87,600</div>
+          <div class="yearly">or $1,051,200 per year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reality-filter">
+    <div class="reality-box">
+      <div class="reality-header">
+        <h3>🔍 Reality Filter: The 50% Mark</h3>
+      </div>
+      <div class="reality-grid">
+        <div class="reality-item">
+          <h4>Scenario 1 at 50%</h4>
+          <div class="val">$7,300 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$87,600 / year • <span style="font-weight: 400;">730 recurring donors</span></div>
+        </div>
+        <div class="reality-item">
+          <h4>Scenario 2 at 50%</h4>
+          <div class="val">$43,800 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$525,600 / year • <span style="font-weight: 400;">4,380 recurring donors</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TIER 3: $20 ================= -->
+  <div class="tier-divider">
+    <h2>Tier 3: $20 a Month</h2>
+    <p>The price of a Netflix subscription 🍿</p>
+  </div>
+  
+  <div class="scenarios-container">
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 1: The Core Network</h2>
+        <div class="subtitle">100% participation from our existing leaders and active volunteers.</div>
+      </div>
+      <div class="scenario-card-body">
+        <div class="total-line" style="margin-top: 2rem;"><span>Total Monthly Donors</span><span>1,460</span></div>
+        <div class="budget-impact emerald" style="background: linear-gradient(135deg, #0f766e 0%, #042f2e 100%);">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$29,200</div>
+          <div class="yearly">or $350,400 per year</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-card-header">
+        <h2>Scenario 2: Plus 5 Friends Each</h2>
+        <div class="subtitle">Every member of the core network finds just 5 friends to donate $20/month.</div>
+      </div>
+      <div class="scenario-card-body">
+        <div class="total-line" style="margin-top: 2rem;"><span>Total Monthly Donors</span><span>8,760</span></div>
+        <div class="budget-impact amber" style="background: linear-gradient(135deg, #b45309 0%, #78350f 100%);">
+          <div class="label">Monthly Income Stream</div>
+          <div class="amount">$175,200</div>
+          <div class="yearly">or $2,102,400 per year</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reality-filter">
+    <div class="reality-box">
+      <div class="reality-header">
+        <h3>🔍 Reality Filter: The 50% Mark</h3>
+      </div>
+      <div class="reality-grid">
+        <div class="reality-item">
+          <h4>Scenario 1 at 50%</h4>
+          <div class="val">$14,600 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$175,200 / year • <span style="font-weight: 400;">730 recurring donors</span></div>
+        </div>
+        <div class="reality-item">
+          <h4>Scenario 2 at 50%</h4>
+          <div class="val">$87,600 <span style="font-size: 1rem; color: #475569; font-weight: 500;">/ month</span></div>
+          <div class="subval">$1,051,200 / year • <span style="font-weight: 400;">4,380 recurring donors</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BASELINE GOALS ================= -->
+  <div class="tier-divider">
+    <h2>Pathways to Baseline Funding</h2>
+    <p>What does it take to keep the local party fully operational? Here is the math for our critical minimum baseline monthly goals.</p>
+  </div>
+
+  <div class="scenarios-container">
+    <!-- Goal 1: $500 -->
+    <div class="scenario-card">
+      <div class="scenario-card-header" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white;">
+        <h2 style="color: white; margin: 0;">Goal 1: $500 / Month</h2>
+        <div class="subtitle" style="color: #cbd5e1; margin-top: 0.25rem;">Covers basic operational software, domains, and core infrastructure.</div>
+      </div>
+      <div class="scenario-card-body">
+        <h4 style="margin: 0 0 1rem 0; color: #334155; font-size: 1.1rem;">How do we get there?</h4>
+        <ul class="participation-list">
+          <li><span class="role">⛽ Pure $5 Model</span><span class="count">100 people</span></li>
+          <li><span class="role">🍔 Pure $10 Model</span><span class="count">50 people</span></li>
+          <li><span class="role">🍿 Pure $20 Model</span><span class="count">25 people</span></li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+          <strong style="display: flex; align-items: center; gap: 0.5rem; color: #0f172a; margin-bottom: 0.75rem;"><span style="font-size: 1.25rem;">🌟</span> The Mixed Model (60 Participants)</strong>
+          <div style="font-size: 0.95rem; color: #475569; display: flex; flex-direction: column; gap: 0.4rem; font-weight: 500;">
+            <div style="display: flex; justify-content: space-between;"><span>40 people @ $5/mo</span> <span>$200</span></div>
+            <div style="display: flex; justify-content: space-between;"><span>10 people @ $10/mo</span> <span>$100</span></div>
+            <div style="display: flex; justify-content: space-between; padding-bottom: 0.4rem; border-bottom: 1px solid #cbd5e1;"><span>10 people @ $20/mo</span> <span>$200</span></div>
+            <div style="display: flex; justify-content: space-between; color: #0ea5e9; font-weight: 800; padding-top: 0.2rem;"><span>Total: 60 people</span> <span>$500 / mo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 2: $1,000 -->
+    <div class="scenario-card">
+      <div class="scenario-card-header" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white;">
+        <h2 style="color: white; margin: 0;">Goal 2: $1,000 / Month</h2>
+        <div class="subtitle" style="color: #cbd5e1; margin-top: 0.25rem;">Allows for dedicated text banking budgets and county-wide outreach.</div>
+      </div>
+      <div class="scenario-card-body">
+         <h4 style="margin: 0 0 1rem 0; color: #334155; font-size: 1.1rem;">How do we get there?</h4>
+        <ul class="participation-list">
+          <li><span class="role">⛽ Pure $5 Model</span><span class="count">200 people</span></li>
+          <li><span class="role">🍔 Pure $10 Model</span><span class="count">100 people</span></li>
+          <li><span class="role">🍿 Pure $20 Model</span><span class="count">50 people</span></li>
+        </ul>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: #fffbeb; border-radius: 8px; border: 1px solid #fde68a;">
+          <strong style="display: flex; align-items: center; gap: 0.5rem; color: #92400e; margin-bottom: 0.75rem;"><span style="font-size: 1.25rem;">🌟</span> The Mixed Model (110 Participants)</strong>
+          <div style="font-size: 0.95rem; color: #b45309; display: flex; flex-direction: column; gap: 0.4rem; font-weight: 500;">
+            <div style="display: flex; justify-content: space-between;"><span>60 people @ $5/mo</span> <span>$300</span></div>
+            <div style="display: flex; justify-content: space-between;"><span>30 people @ $10/mo</span> <span>$300</span></div>
+            <div style="display: flex; justify-content: space-between; padding-bottom: 0.4rem; border-bottom: 1px solid #fcd34d;"><span>20 people @ $20/mo</span> <span>$400</span></div>
+            <div style="display: flex; justify-content: space-between; color: #d97706; font-weight: 800; padding-top: 0.2rem;"><span>Total: 110 people</span> <span>$1,000 / mo</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-to-action">
+    <h2>Be the First to Start the Chain</h2>
+    <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-massive" target="_blank">Start Your Monthly Donation</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 672-7274</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+  </footer>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
