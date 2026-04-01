@@ -17,9 +17,12 @@ if m1 and m2:
     data2 = json.loads(m2.group(1))
     
     for item in data1:
-        precinct_cd_map[str(item.get("precinct", ""))] = str(item.get("CD", "Unknown"))
+        # Strip leading zeroes to ensure match
+        p_str = str(item.get("precinct", "")).lstrip("0")
+        precinct_cd_map[p_str] = str(item.get("CD", "Unknown"))
     for item in data2:
-        precinct_cd_map[str(item.get("precinct", ""))] = str(item.get("CD", "Unknown"))
+        p_str = str(item.get("precinct", "")).lstrip("0")
+        precinct_cd_map[p_str] = str(item.get("CD", "Unknown"))
 
 # 2. Inject into GeoJSON
 geo_path = "data_analysis/hidalgo_analysis_precincts.geojson"
@@ -28,7 +31,8 @@ with open(geo_path, "r", encoding="utf-8") as f:
 
 for feature in geojson['features']:
     props = feature['properties']
-    p_num = str(props.get('PCT', props.get('PREC', '')))
+    p_num = str(props.get('PCT', props.get('PREC', ''))).lstrip("0")
+    
     props['CD'] = precinct_cd_map.get(p_num, "Unknown")
 
 with open(geo_path, "w", encoding="utf-8") as f:
