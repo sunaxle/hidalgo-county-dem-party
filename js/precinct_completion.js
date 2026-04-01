@@ -24,7 +24,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 uniqueFilledPrecincts.add(cleanPct);
             }
         }
-    });
+    
+    // 8. The Volunteer Alert Detector
+    if(window.fetchVolunteerData) {
+        window.fetchVolunteerData().then(volunteers => {
+            const generalVols = volunteers.filter(v => v["Role"].trim() === "General Volunteer");
+            
+            const matches = [];
+            generalVols.forEach(v => {
+                const pNum = parseInt(v["Precinct Number"], 10);
+                if(vacantPrecincts.some(gap => gap.precinct === pNum)) {
+                    matches.push(v);
+                    
+                    const chips = document.querySelectorAll('.chip');
+                    chips.forEach(chip => {
+                        if(chip.innerText === "Pct " + pNum) {
+                            chip.style.backgroundColor = "#fbbf24";
+                            chip.style.color = "#000";
+                            chip.style.border = "2px solid #b45309";
+                            chip.innerHTML = "⭐ Pct " + pNum + " (Vol Available!)";
+                        }
+                    });
+                }
+            });
+
+            if(matches.length > 0) {
+                const alertBox = document.createElement("div");
+                alertBox.style = "background: rgba(251, 191, 36, 0.15); border: 2px solid #fbbf24; color: #fcd34d; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; text-align: center; font-size: 1.1rem;";
+                alertBox.innerHTML = `<strong>🚨 URGENT:</strong> You have ${matches.length} General Volunteer(s) residing in completely vacant precincts! <br>Contact them via the Portal to promote them to Block Captains.`;
+                
+                const container = document.querySelector('.container') || document.body;
+                container.prepend(alertBox);
+            }
+        });
+    }
+});
+
 
 
     const filledCount = uniqueFilledPrecincts.size;

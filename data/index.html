@@ -101,12 +101,21 @@
 <body class="tx-clone">
     <script>
         // Secure Password Gate
-        let pass = prompt("Please enter the secure Access Code to view this restricted data module:");
-        if (pass !== "DATA26") {
-            document.body.innerHTML = "<div style='display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background: #0f172a;'><h1 style='color: #ef4444; font-family: sans-serif;'>Access Denied</h1><p style='color: #94a3b8; font-family: sans-serif;'>Incorrect passcode provided.</p></div>";
-            throw new Error("Execution stopped due to incorrect password.");
+        if (sessionStorage.getItem('data26_auth') !== 'true') {
+            let pass = prompt("Please enter the secure Access Code to view this restricted data module:");
+            if (pass !== "DATA26") {
+                document.body.innerHTML = "<div style='display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; background: #0f172a;'><h1 style='color: #ef4444; font-family: sans-serif;'>Access Denied</h1><p style='color: #94a3b8; font-family: sans-serif;'>Incorrect passcode provided.</p></div>";
+                throw new Error("Execution stopped due to incorrect password.");
+            } else {
+                sessionStorage.setItem('data26_auth', 'true');
+            }
         }
     </script>
+    
+    <div style="background: rgba(30, 41, 59, 0.9); padding: 1rem; border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.3); display: flex; gap: 1rem; margin-bottom: 2rem;">
+        <a href="index.html" style="color: #38bdf8; text-decoration: none; font-weight: bold; padding: 0.5rem 1rem; background: rgba(56, 189, 248, 0.1); border-radius: 6px;">📄 Precinct Chair Density</a>
+        <a href="../early_voting_analysis_paper.html" style="color: #94a3b8; text-decoration: none; font-weight: bold; padding: 0.5rem 1rem;">📄 EV Distance Deserts</a>
+    </div>
     
     <h1>Normalized Precinct Analysis Dashboard & Impact Projection</h1>
     

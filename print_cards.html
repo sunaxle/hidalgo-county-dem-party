@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HCDP Print Cards Generator</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- QR Code Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --hcdp-blue: #0a3161;
+            --hcdp-red: #b31942;
+            --hcdp-dark: #001a40;
+            --hcdp-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--hcdp-light);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .no-print {
+            background-color: white;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-bottom: 4px solid var(--hcdp-red);
+        }
+
+        .no-print h1 {
+            color: var(--hcdp-blue);
+            font-family: 'Alfa Slab One', serif;
+            margin-top: 0;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--hcdp-dark);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select {
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--hcdp-blue);
+        }
+
+        button.primary-btn {
+            background-color: var(--hcdp-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 14px rgba(10, 49, 97, 0.3);
+        }
+
+        button.primary-btn:hover {
+            background-color: var(--hcdp-dark);
+            transform: translateY(-2px);
+        }
+
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .preview-header {
+            text-align: center;
+            color: var(--hcdp-blue);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Card Styles */
+        .card-wrapper {
+            position: relative;
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            transition: all 0.3s ease;
+        }
+
+        /* Dimensions */
+        .card-wrapper[data-size="business"] { width: 3.5in; height: 2in; }
+        .card-wrapper[data-size="business"] .card-content { flex-direction: row; }
+        .card-wrapper[data-size="business"] .qr-box { width: 1.2in; height: 1.2in; }
+        .card-wrapper[data-size="business"] .text-box h2 { font-size: 1.2rem; }
+        .card-wrapper[data-size="business"] .text-box p { font-size: 0.7rem; }
+        .card-wrapper[data-size="business"] .logo-img { height: 40px; margin-bottom: 5px; }
+
+        .card-wrapper[data-size="push"] { width: 4in; height: 9in; }
+        .card-wrapper[data-size="push"] .card-content { flex-direction: column; padding: 2rem 1.5rem; justify-content: space-evenly; }
+        .card-wrapper[data-size="push"] .qr-box { width: 2.5in; height: 2.5in; }
+        .card-wrapper[data-size="push"] .text-box h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .card-wrapper[data-size="push"] .text-box p { font-size: 1.2rem; margin-top: 1rem; }
+        .card-wrapper[data-size="push"] .logo-img { height: 100px; margin-bottom: 1rem; }
+
+        .card-wrapper[data-size="postcard"] { width: 6in; height: 4in; }
+        .card-wrapper[data-size="postcard"] .card-content { flex-direction: row; padding: 2rem; }
+        .card-wrapper[data-size="postcard"] .qr-box { width: 2in; height: 2in; margin-left: 1.5rem; }
+        .card-wrapper[data-size="postcard"] .text-box h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+        .card-wrapper[data-size="postcard"] .text-box p { font-size: 1.1rem; }
+        .card-wrapper[data-size="postcard"] .logo-img { height: 80px; margin-bottom: 1rem; }
+
+        .card-wrapper[data-size="square"] { width: 2.5in; height: 2.5in; }
+        .card-wrapper[data-size="square"] .card-content { flex-direction: column; padding: 0.5rem; }
+        .card-wrapper[data-size="square"] .qr-box { width: 1.3in; height: 1.3in; }
+        .card-wrapper[data-size="square"] .text-box h2 { font-size: 0.9rem; margin-bottom: 0.2rem; }
+        .card-wrapper[data-size="square"] .text-box p { font-size: 0.5rem; display: none; }
+        .card-wrapper[data-size="square"] .logo-img { height: 25px; margin-bottom: 2px; }
+
+        /* Card common layout */
+        .card-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .text-box h2 {
+            font-family: 'Alfa Slab One', serif;
+            margin: 0;
+            line-height: 1.1;
+            font-weight: normal;
+        }
+
+        .text-box p {
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .qr-box {
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .qr-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-img {
+            object-fit: contain;
+        }
+
+        /* Side-specific Styles */
+        .card-front {
+            background: var(--hcdp-blue);
+            color: white;
+        }
+        .card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(179,25,66,0.1) 0%, rgba(0,0,0,0) 100%);
+            z-index: 1;
+        }
+        .card-front .qr-box {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 2px solid white;
+        }
+
+        .card-back {
+            background: white;
+            color: var(--hcdp-blue);
+            border: 1px solid #e2e8f0;
+        }
+        .card-back::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: var(--hcdp-red);
+            z-index: 1;
+        }
+        .card-back .text-box h2 {
+            color: var(--hcdp-red);
+        }
+        .card-back .qr-box {
+            border: 2px solid var(--hcdp-blue);
+        }
+
+        .coffee-icon {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .disclaimer {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.45rem;
+            color: #64748b;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 10;
+        }
+        .card-front .disclaimer { color: rgba(255,255,255,0.7); }
+        .card-wrapper[data-size="business"] .disclaimer { font-size: 0.35rem; bottom: 2px; }
+        .card-wrapper[data-size="push"] .disclaimer { font-size: 0.70rem; bottom: 10px; }
+        .card-wrapper[data-size="postcard"] .disclaimer { font-size: 0.60rem; bottom: 8px; }
+        .card-wrapper[data-size="square"] .disclaimer { font-size: 0.30rem; bottom: 2px; display: none; }
+
+        /* Print Styles */
+        @media print {
+            @page {
+                margin: 0;
+                size: auto;
+            }
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .preview-container {
+                padding: 0;
+                gap: 0;
+                display: block;
+            }
+            .preview-header {
+                display: none;
+            }
+            .card-wrapper {
+                box-shadow: none;
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin: 0 auto; /* Center on page */
+                border: 0.5px solid #ccc; /* Cut line */
+                margin-bottom: 2rem; /* Gap for cutting if printing multiple per page */
+            }
+            
+            /* Print precise backgrounds */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print">
+        <h1>Print Cards Generator</h1>
+        <p style="margin-top:-10px; margin-bottom: 20px; color: #64748b;">Create custom push cards, business cards, and flyers for events.</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="cardSize">Card Size</label>
+                <select id="cardSize" onchange="updateCards()">
+                    <option value="business">Business Card (3.5" x 2")</option>
+                    <option value="push">Push Card / Palm Card (4" x 9")</option>
+                    <option value="postcard">Postcard (6" x 4")</option>
+                    <option value="square">Square Card (2.5" x 2.5")</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="joinUrl">Join the Party URL (Front QR)</label>
+                <input type="url" id="joinUrl" value="https://hidalgo-county-dem-party.org/join.html" oninput="debounceUpdate()">
+            </div>
+
+            <div class="control-group">
+                <label for="donateUrl">Donate URL (Back QR)</label>
+                <input type="url" id="donateUrl" value="https://secure.actblue.com/donate/hidalgocountydems" oninput="debounceUpdate()">
+            </div>
+            
+            <div class="control-group">
+                <label for="disclaimerText">Paid For By Disclaimer</label>
+                <input type="text" id="disclaimerText" value="Paid for by the Hidalgo County Democratic Party" oninput="debounceUpdate()">
+            </div>
+            
+            <div class="control-group" style="justify-content: flex-end;">
+                <button class="primary-btn" onclick="window.print()">
+                    <svg style="width:18px;height:18px;vertical-align:text-bottom;margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Print / Save PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <!-- Front Side -->
+        <div style="text-align: center;">
+            <div class="preview-header">Front Side</div>
+            <div class="card-wrapper card-front" data-size="business" id="frontCard">
+                <div class="card-content">
+                    <div class="text-box">
+                        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="HCDP Logo" class="logo-img" onerror="this.src=''; this.style.display='none';">
+                        <h2>JOIN THE PARTY</h2>
+                        <p>Scan to get involved with the Hidalgo County Democratic Party. Your community needs you!</p>
+                    </div>
+                    <div class="qr-box" id="qrFront"></div>
+                </div>
+                <div class="disclaimer disclaimer-display">Paid for by the Hidalgo County Democratic Party</div>
+            </div>
+        </div>
+
+        <!-- Back Side -->
+        <div style="text-align: center;">
+            <div class="preview-header">Back Side</div>
+            <div class="card-wrapper card-back" data-size="business" id="backCard">
+                <div class="card-content">
+                    <div class="text-box">
+                        <h2><span class="coffee-icon">☕</span>BUY A DEM A COFFEE</h2>
+                        <p>Every dollar counts. Scan to chip in and fuel our fight for South Texas.</p>
+                    </div>
+                    <div class="qr-box" id="qrBack"></div>
+                </div>
+                <div class="disclaimer disclaimer-display">Paid for by the Hidalgo County Democratic Party</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let frontQR = null;
+        let backQR = null;
+        let timeout = null;
+
+        function initQR() {
+            // Initial render
+            frontQR = new QRCode(document.getElementById("qrFront"), {
+                text: document.getElementById('joinUrl').value,
+                width: 500,
+                height: 500,
+                colorDark : "#0a3161",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            backQR = new QRCode(document.getElementById("qrBack"), {
+                text: document.getElementById('donateUrl').value,
+                width: 500,
+                height: 500,
+                colorDark : "#b31942",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            updateCards();
+        }
+
+        function debounceUpdate() {
+            clearTimeout(timeout);
+            timeout = setTimeout(updateCards, 300);
+        }
+
+        function updateCards() {
+            const size = document.getElementById('cardSize').value;
+            const joinUrl = document.getElementById('joinUrl').value;
+            const donateUrl = document.getElementById('donateUrl').value;
+            const disclaimerText = document.getElementById('disclaimerText').value;
+
+            // Update sizes
+            document.getElementById('frontCard').setAttribute('data-size', size);
+            document.getElementById('backCard').setAttribute('data-size', size);
+
+            // Update QR codes
+            if(frontQR) {
+                frontQR.clear();
+                frontQR.makeCode(joinUrl);
+            }
+            if(backQR) {
+                backQR.clear();
+                backQR.makeCode(donateUrl);
+            }
+            
+            // Update disclaimers
+            document.querySelectorAll('.disclaimer-display').forEach(el => {
+                el.innerText = disclaimerText;
+            });
+            
+            // Re-style SVG elements generated by qrcode.js to fit the container 100%
+            document.querySelectorAll('.qr-box img').forEach(img => {
+                img.style.width = '100%';
+                img.style.height = '100%';
+            });
+            document.querySelectorAll('.qr-box canvas').forEach(canvas => {
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.style.display = 'none'; // Only show the img for print reliability
+            });
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            // Hack to make sure qr code js loads
+            setTimeout(initQR, 100);
+        };
+    </script>
+</body>
+</html>

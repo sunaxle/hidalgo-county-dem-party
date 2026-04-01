@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Precinct Chair Toolkit</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  <script>
+    // Passkey Protection Script
+    // Wait for DOM
+    document.addEventListener("DOMContentLoaded", function() {
+        if(localStorage.getItem('hcdp_toolkit_access') !== 'true') {
+            document.body.style.display = 'none'; // Hide content until verified
+            let pass = prompt("Enter the Precinct Chair access passkey to view the Toolkit:");
+            if(pass === "tools26") {
+                localStorage.setItem('hcdp_toolkit_access', 'true');
+                document.body.style.display = 'block';
+            } else {
+                alert("Access denied. Please contact the County Chair if you lost your passkey.");
+                window.location.href = "index.html";
+            }
+        }
+    });
+  </script>
+  <style>
+    .toolkit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .tool-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      border-color: #3b82f6;
+    }
+    .tool-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .tool-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+    .tool-desc {
+      font-family: 'Inter', sans-serif;
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    .tool-btn {
+      display: inline-block;
+      background: #0a3161;
+      color: white;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s;
+    }
+    .tool-btn:hover {
+      background: #001a40;
+    }
+    .tool-btn.disabled {
+      background: #cbd5e1;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body class="tx-clone">
+
+  <nav class="tx-clone-nav">
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <span style="color: white; font-weight: 600; margin-right: 1rem;">Internal Tools Mode</span>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <section class="tx-clone-content" style="min-height: 80vh;">
+    <div class="tx-clone-content-inner">
+      <h2 style="color: #0a3161; margin-bottom: 0.5rem;">🔒 Chair Toolkit</h2>
+      <p style="color: #64748b; font-size: 1.1rem;">Secure internal tools for HCDP Precinct Chairs & Organizers.</p>
+      
+      <div class="toolkit-grid">
+        
+        <!-- Live Tool -->
+        <div class="tool-card">
+          <div class="tool-icon">🖨️</div>
+          <div class="tool-title">Push Card Generator</div>
+          <div class="tool-desc">Create printable layouts with custom QR codes for your precinct's action and donation links. Formatted perfectly for print shops.</div>
+          <a href="print_cards.html" class="tool-btn">Open Generator ➔</a>
+        </div>
+
+        <!-- Upcoming Tool -->
+        <div class="tool-card">
+          <div class="tool-icon">📞</div>
+          <div class="tool-title">Custom Call Scripts</div>
+          <div class="tool-desc">Generate tailored phone banking scripts inserted with your local candidate names and precinct numbers.</div>
+          <a href="#" class="tool-btn disabled">Coming Soon</a>
+        </div>
+
+        <!-- Upcoming Tool -->
+        <div class="tool-card">
+          <div class="tool-icon">📝</div>
+          <div class="tool-title">Event Sign-in Sheets</div>
+          <div class="tool-desc">Instantly render printable PDF sign-in sheets for events or block walks, pre-formatted with HCDP branding.</div>
+          <a href="#" class="tool-btn disabled">Coming Soon</a>
+        </div>
+
+        <!-- External Link Tool -->
+        <div class="tool-card">
+          <div class="tool-icon">🔍</div>
+          <div class="tool-title">Voter Reg Gateway</div>
+          <div class="tool-desc">Quickly bounce to the Texas SOS "Am I Registered" portal to verify voter status out in the field.</div>
+          <a href="https://teamrv-mvp.sos.texas.gov/MVP/mvp.do" target="_blank" class="tool-btn">Verify Voter Status ➔</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
+
+</body>
+</html>
