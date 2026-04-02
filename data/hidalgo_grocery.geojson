@@ -1,0 +1,60 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-97.9855389, 26.2921643]
+      },
+      "properties": {
+        "name": "H-E-B",
+        "type": "grocery"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.1959004, 26.2893952]
+      },
+      "properties": {
+        "name": "H-E-B",
+        "type": "grocery"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.1809687, 26.301332]
+      },
+      "properties": {
+        "name": "Walmart Supercenter",
+        "type": "grocery"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.1631901, 26.2898842]
+      },
+      "properties": {
+        "name": "H-E-B",
+        "type": "grocery"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-98.2183785, 26.266272]
+      },
+      "properties": {
+        "name": "H-E-B",
+        "type": "grocery"
+      }
+    }
+  ]
+}
