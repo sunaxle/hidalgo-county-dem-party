@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch('data_analysis/hidalgo_logistics_precincts.geojson').then(r => r.json()),
         fetch('data/hidalgo_grocery.geojson').then(r => r.json()),
         fetch('data_analysis/logistics_sites.json').then(r => r.json()),
-        fetch('data_analysis/distance_deserts.json').then(r => r.json())
+        fetch('hidalgo-election-map/polling_locations.geojson').then(r => r.json())
     ]).then(([precincts, groceries, sites, evs]) => {
         geojsonData = precincts;
         commerceData = groceries;
@@ -57,14 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Draw basic EV sites fixed
         const drawOriginalSites = () => {
              evSitesLayer = L.layerGroup();
-             evs.forEach(site => {
-                 let marker = L.circle([site.lat, site.lon], {
+             evs.features.forEach(f => {
+                 let lon = f.geometry.coordinates[0];
+                 let lat = f.geometry.coordinates[1];
+                 let name = f.properties.location || "Polling Site";
+                 let marker = L.circle([lat, lon], {
                     color: '#60a5fa', fillOpacity: 0.8, weight: 2, radius: 400
                  });
-                 let zone = L.circle([site.lat, site.lon], {
+                 let zone = L.circle([lat, lon], {
                     color: '#60a5fa', weight: 2, fill: false, dashArray: '5, 5', radius: 3701 // 2.3 miles
                  });
-                 marker.bindTooltip(site.name);
+                 marker.bindTooltip(name);
                  evSitesLayer.addLayer(marker);
                  evSitesLayer.addLayer(zone);
              });
