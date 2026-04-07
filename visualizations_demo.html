@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizations Demo & Playground</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 1. Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- 2. DataTables (for Interactive Tables) -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- 3. vis-network (for Network Graphs) -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        .demo-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 2rem; border: 1px solid #e2e8f0; }
+        #network-graph { height: 400px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #fafafa; }
+        .badge-using { background-color: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: bold; }
+        .badge-not-using { background-color: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: bold; }
+    </style>
+</head>
+<body class="p-8 max-w-5xl mx-auto">
+
+    <div class="mb-10 text-center">
+        <h1 class="text-4xl font-extrabold text-blue-800 tracking-tight">Interactive Examples Playground</h1>
+        <p class="text-gray-600 mt-2">A quick look at different visualization libraries and what they do.</p>
+    </div>
+
+    <!-- Chart.js Example -->
+    <div class="demo-card">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">1. Statistical Charts (Chart.js)</h2>
+            <span class="badge-using">Currently Using</span>
+        </div>
+        <p class="text-gray-600 mb-6 text-sm">Great for animating statistical data over time or comparing groups. Very easy to plug dummy JSON into.</p>
+        <div class="w-full max-w-2xl mx-auto">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Interactive DataTables Example -->
+    <div class="demo-card">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">2. Interactive Tables (DataTables)</h2>
+            <span class="badge-not-using">Not Currently Using</span>
+        </div>
+        <p class="text-gray-600 mb-6 text-sm">Turns a boring HTML list into a highly interactive, searchable database instantly.</p>
+        <table id="exampleTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>City/Precinct</th>
+                    <th>Engagement Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Jane Doe</td><td>Precinct Chair</td><td>McAllen</td><td>95%</td></tr>
+                <tr><td>John Smith</td><td>Volunteer</td><td>Edinburg</td><td>42%</td></tr>
+                <tr><td>Maria Garcia</td><td>Block Captain</td><td>Mission</td><td>88%</td></tr>
+                <tr><td>Robert Johnson</td><td>Precinct Chair</td><td>Pharr</td><td>71%</td></tr>
+                <tr><td>Linda Martinez</td><td>Donor</td><td>Weslaco</td><td>99%</td></tr>
+                <tr><td>Michael Brown</td><td>Volunteer</td><td>Edinburg</td><td>25%</td></tr>
+                <tr><td>Sarah Davis</td><td>Precinct Chair</td><td>McAllen</td><td>83%</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Network Graph Example -->
+    <div class="demo-card">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">3. Network Graphs (Vis.js)</h2>
+            <span class="badge-not-using">Not Currently Using</span>
+        </div>
+        <p class="text-gray-600 mb-6 text-sm">Visualizes relationships and structures. Try dragging the nodes around! Imagine using this to show how different PACs, campaigns, and funds connect to each other.</p>
+        <div id="network-graph"></div>
+    </div>
+
+
+    <script>
+        // --- 1. Chart.js Implementation ---
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: ['McAllen', 'Edinburg', 'Mission', 'Pharr', 'Weslaco'],
+                datasets: [{
+                    label: 'Volunteer Turnout',
+                    data: [11, 16, 7, 3, 14],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.6)', 
+                        'rgba(16, 185, 129, 0.6)', 
+                        'rgba(245, 158, 11, 0.6)', 
+                        'rgba(239, 68, 68, 0.6)', 
+                        'rgba(139, 92, 246, 0.6)'
+                    ]
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { position: 'right' } } }
+        });
+
+        // --- 2. DataTables Implementation ---
+        $(document).ready(function() {
+            $('#exampleTable').DataTable({
+                "pageLength": 5, // Show 5 rows at a time
+                "responsive": true
+            });
+        });
+
+        // --- 3. Network Graph Implementation ---
+        // Dummy JSON data (nodes and edges)
+        var nodes = new vis.DataSet([
+            { id: 1, label: "HCDP HQ", color: "#3b82f6", font: {color: "white"} },
+            { id: 2, label: "Campaign A", color: "#93c5fd" },
+            { id: 3, label: "Campaign B", color: "#93c5fd" },
+            { id: 4, label: "PAC 1", color: "#10b981", font: {color: "white"} },
+            { id: 5, label: "Donor Org", color: "#f59e0b" }
+        ]);
+
+        var edges = new vis.DataSet([
+            { from: 1, to: 2, label: 'supports', arrows: 'to' },
+            { from: 1, to: 3, label: 'supports', arrows: 'to' },
+            { from: 4, to: 2, label: '$5k', arrows: 'to' },
+            { from: 5, to: 4, label: 'funds', arrows: 'to' },
+            { from: 5, to: 1, label: 'funds', arrows: 'to' }
+        ]);
+
+        var container = document.getElementById("network-graph");
+        var data = { nodes: nodes, edges: edges };
+        var options = {
+            physics: {
+                solver: 'forceAtlas2Based',
+                forceAtlas2Based: { gravitationalConstant: -50 }
+            }
+        };
+        var network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>

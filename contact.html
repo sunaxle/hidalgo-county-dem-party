@@ -204,6 +204,28 @@
         <p style="margin-top: 1.5rem;"><strong>Phone:</strong><br><a href="tel:9563225293">(956) 672-7274</a></p>
         <p style="margin-top: 1.5rem;"><strong>Email:</strong><br><a href="mailto:info@hidalgocountydems.org">info@hidalgocountydems.org</a></p>
         
+        <div class="accordion" style="margin-top: 2rem; border-color: var(--accent);">
+          <button type="button" class="accordion-header" style="color: var(--accent); font-size: 1rem; padding: 1rem 1.5rem;" onclick="
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+              content.style.maxHeight = null;
+              this.parentElement.classList.remove('active');
+            } else {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              this.parentElement.classList.add('active');
+            }
+          ">
+            <span>📰 For press inquiries, please press this button</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-content-inner" style="padding-top: 0.5rem;">
+              <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: #cbd5e1;">Click the button below to email our communications team directly. This will automatically format your subject line and CC the appropriate team members to ensure a timely response.</p>
+              <a href="mailto:info@hidalgocountydems.org?cc=communications@hidalgocountydems.org,chair@hidalgocountydems.org&subject=Incoming%20Press%20Inquiry&body=Publication/Organization:%20%0ADeadline:%20%0A%0AInquiry%20Details:%0A%0A" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-block;">Email press info@hidalgocountydems.org</a>
+            </div>
+          </div>
+        </div>
+        
         <div style="margin-top: 3rem;">
           <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             Office Hours 

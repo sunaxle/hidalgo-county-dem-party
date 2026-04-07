@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Political Strategy Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background: #020617;
+      background-attachment: fixed;
+      color: #f8fafc;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      overflow-x: auto;
+      overflow-y: auto;
+      position: relative;
+    }
+    /* Digital Corkboard Canvas */
+    .canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 2500px; /* Big enough for all content */
+    }
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 1) 0%, rgba(2, 6, 23, 1) 100%);
+      background-size: cover;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .grid-pattern {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .svg-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .svg-line {
+      fill: none;
+      stroke-width: 3;
+      stroke-dasharray: 8;
+      animation: dash 30s linear infinite;
+      filter: drop-shadow(0 0 5px currentColor);
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+    /* The Center Hub */
+    .hub-container {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      width: 280px;
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(16px);
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .hub-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+      pointer-events: none;
+    }
+    .hub-circle circle {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+    }
+    .hub-bg { stroke: rgba(255, 255, 255, 0.1); }
+    .hub-progress {
+      stroke: #38bdf8;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 0 10px #38bdf8);
+    }
+    .hub-content {
+      text-align: center;
+      z-index: 2;
+    }
+    .hub-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #94a3b8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .hub-value {
+      font-size: 4rem;
+      font-weight: 900;
+      background: -webkit-linear-gradient(45deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+    .hub-controls {
+      display: flex;
+      gap: 15px;
+    }
+    .hub-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .hub-btn:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      box-shadow: 0 0 15px #38bdf8;
+    }
+
+    /* Draggable Nodes */
+    .node-card {
+      position: absolute;
+      width: 240px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 16px;
+      z-index: 10;
+      cursor: grab;
+      user-select: none;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease-out;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      /* Anti-gravity floating effect normally applied, but we pause it when dragging */
+      animation: float 6s ease-in-out infinite;
+    }
+    .node-card.dragging {
+      cursor: grabbing;
+      opacity: 0.9;
+      transform: scale(1.05);
+      animation: none;
+      z-index: 100;
+    }
+    .node-card.selected {
+      border-color: #38bdf8;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+    }
+    .node-card:not(.dragging):hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .node-color-indicator {
+      position: absolute;
+      top: -1px;
+      left: 16px;
+      right: 16px;
+      height: 4px;
+      border-radius: 4px;
+    }
+    .node-democrat .node-color-indicator { background: linear-gradient(90deg, #3b82f6, #60a5fa); box-shadow: 0 0 10px #3b82f6; }
+    .node-republican .node-color-indicator { background: linear-gradient(90deg, #ef4444, #f87171); box-shadow: 0 0 10px #ef4444; }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .node-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .node-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #94a3b8;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+    .node-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .node-info h3 { font-size: 1rem; font-weight: 800; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+    .node-info p { font-size: 0.75rem; color: #94a3b8; font-weight: 600; text-transform: uppercase; margin-top: 2px;}
+    
+    .node-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-content {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 600px;
+      padding: 30px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(56, 189, 248, 0.1);
+      transform: scale(0.95) translateY(20px);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 20px;
+    }
+    .modal-title-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .modal-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #334155;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 800; border: 2px solid rgba(255,255,255,0.1);
+    }
+    .modal-title h2 { font-size: 1.5rem; font-weight: 900; }
+    .modal-title p { color: #94a3b8; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+    .btn-close {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #94a3b8;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .btn-close:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .metric-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 15px;
+    }
+    .metric-card label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+    .metric-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      outline: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 5px;
+      transition: border-color 0.2s;
+    }
+    .metric-input:focus {
+      border-color: #38bdf8;
+    }
+    
+    .notes-section label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+    .notes-textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 15px;
+      color: #f8fafc;
+      font-family: 'Montserrat', sans-serif;
+      min-height: 120px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .notes-textarea:focus { border-color: #38bdf8; }
+    
+    .top-brand {
+      position: fixed;
+      top: 30px;
+      left: 40px;
+      z-index: 50;
+    }
+    .top-brand h1 {
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .top-brand p { color: #38bdf8; font-weight: 600; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Data Definitions ---
+    const MOCK_NODES = [
+      // Democrats (Left side)
+      { id: '1', x: 100, y: 100, name: 'James Talarico', role: 'D • U.S. Senator', party: 'democrat', metrics: { funds: '$1.2M', doors: '45,000', volunteers: '1,200', calls: '85,000' }, notes: 'Focusing on education.' },
+      { id: '3', x: 250, y: 250, name: 'Gina Hinojosa', role: 'D • Governor', party: 'democrat', metrics: { funds: '$3.1M', doors: '80,000', volunteers: '3,400', calls: '200,000' }, notes: 'Top-of-ticket turnout driver.' },
+      { id: '9', x: 50, y: 400, name: 'Michelle Beckley', role: 'D • Lt. Governor', party: 'democrat', metrics: { funds: '$600K', doors: '20,000', volunteers: '400', calls: '60,000' }, notes: 'Statewide aggressive.' },
+      { id: '11', x: 250, y: 550, name: 'Rochelle Garza', role: 'D • Attorney General', party: 'democrat', metrics: { funds: '$1.5M', doors: '30,000', volunteers: '900', calls: '100,000' }, notes: 'High engagement.' },
+      { id: '5', x: 100, y: 700, name: 'Bobby Pulido', role: 'D • US Rep Dist 15', party: 'democrat', metrics: { funds: '$450K', doors: '15,000', volunteers: '300', calls: '25,000' }, notes: 'High name ID leverage.' },
+      { id: '13', x: 300, y: 850, name: 'Henry Cuellar', role: 'D • US Rep Dist 28', party: 'democrat', metrics: { funds: '$2.1M', doors: '40,000', volunteers: '800', calls: '60,000' }, notes: 'Incumbent holding.' },
+      { id: '7', x: 50, y: 950, name: 'Morgan Lamantia', role: 'D • State Sen Dist 27', party: 'democrat', metrics: { funds: '$2.2M', doors: '35,000', volunteers: '800', calls: '90,000' }, notes: 'Crucial hold.' },
+      { id: '15', x: 250, y: 1100, name: 'Oscar Longoria', role: 'D • State Rep Dist 35', party: 'democrat', metrics: { funds: '$1.4M', doors: '25,000', volunteers: '600', calls: '80,000' }, notes: 'Incumbent.' },
+      { id: '17', x: 100, y: 1250, name: 'Ryan Guillen', role: 'D • State Rep Dist 31', party: 'democrat', metrics: { funds: '$1.5M', doors: '20,000', volunteers: '450', calls: '60,000' }, notes: 'Incumbent.' },
+      { id: '19', x: 50, y: 1400, name: 'Armando Martinez', role: 'D • State Rep Dist 39', party: 'democrat', metrics: { funds: '$1.2M', doors: '30,000', volunteers: '700', calls: '90,000' }, notes: 'Unopposed.' },
+      { id: '21', x: 250, y: 1550, name: 'Terry Canales', role: 'D • State Rep Dist 40', party: 'democrat', metrics: { funds: '$1.3M', doors: '28,000', volunteers: '650', calls: '85,000' }, notes: 'Unopposed.' },
+      { id: '23', x: 100, y: 1700, name: 'Bobby Guerra', role: 'D • State Rep Dist 41', party: 'democrat', metrics: { funds: '$1.6M', doors: '32,000', volunteers: '800', calls: '95,000' }, notes: 'Unopposed.' },
+      { id: '25', x: 250, y: 1850, name: 'Laura Hinojosa', role: 'D • District Clerk', party: 'democrat', metrics: { funds: '$850K', doors: '15,000', volunteers: '400', calls: '50,000' }, notes: 'County wide race.' },
+      { id: '27', x: 50, y: 2000, name: 'Liana De La Fuente', role: 'D • County Treasurer', party: 'democrat', metrics: { funds: '$600K', doors: '12,000', volunteers: '300', calls: '45,000' }, notes: 'County wide race.' },
+      { id: '31', x: 100, y: 2150, name: 'Andrew Gonzalez', role: 'D • JP Pct 1, Pl 2', party: 'democrat', metrics: { funds: '$120K', doors: '8,000', volunteers: '150', calls: '25,000' }, notes: 'Local precinct.' },
+
+      // Republicans (Right side)
+      { id: '2', x: 1050, y: 100, name: 'John Cornyn', role: 'R • U.S. Senator', party: 'republican', metrics: { funds: '$4.5M', doors: '12,000', volunteers: '450', calls: '120,000' }, notes: 'Incumbent war chest.' },
+      { id: '4', x: 900, y: 250, name: 'Greg Abbott', role: 'R • Governor', party: 'republican', metrics: { funds: '$12M', doors: '40,000', volunteers: '1,100', calls: '300,000' }, notes: 'Incumbent.' },
+      { id: '10', x: 1100, y: 400, name: 'Dan Patrick', role: 'R • Lt. Governor', party: 'republican', metrics: { funds: '$15M', doors: '5,000', volunteers: '200', calls: '80,000' }, notes: 'Very strong incumbent.' },
+      { id: '12', x: 900, y: 550, name: 'Ken Paxton', role: 'R • Attorney General', party: 'republican', metrics: { funds: '$8M', doors: '15,000', volunteers: '400', calls: '90,000' }, notes: 'Base mobilization.' },
+      { id: '6', x: 1050, y: 700, name: 'Monica De La Cruz', role: 'R • US Rep Dist 15', party: 'republican', metrics: { funds: '$1.8M', doors: '5,000', volunteers: '150', calls: '50,000' }, notes: 'Incumbent stance.' },
+      { id: '14', x: 850, y: 850, name: 'Tano E. Tijerina', role: 'R • US Rep Dist 28', party: 'republican', metrics: { funds: '$750K', doors: '10,000', volunteers: '200', calls: '30,000' }, notes: 'Challenging Cuellar.' },
+      { id: '8', x: 1100, y: 950, name: 'Adam Hinojosa', role: 'R • State Sen Dist 27', party: 'republican', metrics: { funds: '$1.1M', doors: '10,000', volunteers: '200', calls: '45,000' }, notes: 'Swing precincts target.' },
+      { id: '16', x: 900, y: 1100, name: 'Oscar Rosa', role: 'R • State Rep Dist 35', party: 'republican', metrics: { funds: '$400K', doors: '8,000', volunteers: '100', calls: '20,000' }, notes: 'Challenging.' },
+      { id: '18', x: 1050, y: 1250, name: 'Alena Berlanga', role: 'R • State Rep Dist 31', party: 'republican', metrics: { funds: '$300K', doors: '5,000', volunteers: '120', calls: '15,000' }, notes: 'Primary challenger.' },
+      { id: '26', x: 900, y: 1850, name: 'Maricela De León', role: 'R • District Clerk', party: 'republican', metrics: { funds: '$200K', doors: '4,000', volunteers: '50', calls: '10,000' }, notes: 'Challenger.' },
+      { id: '28', x: 1100, y: 2000, name: 'Princess Anne Pena', role: 'R • County Treasurer', party: 'republican', metrics: { funds: '$150K', doors: '3,000', volunteers: '40', calls: '8,000' }, notes: 'Challenger.' },
+      { id: '32', x: 1050, y: 2150, name: 'Ron Mcvey', role: 'R • JP Pct 1, Pl 2', party: 'republican', metrics: { funds: '$80K', doors: '2,000', volunteers: '20', calls: '5,000' }, notes: 'Local challenger.' },
+    ];
+
+    const CONNECTIONS = [
+      // Cross-party matchups
+      { source: '1', target: '2', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '3', target: '4', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '9', target: '10', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '11', target: '12', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '5', target: '6', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '13', target: '14', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '7', target: '8', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '15', target: '16', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '17', target: '18', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '25', target: '26', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '27', target: '28', color: 'rgba(250, 204, 21, 0.4)' },
+      { source: '31', target: '32', color: 'rgba(250, 204, 21, 0.4)' },
+
+      // Democratic alignments
+      { source: '1', target: '3', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '3', target: '9', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '9', target: '11', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '3', target: '5', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '5', target: '13', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '13', target: '7', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '7', target: '15', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '15', target: '17', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '17', target: '19', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '19', target: '21', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '21', target: '23', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '11', target: '25', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '25', target: '27', color: 'rgba(56, 189, 248, 0.5)' },
+      { source: '27', target: '31', color: 'rgba(56, 189, 248, 0.5)' },
+
+      // Republican alignments
+      { source: '2', target: '4', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '4', target: '10', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '10', target: '12', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '4', target: '6', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '6', target: '14', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '14', target: '8', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '8', target: '16', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '16', target: '18', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '12', target: '26', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '26', target: '28', color: 'rgba(239, 68, 68, 0.5)' },
+      { source: '28', target: '32', color: 'rgba(239, 68, 68, 0.5)' },
+    ];
+
+    // --- Components ---
+
+    const ProgressHub = ({ progress, setProgress }) => {
+      const radius = 130;
+      const circumference = 2 * Math.PI * radius;
+      const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+      return (
+        <div className="hub-container">
+          <svg className="hub-circle">
+            <circle className="hub-bg" cx="140" cy="140" r={radius} />
+            <circle 
+              className="hub-progress" 
+              cx="140" cy="140" r={radius} 
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+            />
+          </svg>
+          <div className="hub-content">
+            <div className="hub-label">General Election</div>
+            <div className="hub-value">{progress}%</div>
+            <div className="hub-label">Turnout Goal</div>
+            <div className="hub-controls" style={{marginTop: '10px', justifyContent: 'center'}}>
+              <button className="hub-btn" onClick={() => setProgress(Math.max(0, progress - 1))}>-</button>
+              <button className="hub-btn" onClick={() => setProgress(Math.min(100, progress + 1))}>+</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const Node = ({ node, isSelected, onSelect, onDrag }) => {
+      const nodeRef = useRef(null);
+      const [isDragging, setIsDragging] = useState(false);
+      const dragStartPos = useRef({ x: 0, y: 0 });
+
+      const handleMouseDown = (e) => {
+        if (e.button !== 0) return;
+        setIsDragging(true);
+        dragStartPos.current = {
+          x: e.clientX - node.x,
+          y: e.clientY - node.y
+        };
+        onSelect(node);
+        e.stopPropagation();
+      };
+
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          if (!isDragging) return;
+          const newX = e.clientX - dragStartPos.current.x;
+          const newY = e.clientY - dragStartPos.current.y;
+          onDrag(node.id, newX, newY);
+        };
+
+        const handleMouseUp = () => {
+          setIsDragging(false);
+        };
+
+        if (isDragging) {
+          window.addEventListener('mousemove', handleMouseMove);
+          window.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+          window.removeEventListener('mousemove', handleMouseMove);
+          window.removeEventListener('mouseup', handleMouseUp);
+        };
+      }, [isDragging, node.id, onDrag]);
+
+      const floatDelay = `-${parseInt(node.id) * 0.7}s`;
+
+      return (
+        <div 
+          ref={nodeRef}
+          className={`node-card ${isDragging ? 'dragging' : ''} ${isSelected ? 'selected' : ''} node-${node.party}`}
+          style={{ left: `${node.x}px`, top: `${node.y}px`, animationDelay: floatDelay }}
+          onMouseDown={handleMouseDown}
+        >
+          <div className="node-color-indicator"></div>
+          <div className="node-header">
+            <div className="node-avatar">
+              {node.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <div className="node-info">
+              <h3>{node.name}</h3>
+              <p>{node.role}</p>
+              <div className="node-badge" style={{color: node.party === 'democrat' ? '#60a5fa' : '#f87171'}}>
+                {node.party === 'democrat' ? 'DEM' : 'REP'}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const SVGConnections = ({ nodes, connections }) => {
+      return (
+        <svg className="svg-layer">
+          <defs>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+          {connections.map((conn, idx) => {
+            const source = nodes.find(n => n.id === conn.source);
+            const target = nodes.find(n => n.id === conn.target);
+            if (!source || !target) return null;
+            
+            const startX = source.x + 120; // center of node approx
+            const startY = source.y + 45;
+            const endX = target.x + 120;
+            const endY = target.y + 45;
+            
+            // Simple cubic bezier curve logic for organic lines
+            const dx = endX - startX;
+            const dy = endY - startY;
+            const cp1x = startX + dx * 0.5;
+            const cp1y = startY;
+            const cp2x = startX + dx * 0.5;
+            const cp2y = endY;
+
+            return (
+              <path 
+                key={idx}
+                d={`M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${endX} ${endY}`}
+                className="svg-line"
+                style={{ stroke: conn.color }}
+              />
+            )
+          })}
+        </svg>
+      );
+    }
+
+    const Modal = ({ node, onClose, onUpdateNode }) => {
+      if (!node) return null;
+
+      const [localData, setLocalData] = useState({...node});
+
+      // Reset local state if node prop changes
+      useEffect(() => {
+        setLocalData({...node});
+      }, [node]);
+
+      const handleMetricChange = (key, value) => {
+        const updated = { ...localData, metrics: { ...localData.metrics, [key]: value }};
+        setLocalData(updated);
+        onUpdateNode(updated);
+      };
+
+      const handleNotesChange = (value) => {
+        const updated = { ...localData, notes: value };
+        setLocalData(updated);
+        onUpdateNode(updated);
+      };
+
+      return (
+        <div className={`modal-overlay ${node ? 'active' : ''}`} onClick={onClose}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <div className="modal-title-area">
+                <div className="modal-avatar" style={{color: node.party === 'democrat' ? '#60a5fa' : '#f87171', borderColor: node.party === 'democrat' ? '#2563eb' : '#dc2626'}}>
+                  {node.name.split(' ').map(n=>n[0]).join('')}
+                </div>
+                <div className="modal-title">
+                  <h2>{node.name}</h2>
+                  <p>{node.role}</p>
+                </div>
+              </div>
+              <button className="btn-close" onClick={onClose}>✕</button>
+            </div>
+            
+            <div className="metrics-grid">
+              <div className="metric-card">
+                <label>Funds Raised</label>
+                <input className="metric-input" value={localData.metrics.funds} onChange={(e) => handleMetricChange('funds', e.target.value)} />
+              </div>
+              <div className="metric-card">
+                <label>Doors Knocked</label>
+                <input className="metric-input" value={localData.metrics.doors} onChange={(e) => handleMetricChange('doors', e.target.value)} />
+              </div>
+              <div className="metric-card">
+                <label>Volunteers</label>
+                <input className="metric-input" value={localData.metrics.volunteers} onChange={(e) => handleMetricChange('volunteers', e.target.value)} />
+              </div>
+              <div className="metric-card">
+                <label>Calls Made</label>
+                <input className="metric-input" value={localData.metrics.calls} onChange={(e) => handleMetricChange('calls', e.target.value)} />
+              </div>
+            </div>
+
+            <div className="notes-section">
+              <label>Strategic Notes & Intel</label>
+              <textarea 
+                className="notes-textarea" 
+                value={localData.notes} 
+                onChange={(e) => handleNotesChange(e.target.value)}
+                placeholder="Enter field notes, opposition research, or internal metrics here..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    // --- Main App ---
+
+    function App() {
+      const [nodes, setNodes] = useState(MOCK_NODES);
+      const [progress, setProgress] = useState(0);
+      const [selectedNodeId, setSelectedNodeId] = useState(null);
+
+      // Handle dragging nodes
+      const handleDrag = (id, newX, newY) => {
+        setNodes(nodes.map(n => n.id === id ? { ...n, x: newX, y: newY } : n));
+      };
+
+      // Handle updating node data from modal
+      const handleUpdateNode = (updatedNode) => {
+        setNodes(nodes.map(n => n.id === updatedNode.id ? updatedNode : n));
+      }
+
+      const selectedNode = nodes.find(n => n.id === selectedNodeId);
+
+      return (
+        <div className="canvas-container" onClick={() => setSelectedNodeId(null)}>
+          <div className="top-brand">
+            <h1>Hidalgo Strategy</h1>
+            <p>Interactive Alignment Matrix</p>
+          </div>
+          
+          <div className="grid-bg"></div>
+          <div className="grid-pattern"></div>
+          
+          <SVGConnections nodes={nodes} connections={CONNECTIONS} />
+          
+          <ProgressHub progress={progress} setProgress={setProgress} />
+
+          {nodes.map(node => (
+            <Node 
+              key={node.id} 
+              node={node} 
+              isSelected={selectedNodeId === node.id}
+              onSelect={(n) => setSelectedNodeId(n.id)}
+              onDrag={handleDrag}
+            />
+          ))}
+
+          <Modal 
+            node={selectedNode} 
+            onClose={() => setSelectedNodeId(null)} 
+            onUpdateNode={handleUpdateNode}
+          />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

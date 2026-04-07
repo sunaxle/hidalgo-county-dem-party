@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     If you have any suggestions, insights, or specific web updates for this platform, please send a WhatsApp voice memo or text to:
     <br/><br/>
     <a href="https://wa.me/19566387581" target="_blank" style="display:inline-block; background:#25D366; color:#fff; text-decoration:none; padding:0.6rem 1rem; border-radius:6px; font-weight:800; width:100%; text-align:center; box-sizing:border-box;">Message Webmaster</a>
-    <div style="margin-top:0.8rem; text-align:center; font-size:0.85rem; color:#94a3b8;">📱 (956) 638-7581</div>
+    <div style="margin-top:0.8rem; text-align:center; font-size:0.85rem; color:#94a3b8;">&#x1F4F1; (956) 638-7581</div>
   `;
 
   // Button - Subtle & Faded State
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
   wmBtn.style.backdropFilter = 'blur(4px)';
   wmBtn.style.transition = 'all 0.3s ease';
   wmBtn.style.border = '1px solid rgba(255,255,255,0.1)';
-  wmBtn.innerHTML = `🛠️ Webmaster`;
+  wmBtn.innerHTML = `&#x1F6E0;&#xFE0F; Webmaster`;
 
   const activateWM = () => {
       wmBtn.style.background = 'var(--accent, #38bdf8)';
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     warningBox.style.maxWidth = '400px';
 
     warningBox.innerHTML = `
-      <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚠️</div>
+      <div style="font-size: 3.5rem; margin-bottom: 1rem;">&#x26A0;&#xFE0F;</div>
       <h3 style="color: #38bdf8; font-size: 1.5rem; margin-bottom: 1rem; margin-top:0;">Mobile Optimization In Progress</h3>
       <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
         Welcome to the new platform! This is the first week of deployment and many user experience updates are still being finalized for mobile devices.
@@ -347,6 +347,103 @@ document.addEventListener('DOMContentLoaded', () => {
         warningOverlay.remove();
       }, 400);
       sessionStorage.setItem('mobile_warning_seen', 'true');
+    });
+  }
+
+  // --- External Link Intercept / Donation Pop-up ---
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    if (href.startsWith('http')) {
+      try {
+        const url = new URL(href);
+        const currentHost = window.location.host;
+        const excludedDomains = [
+          currentHost,
+          'hidalgocountydemocratic.org',
+          'actblue.com',
+          'secure.actblue.com',
+          'wa.me'
+        ];
+        
+        const isExcluded = excludedDomains.some(domain => url.host.includes(domain));
+        
+        if (!isExcluded) {
+          e.preventDefault(); 
+          let safeTarget = link.getAttribute('target');
+          if (!safeTarget) safeTarget = '_self';
+          showExitDonationModal(href, url.host, safeTarget);
+        }
+      } catch (err) {
+        // Invalid URL, ignore
+      }
+    }
+  });
+
+  function showExitDonationModal(targetUrl, targetDomain, targetAttr) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(2, 6, 23, 0.85)';
+    overlay.style.backdropFilter = 'blur(8px)';
+    overlay.style.webkitBackdropFilter = 'blur(8px)';
+    overlay.style.zIndex = '10001';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.padding = '2rem';
+    overlay.style.boxSizing = 'border-box';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.3s ease';
+
+    const modal = document.createElement('div');
+    modal.style.background = 'linear-gradient(145deg, #1e293b, #0f172a)';
+    modal.style.border = '1px solid #38bdf8';
+    modal.style.borderRadius = '16px';
+    modal.style.padding = '2.5rem 2rem';
+    modal.style.textAlign = 'center';
+    modal.style.boxShadow = '0 25px 50px -12px rgba(0,0,0,0.7)';
+    modal.style.maxWidth = '500px';
+
+    modal.innerHTML = `
+      <div style="font-size: 3.5rem; margin-bottom: 1rem;">&#x1F525;</div>
+      <h3 style="color: #38bdf8; font-size: 1.5rem; margin-bottom: 1rem; margin-top:0;">Want to keep the fight going?</h3>
+      <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 2rem;">
+        We rely on grassroots supporters to fund our organizing here at home. Before continuing to <strong>${targetDomain}</strong>, can you pitch in to help us build power in Hidalgo County?
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" target="_blank" style="background: #38bdf8; color: #020617; text-decoration: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-transform: uppercase;">Donate to Hidalgo Dems &#x1F4B8;</a>
+        <a href="${targetUrl}" target="${targetAttr}" id="continueToTarget" style="background: transparent; color: #94a3b8; text-decoration: underline; padding: 0.5rem; font-weight: 600; font-size: 0.95rem; cursor: pointer;">Continue to ${targetDomain}</a>
+        <button id="cancelExit" style="background: transparent; border: none; color: #64748b; margin-top: 0.5rem; cursor: pointer; text-decoration: none; font-size: 0.85rem;">Cancel and stay on this page</button>
+      </div>
+    `;
+
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+    });
+
+    const closeModal = () => {
+      overlay.style.opacity = '0';
+      setTimeout(() => overlay.remove(), 300);
+    };
+
+    document.getElementById('cancelExit').addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+
+    document.getElementById('continueToTarget').addEventListener('click', () => {
+      closeModal();
     });
   }
 
