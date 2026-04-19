@@ -1,191 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Dashboard | Hidalgo County Democrats</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* Admin Dashboard Specific Overrides */
-    body {
-      background: #0f172a; /* Slate background to match login */
-      color: white;
-    }
-
-    .admin-nav {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-
-    .admin-logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logout-btn {
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-    }
-    .logout-btn:hover { color: #ef4444; }
-
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-    }
-
-    .welcome-header {
-      margin-bottom: 3rem;
-    }
-    .welcome-header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .welcome-header p {
-      color: #cbd5e1;
-      font-size: 1.1rem;
-    }
-
-    /* Metric Cards Grid */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .metric-card {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .metric-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: #3b82f6;
-    }
-    .metric-card.green::before { background: #10b981; }
-    .metric-card.orange::before { background: #f59e0b; }
-
-    .metric-title {
-      font-size: 0.85rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-
-    .metric-value {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: white;
-    }
-
-    /* Database Links Grid */
-    .db-section-title {
-      font-size: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .db-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .db-card {
-      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .db-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-      border-color: rgba(59, 130, 246, 0.5);
-    }
-
-    .db-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .db-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: white;
-    }
-
-    .db-card p {
-      color: #94a3b8;
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 2rem;
-      flex-grow: 1;
-    }
-
-    .db-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(59, 130, 246, 0.1);
-      color: #3b82f6;
-      text-decoration: none;
-      padding: 0.75rem 1rem;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      width: fit-content;
-      transition: all 0.2s ease;
-    }
-
-    .db-link:hover {
-      background: #3b82f6;
-      color: white;
-    }
-
-  </style>
-  <script src="js/gatekeeper.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hidalgo Democrats</title>
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/state_party_clone.css" />
-
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
@@ -199,8 +24,7 @@
   <link rel="stylesheet" href="css/a11y.css">
 </head>
 <body class="tx-clone">
-<!-- Secure Top Nav -->
-      <nav class="tx-clone-nav">
+<nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
@@ -297,84 +121,68 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <div class="dashboard-container">
-    
-    <!-- Header -->
-    <header class="welcome-header">
-      <h1>Portal Dashboard</h1>
-      <p>Live datastreams and community access links.</p>
-    </header>
+  <div style="background-image: linear-gradient(rgba(0, 45, 84, 0.85), rgba(0, 45, 84, 0.95)), url('images/hidalgo-exterior-d2100-675.avif'); background-size: cover; background-position: center; min-height: 80vh; padding-bottom: 4rem;">
+      <header class="page-header container fade-in" style="text-align: center; padding: 4rem 2rem;">
+          <h1 style="color: white; font-size: 3.5rem; text-transform: uppercase;">Work With Us</h1>
+          <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: #cbd5e1;">Join a movement that matters. Explore fellowships, internships, and staff opportunities with the Hidalgo County Dem Party.</p>
+      </header>
+      <main class="container fade-in" style="max-width: 1000px; padding: 0 2rem;">
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+              
+              <!-- Fellowship -->
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2.5rem; backdrop-filter: blur(10px);">
+                  <span style="background: var(--tx-sky); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">SUMMER 2026</span>
+                  <h3 style="color: white; font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem;">Organizing Fellowship</h3>
+                  <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 2rem;">A 10-week intensive program for college students looking to learn grassroots field organizing, voter persuasion, and digital campaign strategy.</p>
+                  <a href="#" style="display: block; text-align: center; background: white; color: var(--tx-navy); padding: 1rem; border-radius: 4px; font-weight: 800; text-decoration: none;">Apply Now</a>
+              </div>
 
-    <!-- Top Level Metrics -->
-    <div class="metrics-grid" style="animation-delay: 0.1s;">
-      <div class="metric-card">
-        <div class="metric-title">Community Submissions (30D)</div>
-        <div class="metric-value counter" data-target="142">0</div>
-      </div>
-      <div class="metric-card green">
-        <div class="metric-title">New FastAction Opt-Ins</div>
-        <div class="metric-value counter" data-target="87">0</div>
-      </div>
-      <div class="metric-card orange">
-        <div class="metric-title">Active Precinct Vacancies</div>
-        <div class="metric-value counter" data-target="115">0</div>
-      </div>
-    </div>
+              <!-- Internship -->
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2.5rem; backdrop-filter: blur(10px);">
+                  <span style="background: var(--tx-orange); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">FALL 2026</span>
+                  <h3 style="color: white; font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem;">Data & Analytics Intern</h3>
+                  <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 2rem;">Work directly with the VAN database to model electorate targets, process precinct files, and assist the County Chair in executing direct communication campaigns.</p>
+                  <a href="#" style="display: block; text-align: center; background: white; color: var(--tx-navy); padding: 1rem; border-radius: 4px; font-weight: 800; text-decoration: none;">Apply Now</a>
+              </div>
 
-    <h2 class="db-section-title" style="animation-delay: 0.2s;">Live Databases</h2>
+              <!-- Local Paid Role -->
+              <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 2.5rem; backdrop-filter: blur(10px);">
+                  <span style="background: #10b981; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">STANDING NOFO</span>
+                  <h3 style="color: white; font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 1rem;">Election Clerks</h3>
+                  <p style="color: #cbd5e1; line-height: 1.6; margin-bottom: 2rem;">We are continuously recruiting paid election workers, alternate judges, and ballot board members directly to the Hidalgo County Elections Dept.</p>
+                  <a href="election_workers.html" style="display: block; text-align: center; background: white; color: var(--tx-navy); padding: 1rem; border-radius: 4px; font-weight: 800; text-decoration: none;">See Details</a>
+              </div>
 
-    <!-- Database Link Cards -->
-    <div class="db-grid" style="animation-delay: 0.3s;">
-      
-      <!-- Volunteer Intake DB -->
-      <div class="db-card">
-        <div class="db-icon">📊</div>
-        <h3>Volunteer & FastAction Intake</h3>
-        <p>The master Google Sheet capturing all data from `volunteer.html` and `subscribe.html`. Contains names, emails, and opt-in SMS preferences.</p>
-        <a href="https://docs.google.com/spreadsheets/d/1XexampleGsheetLink/edit?usp=sharing" target="_blank" class="db-link">
-          Open Spreadsheet 
-          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </a>
-      </div>
+          </div>
 
-      <!-- Community Hub Inbox DB -->
-      <div class="db-card">
-        <div class="db-icon">📥</div>
-        <h3>Community Hub Inbox</h3>
-        <p>The centralized repository for "Call It Out" tips, organizer stories, and the County Chair Notes board.</p>
-        <a href="county_chair_notes.html" class="db-link">
-          Review Notes Board
-          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </a>
-      </div>
-
-      <!-- NGP VAN Resources -->
-      <div class="db-card">
-        <div class="db-icon">🔐</div>
-        <h3>State Party VAN Portal</h3>
-        <p>Direct login link to the Texas Democratic Party's official Voter Activation Network (VAN) for downloading walk lists and reporting data.</p>
-        <a href="https://www.ngpvan.com/login" target="_blank" class="db-link" style="color: #10b981; background: rgba(16, 185, 129, 0.1);">
-          Login to VAN
-          <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </a>
-      </div>
-
-    </div>
+      </main>
   </div>
+
+<footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 672-7274</p>
+      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
+      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    <div style="margin-top: 0.5rem;"><a href="precinct_toolkit.html" style="color: #64748b; text-decoration: none; font-size: 0.85rem;">🔒 Chair Toolkit</a></div>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
 
   <script src="js/app.js"></script>
   <script src="js/value_counter.js"></script>
+  <script src="js/form_handler.js"></script>
 
-  <!-- Dashboard Security Check (Redirects to Admin Gateway if accessed directly) -->
-  <script>
-    // In a real application, this would check a secure server session token.
-    // For this demonstration architecture, we verify the user didn't bypass the login screen blindly.
-    if(document.referrer.indexOf('admin.html') === -1) {
-      // NOTE: We disable this physical redirect for local development viewing.
-      // window.location.href = 'admin.html';
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
     }
   </script>
-
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script src="js/a11y.js"></script>
 </body>
