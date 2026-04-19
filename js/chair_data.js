@@ -7,14 +7,18 @@ const chairDataList2026 = [
     "name": "Cassandra S\u00e1nchez",
     "role": "Precinct Chair",
     "phone": "9563326219",
-    "email": "Cassie4589@gmail.com"
+    "email": "Cassie4589@gmail.com",
+    "address": "3219 South Ash Street",
+    "city": "Weslaco"
   },
   {
     "precinct": "4",
     "name": "Arturo Guajardo, Sr.",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9563421232",
+    "email": "agsenior47@yahoo.com",
+    "address": "1222 South Lincoln",
+    "city": "San Juan"
   },
   {
     "precinct": "4",
@@ -25,10 +29,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "7",
-    "name": "Eduardo 'Eddie' De La Rosa",
+    "name": "Eduardo Delarosa",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9562129686",
+    "email": "ed6425@msn.com",
+    "address": "405 Jasmine Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "7",
@@ -42,14 +48,18 @@ const chairDataList2026 = [
     "name": "Andr\u00e9s F Salinas",
     "role": "Precinct Chair",
     "phone": "9562275759",
-    "email": "afsalinas@att.net"
+    "email": "afsalinas@att.net",
+    "address": "3912 South M Street",
+    "city": "McAllen"
   },
   {
     "precinct": "9",
     "name": "Norma Lee Garza",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565669291",
+    "email": "normaleegarza@aol.com",
+    "address": "1006 R\u00edo Coneho",
+    "city": "Mission"
   },
   {
     "precinct": "9",
@@ -60,10 +70,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "11",
-    "name": "Maria E. Peralez",
+    "name": "Mar\u00eda E. Per\u00e1lez",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565699541",
+    "email": "mariaperalez@hotmail.com",
+    "address": "1001 Tabasco Road",
+    "city": "La Joya"
   },
   {
     "precinct": "11",
@@ -74,10 +86,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "13",
-    "name": "Celeste Flores",
+    "name": "Celeste Iris Flores",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566095531",
+    "email": "cel.flo13@icloud.com",
+    "address": "3617 Hawthorne Avenue",
+    "city": "Edinburg"
   },
   {
     "precinct": "13",
@@ -98,35 +112,36 @@ const chairDataList2026 = [
     "name": "Mary Alice Palacios",
     "role": "Precinct Chair",
     "phone": "9565601020",
-    "email": "mary.alice.palacios59@gmail.com"
-  },
-  {
-    "precinct": "16",
-    "name": "Daniel Angel Guzm\u00e1n",
-    "role": "Precinct Chair",
-    "phone": "9565510486",
-    "email": "dannyguzman65@yahoo.com"
+    "email": "mary.alice.palacios59@gmail.com",
+    "address": "701 E. Baker Drive",
+    "city": "Edinburg"
   },
   {
     "precinct": "16",
     "name": "Selma Morales",
     "role": "Precinct Chair",
     "phone": "9562896131",
-    "email": "selmam1341@yahoo.com"
+    "email": "selmam1341@yahoo.com",
+    "address": "406 Reyes Street",
+    "city": "Edcouch"
   },
   {
     "precinct": "17",
     "name": "Guadalupe Rangel, Jr.",
     "role": "Precinct Chair",
     "phone": "9563328980",
-    "email": "guadalupe.rangel@co.hidalgo.tx.us"
+    "email": "guadalupe.rangel@co.hidalgo.tx.us",
+    "address": "1209 San Juanita Street",
+    "city": "La Villa"
   },
   {
     "precinct": "18",
-    "name": "Andrea Torres",
+    "name": "Andrea Gisselle Torres",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566278718",
+    "email": "andrea.torres1301@gmail.com",
+    "address": "4016 Eagle Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "18",
@@ -137,10 +152,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "20",
-    "name": "Grabiel 'Gg' Garcia",
+    "name": "Grabiel \"GG\" Garc\u00eda",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9567894180",
+    "email": "saul133@hotmail.com",
+    "address": "2502 Fresno Avenue",
+    "city": "Hidalgo"
   },
   {
     "precinct": "20",
@@ -154,35 +171,45 @@ const chairDataList2026 = [
     "name": "Jorge Ricardo Alvarado",
     "role": "Precinct Chair",
     "phone": "9565384110",
-    "email": "alvaradojorge1729@gmail.com"
+    "email": "alvaradojorge1729@gmail.com",
+    "address": "659 North Illinois Avenue",
+    "city": "Weslaco"
   },
   {
     "precinct": "23",
     "name": "Raquel Mart\u00ednez",
     "role": "Precinct Chair",
     "phone": "9564637418",
-    "email": "raquel6037@yahoo.com"
+    "email": "raquel6037@yahoo.com",
+    "address": "303 North 8th Street",
+    "city": "Donna"
   },
   {
     "precinct": "25",
     "name": "Daniela Renee \u00c1vila",
     "role": "Precinct Chair",
     "phone": "9563423479",
-    "email": "aviladaniela1@yahoo.com"
+    "email": "aviladaniela1@yahoo.com",
+    "address": "1701 Kumquat Avenue",
+    "city": "Pharr"
   },
   {
     "precinct": "27",
     "name": "Miguel Robledo",
     "role": "Precinct Chair",
     "phone": "9562893045",
-    "email": "mikerobledo1@yahoo.com"
+    "email": "mikerobledo1@yahoo.com",
+    "address": "914 South 15th Street, Suite A",
+    "city": "McAllen"
   },
   {
     "precinct": "28",
-    "name": "Imelda Cant\u00fa Gonzalez",
+    "name": "Imelda Cant\u00fa Gonz\u00e1lez",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9564589261",
+    "email": "imeldagonzalez@gmail.com",
+    "address": "707 Fairview Drive",
+    "city": "Mission"
   },
   {
     "precinct": "28",
@@ -196,21 +223,27 @@ const chairDataList2026 = [
     "name": "Aeryn Christian Ausborn",
     "role": "Precinct Chair",
     "phone": "9568021454",
-    "email": "aeryn389@outlook.com"
+    "email": "aeryn389@outlook.com",
+    "address": "1513 Prosperity Drive, # 2",
+    "city": "Edinburg"
   },
   {
     "precinct": "31",
     "name": "Roel Garza-Morales, Jr.",
     "role": "Precinct Chair",
     "phone": "9562155120",
-    "email": "roelgarzamorales@gmail.com"
+    "email": "roelgarzamorales@gmail.com",
+    "address": "2818 East Pauline Lane",
+    "city": "Edinburg"
   },
   {
     "precinct": "32",
     "name": "Elvia Sandoval",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9564635481",
+    "email": "esandoval38@yahoo.com",
+    "address": "1308 South Florida Street",
+    "city": "Mercedes"
   },
   {
     "precinct": "32",
@@ -221,24 +254,30 @@ const chairDataList2026 = [
   },
   {
     "precinct": "33",
-    "name": "Concepci\u00f3n 'Connie' Villanueva",
+    "name": "Concepci\u00f3n \"Connie\" Villanueva",
     "role": "Precinct Chair",
     "phone": "9563303835",
-    "email": "convil1966@yahoo.com"
+    "email": "convil1966@yahoo.com",
+    "address": "8435 Mateo Escobar Street",
+    "city": "Monte Alto"
   },
   {
     "precinct": "34",
     "name": "Amanda Elise Salas",
     "role": "Precinct Chair",
     "phone": "9567399239",
-    "email": "amandaelisesalas@gmail.com"
+    "email": "amandaelisesalas@gmail.com",
+    "address": "512 E. Upas Ave. # 3",
+    "city": "McAllen"
   },
   {
     "precinct": "35",
-    "name": "Liza L. Cardoza",
+    "name": "Liza Lilian Cardoza",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9563937125",
+    "email": "lizacrdz@gmail.com",
+    "address": "1201 South Bluebonnet Street",
+    "city": "Pharr"
   },
   {
     "precinct": "35",
@@ -249,10 +288,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "36",
-    "name": "Rebecca A. Obregon",
+    "name": "Rebecca A. Obreg\u00f3n",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566247533",
+    "email": "rebeccaobregontx@gmail.com",
+    "address": "1305 East Jackson Avenue",
+    "city": "Pharr"
   },
   {
     "precinct": "36",
@@ -263,10 +304,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "38",
-    "name": "Esmeralda G. Perez",
+    "name": "Esmeralda G. P\u00e9rez",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566485428",
+    "email": "esmerperez113461@gmail.com",
+    "address": "1408 Lucksinger Road",
+    "city": "Mission"
   },
   {
     "precinct": "38",
@@ -280,56 +323,63 @@ const chairDataList2026 = [
     "name": "Imelda Castillo",
     "role": "Precinct Chair",
     "phone": "9566850351",
-    "email": "imeldacs76@yahoo.com"
+    "email": "imeldacs76@yahoo.com",
+    "address": "210 West Salazar Street",
+    "city": "San Juan"
   },
   {
     "precinct": "40",
     "name": "Robert Andrew Garc\u00eda",
     "role": "Precinct Chair",
     "phone": "9562461338",
-    "email": "Rgarcia547@gmail.com"
+    "email": "Rgarcia547@gmail.com",
+    "address": "621 Hidalgo Street",
+    "city": "Progreso"
   },
   {
     "precinct": "42",
     "name": "Mario Cano",
     "role": "Precinct Chair",
     "phone": "9565328987",
-    "email": "1mariocano@gmail.com"
+    "email": "1mariocano@gmail.com",
+    "address": "713 Fannin Street",
+    "city": "Weslaco"
   },
   {
     "precinct": "43",
     "name": "Mar\u00eda Imelda Arteaga",
     "role": "Precinct Chair",
     "phone": "9564724805",
-    "email": "Imeldaa57@aol.com"
+    "email": "Imeldaa57@aol.com",
+    "address": "4700 East Texas Road",
+    "city": "Edinburg"
   },
   {
     "precinct": "44",
     "name": "Erik Torres",
     "role": "Precinct Chair",
     "phone": "9565026150",
-    "email": "etorres0622@gmail.com"
-  },
-  {
-    "precinct": "45",
-    "name": "Michael R. L\u00f3pez",
-    "role": "Precinct Chair",
-    "phone": "9566848491",
-    "email": "ayjale@gmail.com"
+    "email": "etorres0622@gmail.com",
+    "address": "424 Minnesota Road",
+    "city": "Alamo"
   },
   {
     "precinct": "45",
     "name": "\u00c1ngel Magallanes",
     "role": "Precinct Chair",
     "phone": "9563937606",
-    "email": "magallanesangel87@gmail.com"
+    "email": "magallanesangel87@gmail.com",
+    "address": "500 N. 17th Street",
+    "city": "Donna"
   },
   {
     "precinct": "47",
     "name": "Ernesto Rosales, Jr.",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566169248",
+    "email": "er@zamora-lawfirmcom",
+    "address": "1105 South 27th Street",
+    "city": "McAllen"
   },
   {
     "precinct": "47",
@@ -343,28 +393,36 @@ const chairDataList2026 = [
     "name": "Jos\u00e9 B. Salda\u00f1a",
     "role": "Precinct Chair",
     "phone": "9563316808",
-    "email": "jb.saldana23@gmail.com"
+    "email": "jb.saldana23@gmail.com",
+    "address": "2117 Diaz",
+    "city": "McAllen"
   },
   {
     "precinct": "49",
     "name": "Manuel Garc\u00eda, Jr.",
     "role": "Precinct Chair",
     "phone": "5129778474",
-    "email": "mangaric23@gmail.com"
+    "email": "mangaric23@gmail.com",
+    "address": "225 North 41st Street",
+    "city": "McAllen"
   },
   {
     "precinct": "50",
     "name": "Ileana Cant\u00fa Gonz\u00e1lez",
     "role": "Precinct Chair",
     "phone": "9568622628",
-    "email": "ileana7982@gmail.com"
+    "email": "ileana7982@gmail.com",
+    "address": "1807 Ruby Street",
+    "city": "Pe\u00f1itas"
   },
   {
     "precinct": "51",
     "name": "Brenda Lee Villal\u00f3n",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9568626115",
+    "email": "Brendavillalon19@gmail.com",
+    "address": "407 Hawk Street",
+    "city": "Sullivan"
   },
   {
     "precinct": "51",
@@ -378,14 +436,18 @@ const chairDataList2026 = [
     "name": "Jason Daniel Vallejo",
     "role": "Precinct Chair",
     "phone": "9564545068",
-    "email": "jasondanielv@gmail.com"
+    "email": "jasondanielv@gmail.com",
+    "address": "5228 South Sugar Road Apt. 4204",
+    "city": "Edinburg"
   },
   {
     "precinct": "53",
-    "name": "Leticia H. Saenz",
+    "name": "Leticia H. S\u00e1enz",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9562398138",
+    "email": "lettysaenz@yahoo.com",
+    "address": "1214 East Champion Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "53",
@@ -396,24 +458,30 @@ const chairDataList2026 = [
   },
   {
     "precinct": "54",
-    "name": "Regina 'Regi' Compi\u00e1n Richardson",
+    "name": "Regina \"Regi\" Compi\u00e1n Richardson",
     "role": "Precinct Chair",
     "phone": "9568004805",
-    "email": "reginars43@regilaw.com"
+    "email": "reginars43@regilaw.com",
+    "address": "1300 Providence Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "55",
     "name": "Domingo J. Rivas, Sr.",
     "role": "Precinct Chair",
     "phone": "9563439092",
-    "email": "mingos735@yahoo.com"
+    "email": "mingos735@yahoo.com",
+    "address": "510 S. 21st Street",
+    "city": "Donna"
   },
   {
     "precinct": "56",
     "name": "Roberto Guajardo",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565033451",
+    "email": "bobbyguajardo9@gmail.com",
+    "address": "910 South Colorado Avenue",
+    "city": "Mercedes"
   },
   {
     "precinct": "56",
@@ -424,10 +492,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "58",
-    "name": "Ismael Garcia",
+    "name": "Ismael M. Garc\u00eda",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9566485319",
+    "email": "ainmechanical@gmail.com",
+    "address": "4408 Sundance Circle",
+    "city": "Weslaco"
   },
   {
     "precinct": "58",
@@ -448,35 +518,45 @@ const chairDataList2026 = [
     "name": "Oscar Santa Mar\u00eda, Jr.",
     "role": "Precinct Chair",
     "phone": "9562789367",
-    "email": "santamariaoscar40@yahoo.com"
+    "email": "santamariaoscar40@yahoo.com",
+    "address": "215 W. Eagle Street",
+    "city": "San Juan"
   },
   {
     "precinct": "62",
     "name": "Luule Moreno",
     "role": "Precinct Chair",
     "phone": "9565669121",
-    "email": "Luule6@hotmail.com"
+    "email": "Luule6@hotmail.com",
+    "address": "416 Yucca Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "63",
     "name": "Noemi Ramos Garza",
     "role": "Precinct Chair",
     "phone": "9562221051",
-    "email": "jabgarza62@aol.com"
+    "email": "jabgarza62@aol.com",
+    "address": "4036 Garza Street",
+    "city": "Mission"
   },
   {
     "precinct": "64",
     "name": "Ang\u00e9lica Patricia Ramos",
     "role": "Precinct Chair",
     "phone": "9566808509",
-    "email": "gellysenpai@gmail.com"
+    "email": "gellysenpai@gmail.com",
+    "address": "6518 Doffing Lane",
+    "city": "Mission"
   },
   {
     "precinct": "66",
-    "name": "Stacy Solis",
+    "name": "Stacy Elizabeth Solis",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565715860",
+    "email": "ssjstx@yahoo.com",
+    "address": "1312 Jamine Ave.",
+    "city": "McAllen"
   },
   {
     "precinct": "66",
@@ -487,10 +567,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "69",
-    "name": "Marissa Marmolejo Martinez",
+    "name": "Juventina Herrera",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9564587937",
+    "email": "juventinah@yahoo.com",
+    "address": "5302 Falisha Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "69",
@@ -501,10 +583,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "70",
-    "name": "Sara Barrera",
+    "name": "Sara Gail Barrera",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9563732024",
+    "email": "saragailb@gmail.com",
+    "address": "1020 East Mile 12 1/2 North",
+    "city": "Weslaco"
   },
   {
     "precinct": "70",
@@ -518,14 +602,18 @@ const chairDataList2026 = [
     "name": "Mar\u00eda Elena Garc\u00eda",
     "role": "Precinct Chair",
     "phone": "9564530420",
-    "email": "marygarcia664@icloud.com"
+    "email": "marygarcia664@icloud.com",
+    "address": "2024 Jay Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "73",
-    "name": "Julio Garc\u00eda, Iii",
+    "name": "Julio Garc\u00eda III",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565344113",
+    "email": "j.g.III@hotmail.com",
+    "address": "708 Mynah Avenue, No. A",
+    "city": "McAllen"
   },
   {
     "precinct": "73",
@@ -536,10 +624,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "75",
-    "name": "Abraham Sanchez",
+    "name": "Abraham S\u00e1nchez",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565188695",
+    "email": "abramsanch05@gmail.com",
+    "address": "3628 Spicewood Drive",
+    "city": "Edinburg"
   },
   {
     "precinct": "75",
@@ -553,28 +643,36 @@ const chairDataList2026 = [
     "name": "Abad Morales",
     "role": "Precinct Chair",
     "phone": "9566204533",
-    "email": "moralesconstruction72@gmail.com"
+    "email": "moralesconstruction72@gmail.com",
+    "address": "9151 North FM 1015",
+    "city": "Weslaco"
   },
   {
     "precinct": "80",
     "name": "Mar\u00eda Edith Lea\u00f1os Rodr\u00edguez",
     "role": "Precinct Chair",
     "phone": "9569468125",
-    "email": "leanosedith00@gmail.com"
+    "email": "leanosedith00@gmail.com",
+    "address": "801 Amarillo Drive",
+    "city": "Sullivan"
   },
   {
     "precinct": "81",
-    "name": "Chris Eduardo 'Edward' L\u00f3pez",
+    "name": "Chris Eduardo \"Edward\" L\u00f3pez",
     "role": "Precinct Chair",
     "phone": "9567892228",
-    "email": "edsworld956@hotmail.com"
+    "email": "edsworld956@hotmail.com",
+    "address": "6108 North 24th Street",
+    "city": "McAllen"
   },
   {
     "precinct": "82",
     "name": "Rafael Garza",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9568213235",
+    "email": "rgarza1767@gmail.com",
+    "address": "6667 El Camino Real",
+    "city": "Granjeno"
   },
   {
     "precinct": "82",
@@ -588,21 +686,27 @@ const chairDataList2026 = [
     "name": "David Braedon Aguirre",
     "role": "Precinct Chair",
     "phone": "9568886848",
-    "email": "davidbraedon2005@gmail.com"
+    "email": "davidbraedon2005@gmail.com",
+    "address": "2108 Sunrise Lane",
+    "city": "Mission"
   },
   {
     "precinct": "84",
     "name": "Alma Yadira Butcher",
     "role": "Precinct Chair",
     "phone": "9568787362",
-    "email": "alma_butcher@yahoo.com"
+    "email": "alma_butcher@yahoo.com",
+    "address": "6219 N. 46th Lane",
+    "city": "McAllen"
   },
   {
     "precinct": "85",
-    "name": "Hector Alvarado",
+    "name": "H\u00e9ctor Hugo Alvarado, Jr.",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565324337",
+    "email": "hidalgocounty85thprecinct@gmail.com",
+    "address": "3720 South Garden Street",
+    "city": "Mercedes"
   },
   {
     "precinct": "85",
@@ -616,21 +720,27 @@ const chairDataList2026 = [
     "name": "Robert Ricardo Maldonado",
     "role": "Precinct Chair",
     "phone": "9563521727",
-    "email": "robertmaldonado875@gmail.com"
+    "email": "robertmaldonado875@gmail.com",
+    "address": "2131 West Fern Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "88",
     "name": "Elizabeth Rodr\u00edguez M\u00e1rquez",
     "role": "Precinct Chair",
     "phone": "9565634164",
-    "email": "elizabethrodriguez.er956@gmail.com"
+    "email": "elizabethrodriguez.er956@gmail.com",
+    "address": "402 East Main Avenue",
+    "city": "Alton"
   },
   {
     "precinct": "90",
-    "name": "Mingo Rodriguez",
+    "name": "Domingo (Mingo) Rodr\u00edguez",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9562925272",
+    "email": "mingorodriguez58@gmail.com",
+    "address": "114 Ju\u00e1rez Street",
+    "city": "Elsa"
   },
   {
     "precinct": "90",
@@ -644,42 +754,63 @@ const chairDataList2026 = [
     "name": "Karen Louise Prewitt",
     "role": "Precinct Chair",
     "phone": "9569578095",
-    "email": "karen.prewitt.71@gmail.com"
+    "email": "karen.prewitt.71@gmail.com",
+    "address": "2101 Mauve Drive",
+    "city": "Mission"
   },
   {
     "precinct": "94",
     "name": "Rosa Mar\u00eda F\u00e9lix",
     "role": "Precinct Chair",
     "phone": "2109055518",
-    "email": "rosamfelix@yahoo.com"
+    "email": "rosamfelix@yahoo.com",
+    "address": "2002 Paseo Encantado Street",
+    "city": "Mission"
   },
   {
     "precinct": "95",
-    "name": "Everardo 'Lalo' Salda\u00f1a, Sr.",
+    "name": "Everardo \"Lalo\" Salda\u00f1a, Sr.",
     "role": "Precinct Chair",
     "phone": "9567153597",
-    "email": "sanhas4@yahoo.com"
+    "email": "sanhas4@yahoo.com",
+    "address": "604 Thornwood",
+    "city": "Mission"
   },
   {
     "precinct": "96",
     "name": "Irma Garc\u00eda",
     "role": "Precinct Chair",
     "phone": "9562390999",
-    "email": "irma.q.garcia@gmail.com"
+    "email": "irma.q.garcia@gmail.com",
+    "address": "7812 N. 4th Street",
+    "city": "McAllen"
+  },
+  {
+    "precinct": "97",
+    "name": "Jos\u00e9 Enrique Flores",
+    "role": "Precinct Chair",
+    "phone": "9562129909",
+    "email": "enrique.flores825@gmail.com",
+    "address": "2512 Whitewing Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "99",
     "name": "Jovanna Hern\u00e1ndez",
     "role": "Precinct Chair",
     "phone": "9562400214",
-    "email": "jovhdz0142@yahoo.com"
+    "email": "jovhdz0142@yahoo.com",
+    "address": "4104 Pe\u00f1a Circle",
+    "city": "Mission"
   },
   {
     "precinct": "100",
-    "name": "Robert 'Bobby' Moreno",
+    "name": "Roberto Moreno",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "2109965655",
+    "email": "robert.h.moreno@gmail.com",
+    "address": "414 Mazatl\u00e1n Street",
+    "city": "Mission"
   },
   {
     "precinct": "100",
@@ -700,21 +831,36 @@ const chairDataList2026 = [
     "name": "Marta Garc\u00eda-Rodr\u00edguez",
     "role": "Precinct Chair",
     "phone": "9562225916",
-    "email": "maratarodz77@gmail.com"
+    "email": "maratarodz77@gmail.com",
+    "address": "1808 Cynthia Lane",
+    "city": "Palmhurst"
   },
   {
     "precinct": "102",
     "name": "Mary Solum Hogan",
     "role": "Precinct Chair",
     "phone": "9563692383",
-    "email": "marysolumhogan@gmail.com"
+    "email": "marysolumhogan@gmail.com",
+    "address": "500 North Bryan Road E4",
+    "city": "Mission"
   },
   {
     "precinct": "103",
-    "name": "Alma Garcia",
-    "role": "Precinct Chair",
+    "name": "Delia De Le\u00f3n Gil",
+    "role": "Precinct Chair (Runoff)",
     "phone": "",
-    "email": ""
+    "email": "",
+    "address": "",
+    "city": ""
+  },
+  {
+    "precinct": "103",
+    "name": "Alma Gloria Garc\u00eda",
+    "role": "Precinct Chair (Runoff)",
+    "phone": "9562390999",
+    "email": "almavamos@yahoo.com",
+    "address": "1508 Oak Drive",
+    "city": "Mission"
   },
   {
     "precinct": "103",
@@ -739,13 +885,6 @@ const chairDataList2026 = [
   },
   {
     "precinct": "104",
-    "name": "Maribel Vel\u00e1squez",
-    "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
-  },
-  {
-    "precinct": "104",
     "name": "Gloria Maldonado-Lozano",
     "role": "Block Captain",
     "phone": "",
@@ -756,21 +895,27 @@ const chairDataList2026 = [
     "name": "Lilia Elise Ram\u00edrez",
     "role": "Precinct Chair",
     "phone": "9565308434",
-    "email": "liliaeramirez401@gmail.com"
+    "email": "liliaeramirez401@gmail.com",
+    "address": "3610 Shadow wood Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "106",
     "name": "Ann Varick Millard",
     "role": "Precinct Chair",
     "phone": "9566480541",
-    "email": "avmillard@gmail.com"
+    "email": "avmillard@gmail.com",
+    "address": "1923 South Mon Mack Road",
+    "city": "Edinburg"
   },
   {
     "precinct": "107",
-    "name": "Alma Vera",
+    "name": "Alma Rosa Vera",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9564571240",
+    "email": "arvera74@gmail.com",
+    "address": "1316 Tanglewood Drive",
+    "city": "Edinburg"
   },
   {
     "precinct": "107",
@@ -788,31 +933,48 @@ const chairDataList2026 = [
   },
   {
     "precinct": "109",
-    "name": "Maria E. Mendoza",
+    "name": "Mar\u00eda E. Mendoza",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9563090456",
+    "email": "marie195967@gmail.com",
+    "address": "2315 Moonlight Lane, Apt. 2",
+    "city": "Edinburg"
   },
   {
     "precinct": "110",
     "name": "Jes\u00fas Montalvo",
     "role": "Precinct Chair",
     "phone": "9565326175",
-    "email": "jessemontalvo8384@gmail.com"
+    "email": "jessemontalvo8384@gmail.com",
+    "address": "3908 East Manzanillo Drive",
+    "city": "Weslaco"
+  },
+  {
+    "precinct": "111",
+    "name": "Sharon Aisha Hern\u00e1ndez",
+    "role": "Precinct Chair",
+    "phone": "9563732464",
+    "email": "aishasharon@yahoo.com",
+    "address": "1320 South Bridge Avenue Unit 19",
+    "city": "Weslaco"
   },
   {
     "precinct": "112",
     "name": "Betty P\u00e9rez",
     "role": "Precinct Chair",
     "phone": "9562723591",
-    "email": "bettyperez271@gmail.com"
+    "email": "bettyperez271@gmail.com",
+    "address": "307 North Pino",
+    "city": "Weslaco"
   },
   {
     "precinct": "113",
     "name": "Jesse C\u00e1rdenas",
     "role": "Precinct Chair",
     "phone": "9564635907",
-    "email": "cfsr1990@gmail.com"
+    "email": "cfsr1990@gmail.com",
+    "address": "1304 Mulberry Drive",
+    "city": "Weslaco"
   },
   {
     "precinct": "113",
@@ -826,7 +988,9 @@ const chairDataList2026 = [
     "name": "Delma Cadena",
     "role": "Precinct Chair",
     "phone": "9562618652",
-    "email": "9562618652del@gmail.com"
+    "email": "9562618652del@gmail.com",
+    "address": "800 South Border Avenue",
+    "city": "Weslaco"
   },
   {
     "precinct": "114",
@@ -836,11 +1000,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "115",
+    "name": "Hermila Garc\u00eda",
+    "role": "Precinct Chair",
+    "phone": "9564985558",
+    "email": "g.hermila@yahoo.com",
+    "address": "109 This Way",
+    "city": "Pharr"
+  },
+  {
     "precinct": "116",
     "name": "Asia Celestia Razo",
     "role": "Precinct Chair",
     "phone": "9563136673",
-    "email": "asiaamaya46@gmail.com"
+    "email": "asiaamaya46@gmail.com",
+    "address": "825 West Bronze Drive Apt. 3",
+    "city": "Pharr"
   },
   {
     "precinct": "116",
@@ -850,11 +1025,40 @@ const chairDataList2026 = [
     "email": ""
   },
   {
-    "precinct": "120",
-    "name": "Sandra L. Resendez",
+    "precinct": "117",
+    "name": "Dora Guzm\u00e1n",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9568211988",
+    "email": "mzdormae@aol.com",
+    "address": "1804 Calle de Palmas",
+    "city": "San Juan"
+  },
+  {
+    "precinct": "118",
+    "name": "Brenda Torres",
+    "role": "Precinct Chair",
+    "phone": "9564835449",
+    "email": "jeansofie80@gmail.com",
+    "address": "1800 Regnant Drive",
+    "city": "San Juan"
+  },
+  {
+    "precinct": "119",
+    "name": "Leticia Rodr\u00edguez Pe\u00f1a",
+    "role": "Precinct Chair",
+    "phone": "9564546208",
+    "email": "lrpuente@yahoo.com",
+    "address": "17229 Mile 4 West",
+    "city": "Edcouch"
+  },
+  {
+    "precinct": "120",
+    "name": "Deborah Ryan",
+    "role": "Precinct Chair",
+    "phone": "9567332934",
+    "email": "Deborah78596@gmail.com",
+    "address": "202 West South",
+    "city": "Donna"
   },
   {
     "precinct": "120",
@@ -864,18 +1068,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
-    "precinct": "121",
-    "name": "Margarita F. Trevi\u00f1o",
+    "precinct": "122",
+    "name": "Mildred Escobedo",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565151511",
+    "email": "millie8407@gmail.com",
+    "address": "904 W. Ruise\u00f1or Avenue",
+    "city": "Pharr"
   },
   {
     "precinct": "124",
     "name": "Paul M. Vazald\u00faa",
     "role": "Precinct Chair",
     "phone": "9564516775",
-    "email": "paulmv555@yahoo.com"
+    "email": "paulmv555@yahoo.com",
+    "address": "205 West Iris Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "124",
@@ -889,7 +1097,9 @@ const chairDataList2026 = [
     "name": "Mar\u00eda Isabel Perales",
     "role": "Precinct Chair",
     "phone": "9565690955",
-    "email": "miperales50@yahoo.com"
+    "email": "miperales50@yahoo.com",
+    "address": "12404 N. Los Ebanos Road",
+    "city": "Mission"
   },
   {
     "precinct": "125",
@@ -903,7 +1113,9 @@ const chairDataList2026 = [
     "name": "Juanita Solis",
     "role": "Precinct Chair",
     "phone": "9567899301",
-    "email": "jvsolis1@sbcglobal.net"
+    "email": "jvsolis1@sbcglobal.net",
+    "address": "830 N. Alamo Road",
+    "city": "Alamo"
   },
   {
     "precinct": "126",
@@ -917,7 +1129,9 @@ const chairDataList2026 = [
     "name": "Eleazar Escobedo",
     "role": "Precinct Chair",
     "phone": "9564387452",
-    "email": "eescobedosr54@yahoo.com"
+    "email": "eescobedosr54@yahoo.com",
+    "address": "633 E. Citrus Avenue",
+    "city": "Alamo"
   },
   {
     "precinct": "127",
@@ -931,7 +1145,9 @@ const chairDataList2026 = [
     "name": "Nyssa Michelle Cruz",
     "role": "Precinct Chair",
     "phone": "9567337292",
-    "email": "hcdp132@mail.com"
+    "email": "hcdp132@mail.com",
+    "address": "116 Wardlow Avenue",
+    "city": "Weslaco"
   },
   {
     "precinct": "132",
@@ -941,11 +1157,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "134",
+    "name": "Nora Linda Medina",
+    "role": "Precinct Chair",
+    "phone": "9566558213",
+    "email": "nora.medinafnp@gmail.com",
+    "address": "1208 Y-z Avenue",
+    "city": "McAllen"
+  },
+  {
     "precinct": "136",
     "name": "Valent\u00edn Victorino Guerra",
     "role": "Precinct Chair",
     "phone": "4142931195",
-    "email": "valentin.guerra@gmail.com"
+    "email": "valentin.guerra@gmail.com",
+    "address": "2505 North 5th Street",
+    "city": "McAllen"
   },
   {
     "precinct": "136",
@@ -959,7 +1186,9 @@ const chairDataList2026 = [
     "name": "Mar\u00eda A. Recio",
     "role": "Precinct Chair",
     "phone": "9566030952",
-    "email": "reciomary922@icloud.com"
+    "email": "reciomary922@icloud.com",
+    "address": "727 South 83rd Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "142",
@@ -973,7 +1202,9 @@ const chairDataList2026 = [
     "name": "Yolanda G. Trevi\u00f1o",
     "role": "Precinct Chair",
     "phone": "9564580990",
-    "email": "ytrevino4646@yahoo.com"
+    "email": "ytrevino4646@yahoo.com",
+    "address": "2246 Domingo Trevi\u00f1o Drive",
+    "city": "Mission"
   },
   {
     "precinct": "145",
@@ -987,7 +1218,9 @@ const chairDataList2026 = [
     "name": "Olga Ana Laura Cardoza",
     "role": "Precinct Chair",
     "phone": "9566558344",
-    "email": "olgalcardoza@gmail.com"
+    "email": "olgalcardoza@gmail.com",
+    "address": "7016 San Marcos Street",
+    "city": "Pharr"
   },
   {
     "precinct": "146",
@@ -1001,7 +1234,9 @@ const chairDataList2026 = [
     "name": "Diana Laura Morales",
     "role": "Precinct Chair",
     "phone": "9564425357",
-    "email": "diana.morales91@gmail.com"
+    "email": "diana.morales91@gmail.com",
+    "address": "4124 Las Nubes",
+    "city": "Pharr"
   },
   {
     "precinct": "147",
@@ -1015,7 +1250,9 @@ const chairDataList2026 = [
     "name": "Jos\u00e9 Frank P\u00e9rez",
     "role": "Precinct Chair",
     "phone": "9564727401",
-    "email": "perezfrank19610@gmail.com"
+    "email": "perezfrank19610@gmail.com",
+    "address": "1713 Kayla Avenue",
+    "city": "Edinburg"
   },
   {
     "precinct": "151",
@@ -1029,7 +1266,9 @@ const chairDataList2026 = [
     "name": "Melissa Ch\u00e1vez",
     "role": "Precinct Chair",
     "phone": "9564571719",
-    "email": "jesmel1974@gmail.com"
+    "email": "jesmel1974@gmail.com",
+    "address": "10014 Mile 19 North",
+    "city": "Monte Alto"
   },
   {
     "precinct": "153",
@@ -1043,7 +1282,9 @@ const chairDataList2026 = [
     "name": "Juan P. Oliv\u00e1n",
     "role": "Precinct Chair",
     "phone": "9564577123",
-    "email": "jpolivan@sbcglobal.net"
+    "email": "jpolivan@sbcglobal.net",
+    "address": "5314 San Roman Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "154",
@@ -1057,7 +1298,9 @@ const chairDataList2026 = [
     "name": "Norma Vento Reyes",
     "role": "Precinct Chair",
     "phone": "9566840657",
-    "email": "normavreyes@yahoo.com"
+    "email": "normavreyes@yahoo.com",
+    "address": "3457 PFC Pedro Mart\u00ednez Road",
+    "city": "Mercedes"
   },
   {
     "precinct": "155",
@@ -1071,7 +1314,9 @@ const chairDataList2026 = [
     "name": "Ana Paola Garc\u00eda",
     "role": "Precinct Chair",
     "phone": "9568782716",
-    "email": "aglight234@gmail.com"
+    "email": "aglight234@gmail.com",
+    "address": "118 N. Standard Avenue",
+    "city": "San Juan"
   },
   {
     "precinct": "156",
@@ -1085,7 +1330,9 @@ const chairDataList2026 = [
     "name": "Kenna S Giffin",
     "role": "Precinct Chair",
     "phone": "9562834669",
-    "email": "ksg210@gmail.com"
+    "email": "ksg210@gmail.com",
+    "address": "4900 North McColl Road No. 330",
+    "city": "McAllen"
   },
   {
     "precinct": "160",
@@ -1099,7 +1346,9 @@ const chairDataList2026 = [
     "name": "Joe David Garc\u00eda",
     "role": "Precinct Chair",
     "phone": "9568008864",
-    "email": "apex0378557@gmail.com"
+    "email": "apex0378557@gmail.com",
+    "address": "3506 North 32nd Lane",
+    "city": "McAllen"
   },
   {
     "precinct": "161",
@@ -1113,7 +1362,9 @@ const chairDataList2026 = [
     "name": "Prisylla Ann Jasso",
     "role": "Precinct Chair",
     "phone": "9564676030",
-    "email": "prisylla@etiksolutions.us"
+    "email": "prisylla@etiksolutions.us",
+    "address": "5000 N. 1st Lane # 173",
+    "city": "McAllen"
   },
   {
     "precinct": "162",
@@ -1123,11 +1374,49 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "163",
+    "name": "Abel Carre\u00f3n Mart\u00ednez",
+    "role": "Precinct Chair",
+    "phone": "9565030207",
+    "email": "abelcarreongodfirst@gmail.com",
+    "address": "5256 North FM 493",
+    "city": "Donna"
+  },
+  {
+    "precinct": "164",
+    "name": "Eduardo Luna II",
+    "role": "Precinct Chair (Runoff)",
+    "phone": "9564572902",
+    "email": "eddieluna624@gmail.com",
+    "address": "2106 North 49th Lane",
+    "city": "McAllen"
+  },
+  {
+    "precinct": "164",
+    "name": "Catalina Pe\u00f1a",
+    "role": "Precinct Chair (Runoff)",
+    "phone": "",
+    "email": "",
+    "address": "",
+    "city": ""
+  },
+  {
+    "precinct": "165",
+    "name": "Roxanne Gonz\u00e1lez",
+    "role": "Precinct Chair",
+    "phone": "9562727233",
+    "email": "roxgonzalez23@gmail.com",
+    "address": "11423 North Mile 4 West",
+    "city": "Weslaco"
+  },
+  {
     "precinct": "167",
     "name": "Clarissa Ram\u00edrez",
     "role": "Precinct Chair",
     "phone": "9565717778",
-    "email": "msclaramirez@gmail.com"
+    "email": "msclaramirez@gmail.com",
+    "address": "9715 North Bentsen Road",
+    "city": "McAllen"
   },
   {
     "precinct": "167",
@@ -1141,7 +1430,9 @@ const chairDataList2026 = [
     "name": "Briana Villa",
     "role": "Precinct Chair",
     "phone": "9564514463",
-    "email": "bri241512@gmail.com"
+    "email": "bri241512@gmail.com",
+    "address": "3836 Mile 12 North",
+    "city": "Mercedes"
   },
   {
     "precinct": "169",
@@ -1155,7 +1446,9 @@ const chairDataList2026 = [
     "name": "Abel Prado",
     "role": "Precinct Chair",
     "phone": "9567320525",
-    "email": "abeliprado@gmail.com"
+    "email": "abeliprado@gmail.com",
+    "address": "2522 King Drive",
+    "city": "Donna"
   },
   {
     "precinct": "174",
@@ -1165,11 +1458,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "175",
+    "name": "Jos\u00e9 David Guerra",
+    "role": "Precinct Chair",
+    "phone": "9564590493",
+    "email": "",
+    "address": "801 Park Drive",
+    "city": "Donna"
+  },
+  {
     "precinct": "176",
     "name": "Alberto Rodr\u00edguez",
     "role": "Precinct Chair",
     "phone": "9563407534",
-    "email": "albert.rodrigueztx@gmail.com"
+    "email": "albert.rodrigueztx@gmail.com",
+    "address": "464 Cripple Creek Circle",
+    "city": "Alamo"
   },
   {
     "precinct": "176",
@@ -1183,7 +1487,9 @@ const chairDataList2026 = [
     "name": "Nellie Aide Medina",
     "role": "Precinct Chair",
     "phone": "9564604983",
-    "email": "nelliemedina0723@gmail.com"
+    "email": "nelliemedina0723@gmail.com",
+    "address": "809 Ridge Road",
+    "city": "Alamo"
   },
   {
     "precinct": "177",
@@ -1193,11 +1499,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "179",
+    "name": "Selina Serna",
+    "role": "Precinct Chair",
+    "phone": "9563557543",
+    "email": "serna76.ss@gmail.com",
+    "address": "2306 Granjeno Drive",
+    "city": "Mercedes"
+  },
+  {
     "precinct": "180",
     "name": "Gerardo Garc\u00eda, Jr.",
     "role": "Precinct Chair",
     "phone": "9566852685",
-    "email": "Jergarcia19@gmail.com"
+    "email": "Jergarcia19@gmail.com",
+    "address": "29464 Harding Ave.",
+    "city": "Hargill"
   },
   {
     "precinct": "180",
@@ -1211,7 +1528,9 @@ const chairDataList2026 = [
     "name": "Rolando Alvarado, Jr.",
     "role": "Precinct Chair",
     "phone": "9564781357",
-    "email": "rolandotransports@gmail.com"
+    "email": "rolandotransports@gmail.com",
+    "address": "1618 West Bella Vista Avenue",
+    "city": "Alton"
   },
   {
     "precinct": "183",
@@ -1225,7 +1544,9 @@ const chairDataList2026 = [
     "name": "Arturo Morales",
     "role": "Precinct Chair",
     "phone": "3233710829",
-    "email": "arturo90976@gmail.com"
+    "email": "arturo90976@gmail.com",
+    "address": "1411 San Francisco Street",
+    "city": "Mission"
   },
   {
     "precinct": "187",
@@ -1239,7 +1560,9 @@ const chairDataList2026 = [
     "name": "Melisa Zamorano Medina",
     "role": "Precinct Chair",
     "phone": "9562791294",
-    "email": "melzmed@yahoo.com"
+    "email": "melzmed@yahoo.com",
+    "address": "820 Eldora Road",
+    "city": "Alamo"
   },
   {
     "precinct": "192",
@@ -1253,7 +1576,9 @@ const chairDataList2026 = [
     "name": "Michael Alexander Capps",
     "role": "Precinct Chair",
     "phone": "5129661815",
-    "email": "alexcappstx@gmail.com"
+    "email": "alexcappstx@gmail.com",
+    "address": "4812 Sweetwater Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "193",
@@ -1267,7 +1592,9 @@ const chairDataList2026 = [
     "name": "Emily Jocelyn Rodr\u00edguez",
     "role": "Precinct Chair",
     "phone": "9569004712",
-    "email": "remily040@gmail.com"
+    "email": "remily040@gmail.com",
+    "address": "6918 El Lucero Lane",
+    "city": "Palmview"
   },
   {
     "precinct": "194",
@@ -1281,7 +1608,9 @@ const chairDataList2026 = [
     "name": "Kathryn Crystine Harvey",
     "role": "Precinct Chair",
     "phone": "8135233641",
-    "email": "kathryncharvey@aol.com"
+    "email": "kathryncharvey@aol.com",
+    "address": "7511 Birdie Drive",
+    "city": "Mission"
   },
   {
     "precinct": "195",
@@ -1291,11 +1620,40 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "196",
+    "name": "Arminda Garc\u00eda",
+    "role": "Precinct Chair",
+    "phone": "8105138463",
+    "email": "armindag1604@gmail.com",
+    "address": "1914 East 11th Street",
+    "city": "Weslaco"
+  },
+  {
+    "precinct": "199",
+    "name": "Melissa L\u00f3pez Jalomo",
+    "role": "Precinct Chair",
+    "phone": "9568213880",
+    "email": "melja62@yahoo.com",
+    "address": "8600 N. 21st Street",
+    "city": "McAllen"
+  },
+  {
+    "precinct": "200",
+    "name": "Mia Coraz\u00f3n Salazar",
+    "role": "Precinct Chair",
+    "phone": "2102450209",
+    "email": "miacorazonrealtor@gmail.com",
+    "address": "6508 North 26th Street",
+    "city": "McAllen"
+  },
+  {
     "precinct": "201",
     "name": "Jaime Eduardo Gonz\u00e1lez",
     "role": "Precinct Chair",
     "phone": "9565663523",
-    "email": "jimgonzalez64@yahoo.com"
+    "email": "jimgonzalez64@yahoo.com",
+    "address": "3403 Dutchess Street",
+    "city": "Edinburg"
   },
   {
     "precinct": "201",
@@ -1305,11 +1663,22 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "203",
+    "name": "Mario Adrian Su\u00e1rez",
+    "role": "Precinct Chair",
+    "phone": "9565664576",
+    "email": "95marioasuarez@gmail.com",
+    "address": "3403 San Rafael Street",
+    "city": "Mission"
+  },
+  {
     "precinct": "207",
     "name": "Rosendo Villagr\u00e1n, Jr.",
     "role": "Precinct Chair",
     "phone": "9565305516",
-    "email": "gene12_2000@yahoo.com"
+    "email": "gene12_2000@yahoo.com",
+    "address": "3416 Xenops Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "207",
@@ -1323,7 +1692,9 @@ const chairDataList2026 = [
     "name": "Sonya N. Ramsey",
     "role": "Precinct Chair",
     "phone": "6145073191",
-    "email": "nicknathan@gmail.com"
+    "email": "nicknathan@gmail.com",
+    "address": "8119 North 55th Lane",
+    "city": "McAllen"
   },
   {
     "precinct": "211",
@@ -1333,11 +1704,31 @@ const chairDataList2026 = [
     "email": ""
   },
   {
+    "precinct": "214",
+    "name": "Fernando Castillo",
+    "role": "Precinct Chair (Runoff)",
+    "phone": "",
+    "email": "",
+    "address": "",
+    "city": ""
+  },
+  {
+    "precinct": "214",
+    "name": "Mitzi Ivonne Zambrano",
+    "role": "Precinct Chair (Runoff)",
+    "phone": "9563783333",
+    "email": "mitzy2125@icloud.com",
+    "address": "1001 East 13 1/2 Street",
+    "city": "San Juan"
+  },
+  {
     "precinct": "216",
     "name": "Madeleine Christina Croll",
     "role": "Precinct Chair",
     "phone": "9567096118",
-    "email": "madeleine.croll@gmail.com"
+    "email": "madeleine.croll@gmail.com",
+    "address": "2416 Quince Avenue",
+    "city": "McAllen"
   },
   {
     "precinct": "216",
@@ -1348,17 +1739,37 @@ const chairDataList2026 = [
   },
   {
     "precinct": "221",
+    "name": "Eduardo M. Espinosa",
+    "role": "Precinct Chair",
+    "phone": "",
+    "email": "",
+    "address": "",
+    "city": ""
+  },
+  {
+    "precinct": "221",
     "name": "Julio Garza",
     "role": "Block Captain",
     "phone": "",
     "email": ""
   },
   {
+    "precinct": "222",
+    "name": "Marissa Marmolejo Mart\u00ednez",
+    "role": "Precinct Chair",
+    "phone": "9563109261",
+    "email": "marissamarmolejo217@gmail.com",
+    "address": "115 Lincoln Avenue",
+    "city": "Edinburg"
+  },
+  {
     "precinct": "225",
     "name": "Elberto Esiquiel Bravo",
     "role": "Precinct Chair",
     "phone": "9565352822",
-    "email": "elbertobravo3@gmail.com"
+    "email": "elbertobravo3@gmail.com",
+    "address": "18286 FM 493",
+    "city": "La Blanca"
   },
   {
     "precinct": "225",
@@ -1372,7 +1783,9 @@ const chairDataList2026 = [
     "name": "Gustavo Padr\u00f3n Guerra",
     "role": "Precinct Chair",
     "phone": "9568218433",
-    "email": "gguerravv@gmail.com"
+    "email": "gguerravv@gmail.com",
+    "address": "2808 Granjeno Avenue",
+    "city": "Hidalgo"
   },
   {
     "precinct": "226",
@@ -1383,10 +1796,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "227",
-    "name": "Irene Reyes Villarreal",
+    "name": "Irene Guadalupe Reyes Villarreal",
     "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9565584491",
+    "email": "rezainvestmentsllc@yahoo.com",
+    "address": "6402 South Blanca Lane",
+    "city": "Pharr"
   },
   {
     "precinct": "227",
@@ -1400,7 +1815,9 @@ const chairDataList2026 = [
     "name": "Irma Cavazos Espinoza",
     "role": "Precinct Chair",
     "phone": "9562075177",
-    "email": ""
+    "email": "",
+    "address": "3801 North Ra\u00fal Longoria Road",
+    "city": "San Juan"
   },
   {
     "precinct": "228",
@@ -1414,7 +1831,9 @@ const chairDataList2026 = [
     "name": "Jos\u00e9 Robbie Ju\u00e1rez",
     "role": "Precinct Chair",
     "phone": "9563307809",
-    "email": "jdesign1920@gmail.com"
+    "email": "jdesign1920@gmail.com",
+    "address": "13217 Plantation Oaks",
+    "city": "Edinburg"
   },
   {
     "precinct": "230",
@@ -1425,10 +1844,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "234",
-    "name": "Heriberto 'Beto' Rangel",
+    "name": "Heriberto \"Beto\" Rangel",
     "role": "Precinct Chair",
     "phone": "9562491577",
-    "email": "heriberto.rangel00@gmail.com"
+    "email": "heriberto.rangel00@gmail.com",
+    "address": "314 East Levee Avenue",
+    "city": "Hidalgo"
   },
   {
     "precinct": "234",
@@ -1442,7 +1863,9 @@ const chairDataList2026 = [
     "name": "Angelo Billie Fonseca",
     "role": "Precinct Chair",
     "phone": "9566858920",
-    "email": "Bfonz33@gmail.com"
+    "email": "Bfonz33@gmail.com",
+    "address": "1931 Old Military Road",
+    "city": "Weslaco"
   },
   {
     "precinct": "235",
@@ -1456,7 +1879,9 @@ const chairDataList2026 = [
     "name": "Evelyn Izaguirre",
     "role": "Precinct Chair",
     "phone": "9563406820",
-    "email": "evelynizaguirre0228@gmail.com"
+    "email": "evelynizaguirre0228@gmail.com",
+    "address": "311 Aguila Avenue",
+    "city": "Weslaco"
   },
   {
     "precinct": "238",
@@ -1470,7 +1895,9 @@ const chairDataList2026 = [
     "name": "Roel Alberto \u00c1vila",
     "role": "Precinct Chair",
     "phone": "9564938418",
-    "email": "roelavila@sbcglobal.net"
+    "email": "roelavila@sbcglobal.net",
+    "address": "5210 N. Big Five Road",
+    "city": "Edinburg"
   },
   {
     "precinct": "239",
@@ -1484,7 +1911,9 @@ const chairDataList2026 = [
     "name": "Eleazar Guajardo",
     "role": "Precinct Chair",
     "phone": "9562215245",
-    "email": "mr_guajardo@yahoo.com"
+    "email": "mr_guajardo@yahoo.com",
+    "address": "3611 Yvette Drive",
+    "city": "Pharr"
   },
   {
     "precinct": "240",
@@ -1498,7 +1927,9 @@ const chairDataList2026 = [
     "name": "Betty J. (Alaniz) Ram\u00edrez",
     "role": "Precinct Chair",
     "phone": "9563600602",
-    "email": "bettyjramirezzz@gmail.com"
+    "email": "bettyjramirezzz@gmail.com",
+    "address": "12224 N. Bryan Road",
+    "city": "Mission"
   },
   {
     "precinct": "244",
@@ -1512,7 +1943,9 @@ const chairDataList2026 = [
     "name": "Jos\u00e9 Santamar\u00eda",
     "role": "Precinct Chair",
     "phone": "9564605380",
-    "email": "jsanta_maria@hotmail.com"
+    "email": "jsanta_maria@hotmail.com",
+    "address": "2750 N. C\u00e9sar Ch\u00e1vez Road",
+    "city": "Alamo"
   },
   {
     "precinct": "245",
@@ -1526,7 +1959,9 @@ const chairDataList2026 = [
     "name": "Rolando Max Garza, Jr.",
     "role": "Precinct Chair",
     "phone": "9567893195",
-    "email": "rollie1717@yahoo.com"
+    "email": "rollie1717@yahoo.com",
+    "address": "412 South Mile 1 Easat",
+    "city": "Mercedes"
   },
   {
     "precinct": "249",
@@ -1537,17 +1972,12 @@ const chairDataList2026 = [
   },
   {
     "precinct": "250",
-    "name": "Sylvia Sue Handy",
+    "name": "Ismael Miguel Garc\u00eda, Jr.",
     "role": "Precinct Chair",
-    "phone": "9569988543",
-    "email": "sylviasuehandy@aol.com"
-  },
-  {
-    "precinct": "250",
-    "name": "Ismael M. Garcia",
-    "role": "Precinct Chair",
-    "phone": "",
-    "email": ""
+    "phone": "9564630583",
+    "email": "flashback1982@gmail.com",
+    "address": "1100 Saddle Street",
+    "city": "Weslaco"
   },
   {
     "precinct": "250",
@@ -1561,7 +1991,9 @@ const chairDataList2026 = [
     "name": "Jessica Lizbeth S\u00e1nchez",
     "role": "Precinct Chair",
     "phone": "9563608760",
-    "email": "jessiica.sanchez3@gmail.com"
+    "email": "jessiica.sanchez3@gmail.com",
+    "address": "6706 North La Homa Road",
+    "city": "Mission"
   },
   {
     "precinct": "254",
@@ -1575,19 +2007,14 @@ const chairDataList2026 = [
     "name": "Elva Arechiga",
     "role": "Precinct Chair",
     "phone": "9565800302",
-    "email": "lizzette_arechiga@yahoo.com"
+    "email": "lizzette_arechiga@yahoo.com",
+    "address": "41712 3rd Street",
+    "city": "La Joya"
   },
   {
     "precinct": "257",
     "name": "Antonio R. Ruiz",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
-  },
-  {
-    "precinct": "265",
-    "name": "Marisa D. Salinas",
-    "role": "Precinct Chair",
     "phone": "",
     "email": ""
   },

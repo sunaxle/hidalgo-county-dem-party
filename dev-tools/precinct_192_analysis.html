@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        .email-wrapper {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .header {
+            background-color: #0f172a;
+            padding: 30px 40px;
+            text-align: center;
+            border-bottom: 4px solid #3b82f6;
+        }
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .header p {
+            color: #94a3b8;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+        .content {
+            padding: 35px 40px;
+        }
+        h2 {
+            color: #0f172a;
+            font-size: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        
+        /* Stats Grid */
+        .stat-grid {
+            display: table;
+            width: 100%;
+            margin: 25px 0;
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-row { display: table-row; }
+        .stat-box {
+            display: table-cell;
+            width: 33.33%;
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px;
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #2563eb;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .stat-number.red { color: #dc2626; }
+        .stat-number.gray { color: #64748b; }
+        
+        .stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Highlight Boxes */
+        .highlight-box {
+            background-color: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+        }
+        .highlight-box h3 { margin: 0 0 10px 0; color: #b91c1c; font-size: 18px; }
+        .highlight-box p { margin: 0; font-size: 15px; color: #7f1d1d; }
+
+        .blue-highlight {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .gold-highlight {
+            background-color: #fefce8;
+            border-left: 4px solid #eab308;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .gold-highlight h3 { margin: 0 0 10px 0; color: #854d0e; font-size: 18px; }
+
+        /* Races Grid */
+        .race-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #10b981;
+        }
+        .race-card h4 { margin: 0 0 5px 0; color: #047857; font-size: 16px; text-transform: uppercase;}
+        .race-card p { margin: 0; font-size: 14px; color: #334155;}
+        .race-card.blue { border-left-color: #3b82f6; }
+        .race-card.blue h4 { color: #1d4ed8; }
+
+        /* Bar Chart */
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+        .chart-title { font-weight: 700; margin-bottom: 15px; color: #334155; text-align: center; font-size: 18px; }
+        .bar-row { margin-bottom: 15px; }
+        .bar-label { font-size: 14px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        .bar-wrapper { background-color: #f1f5f9; border-radius: 4px; height: 28px; width: 100%; overflow: hidden; position: relative; }
+        .bar-fill { background-color: #3b82f6; height: 100%; border-radius: 4px; }
+        .bar-1 { width: 52%; } .bar-2 { width: 30%; } .bar-3 { width: 10%; } .bar-4 { width: 8%; }
+        .bar-count { position: absolute; right: 12px; top: 5px; font-size: 13px; font-weight: 700; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+
+        .footer {
+            background-color: #f8fafc;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+        .attachment-note {
+            display: block;
+            background-color: #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .attachment-desc {
+            font-weight: normal;
+            font-size: 13px;
+            color: #475569;
+            display: block;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="header">
+            <h1>Precinct 192 Deep Dive</h1>
+            <p>HCDP Analytics Division • Strategic Roadmap</p>
+        </div>
+        
+        <div class="content">
+            <p>Desi,</p>
+            
+            <p>The 2026 defense of Reps. Cuellar and Gonzalez starts now. We have officially pulled the raw Texas VAN dataset for your turf, and we want to give you a complete, unvarnished look under the hood of Precinct 192 so you can operate as a precision quarterback for your neighborhood.</p>
+            
+            <p>Take a look at the attached files and the intelligence below. You'll never block-walk blind again.</p>
+
+            <h2>The Three Battles of 2026</h2>
+            <p>Your precinct is ground zero for three highly consequential races. Do not forget about our local down-ballot candidates when you talk to voters at the door.</p>
+            
+            <div class="race-card blue">
+                <h4>US Congress (District 15)</h4>
+                <p>The path to taking back the US House runs through District 15. This is the fight to put Bobby Pulido in Washington and finally unseat Monica De La Cruz. Every single door knock in 192 matters.</p>
+            </div>
+            
+            <div class="race-card">
+                <h4>US Senate</h4>
+                <p>Rep. James Talarico is the future of the Democratic Party in Texas. His momentum is real, his messaging is flawless, and he has the potential to break the statewide curse.</p>
+            </div>
+
+            <div class="race-card" style="border-left-color: #eab308;">
+                <h4 style="color: #ca8a04;">Local Focus: JP 1</h4>
+                <p>Don't forget the locals. You have a highly contested Justice of the Peace (JP 1) race overlapping your turf. When voters see you care about the local courthouse as much as the White House, they trust you.</p>
+            </div>
+
+            <div class="highlight-box" style="background-color: #1e293b; border-left: 5px solid #10b981; color: #f8fafc;">
+                <h3 style="color: #10b981; margin-bottom: 8px;">In Response To Team Pulido's Email</h3>
+                <p style="color: #cbd5e1; margin-bottom: 15px;">Team Pulido recently emailed you asking for your plan to hit your precinct's "Win Number." According to their spreadsheet, <strong>your official Win Number for 2026 is 140 votes.</strong></p>
+                <p style="color: #ffffff; font-weight: 600;">You don't need to guess how to hit 140.</p>
+                <p style="color: #cbd5e1; margin-top: 5px;">As you'll see in the data below, you already have <strong>120 Hardcore Democrats</strong> locked into your precinct. To hit Team Pulido's target, you literally only need to activate <strong>20</strong> of your non-voters. We have already isolated exactly which doors those 20 people live behind.</p>
+            </div>
+
+            <h2>1. The Core Universe (Your Total Turf)</h2>
+            <div class="blue-highlight">
+                <p><strong>Total Registered Voters in Precinct 192: 578</strong></p>
+                <p style="margin-top: 8px; font-size: 14px;">Your precinct is highly manageable. Face-to-face contact with your entire base is entirely possible over a 60-day sprint.</p>
+            </div>
+
+            <h2>2. Turnout Snapshot & The Early Voting Reality</h2>
+            <p>To give you a picture of how engaged your neighbors are right now, we calculated turnouts from the 2024 elections:</p>
+            <div class="stat-grid" style="margin-bottom: 20px;">
+                <div class="stat-row">
+                    <div class="stat-box" style="border-right: 1px solid #cbd5e1; width: 50%;">
+                        <span class="stat-number gray">45</span>
+                        <span class="stat-label">Voted in '24 Primary</span>
+                    </div>
+                    <div class="stat-box" style="width: 50%;">
+                        <span class="stat-number gray">239</span>
+                        <span class="stat-label">Voted in '24 General</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gold-highlight">
+                <h3>Stop Waiting for Election Day</h3>
+                <p>When we analyzed those 239 General Election voters, we found a critical behavioral pattern: <strong>156 of them voted Early, 4 voted by mail, and only 79 voted on Election Day.</strong></p><br>
+                <p><strong>Over 66% of your precinct votes WEEKS before Election Day.</strong> If you wait until the end of October to start your ground game, you have already lost two-thirds of your neighborhood.</p>
+            </div>
+
+            <h2>3. The Partisan Landscape</h2>
+            <div class="stat-grid">
+                <div class="stat-row">
+                    <div class="stat-box" style="border-right: 1px solid #cbd5e1;">
+                        <span class="stat-number">120</span>
+                        <span class="stat-label">Hardcore Dems</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number red">31</span>
+                        <span class="stat-label">Hardcore Reps</span>
+                    </div>
+                </div>
+            </div>
+            <p><strong>The Strategy:</strong> You have an overwhelming 4-to-1 advantage over the local Republican base. Those <strong>120 Hardcore Democrats</strong> are your VIPs. Ignore the 31 Republicans. Do not knock their doors, do not send them mail. Conserve your energy.</p>
+
+            <h2>4. The Sleeping Giants (The Non-Voters)</h2>
+            <div class="blue-highlight" style="background-color: #f1f5f9; border-color: #64748b;">
+                <p><strong>True Non-Voters (Zero History): 241 voters</strong></p>
+                <p style="margin-top: 5px; font-size: 14px; color: #475569;">Almost half (41%) of your neighborhood has a completely blank voting history file. They have never voted in a Primary or General.</p>
+            </div>
+            
+            <p>Who exactly are these non-voters? We mapped their ages below:</p>
+
+            <div class="chart-container">
+                <div class="chart-title">Non-Voter Demographics (By Age)</div>
+                <div class="bar-row">
+                    <div class="bar-label">Under 30 (Youth Vote)</div>
+                    <div class="bar-wrapper"><div class="bar-fill bar-1"></div><span class="bar-count">126 Voters</span></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Ages 30 to 49</div>
+                    <div class="bar-wrapper"><div class="bar-fill bar-2" style="background-color: #60a5fa;"></div><span class="bar-count" style="color: #1e293b; text-shadow: none;">72 Voters</span></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Ages 50 to 64</div>
+                    <div class="bar-wrapper"><div class="bar-fill bar-3" style="background-color: #93c5fd;"></div><span class="bar-count" style="color: #1e293b; text-shadow: none;">25 Voters</span></div>
+                </div>
+                <div class="bar-row">
+                    <div class="bar-label">Ages 65+</div>
+                    <div class="bar-wrapper"><div class="bar-fill bar-4" style="background-color: #bfdbfe;"></div><span class="bar-count" style="color: #1e293b; text-shadow: none;">18 Voters</span></div>
+                </div>
+            </div>
+
+            <p>As you can see, <strong>over half (52%) of your non-voter universe is under 30 years old</strong>.</p>
+
+            <div class="highlight-box">
+                <h3>The "Trojan Horse" Strategy</h3>
+                <p>We ran a cross-reference matching the addresses of those 241 non-voters against the addresses of your 120 Hardcore Democrats.</p><br>
+                <p><strong>Exactly 59 of those non-voters live under the exact same roof as a Hardcore Democrat.</strong> You just need to call the Democratic parent/spouse in that household and ensure they literally drag that younger voter to the polls with them.</p>
+            </div>
+
+            <h2>Your Deliverables</h2>
+            <p>To execute this plan, we have securely attached two data files to this email:</p>
+            
+            <div class="attachment-note">
+                📎 <strong>1. The Full Precinct Database.csv</strong>
+                <span class="attachment-desc">The complete raw export containing all 578 registered voters in Precinct 192. Keep this as your master record.</span>
+            </div>
+            
+            <div class="attachment-note" style="border-left: 4px solid #ef4444;">
+                📎 <strong>2. The Targeted Non-Voters List.csv</strong>
+                <span class="attachment-desc">A stripped-down file containing ONLY the 241 non-voters, with a special column highlighting the 59 "Trojan House" targets who live with a Democrat.</span>
+            </div>
+
+            <p style="margin-top: 30px;">The old ground game is dead; welcome to precision operations. Let’s get to work.</p>
+
+            <p>Stand strong,<br>
+            <strong>The Organization Team</strong></p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Hidalgo County Democratic Party</strong></p>
+            <p>This is a confidential data-briefing specifically compiled for Precinct Chairs.</p>
+        </div>
+    </div>
+</body>
+</html>

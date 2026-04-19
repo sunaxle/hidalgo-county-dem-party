@@ -137,10 +137,18 @@ document.addEventListener("DOMContentLoaded", () => {
         let popupContent = `<div style="min-width: 200px;">
             <h3 style="margin-top:0; color:#0f172a; border-bottom: 2px solid #3b82f6; padding-bottom: 5px;">Precinct ${cleanPct || 'Unknown'}</h3>`;
         
+        // Add split precinct warning if it falls into both districts
+        if (window.cd15List && window.cd28List && cleanPct) {
+            let pInt = parseInt(cleanPct, 10);
+            if (window.cd15List.includes(pInt) && window.cd28List.includes(pInt)) {
+                popupContent += `<div style="background: rgba(234, 88, 12, 0.1); border: 1px solid #ea580c; color: #ea580c; font-size: 0.8em; font-weight: bold; margin-bottom: 8px; padding: 4px; border-radius: 4px;">⚠️ Split District (TX-15 & TX-28)</div>`;
+            }
+        }
+        
         let officials = chairData.filter(c => c.precinct === cleanPct);
         
         if (officials.length > 0) {
-            let chair = officials.find(o => o.role === "Precinct Chair");
+            let chair = officials.find(o => o.role.includes("Precinct Chair"));
             if (chair) {
                 popupContent += `<div style="margin-bottom: 8px;">
                     <strong><span style="display:inline-block; width:12px; height:12px; border-radius:50%; background:#facc15; margin-right:5px;"></span>Precinct Chair</strong><br>

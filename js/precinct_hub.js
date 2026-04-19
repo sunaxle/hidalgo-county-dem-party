@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderGrid() {
     if (typeof chairDataList2026 === 'undefined') return;
     const data = chairDataList2026;
-    const chairs = data.filter(d => d.role === "Precinct Chair" || d.role === "Block Captain");
+    const chairs = data.filter(d => d.role.includes("Precinct Chair") || d.role === "Block Captain");
     
     // Sort by precinct number to keep it organized
     chairs.sort((a,b) => {
@@ -80,6 +80,7 @@ function renderGrid() {
                     </div>
                     <strong style="color: #fff; font-size: 1.25rem; display:block; margin-bottom: 0.25rem; position: relative; z-index: 2;">${chair.name}</strong>
                     <div style="color: #94a3b8; font-size: 0.95rem; font-weight: 600; position: relative; z-index: 2;">Precinct ${chair.precinct}</div>
+                    ${(cd15List.includes(parseInt(chair.precinct)) && cd28List.includes(parseInt(chair.precinct))) ? '<div style="color: #ea580c; font-size: 0.8rem; font-weight: 700; margin-top: 0.25rem;">⚠️ Split District</div>' : ''}
                 </div>
             </div>
         `;

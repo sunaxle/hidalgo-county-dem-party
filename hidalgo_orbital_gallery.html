@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hidalgo Dems Orbital Action Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #0f172a;
+      background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+    }
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+      display: block;
+      cursor: grab;
+    }
+    #canvas-container:active {
+      cursor: grabbing;
+    }
+    .header {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      margin-bottom: 8px;
+      background: -webkit-linear-gradient(45deg, #38bdf8, #818cf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    .controls-hint {
+        margin-top: 10px;
+        font-size: 0.9rem;
+        color: #64748b;
+        font-weight: 400;
+    }
+    #loading {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #38bdf8;
+      transition: opacity 0.5s ease;
+    }
+    .status-text {
+        font-size: 1rem;
+        color: #64748b;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+    #hover-info {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 15px 30px;
+      border-radius: 30px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      z-index: 20;
+    }
+    #hover-info.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    #hover-title {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+    #hover-desc {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+    #ring-selector {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 30;
+    }
+    .ring-btn {
+        background: rgba(15, 23, 42, 0.6);
+        border: 2px solid rgba(56, 189, 248, 0.3);
+        color: #94a3b8;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 800;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+        position: relative;
+    }
+    .ring-btn:hover:not(.locked) {
+        border-color: #38bdf8;
+        color: white;
+        background: rgba(30, 41, 59, 0.8);
+        transform: scale(1.1);
+    }
+    .ring-btn.active {
+        background: #38bdf8;
+        color: #0f172a;
+        box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        transform: scale(1.15);
+    }
+    .ring-btn.locked {
+        opacity: 0.2;
+        border-color: #475569;
+        cursor: wait;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+      Fabricating Core Array...
+      <div class="status-text" id="status-text">Synchronizing textures...</div>
+  </div>
+  
+  <div class="header">
+    <h1>Hidalgo Dems</h1>
+    <p>Community Action Gallery</p>
+    <div class="controls-hint">Drag to Orbit / Click to Select Orbit Ring</div>
+  </div>
+  
+  <div id="hover-info">
+    <div id="hover-title">Photo Title</div>
+    <div id="hover-desc">Click or drag to explore</div>
+  </div>
+
+  <div id="ring-selector">
+      <!-- Buttons injected by JS depending on ring count -->
+  </div>
+
+  <div id="canvas-container"></div>
+
+  <!-- Use Import Maps for Three.js -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { galleryData } from './js/gallery_data.js';
+
+    // Constants
+    const RNG_MAX_ITEMS = 25;
+    const NUM_RINGS = Math.ceil(galleryData.length / RNG_MAX_ITEMS);
+    const BASE_RADIUS = 7.5;
+    const RADIUS_STEP = 3.5;
+
+    // Scene Setup
+    const container = document.getElementById('canvas-container');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0f172a, 0.02);
+
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    // Start camera far out to see the rings
+    camera.position.set(0, 5, 20);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5;
+    controls.enablePan = false;
+    controls.minDistance = 3;
+    controls.maxDistance = 50;
+
+    // Solar system container that tilts on two axes
+    const solarSystem = new THREE.Group();
+    // Default tilt
+    solarSystem.rotation.x = 0.2;
+    scene.add(solarSystem);
+    
+    const items = [];
+    const ringMeshes = []; 
+    
+    // State Tracking
+    const ringLoadStatus = new Array(NUM_RINGS).fill(0); 
+    const ringIsUnlocked = new Array(NUM_RINGS).fill(false);
+    let activeRingIndex = -1; 
+
+    const textureLoader = new THREE.TextureLoader();
+
+    // UI creation
+    const ringSelectorBox = document.getElementById('ring-selector');
+    for (let i = 0; i < NUM_RINGS; i++) {
+        const btn = document.createElement('div');
+        // Initial state: Ring 1 active, all others locked!
+        btn.className = 'ring-btn' + (i===0 ? ' active' : ' locked');
+        btn.innerText = i + 1;
+        btn.onclick = () => focusRing(i);
+        ringSelectorBox.appendChild(btn);
+    }
+
+    const fallbackWidth = 3.2;
+    const fallbackHeight = 2.4;
+    const basePlaneGeometry = new THREE.PlaneGeometry(fallbackWidth, fallbackHeight, 16, 16); 
+
+    for (let currentRing = 0; currentRing < NUM_RINGS; currentRing++) {
+        const ringGroup = new THREE.Group();
+        solarSystem.add(ringGroup);
+        
+        const photoMeshesForThisRing = [];
+        const radius = BASE_RADIUS + (currentRing * RADIUS_STEP);
+        
+        const startIndex = currentRing * RNG_MAX_ITEMS;
+        const ringData = galleryData.slice(startIndex, startIndex + RNG_MAX_ITEMS);
+        const ringSize = ringData.length;
+        
+        const geometry = basePlaneGeometry.clone();
+        const posAttribute = geometry.attributes.position;
+        const vec = new THREE.Vector3();
+        for (let j = 0; j < posAttribute.count; j++) {
+            vec.fromBufferAttribute(posAttribute, j);
+            const theta = vec.x / radius;
+            const x = Math.sin(theta) * radius;
+            const z = Math.cos(theta) * radius - radius;
+            posAttribute.setXYZ(j, x, vec.y, z);
+        }
+        geometry.computeVertexNormals();
+
+        for (let i = 0; i < ringSize; i++) {
+            const data = ringData[i];
+            
+            // Outer rings are INVISIBLE initially, inner ring is slightly visible before textures
+            const isFirstRing = currentRing === 0;
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0x1e3a8a, 
+                transparent: true, 
+                opacity: isFirstRing ? 0.15 : 0.0,
+                side: THREE.DoubleSide
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            const edges = new THREE.EdgesGeometry(geometry);
+            const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({
+                color: 0x38bdf8,
+                transparent: true,
+                opacity: isFirstRing ? 0.3 : 0.05 // Locked tracks have barely visible wireframes
+            }));
+            mesh.add(line);
+            
+            mesh.frustumCulled = false;
+
+            const angle = (i / ringSize) * Math.PI * 2;
+            mesh.position.x = Math.cos(angle) * radius;
+            mesh.position.z = Math.sin(angle) * radius;
+            
+            const heights = [1.5, 0, -1.5];
+            mesh.position.y = heights[i % 3] + (Math.random() - 0.5) * 0.5;
+
+            mesh.lookAt(0, mesh.position.y, 0);
+            
+            mesh.userData = {
+                url: data.url,
+                title: data.title,
+                desc: data.desc,
+                ringIndex: currentRing,
+                isLoaded: false,
+                isTextureApplied: false,
+                isHovered: false,
+                preloadedTexture: null,
+                wireframeRef: line,
+                baseY: mesh.position.y,
+                baseRadius: radius,
+                angle: angle
+            };
+
+            ringGroup.add(mesh);
+            items.push(mesh);
+            photoMeshesForThisRing.push(mesh);
+        }
+        ringMeshes.push(photoMeshesForThisRing);
+    }
+    
+    const particlesGeo = new THREE.BufferGeometry();
+    const particlesCount = 2000;
+    const posArray = new Float32Array(particlesCount * 3);
+    for(let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 80; 
+    }
+    particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const canvas2d = document.createElement('canvas');
+    canvas2d.width = 16;
+    canvas2d.height = 16;
+    const context2d = canvas2d.getContext('2d');
+    const gradient = context2d.createRadialGradient(8, 8, 0, 8, 8, 8);
+    gradient.addColorStop(0, 'rgba(255,255,255,1)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    context2d.fillStyle = gradient;
+    context2d.fillRect(0, 0, 16, 16);
+    const particleTexture = new THREE.CanvasTexture(canvas2d);
+
+    const particlesMat = new THREE.PointsMaterial({
+        size: 0.15,
+        color: 0x818cf8,
+        transparent: true,
+        opacity: 0.5,
+        map: particleTexture,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+    });
+    const particlesMesh = new THREE.Points(particlesGeo, particlesMat);
+    scene.add(particlesMesh);
+
+    let targetCameraZ = 20;
+
+    // The Progressive Caching Engine
+    function startBackgroundQueue(ringIdx) {
+        if (ringIdx >= NUM_RINGS) return; // All rings loaded
+        
+        const meshes = ringMeshes[ringIdx];
+        const targetCount = meshes.length;
+        
+        const statusText = document.getElementById('status-text');
+        
+        meshes.forEach(mesh => {
+            textureLoader.load(mesh.userData.url, (texture) => {
+                texture.colorSpace = THREE.SRGBColorSpace;
+                mesh.userData.preloadedTexture = texture; // Store securely in cache
+                
+                ringLoadStatus[ringIdx]++;
+                
+                // If it's Ring 0, aggressively load it for initial view
+                if (ringIdx === 0 && activeRingIndex === -1 && ringLoadStatus[0] === targetCount) {
+                    const loading = document.getElementById('loading');
+                    loading.style.opacity = 0;
+                    setTimeout(() => loading.style.display = 'none', 500);
+                    ringIsUnlocked[0] = true;
+                    focusRing(0);
+                    // Move to cache next ring silently
+                    setTimeout(() => startBackgroundQueue(ringIdx + 1), 200);
+                } else if (ringLoadStatus[ringIdx] === targetCount) {
+                    // Outer ring finished caching! Unlock it.
+                    unlockRing(ringIdx);
+                    // Move to cache next ring silently
+                    setTimeout(() => startBackgroundQueue(ringIdx + 1), 200);
+                }
+            }, undefined, (err) => {
+                console.error("Failed loading texture", mesh.userData.url);
+                ringLoadStatus[ringIdx]++;
+                if (ringLoadStatus[ringIdx] === targetCount) {
+                    if (ringIdx === 0 && activeRingIndex === -1) focusRing(0);
+                    unlockRing(ringIdx);
+                    setTimeout(() => startBackgroundQueue(ringIdx + 1), 200);
+                }
+            });
+        });
+    }
+
+    function unlockRing(idx) {
+        ringIsUnlocked[idx] = true;
+        
+        // Update UI Button
+        const btns = document.querySelectorAll('.ring-btn');
+        if (btns[idx] && idx !== activeRingIndex) {
+            btns[idx].classList.remove('locked');
+        }
+        
+        // Materialistically transition the locked ring into an "online frosted" state
+        if (idx !== activeRingIndex) {
+            items.forEach(mesh => {
+                if (mesh.userData.ringIndex === idx) {
+                    mesh.material.opacity = 0.15;
+                    mesh.userData.wireframeRef.material.opacity = 0.3;
+                }
+            });
+        }
+    }
+
+    // Start Engine
+    setTimeout(() => {
+        startBackgroundQueue(0);
+    }, 100);
+
+    function focusRing(idx) {
+        if (idx === activeRingIndex) return;
+        if (!ringIsUnlocked[idx]) {
+            // Let them know it's locked
+            console.log("Ring is still caching in background...");
+            return; 
+        }
+        
+        activeRingIndex = idx;
+        
+        const btns = document.querySelectorAll('.ring-btn');
+        btns.forEach((b, i) => {
+            // Maintain locked class if they are purely locked, otherwise swap active state
+            if (!ringIsUnlocked[i]) {
+                b.className = 'ring-btn locked';
+            } else {
+                b.className = 'ring-btn' + (i === idx ? ' active' : '');
+            }
+        });
+
+        solarSystem.rotation.x = 0.1 + (idx * 0.05);
+
+        const offsetForRing = BASE_RADIUS + (idx * RADIUS_STEP);
+        targetCameraZ = offsetForRing + 8;
+        
+        // Fade logic: Inner blocked rings = clear, Outer rings = frosted
+        items.forEach(mesh => {
+            if (mesh.userData.ringIndex < activeRingIndex) {
+                 mesh.material.opacity = 0.05; 
+                 mesh.material.color.setHex(0x0f172a);
+            } else if (mesh.userData.ringIndex > activeRingIndex) {
+                 // But ONLY if it actually unlocked! If it's locked, keep it invisible
+                 if (ringIsUnlocked[mesh.userData.ringIndex]) {
+                     mesh.material.opacity = 0.15;
+                     mesh.material.color.setHex(0x1e3a8a);
+                 }
+            }
+        });
+
+        // Apply true textures instantly from preloaded GPU cache!
+        const meshes = ringMeshes[idx];
+        meshes.forEach(mesh => {
+             if (mesh.userData.preloadedTexture && !mesh.userData.isTextureApplied) {
+                 mesh.material = new THREE.MeshBasicMaterial({ 
+                     map: mesh.userData.preloadedTexture, 
+                     side: THREE.DoubleSide,
+                     transparent: true,
+                     opacity: 0, 
+                     color: 0xdddddd 
+                 });
+                 mesh.remove(mesh.userData.wireframeRef);
+                 mesh.userData.isLoaded = true;
+                 mesh.userData.isTextureApplied = true;
+             }
+        });
+    }
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let hoveredMesh = null;
+    const hoverInfo = document.getElementById('hover-info');
+    const hoverTitle = document.getElementById('hover-title');
+    const hoverDesc = document.getElementById('hover-desc');
+
+    window.addEventListener('pointermove', (event) => {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    window.addEventListener('click', () => {
+        if (hoveredMesh) {
+            const rIdx = hoveredMesh.userData.ringIndex;
+            if (rIdx !== activeRingIndex) {
+                focusRing(rIdx);
+            }
+        }
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+      
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(items);
+
+      if (intersects.length > 0) {
+        if (hoveredMesh !== intersects[0].object) {
+            if (hoveredMesh && hoveredMesh.userData.isLoaded) {
+                 hoveredMesh.userData.isHovered = false;
+            }
+            hoveredMesh = intersects[0].object;
+            hoveredMesh.userData.isHovered = true;
+            controls.autoRotate = false;
+            
+            if (hoveredMesh.userData.isLoaded) {
+                hoverTitle.textContent = hoveredMesh.userData.title;
+                hoverDesc.textContent = hoveredMesh.userData.desc;
+                hoverInfo.classList.add('active');
+            } else {
+                hoverInfo.classList.remove('active');
+            }
+            
+            // Only show pointer if the ring is unlocked
+            if (ringIsUnlocked[hoveredMesh.userData.ringIndex]) {
+                container.style.cursor = 'pointer';
+            } else {
+                container.style.cursor = 'wait';
+            }
+        }
+      } else {
+        if (hoveredMesh) {
+            if(hoveredMesh.userData.isLoaded) hoveredMesh.userData.isHovered = false;
+            hoveredMesh = null;
+            controls.autoRotate = true; 
+            hoverInfo.classList.remove('active');
+            container.style.cursor = 'grab';
+        }
+      }
+
+      controls.update();
+
+      const targetVec = camera.position.clone().sub(controls.target).normalize().multiplyScalar(targetCameraZ);
+      camera.position.lerp(targetVec.add(controls.target), 0.05);
+
+      particlesMesh.rotation.y = elapsedTime * 0.02;
+      
+      items.forEach((mesh, i) => {
+          if (!mesh.userData.isHovered) {
+             mesh.position.y = mesh.userData.baseY + Math.sin(elapsedTime * 1.5 + i) * 0.2;
+             if (mesh.userData.isLoaded && mesh.userData.ringIndex === activeRingIndex) {
+                 mesh.material.color.lerp(new THREE.Color(0xdddddd), 0.1);
+             }
+          } else {
+             const targetY = mesh.userData.baseY + 0.4;
+             mesh.position.y += (targetY - mesh.position.y) * 0.1;
+             if (mesh.userData.isLoaded) {
+                 mesh.material.color.lerp(new THREE.Color(0xffffff), 0.15);
+             }
+          }
+
+          if (mesh.userData.isLoaded && mesh.userData.ringIndex === activeRingIndex) {
+              if (mesh.material.opacity < 1.0) {
+                  mesh.material.opacity += 0.05;
+              }
+          }
+      });
+
+      renderer.render(scene, camera);
+    }
+    
+    animate();
+  </script>
+</body>
+</html>
