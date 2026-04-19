@@ -454,7 +454,10 @@
                   </td>
                   <td class="name-cell">
                       <strong>${person.name}</strong>
-                      <span>${person.email} ${person.phone ? '| '+person.phone : ''}</span>
+                      <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px; display: flex; flex-direction: column; gap: 2px;">
+                          ${person.email && person.email.toLowerCase() !== 'no email' ? `<span>✉️ <a style="color: #94a3b8; text-decoration: none;" href="mailto:${person.email}">${person.email}</a></span>` : ''}
+                          ${person.phone && person.phone.trim() !== '' ? `<span>📞 <a style="color: #94a3b8; text-decoration: none;" href="tel:${person.phone}">${person.phone}</a></span>` : ''}
+                      </div>
                       ${person.city ? `<div style="font-size: 0.8rem; color: #64748b; margin-top: 2px;">📍 ${person.city}</div>` : ''}
                   </td>
                   <td><span class="role-badge ${badgeClass}">${person.role}</span></td>
