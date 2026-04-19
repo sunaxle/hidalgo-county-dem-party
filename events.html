@@ -3,31 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upcoming Events | Hidalgo County Democrats</title>
+  <title>Volunteer Hub - Hidalgo Dems</title>
+  <meta name="description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .event-item {
+    .volunteer-hero {
+      text-align: center;
+      padding-top: 120px;
+      padding-bottom: 4rem;
+    }
+    
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .action-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      text-align: center;
+      transition: var(--transition);
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      border-bottom: 1px solid var(--glass-border);
-      padding-bottom: 2rem;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(34, 211, 238, 0.2);
+    }
+
+    .action-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .action-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .action-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .action-card p {
+      flex-grow: 1;
       margin-bottom: 2rem;
     }
-    .event-item:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
+
+    .skills-section {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 5rem 0;
+      margin-top: 5rem;
     }
-    .event-date {
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 1.25rem;
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
-    .event-title {
-      font-size: 1.5rem;
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
       font-weight: 600;
-      color: #fff;
+      color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: rgba(34, 211, 238, 0.1);
+      border-color: var(--accent);
     }
   </style>
   <script src="js/gatekeeper.js"></script>
@@ -52,7 +128,11 @@
   <link rel="stylesheet" href="css/a11y.css">
 </head>
 <body class="tx-clone">
-<!-- Navigation -->
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
       <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
@@ -79,6 +159,7 @@
             <a href="precinct_chairs.html">Precinct Chairs</a>
             <a href="precinct_profiles.html" style="color: var(--accent); font-weight: 600;">Precinct Profiles</a>
             <a href="admin.html" style="color: #3b82f6; font-weight: 600;">Portal 🌻</a>
+            <a href="run_for_office.html" style="color: #fca5a5; font-weight: 800;">Run for Office 🏛️</a>
           </div>
         </div>
 
@@ -95,11 +176,12 @@
             <a href="volunteer_dashboard.html">Volunteer Metrics</a>
             <a href="volunteer_roster.html" style="color: #4ade80; font-weight: 600;">Volunteer Roster</a>
             <a href="sustaining_members.html" style="color: #f59e0b; font-weight: 600;">Sustaining Members ⭐</a>
+            <a href="election_workers.html" style="color: #c084fc; font-weight: 800;">Election Workers 📋</a>
           </div>
         </div>
 
                 <div class="nav-item dropdown">
-          <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Community ▼</a>
+           style="color: inherit; text-decoration: none; font-weight: inherit;">Community ▼</a>
           <div class="dropdown-content">
             <a href="civics_101.html" style="color: #fcd34d; font-weight: 800;">Civics 101 📚</a>
             <a href="civics_102.html" style="color: #fca5a5; font-weight: 800;">Civics 102 🎓</a>
@@ -109,6 +191,8 @@
             <a href="social_wall.html">Social Wall</a>
             <a href="county_websites.html">TX Dems</a>
             <a href="south_texas_region.html">South TX</a>
+            <a href="clubs.html" style="color: #60a5fa; font-weight: 800;">Affiliated Clubs 🤝</a>
+            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
           </div>
         </div>
 
@@ -141,40 +225,34 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <!-- Page Header -->
-  <header class="page-header" style="min-height: 30vh; padding-top: 120px;">
-    <div class="container fade-in">
-      <h1>Upcoming Events</h1>
-      <p style="max-width: 600px; margin: 0 auto;">Join us as we host events, blockwalking opportunities, and county-wide Democratic gatherings.</p>
-    </div>
+  <header class="page-header container fade-in" style="padding: 4rem 2rem;">
+    <h1>Upcoming Events</h1>
+    <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: #cbd5e1;">A unified calendar of County Executive Committee meetings, block walks, and community events.</p>
   </header>
-
-  <!-- Events List Section -->
-  <section class="container" style="padding-top: 0;">
-    <div class="glass-card fade-in">
-      
-      <div style="text-align: center; margin-bottom: 2.5rem;">
-        <h2 style="color: var(--accent); margin-bottom: 0.5rem;">Live Volunteer Feed</h2>
-        <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto;">Sign up for phone banks, community blockwalks, and training sessions directly through our live Mobilize calendar below.</p>
-        <div style="margin-top: 1.5rem;">
-            <a href="https://www.mobilize.us/hidalgocountydemocraticparty/" target="_blank" class="btn btn-primary">Open in Mobilize Mobile App</a>
+  <main class="container fade-in" style="min-height: 50vh; margin-bottom: 4rem;">
+    <div class="glass-card" style="padding: 2rem; text-align: center;">
+      <h3 style="margin-bottom: 2rem; color: white;">Unified Events Calendar</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; text-align: left;">
+        
+        <!-- Placeholder Event 1 -->
+        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent);">
+          <div style="color: var(--accent); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.5rem;">March 15, 2026 - 6:00 PM</div>
+          <h4 style="color: white; margin-bottom: 0.5rem;">County Executive Committee Meeting</h4>
+          <p style="color: #94a3b8; font-size: 0.9rem;">Hidalgo County Democratic HQ. Open to all Precinct Chairs and interested public.</p>
         </div>
-      </div>
 
-      <!-- Mobilize Iframe Widget -->
-      <div style="width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: #ffffff;">
-        <iframe src="https://www.mobilize.us/hidalgocountydemocraticparty/" 
-                style="width: 100%; height: 800px; border: 0;" 
-                title="Mobilize Events Calendar"
-                scrolling="yes"
-                allowfullscreen></iframe>
-      </div>
+        <!-- Placeholder Event 2 -->
+        <div style="background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #34d399;">
+          <div style="color: #34d399; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 0.5rem;">April 2, 2026 - 9:00 AM</div>
+          <h4 style="color: white; margin-bottom: 0.5rem;">Weekend Block Walk</h4>
+          <p style="color: #94a3b8; font-size: 0.9rem;">McAllen Public Library. Join us targeting high-propensity Democratic households.</p>
+        </div>
 
+      </div>
     </div>
-  </section>
+  </main>
 
-  <!-- Footer -->
-  <footer class="tx-clone-footer">
+<footer class="tx-clone-footer">
     <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
     <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
       <p>info@hidalgocountydems.org</p>
@@ -197,6 +275,43 @@
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Component Gallery Form Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Skeleton loader demo
+      setTimeout(() => {
+        document.getElementById('form-skeleton').style.display = 'none';
+        const formContainer = document.getElementById('volunteer-form-container');
+        formContainer.style.display = 'block';
+        formContainer.classList.add('fade-in');
+        
+        // Trigger reflow to restart animation
+        void formContainer.offsetWidth;
+        formContainer.classList.add('visible');
+      }, 1500);
+
+      // Submit Spinner demo
+      const form = document.getElementById('volunteer-form');
+      const submitBtn = document.getElementById('submit-btn');
+      
+      if(form && submitBtn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            submitBtn.classList.remove('loading');
+            submitBtn.innerHTML = '<span class="btn-text" style="opacity: 1;">✔️ Profile Submitted</span>';
+            submitBtn.style.background = '#10b981'; // Success green
+            submitBtn.style.color = '#fff';
+            form.reset();
+          }, 2000);
+        });
+      }
+    });
+  </script>
 
   <script src="js/a11y.js"></script>
 </body>

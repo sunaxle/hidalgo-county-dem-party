@@ -1,16 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hidalgo Democrats</title>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Hub - Hidalgo Dems</title>
+  <meta name="description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .volunteer-hero {
+      text-align: center;
+      padding-top: 120px;
+      padding-bottom: 4rem;
+    }
+    
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .action-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(34, 211, 238, 0.2);
+    }
+
+    .action-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .action-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .action-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .action-card p {
+      flex-grow: 1;
+      margin-bottom: 2rem;
+    }
+
+    .skills-section {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 5rem 0;
+      margin-top: 5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      color: var(--accent);
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: rgba(34, 211, 238, 0.1);
+      border-color: var(--accent);
+    }
+  </style>
+  <script src="js/gatekeeper.js"></script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/state_party_clone.css" />
+
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
@@ -24,7 +128,11 @@
   <link rel="stylesheet" href="css/a11y.css">
 </head>
 <body class="tx-clone">
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
 
+  <!-- Navigation -->
       <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
@@ -117,63 +225,36 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <header class="tx-clone-hero">
-    <div class="tx-clone-hero-left">
-      <h3 style="margin-bottom: 1.5rem; color: white; font-size: 1.5rem; text-align: center;">Join the Movement</h3>
-      <form>
-        <div class="tx-clone-form-group">
-          <input type="text" id="name" name="name" placeholder="First & Last Name" required>
-        </div>
-        <div class="tx-clone-form-group">
-          <input type="email" id="email" name="email" placeholder="Email Address" required>
-        </div>
-        <div class="tx-clone-form-group">
-          <input type="text" id="zipcode" name="zipcode" placeholder="ZIP Code" required>
-        </div>
-        <div class="tx-clone-form-group">
-          <input type="tel" id="phone" name="phone" placeholder="Phone Number">
-        </div>
-        <button type="submit" class="tx-clone-btn-submit">SUBMIT</button>
-      </form>
-    </div>
-    <div class="tx-clone-hero-right">
-      <h1>Hidalgo Together is Here.</h1>
-      <div class="tx-clone-hero-btns">
-        <a href="action_center.html" class="tx-clone-btn-outline">Continue to Action Center ➔</a>
-        <a href="volunteer.html" class="tx-clone-btn-outline">I'm a Volunteer</a>
-      </div>
-    </div>
+  <header class="page-header container fade-in" style="padding: 4rem 2rem;">
+    <h1>Become an Election Worker</h1>
+    <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: #cbd5e1;">Democracy runs on people. Step up to serve your community by staffing the polls during early voting and Election Day.</p>
   </header>
-
-  <section class="tx-clone-donation">
-    <div class="tx-clone-donation-inner">
-      <div class="tx-clone-donation-left">
-        <h2>Chip in to elect more<br>Hidalgo Democrats.</h2>
+  <main class="container fade-in" style="min-height: 50vh; margin-bottom: 4rem;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div class="glass-card" style="padding: 2.5rem;">
+        <h2 style="color: white; margin-bottom: 1.5rem;">Election Judges & Clerks Needed</h2>
+        <p style="color: #cbd5e1; margin-bottom: 1rem; line-height: 1.6;">
+          Hidalgo County is always looking for dedicated citizens to manage our polling locations. Election Judges are the officials in charge of a polling site, ensuring fair access and security. Election Clerks assist with checking in voters and managing lines.
+        </p>
+        <ul style="color: #94a3b8; padding-left: 1.5rem; margin-bottom: 2rem;">
+          <li style="margin-bottom: 0.5rem;">Paid positions managed directly by Hidalgo County Elections Dept.</li>
+          <li style="margin-bottom: 0.5rem;">Mandatory paid training provided prior to elections.</li>
+          <li style="margin-bottom: 0.5rem;">Bilingual (English/Spanish) applicants highly encouraged!</li>
+        </ul>
+        <a href="https://www.hidalgocounty.us/105/Elections-Department" target="_blank" class="btn btn-primary" style="display: inline-block;">Apply via Hidalgo County Jobs &rarr;</a>
       </div>
-      <div class="tx-clone-donation-right">
-        <div class="tx-clone-grid">
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">$7</a>
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">$10</a>
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">$25</a>
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">$50</a>
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">$100</a>
-          <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-amount" target="_blank">Other...</a>
-        </div>
-        <p class="tx-clone-donation-disclaimer">*If you've saved your payment information with ActBlue Express, your donation will go through immediately.</p>
+      
+      <div class="glass-card" style="padding: 2.5rem; background: rgba(34, 211, 238, 0.05); border-color: rgba(34, 211, 238, 0.2);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🇺🇸</div>
+        <h3 style="color: white; margin-bottom: 1rem;">Why It Matters</h3>
+        <p style="color: #cbd5e1; line-height: 1.6;">
+          By working the elections, you are the front-line defense for voter access. You ensure that our neighbors wait in shorter lines, experience fewer technical issues, and find friendly faces when they arrive to exercise their constitutional rights.
+        </p>
       </div>
     </div>
-  </section>
+  </main>
 
-  <section class="tx-clone-content">
-    <div class="tx-clone-content-inner">
-      <h2>Our Mission</h2>
-      <p>
-        We believe that every Hidalgo County resident deserves a government that works for them. By organizing, mobilizing, and empowering our communities, we are building a progressive county where everyone thrives. The Hidalgo County Democratic Party stands on the frontlines for your rights.
-      </p>
-    </div>
-  </section>
-
-  <footer class="tx-clone-footer">
+<footer class="tx-clone-footer">
     <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
     <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
       <p>info@hidalgocountydems.org</p>
@@ -187,8 +268,7 @@
   </footer>
 
   <script src="js/app.js"></script>
-  <script src="js/value_counter.js"></script>
-  <script src="js/form_handler.js"></script>
+<script src="js/value_counter.js"></script>
 
   <!-- Google Translate -->
   <script type="text/javascript">
@@ -197,6 +277,43 @@
     }
   </script>
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Component Gallery Form Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Skeleton loader demo
+      setTimeout(() => {
+        document.getElementById('form-skeleton').style.display = 'none';
+        const formContainer = document.getElementById('volunteer-form-container');
+        formContainer.style.display = 'block';
+        formContainer.classList.add('fade-in');
+        
+        // Trigger reflow to restart animation
+        void formContainer.offsetWidth;
+        formContainer.classList.add('visible');
+      }, 1500);
+
+      // Submit Spinner demo
+      const form = document.getElementById('volunteer-form');
+      const submitBtn = document.getElementById('submit-btn');
+      
+      if(form && submitBtn) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            submitBtn.classList.remove('loading');
+            submitBtn.innerHTML = '<span class="btn-text" style="opacity: 1;">✔️ Profile Submitted</span>';
+            submitBtn.style.background = '#10b981'; // Success green
+            submitBtn.style.color = '#fff';
+            form.reset();
+          }, 2000);
+        });
+      }
+    });
+  </script>
 
   <script src="js/a11y.js"></script>
 </body>
