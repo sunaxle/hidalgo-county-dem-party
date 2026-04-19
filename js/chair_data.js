@@ -24,8 +24,8 @@ const chairDataList2026 = [
     "precinct": "4",
     "name": "Dolores Barrientes",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-279-4030",
+    "email": "doloresbarr@hotmail.com"
   },
   {
     "precinct": "7",
@@ -40,8 +40,8 @@ const chairDataList2026 = [
     "precinct": "7",
     "name": "Laurel Theresa Mcleaish",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-342-7278",
+    "email": "ltmcleaish@aol.com"
   },
   {
     "precinct": "8",
@@ -65,8 +65,8 @@ const chairDataList2026 = [
     "precinct": "9",
     "name": "Laura Saldana-Flores",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-225-4913",
+    "email": "lsflores8@gmail.com"
   },
   {
     "precinct": "11",
@@ -81,8 +81,8 @@ const chairDataList2026 = [
     "precinct": "11",
     "name": "Angela Salinas",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-342-1776",
+    "email": "angelasalinas8525@gmail.com"
   },
   {
     "precinct": "13",
@@ -97,15 +97,15 @@ const chairDataList2026 = [
     "precinct": "13",
     "name": "Maria G. Cantu",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-457-0644",
+    "email": "mariagcantu3@gmail.com"
   },
   {
     "precinct": "13",
     "name": "Leonardo Rodriguez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-457-3270",
+    "email": "leorodriguez1031@gmail.com"
   },
   {
     "precinct": "14",
@@ -147,8 +147,8 @@ const chairDataList2026 = [
     "precinct": "18",
     "name": "Abram Mckee",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-313-7754",
+    "email": "abram.mckee01@gmail.com"
   },
   {
     "precinct": "20",
@@ -163,8 +163,8 @@ const chairDataList2026 = [
     "precinct": "20",
     "name": "Leonardo G. Rodr\u00edguez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-457-3270",
+    "email": "leorodriguez1031@gmail.com"
   },
   {
     "precinct": "22",
@@ -215,8 +215,8 @@ const chairDataList2026 = [
     "precinct": "28",
     "name": "Teresa L. Zapatero",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-802-6785",
+    "email": "tzapatero2025@gmail.com"
   },
   {
     "precinct": "30",
@@ -249,8 +249,8 @@ const chairDataList2026 = [
     "precinct": "32",
     "name": "Jose Munoz",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-535-2039",
+    "email": "luigi5900@yahoo.com"
   },
   {
     "precinct": "33",
@@ -283,8 +283,8 @@ const chairDataList2026 = [
     "precinct": "35",
     "name": "Raquel 'Rachel' Moran Nevarez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-867-3414",
+    "email": "rmnevarez1@yahoo.com"
   },
   {
     "precinct": "36",
@@ -299,8 +299,8 @@ const chairDataList2026 = [
     "precinct": "36",
     "name": "Selina Medrano",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-789-9987",
+    "email": "selina_hayes@yahoo.com"
   },
   {
     "precinct": "38",
@@ -315,8 +315,8 @@ const chairDataList2026 = [
     "precinct": "38",
     "name": "Carlos Repetto-Ayala",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-360-2213",
+    "email": "carlosrepettoayala@gmail.com"
   },
   {
     "precinct": "39",
@@ -385,8 +385,8 @@ const chairDataList2026 = [
     "precinct": "47",
     "name": "Matthew Garcia",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-369-9767",
+    "email": "garcia11matthew@gmail.com"
   },
   {
     "precinct": "48",
@@ -453,8 +453,8 @@ const chairDataList2026 = [
     "precinct": "53",
     "name": "Julie Ann Carcano",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-926-9004",
+    "email": "julieanncarcano@gmail.com"
   },
   {
     "precinct": "54",
@@ -487,8 +487,8 @@ const chairDataList2026 = [
     "precinct": "56",
     "name": "Yolanda Solis",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-272-7922",
+    "email": "pet28life@gmail.com"
   },
   {
     "precinct": "58",
@@ -503,15 +503,15 @@ const chairDataList2026 = [
     "precinct": "58",
     "name": "Koni Ramos-Kaiwi",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "972-965-4031",
+    "email": "kaiwi1948@gmail.com"
   },
   {
     "precinct": "58",
     "name": "Ayaan R. Nair",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "832-603-6739",
+    "email": "ayaannair2004@gmail.com"
   },
   {
     "precinct": "59",
@@ -562,8 +562,8 @@ const chairDataList2026 = [
     "precinct": "66",
     "name": "Nicole 'Nikki' Armijo",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-562-5840",
+    "email": "ncarmijo3@yahoo.com"
   },
   {
     "precinct": "69",
@@ -578,8 +578,8 @@ const chairDataList2026 = [
     "precinct": "69",
     "name": "Juventina Herrera",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-458-7937",
+    "email": "juventinah@yahoo.com"
   },
   {
     "precinct": "70",
@@ -594,8 +594,8 @@ const chairDataList2026 = [
     "precinct": "70",
     "name": "Roxanne Gonzalez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-272-7233",
+    "email": "roxgonzalez23@gmail.com"
   },
   {
     "precinct": "72",
@@ -619,8 +619,8 @@ const chairDataList2026 = [
     "precinct": "73",
     "name": "James J S\u00e1nchez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-280-1939",
+    "email": "Injurydoctorrgv@gmail.com"
   },
   {
     "precinct": "75",
@@ -635,8 +635,8 @@ const chairDataList2026 = [
     "precinct": "75",
     "name": "Homero Basaldua",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-844-7143",
+    "email": "homero.basaldua08@gmail.com"
   },
   {
     "precinct": "79",
@@ -678,8 +678,8 @@ const chairDataList2026 = [
     "precinct": "82",
     "name": "Miranda Salinas",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-570-3666",
+    "email": "mhern9235@yahoo.com"
   },
   {
     "precinct": "83",
@@ -712,8 +712,8 @@ const chairDataList2026 = [
     "precinct": "85",
     "name": "Romulo 'Romo' Sanchez, Jr.",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-474-0652",
+    "email": "romosanchez44@outlook.com"
   },
   {
     "precinct": "87",
@@ -746,8 +746,8 @@ const chairDataList2026 = [
     "precinct": "90",
     "name": "Arcadio Padilla, Jr.",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-219-7476",
+    "email": "arcadiopadilla10@gmail.com"
   },
   {
     "precinct": "93",
@@ -816,15 +816,15 @@ const chairDataList2026 = [
     "precinct": "100",
     "name": "Alexander David Perez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-821-4914",
+    "email": "egarcia5454@yahoo.com"
   },
   {
     "precinct": "100",
     "name": "Robert Hoffman",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-458-6268",
+    "email": "rabobhoffman52@yahoo.com"
   },
   {
     "precinct": "101",
@@ -848,8 +848,8 @@ const chairDataList2026 = [
     "precinct": "103",
     "name": "Delia De Le\u00f3n Gil",
     "role": "Precinct Chair (Runoff)",
-    "phone": "",
-    "email": "",
+    "phone": "956-867-1075",
+    "email": "delcali@yahoo.com",
     "address": "",
     "city": ""
   },
@@ -866,29 +866,29 @@ const chairDataList2026 = [
     "precinct": "103",
     "name": "Delia De Leon Gil",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-867-1075",
+    "email": "delcali@yahoo.com"
   },
   {
     "precinct": "103",
     "name": "Matteo Garza",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-616-2482",
+    "email": "matteogarza739@gmail.com"
   },
   {
     "precinct": "103",
     "name": "Meri L. Gomez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-605-1143",
+    "email": "merilgomez@aol.com"
   },
   {
     "precinct": "104",
     "name": "Gloria Maldonado-Lozano",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-330-0759",
+    "email": "glorialozano01@yahoo.com"
   },
   {
     "precinct": "105",
@@ -921,15 +921,15 @@ const chairDataList2026 = [
     "precinct": "107",
     "name": "Jose Villarreal",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-533-3344",
+    "email": "josevillarrealpc107@gmail.com"
   },
   {
     "precinct": "107",
     "name": "Jason Andrew Delattre",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-957-1912",
+    "email": "jason.delattre01@gmail.com"
   },
   {
     "precinct": "109",
@@ -1226,8 +1226,8 @@ const chairDataList2026 = [
     "precinct": "146",
     "name": "Daniel Gonzalez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-975-7651",
+    "email": "drewgonzalez10@gmail.com"
   },
   {
     "precinct": "147",
@@ -1338,8 +1338,8 @@ const chairDataList2026 = [
     "precinct": "160",
     "name": "Samuel V. Reyes",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-651-3002",
+    "email": "samuelreyes2007@gmail.com"
   },
   {
     "precinct": "161",
@@ -1395,8 +1395,8 @@ const chairDataList2026 = [
     "precinct": "164",
     "name": "Catalina Pe\u00f1a",
     "role": "Precinct Chair (Runoff)",
-    "phone": "",
-    "email": "",
+    "phone": "956-467-2232",
+    "email": "catalinapena081@gmail.com",
     "address": "",
     "city": ""
   },
@@ -1568,8 +1568,8 @@ const chairDataList2026 = [
     "precinct": "192",
     "name": "David M. Garcia",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-800-8864",
+    "email": "apex0378557@aol.com"
   },
   {
     "precinct": "193",
@@ -1584,8 +1584,8 @@ const chairDataList2026 = [
     "precinct": "193",
     "name": "Juan E. Lopez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-485-0409",
+    "email": "Vicky.lpz68@gmail.com"
   },
   {
     "precinct": "194",
@@ -1707,8 +1707,8 @@ const chairDataList2026 = [
     "precinct": "214",
     "name": "Fernando Castillo",
     "role": "Precinct Chair (Runoff)",
-    "phone": "",
-    "email": "",
+    "phone": "956-998-6936",
+    "email": "fcastillo14@icloud.com",
     "address": "",
     "city": ""
   },
@@ -1741,7 +1741,7 @@ const chairDataList2026 = [
     "precinct": "221",
     "name": "Eduardo M. Espinosa",
     "role": "Precinct Chair",
-    "phone": "",
+    "phone": "956-331-7690",
     "email": "",
     "address": "",
     "city": ""
@@ -1750,8 +1750,8 @@ const chairDataList2026 = [
     "precinct": "221",
     "name": "Julio Garza",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-369-2023",
+    "email": "juliogarza18@gmail.com"
   },
   {
     "precinct": "222",
@@ -1807,15 +1807,15 @@ const chairDataList2026 = [
     "precinct": "227",
     "name": "Mar V. Hernandez",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-624-0206",
+    "email": "marvhernandez95747@gmail.com"
   },
   {
     "precinct": "228",
     "name": "Irma Cavazos Espinoza",
     "role": "Precinct Chair",
     "phone": "9562075177",
-    "email": "",
+    "email": "jesmel1974@gmail.com",
     "address": "3801 North Ra\u00fal Longoria Road",
     "city": "San Juan"
   },
@@ -1983,8 +1983,8 @@ const chairDataList2026 = [
     "precinct": "250",
     "name": "Jos\u00e9 Torres, Jr.",
     "role": "Block Captain",
-    "phone": "",
-    "email": ""
+    "phone": "956-472-9600",
+    "email": "1982jtorres@gmail.com"
   },
   {
     "precinct": "254",
