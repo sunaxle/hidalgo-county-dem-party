@@ -11,9 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     standardHours += 23.5; // Site-wide template, Dynamic Routing System, Phase 2 Google Sheets CRM
     dataHours += 20.0; // Data Portal maps, Gap Tracker algorithms, D3 Volunteer physics engine
     
-    // Recent Work logging
+    // Recent Work logging (Mar 24)
     standardHours += 32.0; // Mobile Responsiveness UI Audit, Grassroots Chat Upgrades, CRM Pages & Pipeline Dashboard, AI Logos, Theme Customization
     dataHours += 8.0; // Dashboard Data Population, Combining Precinct Data
+    
+    // April 2026 Operations
+    standardHours += 25.0; // Civics Portals, 2026 Roster UI, VDR Partner Integration, Ballot Board Explainer
+    dataHours += 15.0; // PII scrubbing algorithms, 2026 data reconciliation pipelines, LUPE Campaign engineering
     
     let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
 
