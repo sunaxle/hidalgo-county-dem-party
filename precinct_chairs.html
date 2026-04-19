@@ -427,6 +427,8 @@
       
       window.cd15List = [];
       window.cd28List = [];
+      window.activeDistrict = 'ALL';
+      window.activeCity = 'ALL';
       // Fetch district mapping data
       Promise.all([
           fetch('data/cd15_precincts.json').then(r => r.json()),
