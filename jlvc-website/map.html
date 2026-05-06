@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polling Map | JLVC App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="app-container">
+    <header class="top-bar">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Polling Sites Map
+      </a>
+    </header>
+
+    <section style="padding: 0; height: calc(100vh - 150px); display: flex; flex-direction: column;">
+      <div style="padding: 1rem 1.5rem;">
+        <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1rem;">Find early voting and election day polling locations near you.</p>
+        <input type="text" placeholder="Search your zip code or address..." style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(0,0,0,0.3); color: white; font-family: inherit;">
+      </div>
+      
+      <!-- Dummy Map for visual -->
+      <div style="flex-grow: 1; background: url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Hidalgo_County_Texas_Incorporated_and_Unincorporated_areas_Edinburg_Highlighted.svg') no-repeat center center; background-size: cover; border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); position: relative; opacity: 0.8; filter: hue-rotate(180deg) invert(1);">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); padding: 1rem; border-radius: 8px; border: 1px solid var(--color-secondary); color: white; text-align: center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div style="font-weight: 600; margin-top: 0.5rem;">Edinburg Elections Annex</div>
+          <div style="font-size: 0.8rem; color: #94a3b8;">1.2 miles away</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        <span>Home</span>
+      </a>
+      <a href="civics.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Civics</span>
+      </a>
+      <a href="map.html" class="nav-item active">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+        <span>Map</span>
+      </a>
+      <a href="dashboard.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Data</span>
+      </a>
+      <a href="hotspots.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Spots</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gap Analysis | JLVC App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .metric-card { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; }
+    .metric-value { font-size: 1.8rem; font-weight: 800; }
+    .metric-label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.25rem; }
+    
+    .bar-row { display: flex; align-items: center; margin-bottom: 0.75rem; }
+    .bar-label { width: 80px; font-size: 0.8rem; color: #cbd5e1; }
+    .bar-track { flex-grow: 1; height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; margin: 0 10px; }
+    .bar-fill { height: 100%; border-radius: 6px; }
+    .bar-value { width: 45px; font-size: 0.8rem; text-align: right; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="app-container">
+    <header class="top-bar">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        Gap Analysis
+      </a>
+    </header>
+
+    <section style="padding: 2rem 1.5rem; margin-bottom: 60px;">
+      <h2 class="text-gradient" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Hidalgo County</h2>
+      <p style="color: #cbd5e1; margin-bottom: 1.5rem; font-size: 0.95rem;">Tracking the gap between registered voters and eligible, able-bodied unregistered citizens to measure our true civic deficit.</p>
+      
+      <!-- Top Level Metrics -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+        <div class="metric-card" style="border-color: rgba(0, 210, 255, 0.3);">
+          <div class="metric-value" style="color: var(--color-secondary);">432,150</div>
+          <div class="metric-label">Registered Voters</div>
+        </div>
+        <div class="metric-card" style="border-color: rgba(255, 51, 102, 0.3);">
+          <div class="metric-value" style="color: var(--color-primary);">~148,000</div>
+          <div class="metric-label">The Gap (Unregistered)</div>
+        </div>
+      </div>
+
+      <!-- By City Breakdown -->
+      <div class="glass-panel" style="margin-bottom: 2rem; padding: 1.5rem;">
+        <h3 style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #fff;">Unregistered Gap by City (Est.)</h3>
+        <div class="bar-row"><div class="bar-label">McAllen</div><div class="bar-track"><div class="bar-fill" style="width: 85%; background: var(--color-primary);"></div></div><div class="bar-value">34K</div></div>
+        <div class="bar-row"><div class="bar-label">Edinburg</div><div class="bar-track"><div class="bar-fill" style="width: 70%; background: var(--color-primary);"></div></div><div class="bar-value">28K</div></div>
+        <div class="bar-row"><div class="bar-label">Mission</div><div class="bar-track"><div class="bar-fill" style="width: 55%; background: var(--color-primary);"></div></div><div class="bar-value">21K</div></div>
+        <div class="bar-row"><div class="bar-label">Pharr</div><div class="bar-track"><div class="bar-fill" style="width: 45%; background: var(--color-primary);"></div></div><div class="bar-value">18K</div></div>
+        <div class="bar-row"><div class="bar-label">Weslaco</div><div class="bar-track"><div class="bar-fill" style="width: 35%; background: var(--color-primary);"></div></div><div class="bar-value">12K</div></div>
+      </div>
+
+      <!-- Demographic Breakdowns -->
+      <h2 class="text-gradient" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Gap Demographics</h2>
+      
+      <div class="glass-panel" style="margin-bottom: 1.5rem; padding: 1.5rem;">
+        <h3 style="font-size: 1rem; margin-bottom: 1rem; color: var(--color-secondary);">By Age Group</h3>
+        <div class="bar-row"><div class="bar-label">18 - 24</div><div class="bar-track"><div class="bar-fill" style="width: 90%; background: var(--color-secondary);"></div></div><div class="bar-value">45%</div></div>
+        <div class="bar-row"><div class="bar-label">25 - 34</div><div class="bar-track"><div class="bar-fill" style="width: 60%; background: var(--color-secondary);"></div></div><div class="bar-value">30%</div></div>
+        <div class="bar-row"><div class="bar-label">35 - 49</div><div class="bar-track"><div class="bar-fill" style="width: 30%; background: var(--color-secondary);"></div></div><div class="bar-value">15%</div></div>
+        <div class="bar-row"><div class="bar-label">50+</div><div class="bar-track"><div class="bar-fill" style="width: 20%; background: var(--color-secondary);"></div></div><div class="bar-value">10%</div></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-tertiary);">By Ethnicity</h3>
+          <div style="font-size: 1.5rem; font-weight: 800; color: #fff;">93%</div>
+          <div style="font-size: 0.8rem; color: #94a3b8;">Hispanic / Latino</div>
+        </div>
+        <div class="glass-panel" style="padding: 1.5rem; text-align: center;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-tertiary);">By Sex</h3>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; height: 40px; margin-top: 10px;">
+            <div style="width: 45%; display: flex; flex-direction: column; align-items: center;">
+              <div style="width: 100%; height: 35px; background: var(--color-primary); border-radius: 4px 4px 0 0;"></div>
+              <div style="font-size: 0.7rem; margin-top: 4px; color: #cbd5e1;">M (52%)</div>
+            </div>
+            <div style="width: 45%; display: flex; flex-direction: column; align-items: center;">
+              <div style="width: 100%; height: 30px; background: var(--color-secondary); border-radius: 4px 4px 0 0;"></div>
+              <div style="font-size: 0.7rem; margin-top: 4px; color: #cbd5e1;">F (48%)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        <span>Home</span>
+      </a>
+      <a href="civics.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Civics</span>
+      </a>
+      <a href="map.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+        <span>Map</span>
+      </a>
+      <a href="dashboard.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span>Data</span>
+      </a>
+      <a href="hotspots.html" class="nav-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        <span>Spots</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>
