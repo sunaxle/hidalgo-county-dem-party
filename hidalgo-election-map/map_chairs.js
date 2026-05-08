@@ -255,6 +255,130 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Expose updateMapFromSearch for table search integration
+    window.updateMapFromSearch = function(visiblePrecincts, searchTerm) {
+        // Remove old search styles
+        geojsonLayer.eachLayer(layer => {
+            layer.options.isSearchResult = false;
+            layer.options.isSearchedPrecinct = false;
+            layer.options.isNearbyPrecinct = false;
+        });
+
+        const panel = document.getElementById('precinct-info-panel');
+        if (!panel) return;
+
+        // Is it an exact number search?
+        const isPrecinctSearch = /^\d+$/.test(searchTerm);
+        const searchPct = isPrecinctSearch ? parseInt(searchTerm, 10).toString() : null;
+        
+        let targetLayer = null;
+
+        if (isPrecinctSearch) {
+            geojsonLayer.eachLayer(layer => {
+                let pct = layer.feature.properties.PREC || layer.feature.properties.ID;
+                if(!pct && layer.feature.properties.tooltip) {
+                    let match = layer.feature.properties.tooltip.match(/Precinct\s*(\d+)/i);
+                    if(match) pct = match[1];
+                }
+                let cleanPct = pct ? parseInt(pct, 10).toString() : '';
+                if(cleanPct === searchPct) {
+                    targetLayer = layer;
+                    layer.options.isSearchedPrecinct = true;
+                }
+            });
+        }
+        
+        if (targetLayer) {
+                // Style and zoom to precinct
+                geojsonLayer.setStyle(feature => {
+                    let pct = feature.properties.PREC || feature.properties.ID;
+                    if(!pct && feature.properties.tooltip) {
+                        let match = feature.properties.tooltip.match(/Precinct\s*(\d+)/i);
+                        if(match) pct = match[1];
+                    }
+                    let cleanPct = pct ? parseInt(pct, 10).toString() : '';
+                    if (cleanPct === searchTerm) {
+                        return { fillColor: '#facc15', fillOpacity: 0.6, color: '#ca8a04', weight: 3 };
+                    }
+                    return styleFeature(feature);
+                });
+                
+                map.flyToBounds(targetLayer.getBounds(), {
+                    padding: [50, 50],
+                    duration: 0.5,
+                    maxZoom: 12
+                });
+
+                // Get District and City info
+                let pctInt = parseInt(searchTerm, 10);
+                let distString = [];
+                if (window.cd15List && window.cd15List.includes(pctInt)) distString.push("TX-15");
+                if (window.cd28List && window.cd28List.includes(pctInt)) distString.push("TX-28");
+                
+                let cityString = "Unknown City";
+                if (typeof precinctDistricts !== 'undefined') {
+                    const pData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
+                    if (pData && pData.CITY) cityString = pData.CITY;
+                }
+
+                // Update Info Panel
+                document.getElementById('info-panel-title').innerText = `Precinct ${searchTerm}`;
+                document.getElementById('info-panel-district').innerHTML = `<span style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 4px; margin-right: 8px;">📍 ${cityString}</span> <span style="background: rgba(56, 189, 248, 0.2); padding: 4px 8px; border-radius: 4px; color: #38bdf8; font-weight: bold;">Congressional District: ${distString.join(' / ') || 'Unknown'}</span>`;
+
+                // Find nearby precincts (naive bounding box intersection)
+                let nearby = [];
+                let targetBounds = targetLayer.getBounds();
+                // Expand bounds slightly to catch neighbors
+                let expandedBounds = targetBounds.pad(0.3);
+                
+                geojsonLayer.eachLayer(layer => {
+                    if (layer === targetLayer) return;
+                    if (expandedBounds.intersects(layer.getBounds())) {
+                        let pct = layer.feature.properties.PREC || layer.feature.properties.ID;
+                        if(!pct && layer.feature.properties.tooltip) {
+                            let match = layer.feature.properties.tooltip.match(/Precinct\s*(\d+)/i);
+                            if(match) pct = match[1];
+                        }
+                        let cleanPct = pct ? parseInt(pct, 10).toString() : '';
+                        if (cleanPct) {
+                            nearby.push(cleanPct);
+                            layer.options.isNearbyPrecinct = true;
+                        }
+                    }
+                });
+
+                // Deduplicate and limit
+                nearby = [...new Set(nearby)].slice(0, 8);
+                
+                let nearbyHtml = nearby.map(p => {
+                    let status = getPrecinctStatus(p);
+                    let color = status === 'filled' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)';
+                    let border = status === 'filled' ? '#10b981' : '#ef4444';
+                    return `<span style="background: ${color}; border: 1px solid ${border}; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;" onclick="document.getElementById('searchInput').value='${p}'; document.getElementById('searchInput').dispatchEvent(new Event('input'));">Pct ${p}</span>`;
+                }).join('');
+                
+                document.getElementById('info-panel-nearby').innerHTML = nearbyHtml || '<span style="color: #64748b;">None detected</span>';
+                panel.style.display = 'block';
+
+                // Style nearby
+                geojsonLayer.eachLayer(layer => {
+                    if (layer.options.isNearbyPrecinct) {
+                        layer.setStyle({ fillColor: '#22d3ee', fillOpacity: 0.3, color: '#0ea5e9', weight: 2 });
+                    }
+                });
+                
+            }
+        } else {
+            panel.style.display = 'none';
+            // Reset to normal map styles based on filters
+            geojsonLayer.setStyle(styleFeature);
+            if (!searchTerm) {
+                map.flyToBounds(geojsonLayer.getBounds(), {duration: 0.5});
+            }
+        }
+        updateLabels();
+    };
+
     // Button Logic
     function updateActiveButton(activeBtnId) {
         ['btn-show-all', 'btn-show-filled', 'btn-show-vacant'].forEach(id => {
