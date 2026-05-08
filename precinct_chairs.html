@@ -318,6 +318,46 @@
       <strong style="color: #ef4444; text-transform: uppercase;">⚠️ Roster Disclaimer</strong>
       <p style="margin: 0.5rem 0 0; font-size: 0.95rem; color: #f87171;">This directory reflects the upcoming <strong>2026 - 2028 Party Term</strong> resulting from the Primary Election. These elected officials will officially take office on <strong>June 15th</strong>. Please be respectful of this transition period.</p>
     </div>
+
+    <!-- Precinct Organizing Model -->
+    <div class="glass-card" style="margin: 2rem auto; padding: 2rem; max-width: 800px; text-align: left; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+      <h2 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">The Democratic Organizing Model</h2>
+      <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Turf Coordinators</strong> (a modern, community-focused role replacing the traditional "Block Captain") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
+      </p>
+      
+      <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #facc15;">
+          <strong style="color: #facc15; font-size: 1.1rem; display: block;">1. Precinct Chair</strong>
+          <span style="color: #94a3b8; font-size: 0.95rem;">The elected leader who oversees the entire precinct strategy, sets the vision, and recruits Turf Coordinators.</span>
+        </div>
+        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #3b82f6;">
+          <strong style="color: #3b82f6; font-size: 1.1rem; display: block;">2. Turf Coordinators</strong>
+          <span style="color: #94a3b8; font-size: 0.95rem;">Community leaders responsible for a specific, manageable "turf" (like an apartment complex, a neighborhood, or a few streets).</span>
+        </div>
+        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #4ade80;">
+          <strong style="color: #4ade80; font-size: 1.1rem; display: block;">3. Super Volunteers</strong>
+          <span style="color: #94a3b8; font-size: 0.95rem;">Dedicated activists who support their Turf Coordinator by block walking, making phone calls, and registering voters in their assigned area.</span>
+        </div>
+      </div>
+
+      <h3 style="color: #e2e8f0; margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">How the Math Works: The 5,000 Voter Precinct</h3>
+      <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+        <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0 0 1rem 0; line-height: 1.5;">
+          Imagine your precinct has <strong>5,000 registered voters</strong>. Trying to reach them all by yourself is virtually impossible. But look at how manageable it becomes when you build your team:
+        </p>
+        <ul style="color: #a3e635; font-size: 0.95rem; line-height: 1.6; margin: 0; padding-left: 1.5rem; margin-bottom: 1rem;">
+          <li><strong>1 Precinct Chair</strong> recruits...</li>
+          <li><strong>7 Turf Coordinators</strong>. Now the precinct is divided into 7 separate turfs of roughly 714 voters each.</li>
+          <li>Each Turf Coordinator recruits a random set of <strong>1 to 5 Super Volunteers</strong> to help them.</li>
+        </ul>
+        <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0; line-height: 1.5;">
+          If a Turf Coordinator recruits an average of 3 Super Volunteers, that creates a team of 4 people for that turf. <br><br>
+          <strong>714 voters ÷ 4 organizers = Only 178 voters per person!</strong><br><br>
+          By delegating to Turf Coordinators and Super Volunteers, a massive precinct of 5,000 voters is completely covered through teamwork.
+        </p>
+      </div>
+    </div>
     <h1>Precinct Chair Directory</h1>
     <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
       Your Precinct Chair is your neighborhood's direct link to the Hidalgo County Democratic Party. Explore the map below to find your precinct's leadership, or search the directory.
@@ -517,7 +557,8 @@
               const role = row.dataset.role;
               const pctInt = parseInt(pct, 10);
               
-              const matchesSearch = name.includes(searchTerm) || pct === searchTerm;
+              const matchesSearch = name.includes(searchTerm) || pct === searchTerm || 
+                                    (window.activeNearbyPrecincts && window.activeNearbyPrecincts.includes(pctInt.toString()));
               const matchesRole = roleTerm === 'all' || 
                                  (roleTerm === 'chair' && role.includes('precinct chair')) ||
                                  (roleTerm === 'captain' && role.includes('block captain'));
@@ -599,6 +640,15 @@
           searchInput.addEventListener('input', filterTable);
           roleFilter.addEventListener('change', filterTable);
           filterTable();
+          
+          window.activeNearbyPrecincts = [];
+          window.addEventListener('nearbyPrecinctsFound', (e) => {
+              const newNearby = e.detail.nearby || [];
+              if (JSON.stringify(window.activeNearbyPrecincts) !== JSON.stringify(newNearby)) {
+                  window.activeNearbyPrecincts = newNearby;
+                  filterTable(); 
+              }
+          });
           
           // Password protection logic
           const btnUnlock = document.getElementById('btn-unlock');

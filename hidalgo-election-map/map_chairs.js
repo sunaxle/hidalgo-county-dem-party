@@ -367,7 +367,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
                 
-            }
+                // Dispatch custom event with the nearby list so table can update
+                if (window.activeNearbyPrecincts !== nearby) {
+                    const event = new CustomEvent('nearbyPrecinctsFound', { detail: { nearby: nearby, searchPct: searchPct } });
+                    window.dispatchEvent(event);
+                }
+
         } else {
             panel.style.display = 'none';
             // Reset to normal map styles based on filters
