@@ -13,7 +13,7 @@ head = head_match.group(1) if head_match else ""
 nav = nav_match.group(1) if nav_match else ""
 footer = footer_match.group(1) if footer_match else ""
 
-# 1. clubs.html
+# 1. caucuses.html
 clubs_content = """
   <header class="page-header container fade-in" style="text-align: center; padding: 4rem 2rem;">
     <h1>Affiliated Clubs & Organizations</h1>
@@ -133,7 +133,7 @@ run_content = """
 """
 
 pages = {
-    'clubs.html': clubs_content,
+    'caucuses.html': clubs_content,
     'events.html': events_content,
     'election_workers.html': workers_content,
     'run_for_office.html': run_content

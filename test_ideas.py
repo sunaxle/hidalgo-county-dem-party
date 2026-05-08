@@ -2,7 +2,7 @@ import re
 
 html_files = [
     'home.html', 'about.html', 'contact.html', 'volunteer.html', 'donate.html',
-    'vote.html', 'events.html', 'admin.html', 'vbm.html', 'clubs.html', 
+    'vote.html', 'events.html', 'admin.html', 'vbm.html', 'caucuses.html', 
     'election_workers.html', 'run_for_office.html'
 ]
 

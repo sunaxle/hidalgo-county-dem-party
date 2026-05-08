@@ -5,7 +5,7 @@ html_files = glob.glob('*.html')
 
 about_replacement = r'\1\n            <a href="run_for_office.html" style="color: #fca5a5; font-weight: 800;">Run for Office 🏛️</a>\n          </div>\n        </div>\n\n        <div class="nav-item dropdown">\n          <span>Action ▼</span>'
 action_replacement = r'\1\n            <a href="election_workers.html" style="color: #c084fc; font-weight: 800;">Election Workers 📋</a>\n          </div>\n        </div>\n\n                <div class="nav-item dropdown">'
-community_replacement = r'\1\n            <a href="clubs.html" style="color: #60a5fa; font-weight: 800;">Affiliated Clubs 🤝</a>\n            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>\n          </div>\n        </div>\n\n        <div class="nav-item dropdown">\n          <span>Issues ▼</span>'
+community_replacement = r'\1\n            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>\n            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>\n          </div>\n        </div>\n\n        <div class="nav-item dropdown">\n          <span>Issues ▼</span>'
 
 count = 0
 for file in html_files:
@@ -34,7 +34,7 @@ for file in html_files:
     # Community
     content = re.sub(
         r'(<a href="south_texas_region\.html"[^>]*>South TX</a>\s*</div>\s*</div>\s*<div class="nav-item dropdown">\s*<span>Issues ▼</span>)',
-        r'<a href="south_texas_region.html">South TX</a>\n            <a href="clubs.html" style="color: #60a5fa; font-weight: 800;">Affiliated Clubs 🤝</a>\n            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>\n          </div>\n        </div>\n\n        <div class="nav-item dropdown">\n          <span>Issues ▼</span>',
+        r'<a href="south_texas_region.html">South TX</a>\n            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>\n            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>\n          </div>\n        </div>\n\n        <div class="nav-item dropdown">\n          <span>Issues ▼</span>',
         content, flags=re.IGNORECASE)
 
     with open(file, 'w', encoding='utf-8') as f:
