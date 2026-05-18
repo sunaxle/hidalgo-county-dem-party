@@ -180,6 +180,157 @@
       .directory-table td:nth-child(4) { display: none; } /* hide contact button on mobile */
       .search-box { width: 100%; }
     }
+
+    /* Guide Modal Styles */
+    .guide-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .guide-modal-content {
+      background: var(--glass-bg);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      overflow: hidden;
+      position: relative;
+    }
+    .guide-modal-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.95);
+    }
+    .guide-modal-title {
+      color: #38bdf8;
+      font-size: 1.5rem;
+      margin: 0;
+      font-weight: 800;
+    }
+    .guide-close-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .guide-close-btn:hover {
+      color: #fff;
+    }
+    .guide-modal-body {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    
+    /* Carousel Styles */
+    .carousel-container {
+      position: relative;
+      margin-top: 1rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      min-height: 300px;
+      display: flex;
+    }
+    .carousel-slide {
+      display: none;
+      padding: 2rem;
+      width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .carousel-slide.active {
+      display: block;
+    }
+    .carousel-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+    }
+    .carousel-btn {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .carousel-btn:hover {
+      background: rgba(56, 189, 248, 0.4);
+      color: #fff;
+    }
+    .carousel-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .slide-indicator {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .slide-title {
+      color: #facc15;
+      font-size: 1.3rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .slide-content {
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .guide-resources {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .guide-resource-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .guide-resource-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -359,9 +510,13 @@
       </div>
     </div>
     <h1>Precinct Chair Directory</h1>
-    <p style="max-width: 700px; margin: 1rem auto 0; color: var(--text-muted);">
+    <p style="max-width: 700px; margin: 1rem auto 1.5rem; color: var(--text-muted);">
       Your Precinct Chair is your neighborhood's direct link to the Hidalgo County Democratic Party. Explore the map below to find your precinct's leadership, or search the directory.
     </p>
+    <button onclick="document.getElementById('guideModal').style.display='flex'" class="btn btn-primary" style="background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); font-size: 1.1rem; padding: 0.8rem 2rem; box-shadow: 0 0 20px rgba(56,189,248,0.4); border: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+      Open Precinct Chair Guide
+    </button>
   </header>
 
   <!-- Interactive Map Section -->
@@ -488,6 +643,120 @@
   </footer>
 
   <script src="js/app.js"></script>
+
+  <!-- Guide Modal Structure -->
+  <div id="guideModal" class="guide-modal-overlay">
+    <div class="guide-modal-content">
+      <div class="guide-modal-header">
+        <h2 class="guide-modal-title">Precinct Chair Guide</h2>
+        <button class="guide-close-btn" onclick="document.getElementById('guideModal').style.display='none'">✕</button>
+      </div>
+      <div class="guide-modal-body">
+        
+        <p style="color: #94a3b8; font-size: 1rem; text-align: center; margin-top: 0; margin-bottom: 1.5rem;">
+          Elections are truly won or lost in the precincts. Precinct chairs are crucial to ensuring strong support for Democratic candidates and issues. Here are the main roles of a Precinct Chair.
+        </p>
+        
+        <!-- Carousel -->
+        <div class="carousel-container" id="guideCarousel">
+          
+          <div class="carousel-slide active" data-index="0">
+            <h3 class="slide-title"><span>🤝</span> Neighborhood Organizer</h3>
+            <div class="slide-content">
+              <p>A Precinct Chair is the neighborhood organizer for the Democratic Party and an elected official with special duties.</p>
+              <p>You get to meet and help people in your neighborhood vote. You get to meet and help candidates get elected. The precinct is the smallest unit of our Party; however, it is the most essential unit.</p>
+            </div>
+          </div>
+          
+          <div class="carousel-slide" data-index="1">
+            <h3 class="slide-title"><span>🔍</span> Identify Voters (Canvassing)</h3>
+            <div class="slide-content">
+              <p>The first step is to get a list of Democratic voters in your precinct. You will receive access to the <strong>Voter Activation Network (VAN)</strong>.</p>
+              <p>Canvassing is the process of identifying voters and recording that information. Find out who your consistent Democratic voters are, who is a swing voter, and keep track of this data in VAN to help campaigns statewide.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="2">
+            <h3 class="slide-title"><span>📝</span> Register Voters</h3>
+            <div class="slide-content">
+              <p>Always be ready to register a Democrat to vote by becoming a <strong>Volunteer Deputy Registrar (VDR)</strong>.</p>
+              <p>You can help people register to vote, change their address if they've moved, or get a replacement card. It's a short, free training offered by the County Elections Office.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="3">
+            <h3 class="slide-title"><span>📢</span> Inform Voters</h3>
+            <div class="slide-content">
+              <p>You're the political leader in your precinct. Let your Democrats know of Democratic events, issues, upcoming elections, and ways they can be active.</p>
+              <p>Be a distribution hub for campaign yard signs, Democratic literature, stickers, pins, and t-shirts to promote local, statewide, and national candidates.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="4">
+            <h3 class="slide-title"><span>🗳️</span> Get Out The Vote (GOTV)</h3>
+            <div class="slide-content">
+              <p>Getting voters to the polls is our #1 priority. Remind your Democrats about voting dates, times, and locations.</p>
+              <p>Encourage every voter to vote early. Call them, send personal texts, and use <strong>Blockwalking</strong> (door-to-door outreach) which is the single most effective way to boost voter turnout.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide" data-index="5">
+            <h3 class="slide-title"><span>⚖️</span> County Executive Committee (CEC)</h3>
+            <div class="slide-content">
+              <p>As a Precinct Chair, you also sit on the <strong>County Executive Committee (CEC)</strong>. Each county's Democratic Party is governed by the CEC.</p>
+              <p>You are a voting member representing your precinct. Your presence counts towards a quorum enabling official Party business to be conducted, rules to be made, and vacancies to be filled.</p>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="carousel-controls">
+          <button id="btnPrevSlide" class="carousel-btn" onclick="changeSlide(-1)" disabled>← Previous</button>
+          <span class="slide-indicator" id="slideIndicator">1 / 6</span>
+          <button id="btnNextSlide" class="carousel-btn" onclick="changeSlide(1)">Next →</button>
+        </div>
+
+        <!-- Resources -->
+        <div class="guide-resources">
+          <a href="resources/TDP-2021-Precinct-Chair-Guide (9).pdf" target="_blank" class="guide-resource-link">
+            📄 TDP Precinct Chair Guide (PDF)
+          </a>
+          <a href="resources/county-chair-handbook (1).pdf" target="_blank" class="guide-resource-link">
+            📘 County Chair Handbook (PDF)
+          </a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const totalSlides = slides.length;
+
+    function changeSlide(direction) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide += direction;
+      
+      if (currentSlide < 0) currentSlide = 0;
+      if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+      
+      slides[currentSlide].classList.add('active');
+      
+      document.getElementById('slideIndicator').innerText = (currentSlide + 1) + ' / ' + totalSlides;
+      
+      document.getElementById('btnPrevSlide').disabled = currentSlide === 0;
+      document.getElementById('btnNextSlide').disabled = currentSlide === totalSlides - 1;
+    }
+
+    // Close modal on outside click
+    document.getElementById('guideModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+  </script>
   
   <!-- Map Data and Scripts -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
