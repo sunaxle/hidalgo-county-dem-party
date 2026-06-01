@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Overlay Live Chair Data
             if (typeof chairDataList2026 !== 'undefined') {
-                const liveProfile = chairDataList2026.find(d => String(d.precinct) === String(precinctId) && (d.role === "Precinct Chair" || d.role === "Block Captain"));
+                const liveProfile = chairDataList2026.find(d => String(d.precinct) === String(precinctId) && (d.role === "Precinct Chair" || d.role === "Neighborhood Captain"));
                 if(liveProfile) {
                     if (!precinctData) {
                         precinctData = { 

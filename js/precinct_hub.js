@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderGrid() {
     if (typeof chairDataList2026 === 'undefined') return;
     const data = chairDataList2026;
-    const chairs = data.filter(d => d.role.includes("Precinct Chair") || d.role === "Block Captain");
+    const chairs = data.filter(d => d.role.includes("Precinct Chair") || d.role === "Neighborhood Captain");
     
     // Sort by precinct number to keep it organized
     chairs.sort((a,b) => {
@@ -58,7 +58,7 @@ function renderGrid() {
     grid.innerHTML = "";
     
     chairs.forEach((chair, index) => {
-        const isBlockCapt = chair.role === "Block Captain";
+        const isBlockCapt = chair.role === "Neighborhood Captain";
         const badgeColor = isBlockCapt ? "#3b82f6" : "#10b981"; // Blue for Capt, Green for Chair
         
         let photoUrl = chair.photo && chair.photo.trim().length > 0 

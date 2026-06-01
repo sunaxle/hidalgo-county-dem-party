@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Calculate Active Precinct Chairs
     const uniqueFilledPrecincts = new Set();
     
-    // We only care about Precinct Chairs for this specific Gap Tracker (ignore Block Captains)
+    // We only care about Precinct Chairs for this specific Gap Tracker (ignore Neighborhood Captains)
     chairDataList.forEach(person => {
         if (person.role.toLowerCase() === "precinct chair") {
             // Force strict integer casting to strip padding (e.g., "002" -> 2)
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if(matches.length > 0) {
                 const alertBox = document.createElement("div");
                 alertBox.style = "background: rgba(251, 191, 36, 0.15); border: 2px solid #fbbf24; color: #fcd34d; padding: 1.5rem; border-radius: 8px; margin-bottom: 2.5rem; text-align: center; font-size: 1.1rem;";
-                alertBox.innerHTML = `<strong>🚨 URGENT:</strong> You have ${matches.length} General Volunteer(s) residing in completely vacant precincts! <br>Contact them via the Portal to promote them to Block Captains.`;
+                alertBox.innerHTML = `<strong>🚨 URGENT:</strong> You have ${matches.length} General Volunteer(s) residing in completely vacant precincts! <br>Contact them via the Portal to promote them to Neighborhood Captains.`;
                 
                 const container = document.querySelector('.container') || document.body;
                 container.prepend(alertBox);
