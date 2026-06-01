@@ -153,25 +153,25 @@
         
         <div style="flex: 1; min-width: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
           <!-- CSS Pyramid Graphic -->
-          <div style="width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 4px; align-items: center;">
+          <div style="width: 100%; max-width: 350px; aspect-ratio: 1.1 / 1; clip-path: polygon(50% 0%, 100% 100%, 0% 100%); display: flex; flex-direction: column; background: transparent;">
             <!-- Top layer -->
-            <div style="width: 40%; background: #38bdf8; padding: 1.5rem 0.5rem 0.5rem 0.5rem; text-align: center; color: #0f172a; font-weight: 800; font-size: 0.9rem; clip-path: polygon(50% 0%, 100% 100%, 0% 100%);">
-              <div style="margin-top: 1rem;">Precinct<br>Chairs</div>
-              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.2rem;">(1 per precinct)</div>
+            <div style="flex: 1.4; background: #38bdf8; text-align: center; color: #0f172a; font-weight: 800; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 0.5rem; margin-bottom: 3px;">
+              <div>Precinct Chairs</div>
+              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.1rem;">(1 per precinct)</div>
             </div>
             <!-- Second layer -->
-            <div style="width: 65%; background: #0ea5e9; padding: 1rem; text-align: center; color: #0f172a; font-weight: 800; font-size: 0.9rem; clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);">
-              Neighborhood<br>Captains
-              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.2rem;">(3-5 per precinct)</div>
+            <div style="flex: 1; background: #0ea5e9; text-align: center; color: #0f172a; font-weight: 800; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: center; margin-bottom: 3px;">
+              <div>Neighborhood Captains</div>
+              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.1rem;">(3-5 per precinct)</div>
             </div>
             <!-- Third layer -->
-            <div style="width: 85%; background: #0284c7; padding: 1rem; text-align: center; color: #fff; font-weight: 800; font-size: 0.9rem; clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);">
-              Block Workers
-              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.2rem;">(3-5 per neighborhood)</div>
+            <div style="flex: 1; background: #0284c7; text-align: center; color: #fff; font-weight: 800; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: center; margin-bottom: 3px;">
+              <div>Block Workers</div>
+              <div style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.1rem;">(3-5 per neighborhood)</div>
             </div>
             <!-- Base layer -->
-            <div style="width: 100%; background: #0369a1; padding: 1.5rem; text-align: center; color: #fff; font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%); text-transform: uppercase;">
-              Voters
+            <div style="flex: 1.1; background: #0369a1; text-align: center; color: #fff; font-weight: 800; font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; display: flex; flex-direction: column; justify-content: center;">
+              <div>Voters</div>
             </div>
           </div>
         </div>
