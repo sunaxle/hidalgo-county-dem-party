@@ -227,104 +227,118 @@
     </div>
 
     <!-- Power of the Precinct Model -->
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4rem; margin-top: 5rem;">
-      <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4rem; margin-top: 5rem; overflow-x: hidden;">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 1rem auto; padding: 0 1rem;">
         <h2 style="color: var(--accent); font-size: 2.5rem; margin-bottom: 1rem;">The Power of the Precinct Model</h2>
         <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
-          See how Precinct 107 builds their team. With just a handful of dedicated people, they can personally connect with over 50 consistent voting households. Imagine the impact across the entire county!
+          See how Precinct 107 builds their team. Alma sits at the center of a growing organized network. Each Neighborhood Captain and Block Worker has their own dedicated circle of voters. Together, they instantly command a 70+ voter base.
         </p>
+        <a href="precinct_107_case_study.html" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; background: rgba(56, 189, 248, 0.1); color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; text-decoration: none; font-weight: bold; transition: all 0.2s;">View Full Precinct Case Study</a>
       </div>
 
-      <div style="display: flex; justify-content: center; overflow-x: auto; padding: 1rem 0;">
-        <div style="min-width: 800px; text-align: center; color: white;">
-          <!-- Level 1: Chair -->
-          <div style="display: inline-block; padding: 1rem 2rem; background: #10b981; color: #020617; font-weight: bold; border-radius: 8px; margin-bottom: 2rem; position: relative;">
+      <div style="display: flex; justify-content: center; padding: 2rem 0; overflow-x: auto;">
+        <div style="position: relative; width: 900px; height: 800px; margin: 0 auto; min-width: 900px;">
+          
+          <!-- SVG Connecting Lines -->
+          <svg width="900" height="800" style="position: absolute; top: 0; left: 0; z-index: 1;">
+            <!-- Alma to Captains -->
+            <line x1="450" y1="400" x2="300" y2="250" stroke="#475569" stroke-width="2" />
+            <line x1="450" y1="400" x2="600" y2="250" stroke="#475569" stroke-width="2" />
+            <!-- Alma to Pending Captains -->
+            <line x1="450" y1="400" x2="300" y2="550" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+            <line x1="450" y1="400" x2="600" y2="550" stroke="#475569" stroke-width="2" stroke-dasharray="6,6" />
+            
+            <!-- Captains to Workers -->
+            <line x1="300" y1="250" x2="150" y2="150" stroke="#475569" stroke-width="2" />
+            <line x1="300" y1="250" x2="150" y2="350" stroke="#475569" stroke-width="2" />
+            <line x1="600" y1="250" x2="750" y2="150" stroke="#475569" stroke-width="2" />
+            <line x1="600" y1="250" x2="750" y2="350" stroke="#475569" stroke-width="2" />
+
+            <!-- Connecting lines to voter clusters (aesthetic) -->
+            <line x1="450" y1="400" x2="450" y2="280" stroke="#334155" stroke-width="1" />
+            <line x1="300" y1="250" x2="300" y2="150" stroke="#334155" stroke-width="1" />
+            <line x1="600" y1="250" x2="600" y2="150" stroke="#334155" stroke-width="1" />
+            <line x1="150" y1="150" x2="80" y2="150" stroke="#334155" stroke-width="1" />
+            <line x1="150" y1="350" x2="80" y2="350" stroke="#334155" stroke-width="1" />
+            <line x1="750" y1="150" x2="820" y2="150" stroke="#334155" stroke-width="1" />
+            <line x1="750" y1="350" x2="820" y2="350" stroke="#334155" stroke-width="1" />
+          </svg>
+
+          <!-- CSS Definitions for Nodes -->
+          <style>
+            .radial-node { position: absolute; transform: translate(-50%, -50%); text-align: center; font-weight: bold; border-radius: 8px; z-index: 10; padding: 0.8rem 1rem; width: max-content; }
+            .node-chair { background: #10b981; color: #020617; box-shadow: 0 0 20px rgba(16,185,129,0.3); }
+            .node-capt { background: #3b82f6; color: white; }
+            .node-pend { background: transparent; border: 2px dashed #94a3b8; color: #94a3b8; }
+            .node-work { background: #f59e0b; color: white; padding: 0.6rem; font-size: 0.85rem; }
+            .voter-cluster { position: absolute; transform: translate(-50%, -50%); display: flex; flex-wrap: wrap; width: 140px; justify-content: center; gap: 4px; z-index: 5; }
+            .voter-dot { width: 34px; height: 16px; background: #cbd5e1; border-radius: 8px; font-size: 7px; color: #0f172a; display: flex; align-items: center; justify-content: center; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+          </style>
+
+          <!-- Central Chair -->
+          <div class="radial-node node-chair" style="left: 450px; top: 400px; padding: 1.2rem 2rem;">
             Alma Vera<br><span style="font-size: 0.8rem; opacity: 0.8;">Precinct Chair</span>
-            <!-- line down -->
-            <div style="position: absolute; bottom: -2rem; left: 50%; width: 2px; height: 2rem; background: #94a3b8;"></div>
+          </div>
+          <!-- Alma's Voters -->
+          <div class="voter-cluster" style="left: 450px; top: 250px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
           </div>
 
-          <!-- Horizontal connector -->
-          <div style="width: 400px; height: 2px; background: #94a3b8; margin: 0 auto;"></div>
-
-          <!-- Level 2: Captains -->
-          <div style="display: flex; justify-content: space-between; width: 600px; margin: 0 auto; margin-top: 0;">
-            <!-- Captain 1 line down -->
-            <div style="position: relative; width: 2px; height: 2rem; background: #94a3b8; margin-left: 100px;"></div>
-            <!-- Captain 2 line down -->
-            <div style="position: relative; width: 2px; height: 2rem; background: #94a3b8; margin-right: 100px;"></div>
+          <!-- Captain 1: Chris -->
+          <div class="radial-node node-capt" style="left: 300px; top: 250px;">
+            Chris Vera<br><span style="font-size: 0.75rem; opacity: 0.8;">Neighborhood Captain</span>
+          </div>
+          <div class="voter-cluster" style="left: 300px; top: 120px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
           </div>
 
-          <div style="display: flex; justify-content: space-between; width: 600px; margin: 0 auto; margin-top: 0;">
-            <!-- Captain 1 -->
-            <div style="padding: 1rem 1.5rem; background: #3b82f6; color: white; font-weight: bold; border-radius: 8px; margin-bottom: 2rem; position: relative; min-width: 180px;">
-              Chris Vera<br><span style="font-size: 0.8rem; opacity: 0.8;">Neighborhood Captain</span>
-              <div style="position: absolute; bottom: -2rem; left: 50%; width: 2px; height: 2rem; background: #94a3b8;"></div>
-            </div>
-            <!-- Captain 2 -->
-            <div style="padding: 1rem 1.5rem; background: #3b82f6; color: white; font-weight: bold; border-radius: 8px; margin-bottom: 2rem; position: relative; min-width: 180px;">
-              Jason Delattre<br><span style="font-size: 0.8rem; opacity: 0.8;">Neighborhood Captain</span>
-              <div style="position: absolute; bottom: -2rem; left: 50%; width: 2px; height: 2rem; background: #94a3b8;"></div>
-            </div>
+          <!-- Captain 2: Jason -->
+          <div class="radial-node node-capt" style="left: 600px; top: 250px;">
+            Jason Delattre<br><span style="font-size: 0.75rem; opacity: 0.8;">Neighborhood Captain</span>
+          </div>
+          <div class="voter-cluster" style="left: 600px; top: 120px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
           </div>
 
-          <!-- Level 3: Block Workers -->
-          <div style="display: flex; justify-content: space-between; width: 600px; margin: 0 auto;">
-             <!-- Chris's branch -->
-             <div style="width: 180px; border-top: 2px solid #94a3b8; margin-left: 10px;">
-                <div style="display: flex; justify-content: space-between;">
-                    <div style="width: 2px; height: 1rem; background: #94a3b8;"></div>
-                    <div style="width: 2px; height: 1rem; background: #94a3b8;"></div>
-                </div>
-             </div>
-             <!-- Jason's branch -->
-             <div style="width: 180px; border-top: 2px solid #94a3b8; margin-right: 10px;">
-                <div style="display: flex; justify-content: space-between;">
-                    <div style="width: 2px; height: 1rem; background: #94a3b8;"></div>
-                    <div style="width: 2px; height: 1rem; background: #94a3b8;"></div>
-                </div>
-             </div>
+          <!-- Pending Captains -->
+          <div class="radial-node node-pend" style="left: 300px; top: 550px;">
+            Neighborhood Captain 3<br><span style="font-size: 0.75rem;">(Pending recruitment)</span>
+          </div>
+          <div class="radial-node node-pend" style="left: 600px; top: 550px;">
+            Neighborhood Captain 4<br><span style="font-size: 0.75rem;">(Pending recruitment)</span>
           </div>
 
-          <div style="display: flex; justify-content: space-between; width: 750px; margin: 0 auto; padding-top: 0;">
-             <!-- Chris's workers -->
-             <div style="padding: 0.8rem; background: #f59e0b; color: white; font-weight: bold; border-radius: 6px; font-size: 0.9rem; position: relative; width: 120px;">Block Worker
-                 <div style="position: absolute; bottom: -1.5rem; left: 50%; width: 2px; height: 1.5rem; background: #94a3b8;"></div>
-             </div>
-             <div style="padding: 0.8rem; background: #f59e0b; color: white; font-weight: bold; border-radius: 6px; font-size: 0.9rem; position: relative; width: 120px;">Block Worker
-                 <div style="position: absolute; bottom: -1.5rem; left: 50%; width: 2px; height: 1.5rem; background: #94a3b8;"></div>
-             </div>
-             <!-- spacer -->
-             <div style="width: 50px;"></div>
-             <!-- Jason's workers -->
-             <div style="padding: 0.8rem; background: #f59e0b; color: white; font-weight: bold; border-radius: 6px; font-size: 0.9rem; position: relative; width: 120px;">Mrs. Delattre<br><span style="font-size: 0.75rem; opacity: 0.8;">Block Worker</span>
-                 <div style="position: absolute; bottom: -1.5rem; left: 50%; width: 2px; height: 1.5rem; background: #94a3b8;"></div>
-             </div>
-             <div style="padding: 0.8rem; background: #f59e0b; color: white; font-weight: bold; border-radius: 6px; font-size: 0.9rem; position: relative; width: 120px;">Block Worker
-                 <div style="position: absolute; bottom: -1.5rem; left: 50%; width: 2px; height: 1.5rem; background: #94a3b8;"></div>
-             </div>
+          <!-- Chris's Workers -->
+          <div class="radial-node node-work" style="left: 150px; top: 150px;">
+            Block Worker
+          </div>
+          <div class="voter-cluster" style="left: 40px; top: 150px; width: 80px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
           </div>
 
-          <!-- Level 4: Voters -->
-          <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; width: 750px; margin-left: auto; margin-right: auto;">
-             <!-- Groups of voters -->
-             <div style="display: flex; gap: 4px; flex-wrap: wrap; width: 120px; justify-content: center;">
-                 <div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div>
-             </div>
-             <div style="display: flex; gap: 4px; flex-wrap: wrap; width: 120px; justify-content: center;">
-                 <div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div>
-             </div>
-             <div style="width: 50px;"></div>
-             <div style="display: flex; gap: 4px; flex-wrap: wrap; width: 120px; justify-content: center;">
-                 <div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div>
-             </div>
-             <div style="display: flex; gap: 4px; flex-wrap: wrap; width: 120px; justify-content: center;">
-                 <div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div><div style="width: 12px; height: 12px; background: #cbd5e1; border-radius: 50%;"></div>
-             </div>
+          <div class="radial-node node-work" style="left: 150px; top: 350px;">
+            Block Worker
           </div>
-          <div style="margin-top: 2rem; color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">
-            Each Block Worker personally connects with 10-15 households. <br>
-            Together, this core team reliably organizes and mobilizes <strong style="color: #fff;">over 50 voters</strong>!
+          <div class="voter-cluster" style="left: 40px; top: 350px; width: 80px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
+          </div>
+
+          <!-- Jason's Workers -->
+          <div class="radial-node node-work" style="left: 750px; top: 150px;">
+            Mrs. Delattre<br><span style="font-size: 0.7rem;">Block Worker</span>
+          </div>
+          <div class="voter-cluster" style="left: 860px; top: 150px; width: 80px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
+          </div>
+
+          <div class="radial-node node-work" style="left: 750px; top: 350px;">
+            Block Worker
+          </div>
+          <div class="voter-cluster" style="left: 860px; top: 350px; width: 80px;">
+            <div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div><div class="voter-dot">voter</div>
           </div>
 
         </div>
