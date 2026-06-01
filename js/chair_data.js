@@ -1,6 +1,6 @@
 // Unified Dual-Term Database
 // ----------------------------------------------------
-// Term: 2026-2028 (Includes Block Captains)
+// Term: 2026-2028 (Includes Helpful Turf Coordinators)
 const chairDataList2026 = [
   {
     "precinct": "2",
@@ -21,7 +21,7 @@ const chairDataList2026 = [
   {
     "precinct": "4",
     "name": "Dolores Barrientes",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-279-4030",
     "email": "doloresbarr@hotmail.com"
   },
@@ -36,7 +36,7 @@ const chairDataList2026 = [
   {
     "precinct": "7",
     "name": "Laurel Theresa Mcleaish",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-342-7278",
     "email": "ltmcleaish@aol.com"
   },
@@ -59,7 +59,7 @@ const chairDataList2026 = [
   {
     "precinct": "9",
     "name": "Laura Saldana-Flores",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-225-4913",
     "email": "lsflores8@gmail.com"
   },
@@ -74,7 +74,7 @@ const chairDataList2026 = [
   {
     "precinct": "11",
     "name": "Angela Salinas",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-342-1776",
     "email": "angelasalinas8525@gmail.com"
   },
@@ -89,14 +89,14 @@ const chairDataList2026 = [
   {
     "precinct": "13",
     "name": "Maria G. Cantu",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-457-0644",
     "email": "mariagcantu3@gmail.com"
   },
   {
     "precinct": "13",
     "name": "Leonardo Rodriguez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-457-3270",
     "email": "leorodriguez1031@gmail.com"
   },
@@ -135,7 +135,7 @@ const chairDataList2026 = [
   {
     "precinct": "18",
     "name": "Abram Mckee",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-313-7754",
     "email": "abram.mckee01@gmail.com"
   },
@@ -150,7 +150,7 @@ const chairDataList2026 = [
   {
     "precinct": "20",
     "name": "Leonardo G. Rodr\u00edguez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-457-3270",
     "email": "leorodriguez1031@gmail.com"
   },
@@ -197,7 +197,7 @@ const chairDataList2026 = [
   {
     "precinct": "28",
     "name": "Teresa L. Zapatero",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-802-6785",
     "email": "tzapatero2025@gmail.com"
   },
@@ -228,7 +228,7 @@ const chairDataList2026 = [
   {
     "precinct": "32",
     "name": "Jose Munoz",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-535-2039",
     "email": "luigi5900@yahoo.com"
   },
@@ -259,7 +259,7 @@ const chairDataList2026 = [
   {
     "precinct": "35",
     "name": "Raquel 'Rachel' Moran Nevarez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-867-3414",
     "email": "rmnevarez1@yahoo.com"
   },
@@ -274,7 +274,7 @@ const chairDataList2026 = [
   {
     "precinct": "36",
     "name": "Selina Medrano",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-789-9987",
     "email": "selina_hayes@yahoo.com"
   },
@@ -289,7 +289,7 @@ const chairDataList2026 = [
   {
     "precinct": "38",
     "name": "Carlos Repetto-Ayala",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-360-2213",
     "email": "carlosrepettoayala@gmail.com"
   },
@@ -352,7 +352,7 @@ const chairDataList2026 = [
   {
     "precinct": "47",
     "name": "Matthew Garcia",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-369-9767",
     "email": "garcia11matthew@gmail.com"
   },
@@ -391,7 +391,7 @@ const chairDataList2026 = [
   {
     "precinct": "51",
     "name": "Juana Victoria Olivarez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -414,7 +414,7 @@ const chairDataList2026 = [
   {
     "precinct": "53",
     "name": "Julie Ann Carcano",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-926-9004",
     "email": "julieanncarcano@gmail.com"
   },
@@ -445,7 +445,7 @@ const chairDataList2026 = [
   {
     "precinct": "56",
     "name": "Yolanda Solis",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-272-7922",
     "email": "pet28life@gmail.com"
   },
@@ -460,14 +460,14 @@ const chairDataList2026 = [
   {
     "precinct": "58",
     "name": "Koni Ramos-Kaiwi",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "972-965-4031",
     "email": "kaiwi1948@gmail.com"
   },
   {
     "precinct": "58",
     "name": "Ayaan R. Nair",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "832-603-6739",
     "email": "ayaannair2004@gmail.com"
   },
@@ -514,7 +514,7 @@ const chairDataList2026 = [
   {
     "precinct": "66",
     "name": "Nicole 'Nikki' Armijo",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-562-5840",
     "email": "ncarmijo3@yahoo.com"
   },
@@ -529,7 +529,7 @@ const chairDataList2026 = [
   {
     "precinct": "69",
     "name": "Juventina Herrera",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-458-7937",
     "email": "juventinah@yahoo.com"
   },
@@ -544,7 +544,7 @@ const chairDataList2026 = [
   {
     "precinct": "70",
     "name": "Roxanne Gonzalez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-272-7233",
     "email": "roxgonzalez23@gmail.com"
   },
@@ -567,7 +567,7 @@ const chairDataList2026 = [
   {
     "precinct": "73",
     "name": "James J S\u00e1nchez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-280-1939",
     "email": "Injurydoctorrgv@gmail.com"
   },
@@ -582,7 +582,7 @@ const chairDataList2026 = [
   {
     "precinct": "75",
     "name": "Homero Basaldua",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-844-7143",
     "email": "homero.basaldua08@gmail.com"
   },
@@ -621,7 +621,7 @@ const chairDataList2026 = [
   {
     "precinct": "82",
     "name": "Miranda Salinas",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-570-3666",
     "email": "mhern9235@yahoo.com"
   },
@@ -652,7 +652,7 @@ const chairDataList2026 = [
   {
     "precinct": "85",
     "name": "Romulo 'Romo' Sanchez, Jr.",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-474-0652",
     "email": "romosanchez44@outlook.com"
   },
@@ -683,7 +683,7 @@ const chairDataList2026 = [
   {
     "precinct": "90",
     "name": "Arcadio Padilla, Jr.",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-219-7476",
     "email": "arcadiopadilla10@gmail.com"
   },
@@ -746,14 +746,14 @@ const chairDataList2026 = [
   {
     "precinct": "100",
     "name": "Alexander David Perez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-821-4914",
     "email": "egarcia5454@yahoo.com"
   },
   {
     "precinct": "100",
     "name": "Robert Hoffman",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-458-6268",
     "email": "rabobhoffman52@yahoo.com"
   },
@@ -792,28 +792,28 @@ const chairDataList2026 = [
   {
     "precinct": "103",
     "name": "Delia De Leon Gil",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-867-1075",
     "email": "delcali@yahoo.com"
   },
   {
     "precinct": "103",
     "name": "Matteo Garza",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-616-2482",
     "email": "matteogarza739@gmail.com"
   },
   {
     "precinct": "103",
     "name": "Meri L. Gomez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-605-1143",
     "email": "merilgomez@aol.com"
   },
   {
     "precinct": "104",
     "name": "Gloria Maldonado-Lozano",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-330-0759",
     "email": "glorialozano01@yahoo.com"
   },
@@ -844,14 +844,14 @@ const chairDataList2026 = [
   {
     "precinct": "107",
     "name": "Jose Villarreal",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-533-3344",
     "email": "josevillarrealpc107@gmail.com"
   },
   {
     "precinct": "107",
     "name": "Jason Andrew Delattre",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-957-1912",
     "email": "jason.delattre01@gmail.com"
   },
@@ -898,7 +898,7 @@ const chairDataList2026 = [
   {
     "precinct": "113",
     "name": "Norma Chapa",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -913,7 +913,7 @@ const chairDataList2026 = [
   {
     "precinct": "114",
     "name": "Yolanda Reyna-Gonzalez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -936,7 +936,7 @@ const chairDataList2026 = [
   {
     "precinct": "116",
     "name": "Ana Salem",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -975,7 +975,7 @@ const chairDataList2026 = [
   {
     "precinct": "120",
     "name": "Marisela 'Mary' Alaniz",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -998,7 +998,7 @@ const chairDataList2026 = [
   {
     "precinct": "124",
     "name": "David H. Trevi\u00f1o",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1013,7 +1013,7 @@ const chairDataList2026 = [
   {
     "precinct": "125",
     "name": "Julio D. Lozano",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1028,7 +1028,7 @@ const chairDataList2026 = [
   {
     "precinct": "126",
     "name": "Ana Marcus",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1043,7 +1043,7 @@ const chairDataList2026 = [
   {
     "precinct": "127",
     "name": "Hector Garza",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1058,7 +1058,7 @@ const chairDataList2026 = [
   {
     "precinct": "132",
     "name": "Jorge 'George' Rosales",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1081,7 +1081,7 @@ const chairDataList2026 = [
   {
     "precinct": "136",
     "name": "Carmen T. Guerrero",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1096,7 +1096,7 @@ const chairDataList2026 = [
   {
     "precinct": "142",
     "name": "Marivel L. Garza",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1111,7 +1111,7 @@ const chairDataList2026 = [
   {
     "precinct": "145",
     "name": "Jessica E. Ramos",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1126,7 +1126,7 @@ const chairDataList2026 = [
   {
     "precinct": "146",
     "name": "Daniel Gonzalez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-975-7651",
     "email": "drewgonzalez10@gmail.com"
   },
@@ -1141,7 +1141,7 @@ const chairDataList2026 = [
   {
     "precinct": "147",
     "name": "Marcos Medina",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1156,7 +1156,7 @@ const chairDataList2026 = [
   {
     "precinct": "151",
     "name": "Roberto Perez, Jr.",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1171,7 +1171,7 @@ const chairDataList2026 = [
   {
     "precinct": "153",
     "name": "Veronica Chavez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1186,7 +1186,7 @@ const chairDataList2026 = [
   {
     "precinct": "154",
     "name": "Edgar Olivan",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1201,7 +1201,7 @@ const chairDataList2026 = [
   {
     "precinct": "155",
     "name": "Albert Campos",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1216,7 +1216,7 @@ const chairDataList2026 = [
   {
     "precinct": "156",
     "name": "Luis R. Martinez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1231,7 +1231,7 @@ const chairDataList2026 = [
   {
     "precinct": "160",
     "name": "Samuel V. Reyes",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-651-3002",
     "email": "samuelreyes2007@gmail.com"
   },
@@ -1246,7 +1246,7 @@ const chairDataList2026 = [
   {
     "precinct": "161",
     "name": "Carlos J. Trevi\u00f1o",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1261,7 +1261,7 @@ const chairDataList2026 = [
   {
     "precinct": "162",
     "name": "Gabriel O. Cruz",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1308,7 +1308,7 @@ const chairDataList2026 = [
   {
     "precinct": "167",
     "name": "Miguel Santiago",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1323,7 +1323,7 @@ const chairDataList2026 = [
   {
     "precinct": "169",
     "name": "Eduardo Villa",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1338,7 +1338,7 @@ const chairDataList2026 = [
   {
     "precinct": "174",
     "name": "Rosalinda Prado",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1361,7 +1361,7 @@ const chairDataList2026 = [
   {
     "precinct": "176",
     "name": "Jesus F. Perez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1376,7 +1376,7 @@ const chairDataList2026 = [
   {
     "precinct": "177",
     "name": "Roberto Medina",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1399,7 +1399,7 @@ const chairDataList2026 = [
   {
     "precinct": "180",
     "name": "Ruben D. Salinas",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1414,7 +1414,7 @@ const chairDataList2026 = [
   {
     "precinct": "183",
     "name": "Jaime L. Garcia",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1429,7 +1429,7 @@ const chairDataList2026 = [
   {
     "precinct": "187",
     "name": "Sandra Morales",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1444,7 +1444,7 @@ const chairDataList2026 = [
   {
     "precinct": "192",
     "name": "David M. Garcia",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-800-8864",
     "email": "apex0378557@aol.com"
   },
@@ -1459,7 +1459,7 @@ const chairDataList2026 = [
   {
     "precinct": "193",
     "name": "Juan E. Lopez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-485-0409",
     "email": "Vicky.lpz68@gmail.com"
   },
@@ -1474,7 +1474,7 @@ const chairDataList2026 = [
   {
     "precinct": "194",
     "name": "Sara V. Martinez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1489,7 +1489,7 @@ const chairDataList2026 = [
   {
     "precinct": "195",
     "name": "Rebecca L. Torres",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1528,7 +1528,7 @@ const chairDataList2026 = [
   {
     "precinct": "201",
     "name": "Javier O. Salinas",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1551,7 +1551,7 @@ const chairDataList2026 = [
   {
     "precinct": "207",
     "name": "Silvia R. Chavez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1566,7 +1566,7 @@ const chairDataList2026 = [
   {
     "precinct": "211",
     "name": "Omar G. Reyes",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1597,7 +1597,7 @@ const chairDataList2026 = [
   {
     "precinct": "216",
     "name": "Andres J. Valdez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1612,7 +1612,7 @@ const chairDataList2026 = [
   {
     "precinct": "221",
     "name": "Julio Garza",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-369-2023",
     "email": "juliogarza18@gmail.com"
   },
@@ -1635,7 +1635,7 @@ const chairDataList2026 = [
   {
     "precinct": "225",
     "name": "Luisa F. Moreno",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1650,7 +1650,7 @@ const chairDataList2026 = [
   {
     "precinct": "226",
     "name": "Hector M. Santiago",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1665,7 +1665,7 @@ const chairDataList2026 = [
   {
     "precinct": "227",
     "name": "Mar V. Hernandez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-624-0206",
     "email": "marvhernandez95747@gmail.com"
   },
@@ -1680,7 +1680,7 @@ const chairDataList2026 = [
   {
     "precinct": "228",
     "name": "Margarita S. Castillo",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1695,7 +1695,7 @@ const chairDataList2026 = [
   {
     "precinct": "230",
     "name": "Ruben C. Garza",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1710,7 +1710,7 @@ const chairDataList2026 = [
   {
     "precinct": "234",
     "name": "Roberto M. Flores",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1725,7 +1725,7 @@ const chairDataList2026 = [
   {
     "precinct": "235",
     "name": "Veronica T. Rosales",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1740,7 +1740,7 @@ const chairDataList2026 = [
   {
     "precinct": "238",
     "name": "David P. Sanchez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1755,7 +1755,7 @@ const chairDataList2026 = [
   {
     "precinct": "239",
     "name": "Alicia L. Hernandez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1770,7 +1770,7 @@ const chairDataList2026 = [
   {
     "precinct": "240",
     "name": "Samuel J. Martinez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1785,7 +1785,7 @@ const chairDataList2026 = [
   {
     "precinct": "244",
     "name": "Jaime C. Cantu",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1800,7 +1800,7 @@ const chairDataList2026 = [
   {
     "precinct": "245",
     "name": "Mario V. Salda\u00f1a",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1815,7 +1815,7 @@ const chairDataList2026 = [
   {
     "precinct": "249",
     "name": "Elena F. Dominguez",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1830,7 +1830,7 @@ const chairDataList2026 = [
   {
     "precinct": "250",
     "name": "Jos\u00e9 Torres, Jr.",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "956-472-9600",
     "email": "1982jtorres@gmail.com"
   },
@@ -1845,7 +1845,7 @@ const chairDataList2026 = [
   {
     "precinct": "254",
     "name": "Rebecca O. Lozano",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
@@ -1860,14 +1860,14 @@ const chairDataList2026 = [
   {
     "precinct": "257",
     "name": "Antonio R. Ruiz",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   },
   {
     "precinct": "265",
     "name": "Jessica N. Pena",
-    "role": "Block Captain",
+    "role": "Helpful Turf Coordinator",
     "phone": "",
     "email": ""
   }
@@ -2560,7 +2560,7 @@ const chairDataList2024 = [
 // Global Routing Logic
 // ----------------------------------------------------
 
-// Retrieve active term from session storage (defaults to 2026 to ensure Block Captains load by default if wanted, or we could default to 2024. Let's default to 2026)
+// Retrieve active term from session storage (defaults to 2026 to ensure Helpful Turf Coordinators load by default if wanted, or we could default to 2024. Let's default to 2026)
 let activeTerm = sessionStorage.getItem('activeTerm');
 if (!activeTerm) {
     activeTerm = '2026';

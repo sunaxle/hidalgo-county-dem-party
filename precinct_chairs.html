@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Precinct Chair Directory - Hidalgo Dems</title>
-  <meta name="description" content="Find your local Hidalgo County Democratic Party Precinct Chair and Block Captains.">
+  <meta name="description" content="Find your local Hidalgo County Democratic Party Precinct Chair and Helpful Turf Coordinators.">
   <link rel="stylesheet" href="css/styles.css">
   
   <!-- Leaflet CSS for the map -->
@@ -474,7 +474,7 @@
     <div class="glass-card" style="margin: 2rem auto; padding: 2rem; max-width: 800px; text-align: left; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
       <h2 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">The Democratic Organizing Model</h2>
       <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Turf Coordinators</strong> (a modern, community-focused role replacing the traditional "Block Captain") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
+        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Turf Coordinators</strong> (a modern, community-focused role replacing the traditional "Helpful Turf Coordinator") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
       </p>
       
       <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
@@ -577,7 +577,7 @@
          <select id="roleFilter" class="search-input" style="padding-left: 1.5rem; cursor: pointer;">
            <option value="all">All Roles</option>
            <option value="chair">Precinct Chairs</option>
-           <option value="captain">Block Captains</option>
+           <option value="captain">Helpful Turf Coordinators</option>
          </select>
       </div>
     </div>
@@ -789,7 +789,7 @@
           row.dataset.name = person.name.toLowerCase();
           row.dataset.role = person.role.toLowerCase();
 
-          const badgeClass = person.role === 'Block Captain' ? 'badge-captain' : 'badge-chair';
+          const badgeClass = person.role === 'Helpful Turf Coordinator' ? 'badge-captain' : 'badge-chair';
 
           row.innerHTML = `
               <td>
@@ -830,7 +830,7 @@
                                     (window.activeNearbyPrecincts && window.activeNearbyPrecincts.includes(pctInt.toString()));
               const matchesRole = roleTerm === 'all' || 
                                  (roleTerm === 'chair' && role.includes('precinct chair')) ||
-                                 (roleTerm === 'captain' && role.includes('block captain'));
+                                 (roleTerm === 'captain' && role.includes('helpful turf coordinator'));
                                  
               let matchesDistrict = true;
               if (window.activeDistrict === '15') matchesDistrict = window.cd15List.includes(pctInt);
