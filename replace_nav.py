@@ -26,7 +26,6 @@ new_nav_links = """    <div class="nav-links">
           <a href="about.html">About Us</a>
           <a href="bylaws.html">Bylaws</a>
           <a href="elected_officials.html">Elected Reps</a>
-          <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Chair Hub 🧭</a>
           <a href="precinct_chairs.html">Precinct Chairs</a>
         </div>
       </div>
@@ -34,6 +33,7 @@ new_nav_links = """    <div class="nav-links">
       <div class="nav-item dropdown">
         <span>Action ▼</span>
         <div class="dropdown-content">
+          <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Chair Hub 🧭</a>
           <a href="volunteer.html">Volunteer</a>
           <a href="arena_training.html">The Arena</a>
           <a href="vote.html">Resources</a>
