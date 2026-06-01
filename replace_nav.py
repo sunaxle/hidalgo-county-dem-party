@@ -26,6 +26,7 @@ new_nav_links = """    <div class="nav-links">
           <a href="about.html">About Us</a>
           <a href="bylaws.html">Bylaws</a>
           <a href="elected_officials.html">Elected Reps</a>
+          <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Chair Hub 🧭</a>
           <a href="precinct_chairs.html">Precinct Chairs</a>
         </div>
       </div>

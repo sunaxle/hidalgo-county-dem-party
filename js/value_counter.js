@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     standardHours += 25.0; // Civics Portals, 2026 Roster UI, VDR Partner Integration, Ballot Board Explainer
     dataHours += 15.0; // PII scrubbing algorithms, 2026 data reconciliation pipelines, LUPE Campaign engineering
     
+    // May/June 2026 Operations
+    standardHours += 15.0; // System maintenance, script generation, and general programming
+    dataHours += 25.0; // VAN Runoff data parsing, Precinct proportional turnout estimates, and data analytics
+    
     let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
 
     // Create the footer element
