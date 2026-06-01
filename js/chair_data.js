@@ -856,6 +856,20 @@ const chairDataList2026 = [
     "email": "jason.delattre01@gmail.com"
   },
   {
+    "precinct": "107",
+    "name": "Chris Vera",
+    "role": "Neighborhood Captain",
+    "phone": "",
+    "email": ""
+  },
+  {
+    "precinct": "107",
+    "name": "Mrs. Delattre",
+    "role": "Block Worker",
+    "phone": "",
+    "email": ""
+  },
+  {
     "precinct": "109",
     "name": "Mar\u00eda E. Mendoza",
     "role": "Precinct Chair",
