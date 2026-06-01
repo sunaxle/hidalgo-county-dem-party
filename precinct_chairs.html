@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Precinct Chair Directory - Hidalgo Dems</title>
-  <meta name="description" content="Find your local Hidalgo County Democratic Party Precinct Chair and Block Captains.">
+  <meta name="description" content="Find your local Hidalgo County Democratic Party Precinct Chair and Neighborhood Captains.">
   <link rel="stylesheet" href="css/styles.css">
   
   <!-- Leaflet CSS for the map -->
@@ -474,21 +474,21 @@
     <div class="glass-card" style="margin: 2rem auto; padding: 2rem; max-width: 800px; text-align: left; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
       <h2 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">The Democratic Organizing Model</h2>
       <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Turf Coordinators</strong> (a modern, community-focused role replacing the traditional "Block Captain") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
+        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Neighborhood Captains</strong> (a modern, community-focused role replacing the traditional "Neighborhood Captain") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
       </p>
       
       <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
         <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #facc15;">
           <strong style="color: #facc15; font-size: 1.1rem; display: block;">1. Precinct Chair</strong>
-          <span style="color: #94a3b8; font-size: 0.95rem;">The elected leader who oversees the entire precinct strategy, sets the vision, and recruits Turf Coordinators.</span>
+          <span style="color: #94a3b8; font-size: 0.95rem;">The elected leader who oversees the entire precinct strategy, sets the vision, and recruits Neighborhood Captains.</span>
         </div>
         <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #3b82f6;">
-          <strong style="color: #3b82f6; font-size: 1.1rem; display: block;">2. Turf Coordinators</strong>
+          <strong style="color: #3b82f6; font-size: 1.1rem; display: block;">2. Neighborhood Captains</strong>
           <span style="color: #94a3b8; font-size: 0.95rem;">Community leaders responsible for a specific, manageable "turf" (like an apartment complex, a neighborhood, or a few streets).</span>
         </div>
         <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #4ade80;">
           <strong style="color: #4ade80; font-size: 1.1rem; display: block;">3. Super Volunteers</strong>
-          <span style="color: #94a3b8; font-size: 0.95rem;">Dedicated activists who support their Turf Coordinator by block walking, making phone calls, and registering voters in their assigned area.</span>
+          <span style="color: #94a3b8; font-size: 0.95rem;">Dedicated activists who support their Neighborhood Captain by block walking, making phone calls, and registering voters in their assigned area.</span>
         </div>
       </div>
 
@@ -499,13 +499,13 @@
         </p>
         <ul style="color: #a3e635; font-size: 0.95rem; line-height: 1.6; margin: 0; padding-left: 1.5rem; margin-bottom: 1rem;">
           <li><strong>1 Precinct Chair</strong> recruits...</li>
-          <li><strong>7 Turf Coordinators</strong>. Now the precinct is divided into 7 separate turfs of roughly 714 voters each.</li>
-          <li>Each Turf Coordinator recruits a random set of <strong>1 to 5 Super Volunteers</strong> to help them.</li>
+          <li><strong>7 Neighborhood Captains</strong>. Now the precinct is divided into 7 separate turfs of roughly 714 voters each.</li>
+          <li>Each Neighborhood Captain recruits a random set of <strong>1 to 5 Super Volunteers</strong> to help them.</li>
         </ul>
         <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0; line-height: 1.5;">
-          If a Turf Coordinator recruits an average of 3 Super Volunteers, that creates a team of 4 people for that turf. <br><br>
+          If a Neighborhood Captain recruits an average of 3 Super Volunteers, that creates a team of 4 people for that turf. <br><br>
           <strong>714 voters ÷ 4 organizers = Only 178 voters per person!</strong><br><br>
-          By delegating to Turf Coordinators and Super Volunteers, a massive precinct of 5,000 voters is completely covered through teamwork.
+          By delegating to Neighborhood Captains and Super Volunteers, a massive precinct of 5,000 voters is completely covered through teamwork.
         </p>
       </div>
     </div>
@@ -577,7 +577,7 @@
          <select id="roleFilter" class="search-input" style="padding-left: 1.5rem; cursor: pointer;">
            <option value="all">All Roles</option>
            <option value="chair">Precinct Chairs</option>
-           <option value="captain">Block Captains</option>
+           <option value="captain">Neighborhood Captains</option>
          </select>
       </div>
     </div>
@@ -789,7 +789,7 @@
           row.dataset.name = person.name.toLowerCase();
           row.dataset.role = person.role.toLowerCase();
 
-          const badgeClass = person.role === 'Block Captain' ? 'badge-captain' : 'badge-chair';
+          const badgeClass = person.role === 'Neighborhood Captain' ? 'badge-captain' : 'badge-chair';
 
           row.innerHTML = `
               <td>
@@ -830,7 +830,7 @@
                                     (window.activeNearbyPrecincts && window.activeNearbyPrecincts.includes(pctInt.toString()));
               const matchesRole = roleTerm === 'all' || 
                                  (roleTerm === 'chair' && role.includes('precinct chair')) ||
-                                 (roleTerm === 'captain' && role.includes('block captain'));
+                                 (roleTerm === 'captain' && role.includes('neighborhood captain'));
                                  
               let matchesDistrict = true;
               if (window.activeDistrict === '15') matchesDistrict = window.cd15List.includes(pctInt);
