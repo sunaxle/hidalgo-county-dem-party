@@ -2,6 +2,7 @@
 let cd15List = [];
 let cd28List = [];
 let currentCDFilter = 'ALL';
+let currentRoleFilter = 'ALL';
 let currentSearchQuery = '';
 let filterTimeout = null;
 
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderGrid() {
     if (typeof chairDataList2026 === 'undefined') return;
     const data = chairDataList2026;
-    const chairs = data.filter(d => d.role.includes("Precinct Chair") || d.role === "Neighborhood Captain");
+    const chairs = data.filter(d => d.role.includes("Precinct Chair") || d.role === "Neighborhood Captain" || d.role === "Block Worker");
     
     // Sort by precinct number to keep it organized
     chairs.sort((a,b) => {
@@ -59,7 +60,8 @@ function renderGrid() {
     
     chairs.forEach((chair, index) => {
         const isBlockCapt = chair.role === "Neighborhood Captain";
-        const badgeColor = isBlockCapt ? "#3b82f6" : "#10b981"; // Blue for Capt, Green for Chair
+        const isBlockWorker = chair.role === "Block Worker";
+        const badgeColor = isBlockWorker ? "#f59e0b" : (isBlockCapt ? "#3b82f6" : "#10b981"); // Orange for Worker, Blue for Capt, Green for Chair
         
         let photoUrl = chair.photo && chair.photo.trim().length > 0 
            ? chair.photo 
@@ -69,7 +71,7 @@ function renderGrid() {
         const animDelay = (index * 0.05) % 1.5; // Cap at 1.5s for stagger loop
         
         const cardHtml = `
-            <div data-name="${chair.name.replace(/"/g, '').toLowerCase()}" data-pct="${chair.precinct}" class="hub-card-hover stagger-fade-in" style="animation-delay: ${animDelay}s; background: rgba(255,255,255,0.05); padding: 0; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; cursor:pointer;" onclick="window.location.href='precinct.html?id=${chair.precinct}'">
+            <div data-name="${chair.name.replace(/"/g, '').toLowerCase()}" data-pct="${chair.precinct}" data-role="${chair.role}" class="hub-card-hover stagger-fade-in" style="animation-delay: ${animDelay}s; background: rgba(255,255,255,0.05); padding: 0; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; cursor:pointer;" onclick="window.location.href='precinct.html?id=${chair.precinct}'">
                 <div style="height: 180px; width: 100%; overflow: hidden; position: relative;">
                     <img src="${photoUrl}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" class="card-img-zoom" alt="Profile Picture"/>
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0) 100%);"></div>
@@ -95,9 +97,20 @@ function applyFilters() {
     cards.forEach(card => {
         const name = card.getAttribute('data-name');
         const pct = card.getAttribute('data-pct');
+        const role = card.getAttribute('data-role');
         const pctNum = parseInt(pct, 10);
         
-        // 1. Check CD Filter
+        // 1. Check Role Filter
+        let roleMatch = true;
+        if (currentRoleFilter === 'CHAIR') {
+            roleMatch = role.includes('Precinct Chair');
+        } else if (currentRoleFilter === 'CAPTAIN') {
+            roleMatch = role === 'Neighborhood Captain';
+        } else if (currentRoleFilter === 'BLOCK') {
+            roleMatch = role === 'Block Worker';
+        }
+
+        // 2. Check CD Filter
         let cdMatch = true;
         if (currentCDFilter === '15') {
             // Note: cd15List contains numbers matching pctNum
@@ -106,13 +119,13 @@ function applyFilters() {
             cdMatch = cd28List.includes(pctNum);
         }
 
-        // 2. Check Text Search Filter
+        // 3. Check Text Search Filter
         let textMatch = true;
         if (currentSearchQuery.length > 0) {
             textMatch = name.includes(currentSearchQuery) || String(pct).includes(currentSearchQuery);
         }
 
-        if (cdMatch && textMatch) {
+        if (roleMatch && cdMatch && textMatch) {
             card.style.display = 'block';
             card.style.opacity = '1';
             visibleCount++;
@@ -164,5 +177,27 @@ window.filterGridByCD = function(districtStr, btnElement) {
     }
 
     currentCDFilter = districtStr;
+    applyFilters();
+};
+
+window.filterGridByRole = function(roleStr, btnElement) {
+    const buttons = document.querySelectorAll('.role-filter-btn');
+    buttons.forEach(b => {
+        b.style.background = 'rgba(255,255,255,0.05)';
+        b.style.color = '#94a3b8';
+        b.style.borderColor = 'rgba(255,255,255,0.1)';
+        b.style.boxShadow = 'none';
+        b.classList.remove('active-role');
+    });
+
+    if (btnElement) {
+        btnElement.style.background = 'var(--accent)';
+        btnElement.style.color = '#020617';
+        btnElement.style.borderColor = 'var(--accent)';
+        btnElement.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
+        btnElement.classList.add('active-role');
+    }
+
+    currentRoleFilter = roleStr;
     applyFilters();
 };
