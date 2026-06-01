@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the STC Dems!</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0A3161 0%, #1a5296 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+        }
+        .salutation {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0A3161;
+        }
+        
+        .message-body {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .details-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #0A3161;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .details-box h3 {
+            margin-top: 0;
+            color: #0A3161;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .benefits-list li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            padding-left: 24px;
+            position: relative;
+        }
+        .benefits-list li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .benefits-list strong {
+            color: #1e293b;
+        }
+        
+        /* Button */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .btn {
+            background-color: #0A3161;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Get Involved 🌟</h1>
+        <p>South Texas College Democrats</p>
+    </div>
+    
+    <div class="content">
+        <div class="salutation">
+            Hi {{FIRST_NAME}},
+        </div>
+
+        <div class="message-body">
+            <p>Thank you for showing interest in the past and attending our on-campus events! We loved connecting with you.</p>
+            <p>We are currently looking to expand our community and would absolutely love for you to officially join our club, as well as our larger affiliated network of <strong>RGV College Democrats</strong>.</p>
+        </div>
+
+        <div class="details-box">
+            <h3>Why Join STC Dems?</h3>
+            <ul class="benefits-list">
+                <li><strong>Meet Electeds:</strong> Network with local and state representatives who shape our community.</li>
+                <li><strong>Engage with Candidates:</strong> Get a front-row seat to campaigns and local politics.</li>
+                <li><strong>Campaign Job Opportunities:</strong> Find paid work and critical career stepping stones during election cycles.</li>
+                <li><strong>Access to Fellowships:</strong> Tap into exclusive state and national fellowships tailored for student leaders.</li>
+                <li><strong>Resume Banks:</strong> Get your resume in front of top political and community organizations.</li>
+                <li><strong>Safe Third Spaces:</strong> Find a welcoming environment to discuss ideas, unwind, and build lasting friendships.</li>
+                <li><strong>Fun Socials:</strong> Enjoy regular meetups, games, and hangouts with like-minded peers across the valley!</li>
+            </ul>
+        </div>
+
+        <div class="details-box" style="margin-top: 30px; border-left-color: #10b981;">
+            <h3>Upcoming Event: End of Semester Social</h3>
+            <ul class="benefits-list">
+                <li><strong>When:</strong> Thursday, May 14 at 7:30 PM</li>
+                <li><strong>Where:</strong> McIntyre Square (310 W McIntyre St, Edinburg, TX)</li>
+                <li><strong>What:</strong> Food, games, and great company to kick off summer!</li>
+            </ul>
+        </div>
+
+        <div class="message-body">
+            <p>Whether you're looking to kickstart a career in public service, make a difference in your local community, or just find a great group of people to hang out with, the STC Dems have a place for you.</p>
+            <p>Reply directly to this email to get plugged in, or forward it to a friend who might be interested.</p>
+            <p>Hope to see you soon!</p>
+            <p>Best,<br><strong>STC Democrats</strong></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        You are receiving this email because you previously attended an STC Democrats event or showed interest in our organization.
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>iPhone 15 Preview - Precinct Chairs</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #e2e8f0;
+    }
+    
+    .header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    h1 {
+      margin: 0 0 0.5rem 0;
+      color: #38bdf8;
+    }
+
+    /* iPhone 15 Dimensions: 393 x 852 */
+    .iphone-frame {
+      width: 393px;
+      height: 852px;
+      border: 16px solid #1e293b;
+      border-radius: 48px;
+      position: relative;
+      background-color: #000;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    /* Simulated Dynamic Island */
+    .dynamic-island {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 35px;
+      background-color: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    .iphone-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 32px;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>iPhone 15 Simulation</h1>
+    <p>Viewing <code>precinct_chairs.html</code></p>
+  </div>
+  
+  <div class="iphone-frame">
+    <div class="dynamic-island"></div>
+    <iframe src="precinct_chairs.html"></iframe>
+  </div>
+</body>
+</html>

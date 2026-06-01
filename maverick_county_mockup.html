@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maverick County Democratic Party | Texas Democrats</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --tdp-blue: #0A3161;
+            --tdp-light-blue: #1C58A5;
+            --tdp-red: #B31942;
+            --bg-color: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: var(--tdp-blue);
+            color: white;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--tdp-blue);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--tdp-light-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--tdp-light-blue);
+        }
+
+        .btn-donate {
+            background-color: var(--tdp-red);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 14px rgba(179, 25, 66, 0.4);
+        }
+
+        .btn-donate:hover {
+            background-color: #901435;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(179, 25, 66, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(10, 49, 97, 0.8), rgba(28, 88, 165, 0.8)), url('https://images.unsplash.com/photo-1599839619722-39751411ea63?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            color: white;
+            padding: 8rem 5%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--tdp-blue);
+        }
+
+        .btn-primary:hover {
+            background-color: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Admin Setup Form Section */
+        .admin-section {
+            background-color: #F8FAFC;
+            padding: 5rem 5%;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border-top: 6px solid #10B981;
+        }
+
+        .admin-badge {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .admin-container h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-top: 0;
+            color: var(--tdp-blue);
+        }
+
+        .admin-container p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--tdp-light-blue);
+            box-shadow: 0 0 0 3px rgba(28, 88, 165, 0.1);
+        }
+
+        .btn-submit {
+            background-color: #10B981;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-submit:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Standard Content Section */
+        .content-section {
+            padding: 5rem 5%;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--tdp-blue);
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid #E2E8F0;
+            text-align: left;
+        }
+
+        .feature-card h3 {
+            color: var(--tdp-light-blue);
+            margin-top: 0;
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--tdp-blue);
+            color: white;
+            padding: 4rem 5% 2rem 5%;
+            text-align: center;
+        }
+
+        .footer-disclaimer {
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div>Official Website of the Maverick County Democratic Party</div>
+        <div>
+            <a href="#">Texas Democrats</a> | 
+            <a href="state_party_county_portal.html">← Back to Portal</a>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            Maverick County <span>Democrats</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">Who We Are</a>
+            <a href="#">Events</a>
+            <a href="#">Resources</a>
+            <a href="#">Voting Info</a>
+            <a href="#" class="btn-donate">Donate</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Welcome to the Maverick County Democratic Party</h1>
+        <p>Since 1846, Texas Democrats have worked to fulfill the promise of a state as bold and vibrant as its people. We believe that government should reflect the strength and values of all Texans, starting right here in Maverick County.</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Get Involved</a>
+            <a href="#" class="btn-secondary">Register to Vote</a>
+        </div>
+    </section>
+
+    <!-- Admin Takeover Section for State Party Pipeline -->
+    <section class="admin-section">
+        <div class="admin-container">
+            <div class="admin-badge">Admin Claim Portal</div>
+            <h2>Claim This County Website</h2>
+            <p>This is a standardized template provided by the Texas Democratic Party. If you are the County Chair or an authorized webmaster for Maverick County, please fill out the form below to receive administrative access to customize your content, upload photos, and manage local events.</p>
+            
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Application submitted! The Texas Democratic Party data team will review and grant access within 24 hours.');">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Jane Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Party Role</label>
+                    <select id="role" class="form-control" required>
+                        <option value="">Select your role...</option>
+                        <option value="chair">County Chair</option>
+                        <option value="vice-chair">Vice Chair</option>
+                        <option value="webmaster">Designated Webmaster</option>
+                        <option value="other">Other Official</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address (Must match TDP records)</label>
+                    <input type="email" id="email" class="form-control" placeholder="jane@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="(555) 123-4567" required>
+                </div>
+                <button type="submit" class="btn-submit">Request Administrator Access</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2>Building a Stronger Texas Together</h2>
+        <p>This bare-bones layout ensures every single county in Texas has a modern, mobile-friendly, and accessible web presence while waiting for local leadership to curate their specific message.</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>Voter Resources</h3>
+                <p>Standardized polling locations, early voting times, and ID requirements synced directly from the state party database.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Event Management</h3>
+                <p>A centralized calendar that local chairs can update easily, pushing events up to the state Mobilize feed automatically.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Local Leadership</h3>
+                <p>Placeholder for the local Chair's photo, contact info, and welcome message. Highly customizable once claimed.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-disclaimer">
+            Paid for by the Texas Democratic Party, texasdemocrats.org. <br>
+            This communication is not authorized by any candidate or any candidate's committee.
+        </div>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact State Party</a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.6; font-size: 0.8rem;">
+            &copy; 2026 Texas Democratic Party. All rights reserved.
+        </p>
+    </footer>
+
+</body>
+</html>

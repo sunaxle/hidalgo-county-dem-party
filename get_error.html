@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+window.onerror = function(msg, url, line, col, err) {
+    document.body.innerHTML += "<h1>ERROR: " + msg + " at " + line + ":" + col + "</h1>";
+    if(err) document.body.innerHTML += "<pre>" + err.stack + "</pre>";
+};
+</script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/precinct_mapping_data.js"></script>
+<script src="hidalgo-election-map/hidalgo_precincts.js"></script>
+<script src="js/chair_data.js"></script>
+<div id="map" style="height: 500px;"></div>
+<script src="hidalgo-election-map/map_chairs.js"></script>
+</head>
+<body>
+</body>
+</html>
