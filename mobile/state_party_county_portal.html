@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>State Party County Portal - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-title" style="font-weight: 800;">HIDALGO TOGETHER.</span>
+        </div>
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-donate-sm" target="_blank">DONATE</a>
+    </header>
+
+    <main class="mobile-container pb-tabbar">
+        <div class="glass" style="padding: 1.5rem; border-top: 4px solid var(--hcdp-blue);">
+            <!-- DYNAMIC INJECTED CONTENT START -->
+            
+
+    <header>
+        <h1>County Website Portal</h1>
+        <p>Empowering all 254 Texas counties with standardized, beautiful, and accessible web presences to turn Texas blue.</p>
+    </header>
+
+    <div class="container">
+        <div class="stats-banner">
+            <div class="stat">
+                <div class="stat-value" id="statTotal">254</div>
+                <div class="stat-label">Total Counties</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statActive" style="color: #10B981;">0</div>
+                <div class="stat-label">Active Websites</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="statPending" style="color: var(--tdp-red);">0</div>
+                <div class="stat-label">Pending Setup</div>
+            </div>
+            <div class="legend">
+                <div class="legend-item"><div class="dot active"></div> Active</div>
+                <div class="legend-item"><div class="dot missing"></div> Pending Setup</div>
+            </div>
+        </div>
+
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search for a county...">
+
+        <div class="county-grid" id="countyGrid">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <script>
+        // Representative list of 254 Texas counties
+        const allCounties = [
+            "Anderson", "Andrews", "Angelina", "Aransas", "Archer", "Armstrong", "Atascosa", "Austin", "Bailey", "Bandera",
+            "Bastrop", "Baylor", "Bee", "Bell", "Bexar", "Blanco", "Borden", "Bosque", "Bowie", "Brazoria",
+            "Brazos", "Brewster", "Briscoe", "Brooks", "Brown", "Burleson", "Burnet", "Caldwell", "Calhoun", "Callahan",
+            "Cameron", "Camp", "Carson", "Cass", "Castro", "Chambers", "Cherokee", "Childress", "Clay", "Cochran",
+            "Coke", "Coleman", "Collin", "Collingsworth", "Colorado", "Comal", "Comanche", "Concho", "Cooke", "Coryell",
+            "Cottle", "Crane", "Crockett", "Crosby", "Culberson", "Dallam", "Dallas", "Dawson", "Deaf Smith", "Delta",
+            "Denton", "DeWitt", "Dickens", "Dimmit", "Donley", "Duval", "Eastland", "Ector", "Edwards", "Ellis",
+            "El Paso", "Erath", "Falls", "Fannin", "Fayette", "Fisher", "Floyd", "Foard", "Fort Bend", "Franklin",
+            "Freestone", "Frio", "Gaines", "Galveston", "Garza", "Gillespie", "Glasscock", "Goliad", "Gonzales", "Gray",
+            "Grayson", "Gregg", "Grimes", "Guadalupe", "Hale", "Hall", "Hamilton", "Hansford", "Hardeman", "Hardin",
+            "Harris", "Harrison", "Hartley", "Haskell", "Hays", "Hemphill", "Henderson", "Hidalgo", "Hill", "Hockley",
+            "Hood", "Hopkins", "Houston", "Howard", "Hudspeth", "Hunt", "Hutchinson", "Irion", "Jack", "Jackson",
+            "Jasper", "Jeff Davis", "Jefferson", "Jim Hogg", "Jim Wells", "Johnson", "Jones", "Karnes", "Kaufman", "Kendall",
+            "Kenedy", "Kent", "Kerr", "Kimble", "King", "Kinney", "Kleberg", "Knox", "Lamar", "Lamb",
+            "Lampasas", "La Salle", "Lavaca", "Lee", "Leon", "Liberty", "Limestone", "Lipscomb", "Live Oak", "Llano",
+            "Loving", "Lubbock", "Lynn", "Madison", "Marion", "Martin", "Mason", "Matagorda", "Maverick", "McCulloch",
+            "McLennan", "McMullen", "Medina", "Menard", "Midland", "Milam", "Mills", "Mitchell", "Montague", "Montgomery",
+            "Moore", "Morris", "Motley", "Nacogdoches", "Navarro", "Newton", "Nolan", "Nueces", "Ochiltree", "Oldham",
+            "Orange", "Palo Pinto", "Panola", "Parker", "Parmer", "Pecos", "Polk", "Potter", "Presidio", "Rains",
+            "Randall", "Reagan", "Real", "Red River", "Reeves", "Refugio", "Roberts", "Robertson", "Rockwall", "Runnels",
+            "Rusk", "Sabine", "San Augustine", "San Jacinto", "San Patricio", "San Saba", "Schleicher", "Scurry", "Shackelford", "Shelby",
+            "Sherman", "Smith", "Somervell", "Starr", "Stephens", "Sterling", "Stonewall", "Sutton", "Swisher", "Tarrant",
+            "Taylor", "Terrell", "Terry", "Throckmorton", "Titus", "Tom Green", "Travis", "Trinity", "Tyler", "Upshur",
+            "Upton", "Uvalde", "Val Verde", "Van Zandt", "Victoria", "Walker", "Waller", "Ward", "Washington", "Webb",
+            "Wharton", "Wheeler", "Wichita", "Wilbarger", "Willacy", "Williamson", "Wilson", "Winkler", "Wise", "Wood",
+            "Yoakum", "Young", "Zapata", "Zavala"
+        ];
+
+        // 53 major counties that are highly likely to have functional Democratic Party websites
+        const activeCounties = new Set([
+            "Harris", "Dallas", "Bexar", "Travis", "Tarrant", "El Paso", "Collin", "Denton", "Fort Bend", "Hidalgo",
+            "Montgomery", "Williamson", "Galveston", "Brazoria", "Webb", "Nueces", "Bell", "Cameron", "Lubbock", "McLennan", 
+            "Smith", "Hays", "Brazos", "Ellis", "Johnson", "Guadalupe", "Midland", "Parker", "Ector", "Taylor", 
+            "Kaufman", "Randall", "Victoria", "Hunt", "Comal", "Tom Green", "Gregg", "Bowie", "Henderson", "Bastrop", 
+            "Coryell", "Potter", "Angelina", "Cherokee", "Harrison", "Waller", "Val Verde", "Starr", "Grayson", "Burnet", 
+            "Gillespie", "Kendall", "Medina"
+        ]);
+
+        const grid = document.getElementById('countyGrid');
+        const searchInput = document.getElementById('searchInput');
+
+        document.getElementById('statTotal').innerText = allCounties.length;
+        document.getElementById('statActive').innerText = activeCounties.size;
+        document.getElementById('statPending').innerText = allCounties.length - activeCounties.size;
+
+        function renderGrid(filter = "") {
+            grid.innerHTML = "";
+            const lowerFilter = filter.toLowerCase();
+
+            allCounties.forEach(county => {
+                if (!county.toLowerCase().includes(lowerFilter)) return;
+
+                const isActive = activeCounties.has(county);
+                const isMaverick = county === "Maverick"; // Highlighting Maverick for the demo
+                
+                const card = document.createElement('a');
+                // Link Maverick to our mockup, otherwise just #
+                card.href = isMaverick ? "maverick_county_mockup.html" : "#";
+                card.className = `county-card ${isActive ? 'active' : 'missing'}`;
+                if (isMaverick) card.classList.add('pulse'); // Highlight the target mock for presentation
+
+                card.innerHTML = `
+                    <h3>${county} County</h3>
+                    <div class="county-status ${isActive ? 'status-active' : 'status-missing'}">
+                        <div class="dot ${isActive ? 'active' : 'missing'}"></div>
+                        ${isActive ? 'Website Active' : 'Action Required'}
+                    </div>
+                    <div class="action-btn ${isActive ? 'btn-visit' : 'btn-setup'}">
+                        ${isActive ? 'Visit Website' : (isMaverick ? 'Preview Template →' : 'Deploy Template')}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            renderGrid(e.target.value);
+        });
+
+        renderGrid();
+    </script>
+
+            <!-- DYNAMIC INJECTED CONTENT END -->
+        </div>
+    </main>
+
+    <nav class="bottom-tab-bar glass-tab">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Action</span>
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span>Events</span>
+        </a>
+    </nav>
+</body>
+</html>

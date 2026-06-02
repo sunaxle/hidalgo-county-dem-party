@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chat - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-title" style="font-weight: 800;">HIDALGO TOGETHER.</span>
+        </div>
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-donate-sm" target="_blank">DONATE</a>
+    </header>
+
+    <main class="mobile-container pb-tabbar">
+        <div class="glass" style="padding: 1.5rem; border-top: 4px solid var(--hcdp-blue);">
+            <!-- DYNAMIC INJECTED CONTENT START -->
+            
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1" style="left: -100px; right: auto;"></div>
+
+  <!-- Navigation -->
+      
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px;">
+    
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+      <div style="display:inline-block; background:rgba(34, 211, 238, 0.1); padding:0.5rem 1rem; border-radius:30px; border:1px solid rgba(34, 211, 238, 0.3); color:#38bdf8; font-weight:800; font-size:0.85rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:1rem;">Experimental Beta</div>
+      <h1 style="color: var(--accent); font-size: 3rem; margin-bottom: 1rem;">Grassroots Web Chat</h1>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+        Welcome to the sandbox. This is a highly experimental, decentralized public chat forum for our 2,000+ volunteers and Precinct Chairs to rapidly communicate directly with each other. Please note: This is an unmoderated public square. Be respectful and protect your personal privacy.
+      </p>
+    </div>
+
+    <!-- Chat Interface -->
+    <div style="max-width: 800px; margin: 0 auto; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; position: relative;">
+        
+        <!-- Chat Header -->
+        <div style="background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.2rem 2rem; display: flex; align-items: center; justify-content: space-between; position: absolute; top: 0; left: 0; right: 0; z-index: 10;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <div style="width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></div>
+                <span style="color: #fff; font-weight: bold; font-size: 1.1rem; font-family: 'Inter', sans-serif;">Hidalgo County Live Chat</span>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.85rem;" id="chat-count">0 Users Online</div>
+        </div>
+
+        <!-- Chat Window -->
+        <div id="chat-window" style="height: 500px; overflow-y: auto; padding: 5.5rem 2rem 2rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; background: linear-gradient(180deg, rgba(15,23,42,0.4) 0%, rgba(2,6,23,0.6) 100%);">
+            <!-- Messages inject here -->
+            <div style="color: #64748b; font-size: 0.9rem; text-align: center; margin-top: 2rem;">Connecting to universal sandbox server...</div>
+        </div>
+
+        <!-- Input Area -->
+        <div style="background: rgba(30, 41, 59, 0.6); border-top: 1px solid rgba(255,255,255,0.1); padding: 1.5rem 2rem;">
+            
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="chat-name" placeholder="Your Name (E.g. Alice - PCT #14)" style="width: 300px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; padding: 0.8rem 1.2rem; font-family: 'Inter', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.2s;">
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <textarea id="chat-message" placeholder="Type your message here to the county network..." rows="2" style="flex: 1; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; padding: 1rem 1.2rem; font-family: 'Inter', sans-serif; font-size: 1rem; resize: none; outline: none; transition: border-color 0.2s;"></textarea>
+                <button id="chat-submit" style="background: var(--accent, #38bdf8); color: #020617; border: none; border-radius: 8px; padding: 0 2rem; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">SEND</button>
+            </div>
+            
+            <p style="color: #64748b; font-size: 0.8rem; margin-top: 1rem; text-align: center;">
+                By using this chat room, you agree to our <a href="standards.html" style="color: #94a3b8; text-decoration: underline;">Community Standards</a>. No profanity allowed.
+            </p>
+        </div>
+
+    </div>
+  </main>
+
+  <!-- Interactive Sandbox Javascript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const windowEl = document.getElementById("chat-window");
+        const nameInput = document.getElementById("chat-name");
+        const msgInput = document.getElementById("chat-message");
+        const submitBtn = document.getElementById("chat-submit");
+        const countEl = document.getElementById("chat-count");
+
+        // Focus styling
+        [nameInput, msgInput].forEach(el => {
+            el.addEventListener("focus", () => el.style.borderColor = "var(--accent, #38bdf8)");
+            el.addEventListener("blur", () => el.style.borderColor = "rgba(255,255,255,0.2)");
+        });
+
+        // Initialize mock state using LocalStorage for the prototype demonstration
+        let chatHistory = JSON.parse(localStorage.getItem("hcdp_sandbox_chat_v2")) || [
+            {
+                name: "System Admin",
+                msg: "Welcome to the Hidalgo County Sandbox Chat. This is a live demonstration prototype.",
+                timestamp: new Date().getTime(),
+                isSystem: true
+            }
+        ];
+
+        // Ensure fake active user count is interesting
+        countEl.innerText = Math.floor(Math.random() * 45 + 15) + " Active Operators";
+
+        function formatTime(ms) {
+            const d = new Date(ms);
+            let h = d.getHours();
+            let m = d.getMinutes();
+            let ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            h = h ? h : 12;
+            m = m < 10 ? '0'+m : m;
+            return `${h}:${m} ${ampm}`;
+        }
+
+        function renderChat() {
+            windowEl.innerHTML = "";
+            chatHistory.forEach((data, index) => {
+                const bubble = document.createElement("div");
+                if (index === chatHistory.length - 1) {
+                    bubble.className = "chat-bubble-anim";
+                }
+                bubble.style.display = "flex";
+                bubble.style.flexDirection = "column";
+                bubble.style.maxWidth = "80%";
+                
+                // Align user messages to the right, system/others to the left
+                const isSystem = data.isSystem;
+                const isMe = data.name === nameInput.value.trim() && nameInput.value.trim() !== "";
+                
+                if (isMe) {
+                    bubble.style.alignSelf = "flex-end";
+                    bubble.innerHTML = `
+                        <div style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 0.3rem; text-align: right;">${data.name} <span style="font-weight: 400; opacity: 0.6; margin-left: 0.5rem;">${formatTime(data.timestamp)}</span></div>
+                        <div style="background: var(--accent, #38bdf8); color: #020617; padding: 1rem 1.2rem; border-radius: 12px 12px 0 12px; font-size: 1.05rem; line-height: 1.5; font-weight: 500; word-wrap: break-word;">
+                            ${data.msg}
+                        </div>
+                    `;
+                } else if(isSystem) {
+                    bubble.style.alignSelf = "center";
+                    bubble.style.maxWidth = "90%";
+                    bubble.innerHTML = `
+                        <div style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); color: #38bdf8; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 0.9rem; text-align: center;">
+                            <strong>[${formatTime(data.timestamp)}] ${data.name}:</strong> ${data.msg}
+                        </div>
+                    `;
+                } else {
+                    bubble.style.alignSelf = "flex-start";
+                    bubble.innerHTML = `
+                        <div style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 0.3rem;"><span style="font-weight: 400; opacity: 0.6; margin-right: 0.5rem;">${formatTime(data.timestamp)}</span> ${data.name}</div>
+                        <div style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 12px 12px 12px 0; font-size: 1.05rem; line-height: 1.5; word-wrap: break-word;">
+                            ${data.msg}
+                        </div>
+                    `;
+                }
+                
+                windowEl.appendChild(bubble);
+            });
+            windowEl.scrollTop = windowEl.scrollHeight;
+        }
+
+        renderChat();
+
+        function handleSend() {
+            const n = nameInput.value.trim();
+            const m = msgInput.value.trim();
+            if(!n) {
+                alert("Please enter a Name or Precinct title to chat.");
+                nameInput.focus();
+                return;
+            }
+            if(!m) return;
+
+            chatHistory.push({
+                name: n,
+                msg: m,
+                timestamp: new Date().getTime(),
+                isSystem: false
+            });
+
+            // Persist to local cache for overnight viewing
+            localStorage.setItem("hcdp_sandbox_chat_v2", JSON.stringify(chatHistory));
+
+            msgInput.value = "";
+            renderChat();
+
+            // Simulate a fake "reply" 3 seconds later so the sandbox feels alive for the prototype
+            if (chatHistory.length % 3 === 0) {
+                 const typingId = "typing-" + Date.now();
+                 const typingMsg = document.createElement("div");
+                 typingMsg.id = typingId;
+                 typingMsg.className = "chat-bubble-anim";
+                 typingMsg.style.alignSelf = "flex-start";
+                 typingMsg.style.maxWidth = "80%";
+                 typingMsg.style.display = "flex";
+                 typingMsg.style.flexDirection = "column";
+                 typingMsg.innerHTML = `
+                    <div style="font-size: 0.8rem; color: #94a3b8; font-weight: 600; margin-bottom: 0.3rem;"><span style="font-weight: 400; opacity: 0.6; margin-right: 0.5rem;">Just now</span> Auto-Responder Bot</div>
+                    <div style="background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; padding: 1rem 1.2rem; border-radius: 12px 12px 12px 0; font-size: 1.05rem; display: flex; align-items: center; height: 24px;">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                 `;
+                 setTimeout(() => {
+                     windowEl.appendChild(typingMsg);
+                     windowEl.scrollTop = windowEl.scrollHeight;
+                 }, 400);
+
+                 setTimeout(() => {
+                     const tEl = document.getElementById(typingId);
+                     if(tEl) tEl.remove();
+
+                     chatHistory.push({
+                         name: "Auto-Responder Bot",
+                         msg: "That's a great point, " + n + ". I am an automated sandbox script confirming your message was received by the DOM structure!",
+                         timestamp: new Date().getTime(),
+                         isSystem: false
+                     });
+                     localStorage.setItem("hcdp_sandbox_chat_v2", JSON.stringify(chatHistory));
+                     renderChat();
+                 }, 3000);
+            }
+        }
+
+        submitBtn.addEventListener("click", handleSend);
+        
+        msgInput.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
+            }
+        });
+    });
+  </script>
+<!-- Footer -->
+  
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+
+  <!-- Google Translate -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script src="js/a11y.js"></script>
+
+            <!-- DYNAMIC INJECTED CONTENT END -->
+        </div>
+    </main>
+
+    <nav class="bottom-tab-bar glass-tab">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Action</span>
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span>Events</span>
+        </a>
+    </nav>
+</body>
+</html>

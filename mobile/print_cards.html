@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Print Cards - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-title" style="font-weight: 800;">HIDALGO TOGETHER.</span>
+        </div>
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-donate-sm" target="_blank">DONATE</a>
+    </header>
+
+    <main class="mobile-container pb-tabbar">
+        <div class="glass" style="padding: 1.5rem; border-top: 4px solid var(--hcdp-blue);">
+            <!-- DYNAMIC INJECTED CONTENT START -->
+            
+
+    <div class="no-print">
+        <h1>Print Cards Generator</h1>
+        <p style="margin-top:-10px; margin-bottom: 20px; color: #64748b;">Create custom push cards, business cards, and flyers for events.</p>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="cardSize">Card Size</label>
+                <select id="cardSize" onchange="updateCards()">
+                    <option value="business">Business Card (3.5" x 2")</option>
+                    <option value="push">Push Card / Palm Card (4" x 9")</option>
+                    <option value="postcard">Postcard (6" x 4")</option>
+                    <option value="square">Square Card (2.5" x 2.5")</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="joinUrl">Join the Party URL (Front QR)</label>
+                <input type="url" id="joinUrl" value="https://hidalgo-county-dem-party.org/join.html" oninput="debounceUpdate()">
+            </div>
+
+            <div class="control-group">
+                <label for="donateUrl">Donate URL (Back QR)</label>
+                <input type="url" id="donateUrl" value="https://secure.actblue.com/donate/hidalgocountydems" oninput="debounceUpdate()">
+            </div>
+            
+            <div class="control-group">
+                <label for="disclaimerText">Paid For By Disclaimer</label>
+                <input type="text" id="disclaimerText" value="Paid for by the Hidalgo County Democratic Party" oninput="debounceUpdate()">
+            </div>
+            
+            <div class="control-group" style="justify-content: flex-end;">
+                <button class="primary-btn" onclick="window.print()">
+                    <svg style="width:18px;height:18px;vertical-align:text-bottom;margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Print / Save PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <!-- Front Side -->
+        <div style="text-align: center;">
+            <div class="preview-header">Front Side</div>
+            <div class="card-wrapper card-front" data-size="business" id="frontCard">
+                <div class="card-content">
+                    <div class="text-box">
+                        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="HCDP Logo" class="logo-img" onerror="this.src=''; this.style.display='none';">
+                        <h2>JOIN THE PARTY</h2>
+                        <p>Scan to get involved with the Hidalgo County Democratic Party. Your community needs you!</p>
+                    </div>
+                    <div class="qr-box" id="qrFront"></div>
+                </div>
+                <div class="disclaimer disclaimer-display">Paid for by the Hidalgo County Democratic Party</div>
+            </div>
+        </div>
+
+        <!-- Back Side -->
+        <div style="text-align: center;">
+            <div class="preview-header">Back Side</div>
+            <div class="card-wrapper card-back" data-size="business" id="backCard">
+                <div class="card-content">
+                    <div class="text-box">
+                        <h2><span class="coffee-icon">☕</span>BUY A DEM A COFFEE</h2>
+                        <p>Every dollar counts. Scan to chip in and fuel our fight for South Texas.</p>
+                    </div>
+                    <div class="qr-box" id="qrBack"></div>
+                </div>
+                <div class="disclaimer disclaimer-display">Paid for by the Hidalgo County Democratic Party</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let frontQR = null;
+        let backQR = null;
+        let timeout = null;
+
+        function initQR() {
+            // Initial render
+            frontQR = new QRCode(document.getElementById("qrFront"), {
+                text: document.getElementById('joinUrl').value,
+                width: 500,
+                height: 500,
+                colorDark : "#0a3161",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            backQR = new QRCode(document.getElementById("qrBack"), {
+                text: document.getElementById('donateUrl').value,
+                width: 500,
+                height: 500,
+                colorDark : "#b31942",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            updateCards();
+        }
+
+        function debounceUpdate() {
+            clearTimeout(timeout);
+            timeout = setTimeout(updateCards, 300);
+        }
+
+        function updateCards() {
+            const size = document.getElementById('cardSize').value;
+            const joinUrl = document.getElementById('joinUrl').value;
+            const donateUrl = document.getElementById('donateUrl').value;
+            const disclaimerText = document.getElementById('disclaimerText').value;
+
+            // Update sizes
+            document.getElementById('frontCard').setAttribute('data-size', size);
+            document.getElementById('backCard').setAttribute('data-size', size);
+
+            // Update QR codes
+            if(frontQR) {
+                frontQR.clear();
+                frontQR.makeCode(joinUrl);
+            }
+            if(backQR) {
+                backQR.clear();
+                backQR.makeCode(donateUrl);
+            }
+            
+            // Update disclaimers
+            document.querySelectorAll('.disclaimer-display').forEach(el => {
+                el.innerText = disclaimerText;
+            });
+            
+            // Re-style SVG elements generated by qrcode.js to fit the container 100%
+            document.querySelectorAll('.qr-box img').forEach(img => {
+                img.style.width = '100%';
+                img.style.height = '100%';
+            });
+            document.querySelectorAll('.qr-box canvas').forEach(canvas => {
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.style.display = 'none'; // Only show the img for print reliability
+            });
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            // Hack to make sure qr code js loads
+            setTimeout(initQR, 100);
+        };
+    </script>
+  <script src="js/a11y.js"></script>
+
+            <!-- DYNAMIC INJECTED CONTENT END -->
+        </div>
+    </main>
+
+    <nav class="bottom-tab-bar glass-tab">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Action</span>
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span>Events</span>
+        </a>
+    </nav>
+</body>
+</html>

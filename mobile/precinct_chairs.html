@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Precinct Chairs - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-title" style="font-weight: 800;">HIDALGO TOGETHER.</span>
+        </div>
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-donate-sm" target="_blank">DONATE</a>
+    </header>
+
+    <main class="mobile-container pb-tabbar">
+        <div class="glass" style="padding: 1.5rem; border-top: 4px solid var(--hcdp-blue);">
+            <!-- DYNAMIC INJECTED CONTENT START -->
+            
+
+  <!-- Interactive Map Section -->
+  <section class="container fade-in">
+    <div id="precinct-info-panel" class="glass-card" style="display:none; margin-bottom: 1rem; padding: 1.5rem; border-left: 4px solid #facc15; background: rgba(15, 23, 42, 0.8);">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
+            <div>
+                <h3 id="info-panel-title" style="margin: 0 0 0.5rem 0; color: #facc15; font-size: 1.5rem; font-weight: 800;">Precinct</h3>
+                <div id="info-panel-district" style="color: #e2e8f0; font-size: 1rem;"></div>
+            </div>
+            <div>
+                <div style="color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: bold;">Nearby Precincts</div>
+                <div id="info-panel-nearby" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <!-- badges go here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map-controls glass-card" style="margin-bottom: 1rem; padding: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+      <span style="font-weight: bold; color: white;">Map View:</span>
+      <button id="btn-show-all" class="btn btn-sm" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Show All</button>
+      <button id="btn-show-filled" class="btn btn-sm" style="background: rgba(59, 130, 246, 0.4); border-color: #3b82f6;">Current Chairs</button>
+      <button id="btn-show-vacant" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.4); border-color: #ef4444;">Vacant Precincts</button>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+  </section>
+
+  <!-- Directory Section -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <!-- Congressional District Toggle -->
+    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 50; touch-action: manipulation;">
+        <button class="cd-filter-btn" data-district="ALL" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4); touch-action: manipulation;">All Districts</button>
+        <button class="cd-filter-btn" data-district="15" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">TX-15 Only</button>
+        <button class="cd-filter-btn" data-district="28" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">TX-28 Only</button>
+    </div>
+
+    <!-- City Filter Toggle -->
+    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 50; touch-action: manipulation;">
+        <button class="city-filter-btn" data-city="ALL" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4); touch-action: manipulation;">All Cities</button>
+        <button class="city-filter-btn" data-city="Edinburg" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Edinburg</button>
+        <button class="city-filter-btn" data-city="McAllen" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">McAllen</button>
+        <button class="city-filter-btn" data-city="Mission" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Mission</button>
+        <button class="city-filter-btn" data-city="Pharr" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Pharr</button>
+        <button class="city-filter-btn" data-city="Weslaco" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Weslaco</button>
+        <button class="city-filter-btn" data-city="Alamo" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Alamo</button>
+        <button class="city-filter-btn" data-city="Donna" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Donna</button>
+        <button class="city-filter-btn" data-city="San Juan" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">San Juan</button>
+    </div>
+
+    <div class="directory-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by Name or Precinct Number...">
+      </div>
+      <div class="filter-controls">
+         <select id="roleFilter" class="search-input" style="padding-left: 1.5rem; cursor: pointer;">
+           <option value="all">All Roles</option>
+           <option value="chair">Precinct Chairs</option>
+           <option value="captain">Neighborhood Captains</option>
+         </select>
+      </div>
+    </div>
+
+    <div class="table-container" style="position: relative;">
+      
+      <div id="password-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(15, 23, 42, 0.4); z-index: 10; border-radius: 8px;">
+        <div class="glass-card" style="padding: 2.5rem; text-align: center; max-width: 450px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.1);">
+          <h3 style="color: #facc15; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Restricted Access</h3>
+          <p style="color: #e2e8f0; font-size: 1rem; margin-bottom: 1rem;">Please enter a password to see precinct chair information.</p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">Please request password at <a href="mailto:info@hidalgocountydems.org" style="color: #38bdf8;">info@hidalgocountydems.org</a>.</p>
+          <input type="password" id="chair-password" class="search-input" placeholder="Password" style="margin-bottom: 1rem; width: 100%; text-align: center; padding-left: 0;">
+          <button id="btn-unlock" class="btn btn-primary" style="width: 100%;">Unlock Directory</button>
+          <div id="password-error" style="color: #ef4444; font-size: 0.85rem; margin-top: 0.5rem; display: none;">Incorrect password.</div>
+        </div>
+      </div>
+
+      <div id="protected-content" style="filter: blur(10px); pointer-events: none; user-select: none; transition: filter 0.3s ease;">
+        <table class="directory-table">
+          <thead>
+            <tr>
+              <th width="10%">Pct</th>
+              <th width="40%">Name & Info</th>
+              <th width="25%">Role</th>
+              <th width="25%" style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="directoryBody">
+              <!-- Dynamically populated by JavaScript -->
+          </tbody>
+        </table>
+        <div id="noResults" class="no-results">
+          <h3>No leaders found matching your search.</h3>
+          <p>If your precinct is vacant, <a href="volunteer.html" style="color:var(--primary);">step up and run</a>!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container fade-in" style="margin-bottom: 5rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+      <h2>Don't See Your Precinct?</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-muted);">
+        Hidalgo County has over 200 precincts, and we need dedicated Democrats in every single one of them. Find out what it takes to become a Precinct Chair today.
+      </p>
+      <a href="volunteer.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Learn How to Run</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  
+            <!-- DYNAMIC INJECTED CONTENT END -->
+        </div>
+    </main>
+
+    <nav class="bottom-tab-bar glass-tab">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Action</span>
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span>Events</span>
+        </a>
+    </nav>
+</body>
+</html>

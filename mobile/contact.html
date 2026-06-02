@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-title" style="font-weight: 800;">HIDALGO TOGETHER.</span>
+        </div>
+        <a href="https://secure.actblue.com/donate/hidalgocountydems" class="btn-donate-sm" target="_blank">DONATE</a>
+    </header>
+
+    <main class="mobile-container pb-tabbar">
+        <div class="glass" style="padding: 1.5rem; border-top: 4px solid var(--hcdp-blue);">
+            <!-- DYNAMIC INJECTED CONTENT START -->
+            
+
+  <!-- Contact Form & Info -->
+  <section class="container" style="padding-top: 0;">
+    <div class="glass-card fade-in contact-grid">
+      
+      <!-- Contact Info -->
+      <div>
+        <h2 style="text-align: left; margin-bottom: 2rem;">Headquarters</h2>
+        <p><strong>Address:</strong><br>800 N. Main St. Suite 110<br>McAllen, TX 78501</p>
+        <p style="margin-top: 1.5rem;"><strong>Phone:</strong><br><a href="tel:9563225293">(956) 672-7274</a></p>
+        <p style="margin-top: 1.5rem;"><strong>Email:</strong><br><a href="mailto:info@hidalgocountydems.org">info@hidalgocountydems.org</a></p>
+        
+        <div class="accordion" style="margin-top: 2rem; border-color: var(--accent);">
+          <button type="button" class="accordion-header" style="color: var(--accent); font-size: 1rem; padding: 1rem 1.5rem;" onclick="
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+              content.style.maxHeight = null;
+              this.parentElement.classList.remove('active');
+            } else {
+              content.style.maxHeight = content.scrollHeight + 'px';
+              this.parentElement.classList.add('active');
+            }
+          ">
+            <span>📰 For press inquiries, please press this button</span>
+            <span class="accordion-icon">▼</span>
+          </button>
+          <div class="accordion-content">
+            <div class="accordion-content-inner" style="padding-top: 0.5rem;">
+              <p style="margin-bottom: 0.75rem; font-size: 0.9rem; color: #cbd5e1;">Click the button below to email our communications team directly. This will automatically format your subject line and CC the appropriate team members to ensure a timely response.</p>
+              <a href="mailto:info@hidalgocountydems.org?cc=communications@hidalgocountydems.org,chair@hidalgocountydems.org&subject=Incoming%20Press%20Inquiry&body=Publication/Organization:%20%0ADeadline:%20%0A%0AInquiry%20Details:%0A%0A" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-block;">Email press info@hidalgocountydems.org</a>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 3rem;">
+          <h3 style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            Office Hours 
+            <span style="font-size: 0.75rem; background: #ef4444; color: white; padding: 0.25rem 0.6rem; border-radius: 12px; font-weight: 600; letter-spacing: 0.5px;">BY APPOINTMENT ONLY</span>
+          </h3>
+          <p style="color: #94a3b8; margin-bottom: 1.5rem;">The Headquarters is running on an appointment-only basis while we recruit new volunteers to man the front desk. Can you help us keep the doors open?</p>
+          
+          <div style="margin-top: 2rem;">
+            <h4 style="color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Priority Volunteer Shifts</h4>
+            
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Tuesday Morning Shift</h4>
+                <p>9:00 AM - 12:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Thursday Afternoon Shift</h4>
+                <p>1:00 PM - 4:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+
+            <div class="volunteer-slot">
+              <div class="slot-info">
+                <h4>Saturday Weekend Shift</h4>
+                <p>10:00 AM - 1:00 PM (3 Hours)</p>
+              </div>
+              <a href="volunteer.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Sign Up</a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div>
+        <form onsubmit="event.preventDefault(); alert('Form submitted! We will be in touch.');">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required placeholder="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" required placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" required placeholder="How can we help you?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 2rem;">Send Message</button>
+          
+          <div style="text-align: center; border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+            <p style="margin-bottom: 1rem; color: #cbd5e1;">Just want to stay in the loop with email and text updates?</p>
+            <a href="subscribe.html" class="btn btn-secondary" style="width: 100%;">Get Email Updates</a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  
+            <!-- DYNAMIC INJECTED CONTENT END -->
+        </div>
+    </main>
+
+    <nav class="bottom-tab-bar glass-tab">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span>Home</span>
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            <span>Action</span>
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            <span>Events</span>
+        </a>
+    </nav>
+</body>
+</html>
