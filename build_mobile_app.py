@@ -55,6 +55,10 @@ for file_path in html_files:
             body_content = match.group(1)
             body_content = re.sub(r'<nav.*?</nav>', '', body_content, flags=re.IGNORECASE | re.DOTALL)
             body_content = re.sub(r'<footer.*?</footer>', '', body_content, flags=re.IGNORECASE | re.DOTALL)
+            # Strip desktop scripts that might break on mobile
+            body_content = re.sub(r'<script.*?</script>', '', body_content, flags=re.IGNORECASE | re.DOTALL)
+            # Rewrite image paths
+            body_content = body_content.replace('src="images/', 'src="../images/')
             match_str = body_content
         else:
             match_str = "<p>Content could not be parsed.</p>"
