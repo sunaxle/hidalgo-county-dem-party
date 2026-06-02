@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find My Precinct - HCDP Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="mobile-header">
+        <div class="logo-area">
+            <span class="hcdp-logo">HCDP</span>
+            <span class="hcdp-title">Hidalgo County Democrats</span>
+        </div>
+        <a href="index.html" class="btn-back">Home</a>
+    </header>
+
+    <main class="mobile-container">
+        <section class="card">
+            <h2>Hidalgo Precinct Chair Lookup</h2>
+            <p>Enter your 5-digit ZIP code to dynamically resolve your precinct number and view your sworn-in Precinct Chair's contact information.</p>
+            
+            <div class="form-group">
+                <label for="zipInput">Your ZIP Code</label>
+                <input type="number" id="zipInput" placeholder="e.g. 78501" pattern="[0-9]*" inputmode="numeric">
+                <button class="btn-primary" onclick="lookupZip()" style="margin-top:15px; width:100%;">Search Database</button>
+            </div>
+
+            <div id="lookupResult" class="result-box" style="display:none; margin-top:20px; padding:15px; background:#e8f5e9; border-radius:6px; border-left:4px solid #2e7d32;">
+                <!-- Result dynamically injected here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const zipDatabase = { 
+            "78501": { "pct": "27", "name": "Miguel Robledo", "email": "mikerobledo1@yahoo.com" },
+            "78504": { "pct": "66", "name": "Stacy Elizabeth Solís", "email": "ssjstx@yahoo.com" },
+            "78596": { "pct": "2", "name": "Abad Morales", "email": "moralesconstruction72@gmail.com" },
+            "78572": { "pct": "63", "name": "Noemi Garza", "email": "jabgarza62@aol.com" },
+            "78539": { "pct": "13", "name": "Leonardo Rodríguez", "email": "leorodriguez1031@gmail.com" }
+        };
+
+        function lookupZip() {
+            const val = document.getElementById("zipInput").value.trim();
+            const resultBox = document.getElementById("lookupResult");
+            if (val in zipDatabase) {
+                const chair = zipDatabase[val];
+                resultBox.style.display = "block";
+                resultBox.style.background = "#e8f5e9";
+                resultBox.style.borderLeftColor = "#2e7d32";
+                resultBox.innerHTML = `
+                    <h4 style="margin:0 0 10px 0; color:#2e7d32;">📍 MATCH FOUND: PRECINCT ${chair.pct}</h4>
+                    <p style="margin:4px 0;"><strong>Chair:</strong> ${chair.name}</p>
+                    <p style="margin:4px 0;"><strong>Email:</strong> <a href="mailto:${chair.email}">${chair.email}</a></p>
+                `;
+            } else {
+                resultBox.style.display = "block";
+                resultBox.style.background = "#ffe0b2";
+                resultBox.style.borderLeftColor = "#fb8c00";
+                resultBox.innerHTML = `
+                    <h4 style="margin:0 0 10px 0; color:#e65100;">⚠️ NO SWORN CHAIR CURRENTLY FOUND</h4>
+                    <p style="margin:4px 0;">This precinct is currently vacant. Would you like to apply to represent your neighborhood?</p>
+                    <a href="volunteer.html" style="color:#e65100; font-weight:bold; text-decoration:underline;">Submit application</a>
+                `;
+            }
+        }
+    </script>
+    <nav class="bottom-tab-bar">
+        <a href="index.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            Home
+        </a>
+        <a href="precinct_lookup.html" class="tab-item active">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Precinct
+        </a>
+        <a href="volunteer.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            Volunteer
+        </a>
+        <a href="events.html" class="tab-item">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+            Events
+        </a>
+    </nav>
+    <script src="app.js"></script>
+</body>
+</html>
