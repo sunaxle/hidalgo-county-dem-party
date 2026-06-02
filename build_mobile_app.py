@@ -25,6 +25,7 @@ html_files = glob.glob(os.path.join(REPO_DIR, "*.html"))
 html_files = [f for f in html_files if os.path.basename(f) not in exclude_list]
 
 success_count = 0
+menu_items = []
 
 for file_path in html_files:
     filename = os.path.basename(file_path)
@@ -36,19 +37,14 @@ for file_path in html_files:
         continue
 
     # Attempt to extract the core content. 
-    # Strategy 1: Look for tx-clone-content-inner
     match = re.search(r'<div class="tx-clone-content-inner[^>]*>(.*?)</div>\s*</section>', content, re.IGNORECASE | re.DOTALL)
     if not match:
-        # Strategy 2: Look for anything between </header> and <footer
         match = re.search(r'</header>(.*?)<footer', content, re.IGNORECASE | re.DOTALL)
     if not match:
-        # Strategy 3: Just grab body excluding nav
         match = re.search(r'<body[^>]*>(.*?)</body>', content, re.IGNORECASE | re.DOTALL)
         if match:
             body_content = match.group(1)
-            # Remove navs
             body_content = re.sub(r'<nav.*?</nav>', '', body_content, flags=re.IGNORECASE | re.DOTALL)
-            # Remove footers
             body_content = re.sub(r'<footer.*?</footer>', '', body_content, flags=re.IGNORECASE | re.DOTALL)
             match_str = body_content
         else:
@@ -56,14 +52,12 @@ for file_path in html_files:
     else:
         match_str = match.group(1)
 
-    # Format the title
     title = filename.replace(".html", "").replace("_", " ").title()
+    menu_items.append((title, filename))
     
-    # Inject into template
     output_html = template_html.replace("{{TITLE}}", title)
     output_html = output_html.replace("{{CONTENT}}", match_str)
 
-    # Save to mobile directory
     output_path = os.path.join(MOBILE_DIR, filename)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(output_html)
@@ -71,4 +65,27 @@ for file_path in html_files:
     success_count += 1
     print(f"Compiled: {filename} -> mobile/{filename}")
 
-print(f"\n✅ SUCCESSFULLY COMPILED {success_count} PAGES INTO MOBILE UI SHELL!")
+# Generate Menu Page
+menu_items.sort(key=lambda x: x[0])
+menu_links_html = '<div class="menu-list" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">\n'
+for title, filename in menu_items:
+    menu_links_html += f'  <a href="{filename}" class="btn-donate-sm" style="background: white; color: var(--hcdp-blue); text-align: left; text-transform: none; justify-content: flex-start; padding: 12px;">{title}</a>\n'
+menu_links_html += '</div>'
+
+menu_content = f'''
+<h2>Directory</h2>
+<p>Browse all available resources below:</p>
+{menu_links_html}
+'''
+
+menu_html = template_html.replace("{{TITLE}}", "Menu")
+menu_html = menu_html.replace("{{CONTENT}}", menu_content)
+
+# We must ensure the menu tab appears active on the menu page itself
+menu_html = menu_html.replace('href="menu.html" class="tab-item"', 'href="menu.html" class="tab-item active"')
+menu_html = menu_html.replace('href="index.html" class="tab-item active"', 'href="index.html" class="tab-item"')
+
+with open(os.path.join(MOBILE_DIR, "menu.html"), "w", encoding="utf-8") as f:
+    f.write(menu_html)
+
+print(f"\n✅ SUCCESSFULLY COMPILED {success_count} PAGES AND GENERATED MENU DIRECTORY!")
