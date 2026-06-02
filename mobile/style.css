@@ -23,6 +23,7 @@ body {
     background-color: var(--bg);
     color: var(--fg);
     line-height: 1.6;
+    font-size: 1.15rem; /* Increased base font size */
     overscroll-behavior-y: none;
     -webkit-font-smoothing: antialiased;
 }
@@ -90,7 +91,7 @@ body {
 
 /* Main Container */
 .mobile-container {
-    padding: 2rem 1.5rem; /* Squeezed margins */
+    padding: 1.5rem 0.5rem; /* Expanded margins: pushed out to the edges */
 }
 
 /* Telluride Cards (Replaces Glass) */
@@ -99,7 +100,7 @@ body {
     border: 4px solid var(--border-color);
     box-shadow: 6px 6px 0px var(--border-color);
     border-radius: 0; /* Brutalist sharp corners */
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem; /* Reduced card internal padding */
     margin-bottom: 2rem;
 }
 
@@ -121,7 +122,7 @@ body {
 }
 
 .hero-card p {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--fg);
     font-weight: 600;
     margin-bottom: 2rem;
