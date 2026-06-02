@@ -18,7 +18,7 @@ with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
 exclude_list = ["mobile_template.html", "index.html", "events.html", "volunteer.html", "precinct_lookup.html", 
                 "demographic_map.html", "issues_map.html", "interactive_precincts.html", "political_strategy_dashboard.html", 
                 "admin_dashboard.html", "volunteer_dashboard.html", "hidalgo_orbital_gallery.html", 
-                "precinct_107_case_study.html", "mockup_c_dashboard.html", "visualizations_demo.html", 
+                "mockup_c_dashboard.html", "visualizations_demo.html", 
                 "live_results.html", "social_wall.html", "van_resources.html",
                 "college_dems_social_template.html", "get_error.html", "iphone_preview.html", 
                 "logistics_experiment.html", "lupe_marcha_email_template.html", "lupe_marcha_preview.html", 
