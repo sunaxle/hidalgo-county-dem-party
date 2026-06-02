@@ -19,7 +19,12 @@ exclude_list = ["mobile_template.html", "index.html", "events.html", "volunteer.
                 "demographic_map.html", "issues_map.html", "interactive_precincts.html", "political_strategy_dashboard.html", 
                 "admin_dashboard.html", "volunteer_dashboard.html", "hidalgo_orbital_gallery.html", 
                 "precinct_107_case_study.html", "mockup_c_dashboard.html", "visualizations_demo.html", 
-                "live_results.html", "social_wall.html", "van_resources.html"]
+                "live_results.html", "social_wall.html", "van_resources.html",
+                "college_dems_social_template.html", "get_error.html", "iphone_preview.html", 
+                "logistics_experiment.html", "lupe_marcha_email_template.html", "lupe_marcha_preview.html", 
+                "lupe_marcha_preview_nonchair.html", "mockup_a_reskin.html", "mockup_b_pwa.html", 
+                "option4_classic.html", "stc_dems_recruitment_template.html", "stonewall_rgv_experiment.html", 
+                "test_browser.html", "test_deploy.html", "test_images.html", "young_dems_meeting_template.html"]
 
 html_files = glob.glob(os.path.join(REPO_DIR, "*.html"))
 html_files = [f for f in html_files if os.path.basename(f) not in exclude_list]
