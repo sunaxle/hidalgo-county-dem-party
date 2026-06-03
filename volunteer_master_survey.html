@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Master Volunteer Shift Survey - Hidalgo Dems</title>
+  <meta name="description" content="Sign up for volunteer shifts, block walking, phone banking, and provide your priorities to the Hidalgo County Democratic Party.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .volunteer-hero {
+      text-align: center;
+      padding-top: 120px;
+      padding-bottom: 2rem;
+    }
+    
+    .survey-container {
+      max-width: 900px;
+      margin: 0 auto 5rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .survey-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .form-section {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .form-section h3 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .form-label-sub {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 0.5rem;
+      display: block;
+      font-weight: 400;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.5rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+    }
+
+    /* Select specific styling to handle dark background */
+    .form-select option {
+      background: #0f172a;
+      color: #fff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .survey-container {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Checkbox & Radio Groups */
+    .check-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .check-item:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .check-item input[type="radio"],
+    .check-item input[type="checkbox"] {
+      margin-top: 0.25rem;
+      width: 1.1rem;
+      height: 1.1rem;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .check-item span.label-text {
+      font-weight: 500;
+      color: #f8fafc;
+      display: block;
+    }
+
+    .check-item span.label-desc {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    /* Highlight box for teacher/campaigns */
+    .highlight-box {
+      background: rgba(34, 211, 238, 0.05);
+      border: 1px solid var(--accent);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    /* Submit Button Spinner */
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .btn.loading .spinner {
+      display: inline-block;
+    }
+    
+    .success-message {
+      display: none;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid #10b981;
+      color: #10b981;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+  </style>
+  <script src="js/gatekeeper.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  <link rel="stylesheet" href="css/a11y.css">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q577ZL75XM');
+</script>
+</head>
+<body class="tx-clone">
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-center" style="justify-content: flex-start; padding-left: 2rem;">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div style="color: white; font-weight: 800; font-size: 1.2rem; margin-left: 1rem; letter-spacing: 1px;">VOLUNTEER PORTAL</div>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Section -->
+  <header class="volunteer-hero container fade-in">
+    <h1>Master Volunteer Intake</h1>
+    <p style="max-width: 700px; margin: 1rem auto; font-size: 1.1rem; color: #cbd5e1;">Whether you want to block walk, phone bank, host an event, or just share what's happening in your precinct—tell us everything so we can put you to work effectively.</p>
+  </header>
+
+  <!-- Survey Form Container -->
+  <section class="container fade-in" style="animation-delay: 0.1s;">
+    <div class="survey-container">
+      
+      <div id="success-banner" class="success-message">
+        <svg style="width: 48px; height: 48px; margin: 0 auto 1rem; display: block;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #10b981;">Response Recorded!</h3>
+        <p style="color: #cbd5e1; margin: 0;">Thank you for stepping up to help the party. Your data has been synced with our master sheet and the VAN. An organizer will be in touch shortly.</p>
+        <button type="button" class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="window.location.reload();">Submit Another Volunteer</button>
+      </div>
+
+      <form id="master-survey-form">
+        
+        <!-- SECTION 1: Submitter Context -->
+        <div class="form-section">
+          <h3>1. Submission Context</h3>
+          <div class="form-group">
+            <label class="form-label">Who are you submitting this form for?</label>
+            <div class="check-grid" style="grid-template-columns: 1fr 1fr;">
+              <label class="check-item">
+                <input type="radio" name="submitter_type" value="Self" required>
+                <div>
+                  <span class="label-text">Myself</span>
+                  <span class="label-desc">I am filling out my own volunteer profile.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="radio" name="submitter_type" value="Proxy">
+                <div>
+                  <span class="label-text">Someone Else (Proxy)</span>
+                  <span class="label-desc">I am a Precinct Chair/Organizer submitting info for a voter.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Contact Info -->
+        <div class="form-section">
+          <h3>2. Contact Information</h3>
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">First Name *</label>
+              <input type="text" class="form-input" name="first_name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name *</label>
+              <input type="text" class="form-input" name="last_name" required>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" name="email">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" class="form-input" name="phone" required>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Precinct Number</label>
+              <input type="number" class="form-input" name="precinct" placeholder="e.g. 107">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Best time to contact?</label>
+              <select class="form-select" name="best_time">
+                <option value="Anytime">Anytime</option>
+                <option value="Morning">Morning (8am - 12pm)</option>
+                <option value="Afternoon">Afternoon (12pm - 5pm)</option>
+                <option value="Evening">Evening (5pm - 8pm)</option>
+                <option value="Weekends">Weekends Only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preferred Contact Method</label>
+            <div class="check-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <label class="check-item"><input type="radio" name="preferred_contact" value="Text/SMS" checked><span class="label-text">Text / SMS</span></label>
+              <label class="check-item"><input type="radio" name="preferred_contact" value="Phone Call"><span class="label-text">Phone Call</span></label>
+              <label class="check-item"><input type="radio" name="preferred_contact" value="Email"><span class="label-text">Email</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Demographics & VAN -->
+        <div class="form-section">
+          <h3>3. Demographics & Priorities (VAN Data)</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">This helps us match you with the right voter outreach models in the VAN.</p>
+          
+          <div class="form-group">
+            <label class="form-label">Race / Ethnicity</label>
+            <select class="form-select" name="ethnicity">
+              <option value="">Prefer not to answer</option>
+              <option value="Hispanic/Latino">Hispanic or Latino</option>
+              <option value="White">White / Caucasian</option>
+              <option value="Black/African American">Black / African American</option>
+              <option value="Asian">Asian / Pacific Islander</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Top Priority Issues (Select up to 3)</label>
+            <span class="form-label-sub">What do you care about the most this election cycle?</span>
+            <div class="check-grid">
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Economy"><span class="label-text">Economy / Jobs</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Immigration"><span class="label-text">Immigration</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Education"><span class="label-text">Public Education</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Healthcare"><span class="label-text">Healthcare</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Reproductive Rights"><span class="label-text">Reproductive Rights</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Voting Rights"><span class="label-text">Voting Rights</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Border Security"><span class="label-text">Border Security</span></label>
+              <label class="check-item"><input type="checkbox" name="issues[]" value="Infrastructure"><span class="label-text">Infrastructure</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Professional Skills & Campaigns -->
+        <div class="form-section">
+          <h3>4. Campaigns & Professional Background</h3>
+          
+          <div class="highlight-box">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" style="color: var(--accent);">Are you a Teacher or Educator?</label>
+              <span class="form-label-sub" style="color: #cbd5e1;">We are building a specific coalition to support pro-public-education candidates.</span>
+              <div class="check-grid" style="margin-top: 1rem;">
+                <label class="check-item" style="background: rgba(255,255,255,0.1);"><input type="radio" name="is_teacher" value="Yes"><span class="label-text">Yes, I am an educator</span></label>
+                <label class="check-item" style="background: rgba(255,255,255,0.1);"><input type="radio" name="is_teacher" value="No" checked><span class="label-text">No</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top: 2rem;">
+            <label class="form-label">Are there specific campaigns you want to prioritize helping?</label>
+            <div class="check-group">
+              <label class="check-item"><input type="checkbox" name="target_campaigns[]" value="Thomas Rey Garcia"><span class="label-text">Thomas Rey Garcia (State Board of Education)</span></label>
+              <label class="check-item"><input type="checkbox" name="target_campaigns[]" value="Vicente Gonzalez"><span class="label-text">Vicente Gonzalez (U.S. House)</span></label>
+              <label class="check-item"><input type="checkbox" name="target_campaigns[]" value="Michelle Vallejo"><span class="label-text">Michelle Vallejo (U.S. House)</span></label>
+              <label class="check-item"><input type="checkbox" name="target_campaigns[]" value="Colin Allred"><span class="label-text">Colin Allred (U.S. Senate)</span></label>
+            </div>
+            <input type="text" class="form-input" name="other_campaigns" placeholder="Other campaigns? (Type name here)" style="margin-top: 1rem;">
+          </div>
+        </div>
+
+        <!-- SECTION 5: Volunteer Shifts -->
+        <div class="form-section">
+          <h3>5. Volunteer Action Plan & Shifts</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: -1rem; margin-bottom: 1.5rem;">How do you want to help us win?</p>
+
+          <div class="form-group">
+            <label class="form-label">What actions are you willing to take?</label>
+            <div class="check-grid">
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Block Walking">
+                <div>
+                  <span class="label-text">Block Walking</span>
+                  <span class="label-desc">Knocking doors and talking to voters.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Phone Banking">
+                <div>
+                  <span class="label-text">Phone Banking</span>
+                  <span class="label-desc">Calling voters from home or HQ.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Touch 10">
+                <div>
+                  <span class="label-text">Touch 10</span>
+                  <span class="label-desc">I will commit to turning out 10 friends/family.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Host Event">
+                <div>
+                  <span class="label-text">Host a Meet & Greet</span>
+                  <span class="label-desc">Host candidates at my house or neighborhood.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Data/VAN">
+                <div>
+                  <span class="label-text">VAN / Data Entry</span>
+                  <span class="label-desc">Help with backend data processing.</span>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" name="volunteer_actions[]" value="Election Worker">
+                <div>
+                  <span class="label-text">Election Worker</span>
+                  <span class="label-desc">Working the polls during early voting/election day.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Shift Availability</label>
+            <span class="form-label-sub">When are you generally available for shifts?</span>
+            <div class="check-grid">
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Weekday Mornings"><span class="label-text">Weekday Mornings</span></label>
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Weekday Afternoons"><span class="label-text">Weekday Afternoons</span></label>
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Weekday Evenings"><span class="label-text">Weekday Evenings</span></label>
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Saturday Morning"><span class="label-text">Saturday Morning</span></label>
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Saturday Afternoon"><span class="label-text">Saturday Afternoon</span></label>
+              <label class="check-item"><input type="checkbox" name="shifts[]" value="Sunday Afternoon"><span class="label-text">Sunday Afternoon</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 6: Open Mic -->
+        <div class="form-section">
+          <h3>6. Open Mic</h3>
+          <div class="form-group">
+            <label class="form-label">Comments, suggestions, intelligence, or political rants?</label>
+            <span class="form-label-sub">Tell us what you're hearing on the ground in your precinct, or share any ideas you have for the party.</span>
+            <textarea class="form-textarea" name="open_feedback" rows="6" placeholder="Type your thoughts here..."></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+          <button type="submit" class="btn btn-primary" id="submit-btn" style="width: 100%; font-size: 1.25rem; padding: 1.25rem; display: flex; justify-content: center; align-items: center;">
+            <span class="spinner"></span>
+            <span class="btn-text">Submit Volunteer Profile</span>
+          </button>
+          <p style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 1rem;">
+            Data is securely transmitted and logged for VAN syncing.
+          </p>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Form Handler Script -->
+  <script src="js/survey_handler.js"></script>
+  <script src="js/a11y.js"></script>
+</body>
+</html>
