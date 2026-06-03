@@ -55,27 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("🚀 Payload ready for Google Sheets Webhook / VAN Bulk Upload:");
     console.table(payload);
 
-    // 3. Mock POST Request (Replace this setTimeout with actual fetch() call to the Webhook URL)
-    /*
-      Example Implementation:
+    // 3. Send POST Request to Google Apps Script Webhook
+    const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwPi82fwnMQxQjuw961LgB7UXQ8tB5_KJsdyM2cxKbXrAWM13-Ylrgm7Nz6H3a7MIge/exec';
+    
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Needed for unauthenticated Google Apps Script endpoints
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
       
-      const WEBHOOK_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-      try {
-        await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          mode: 'no-cors', // Needed for some Google Apps Script setups
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        console.error("Error submitting form", err);
-      }
-    */
-
-    // Simulate network delay for effect
-    setTimeout(() => {
       // Hide form
       form.style.display = 'none';
       
@@ -83,11 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
       successBanner.style.display = 'block';
       successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
       
-      // Reset button just in case
+    } catch (err) {
+      console.error("Error submitting form", err);
+      alert("There was an error connecting to the database. Please try again or email us directly.");
+    } finally {
+      // Reset button
       submitBtn.classList.remove('loading');
       submitBtn.disabled = false;
       submitBtn.querySelector('.btn-text').innerText = "Submit Volunteer Profile";
-      
-    }, 1800);
+    }
   });
 });
