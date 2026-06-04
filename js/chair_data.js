@@ -4,11 +4,13 @@
 const chairDataList2026 = [
   {
     "precinct": "2",
-    "name": "Cassandra S\u00e1nchez",
+    "name": "Cassandra Sánchez",
     "role": "Precinct Chair",
     "phone": "9563326219",
     "email": "Cassie4589@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "4",
@@ -16,14 +18,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563421232",
     "email": "agsenior47@yahoo.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "4",
     "name": "Dolores Barrientes",
     "role": "Neighborhood Captain",
     "phone": "956-279-4030",
-    "email": "doloresbarr@hotmail.com"
+    "email": "doloresbarr@hotmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "7",
@@ -31,22 +37,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562129686",
     "email": "ed6425@msn.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "7",
     "name": "Laurel Theresa Mcleaish",
     "role": "Neighborhood Captain",
     "phone": "956-342-7278",
-    "email": "ltmcleaish@aol.com"
+    "email": "ltmcleaish@aol.com",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "8",
-    "name": "Andr\u00e9s F Salinas",
+    "name": "Andrés F Salinas",
     "role": "Precinct Chair",
     "phone": "9562275759",
     "email": "afsalinas@att.net",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "9",
@@ -54,29 +66,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565669291",
     "email": "normaleegarza@aol.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "9",
     "name": "Laura Saldana-Flores",
     "role": "Neighborhood Captain",
     "phone": "956-225-4913",
-    "email": "lsflores8@gmail.com"
+    "email": "lsflores8@gmail.com",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "11",
-    "name": "Mar\u00eda E. Per\u00e1lez",
+    "name": "María E. Perález",
     "role": "Precinct Chair",
     "phone": "9565699541",
     "email": "mariaperalez@hotmail.com",
-    "city": "La Joya"
+    "city": "La Joya",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "11",
     "name": "Angela Salinas",
     "role": "Neighborhood Captain",
     "phone": "956-342-1776",
-    "email": "angelasalinas8525@gmail.com"
+    "email": "angelasalinas8525@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "13",
@@ -84,21 +104,27 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566095531",
     "email": "cel.flo13@icloud.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "13",
     "name": "Maria G. Cantu",
     "role": "Neighborhood Captain",
     "phone": "956-457-0644",
-    "email": "mariagcantu3@gmail.com"
+    "email": "mariagcantu3@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "13",
     "name": "Leonardo Rodriguez",
     "role": "Neighborhood Captain",
     "phone": "956-457-3270",
-    "email": "leorodriguez1031@gmail.com"
+    "email": "leorodriguez1031@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "14",
@@ -106,7 +132,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565601020",
     "email": "mary.alice.palacios59@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "16",
@@ -114,7 +142,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562896131",
     "email": "selmam1341@yahoo.com",
-    "city": "Edcouch"
+    "city": "Edcouch",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "17",
@@ -122,36 +152,46 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563328980",
     "email": "guadalupe.rangel@co.hidalgo.tx.us",
-    "city": "La Villa"
+    "city": "La Villa",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "18",
     "name": "Andrea Torres",
     "role": "Precinct Chair",
     "email": "andrea.torres1301@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "18",
     "name": "Abram Mckee",
     "role": "Neighborhood Captain",
     "phone": "956-313-7754",
-    "email": "abram.mckee01@gmail.com"
+    "email": "abram.mckee01@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "20",
-    "name": "Grabiel \"GG\" Garc\u00eda",
+    "name": "Grabiel \"GG\" García",
     "role": "Precinct Chair",
     "phone": "9567894180",
     "email": "saul133@hotmail.com",
-    "city": "Hidalgo"
+    "city": "Hidalgo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "20",
-    "name": "Leonardo G. Rodr\u00edguez",
+    "name": "Leonardo G. Rodríguez",
     "role": "Neighborhood Captain",
     "phone": "956-457-3270",
-    "email": "leorodriguez1031@gmail.com"
+    "email": "leorodriguez1031@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "22",
@@ -159,23 +199,29 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565384110",
     "email": "alvaradojorge1729@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "23",
-    "name": "Raquel Mart\u00ednez",
+    "name": "Raquel Martínez",
     "role": "Precinct Chair",
     "phone": "9564637418",
     "email": "raquel6037@yahoo.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "25",
-    "name": "Daniela Renee \u00c1vila",
+    "name": "Daniela Renee Ávila",
     "role": "Precinct Chair",
     "phone": "9563423479",
     "email": "aviladaniela1@yahoo.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "27",
@@ -183,22 +229,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562893045",
     "email": "mikerobledo1@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "28",
-    "name": "Imelda Cant\u00fa Gonz\u00e1lez",
+    "name": "Imelda Cantú González",
     "role": "Precinct Chair",
     "phone": "9564589261",
     "email": "imeldagonzalez@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "28",
     "name": "Teresa L. Zapatero",
     "role": "Neighborhood Captain",
     "phone": "956-802-6785",
-    "email": "tzapatero2025@gmail.com"
+    "email": "tzapatero2025@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "30",
@@ -206,7 +258,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9568021454",
     "email": "aeryn389@outlook.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "31",
@@ -214,7 +268,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562155120",
     "email": "roelgarzamorales@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "32",
@@ -222,22 +278,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564635481",
     "email": "esandoval38@yahoo.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "32",
     "name": "Jose Munoz",
     "role": "Neighborhood Captain",
     "phone": "956-535-2039",
-    "email": "luigi5900@yahoo.com"
+    "email": "luigi5900@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "33",
-    "name": "Concepci\u00f3n \"Connie\" Villanueva",
+    "name": "Concepción \"Connie\" Villanueva",
     "role": "Precinct Chair",
     "phone": "9563303835",
     "email": "convil1966@yahoo.com",
-    "city": "Monte Alto"
+    "city": "Monte Alto",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "34",
@@ -245,7 +307,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567399239",
     "email": "amandaelisesalas@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "35",
@@ -253,44 +317,56 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563937125",
     "email": "lizacrdz@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "35",
     "name": "Raquel 'Rachel' Moran Nevarez",
     "role": "Neighborhood Captain",
     "phone": "956-867-3414",
-    "email": "rmnevarez1@yahoo.com"
+    "email": "rmnevarez1@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "36",
-    "name": "Rebecca A. Obreg\u00f3n",
+    "name": "Rebecca A. Obregón",
     "role": "Precinct Chair",
     "phone": "9566247533",
     "email": "rebeccaobregontx@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "36",
     "name": "Selina Medrano",
     "role": "Neighborhood Captain",
     "phone": "956-789-9987",
-    "email": "selina_hayes@yahoo.com"
+    "email": "selina_hayes@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "38",
-    "name": "Esmeralda G. P\u00e9rez",
+    "name": "Esmeralda G. Pérez",
     "role": "Precinct Chair",
     "phone": "9566485428",
     "email": "esmerperez113461@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "38",
     "name": "Carlos Repetto-Ayala",
     "role": "Neighborhood Captain",
     "phone": "956-360-2213",
-    "email": "carlosrepettoayala@gmail.com"
+    "email": "carlosrepettoayala@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "39",
@@ -298,15 +374,19 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566850351",
     "email": "imeldacs76@yahoo.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "40",
-    "name": "Robert Andrew Garc\u00eda",
+    "name": "Robert Andrew García",
     "role": "Precinct Chair",
     "phone": "9562461338",
     "email": "Rgarcia547@gmail.com",
-    "city": "Progreso"
+    "city": "Progreso",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "42",
@@ -314,15 +394,19 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565328987",
     "email": "1mariocano@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "43",
-    "name": "Mar\u00eda Imelda Arteaga",
+    "name": "María Imelda Arteaga",
     "role": "Precinct Chair",
     "phone": "9564724805",
     "email": "Imeldaa57@aol.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "44",
@@ -330,15 +414,19 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565026150",
     "email": "etorres0622@gmail.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "45",
-    "name": "\u00c1ngel Magallanes",
+    "name": "Ángel Magallanes",
     "role": "Precinct Chair",
     "phone": "9563937606",
     "email": "magallanesangel87@gmail.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "47",
@@ -346,53 +434,67 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566169248",
     "email": "er@zamora-lawfirmcom",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "47",
     "name": "Matthew Garcia",
     "role": "Neighborhood Captain",
     "phone": "956-369-9767",
-    "email": "garcia11matthew@gmail.com"
+    "email": "garcia11matthew@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "48",
-    "name": "Jos\u00e9 B. Salda\u00f1a",
+    "name": "José B. Saldaña",
     "role": "Precinct Chair",
     "phone": "9563316808",
     "email": "jb.saldana23@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "49",
-    "name": "Manuel Garc\u00eda, Jr.",
+    "name": "Manuel García, Jr.",
     "role": "Precinct Chair",
     "phone": "5129778474",
     "email": "mangaric23@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "50",
-    "name": "Ileana Cant\u00fa Gonz\u00e1lez",
+    "name": "Ileana Cantú González",
     "role": "Precinct Chair",
     "phone": "9568622628",
     "email": "ileana7982@gmail.com",
-    "city": "Pe\u00f1itas"
+    "city": "Peñitas",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "51",
-    "name": "Brenda Lee Villal\u00f3n",
+    "name": "Brenda Lee Villalón",
     "role": "Precinct Chair",
     "phone": "9568626115",
     "email": "Brendavillalon19@gmail.com",
-    "city": "Sullivan"
+    "city": "Sullivan",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "51",
     "name": "Juana Victoria Olivarez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "52",
@@ -400,30 +502,38 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564545068",
     "email": "jasondanielv@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "53",
-    "name": "Leticia H. S\u00e1enz",
+    "name": "Leticia H. Sáenz",
     "role": "Precinct Chair",
     "phone": "9562398138",
     "email": "lettysaenz@yahoo.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "53",
     "name": "Julie Ann Carcano",
     "role": "Neighborhood Captain",
     "phone": "956-926-9004",
-    "email": "julieanncarcano@gmail.com"
+    "email": "julieanncarcano@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "54",
-    "name": "Regina \"Regi\" Compi\u00e1n Richardson",
+    "name": "Regina \"Regi\" Compián Richardson",
     "role": "Precinct Chair",
     "phone": "9568004805",
     "email": "reginars43@regilaw.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "55",
@@ -431,7 +541,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563439092",
     "email": "mingos735@yahoo.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "56",
@@ -439,44 +551,56 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565033451",
     "email": "bobbyguajardo9@gmail.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "56",
     "name": "Yolanda Solis",
     "role": "Neighborhood Captain",
     "phone": "956-272-7922",
-    "email": "pet28life@gmail.com"
+    "email": "pet28life@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "58",
-    "name": "Ismael M. Garc\u00eda",
+    "name": "Ismael M. García",
     "role": "Precinct Chair",
     "phone": "9566485319",
     "email": "ainmechanical@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "58",
     "name": "Koni Ramos-Kaiwi",
     "role": "Neighborhood Captain",
     "phone": "972-965-4031",
-    "email": "kaiwi1948@gmail.com"
+    "email": "kaiwi1948@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "58",
     "name": "Ayaan R. Nair",
     "role": "Neighborhood Captain",
     "phone": "832-603-6739",
-    "email": "ayaannair2004@gmail.com"
+    "email": "ayaannair2004@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "59",
-    "name": "Oscar Santa Mar\u00eda, Jr.",
+    "name": "Oscar Santa María, Jr.",
     "role": "Precinct Chair",
     "phone": "9562789367",
     "email": "santamariaoscar40@yahoo.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "62",
@@ -484,7 +608,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565669121",
     "email": "Luule6@hotmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "63",
@@ -492,15 +618,19 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562221051",
     "email": "jabgarza62@aol.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "64",
-    "name": "Ang\u00e9lica Patricia Ramos",
+    "name": "Angélica Patricia Ramos",
     "role": "Precinct Chair",
     "phone": "9566808509",
     "email": "gellysenpai@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "66",
@@ -508,14 +638,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565715860",
     "email": "ssjstx@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "66",
     "name": "Nicole 'Nikki' Armijo",
     "role": "Neighborhood Captain",
     "phone": "956-562-5840",
-    "email": "ncarmijo3@yahoo.com"
+    "email": "ncarmijo3@yahoo.com",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "69",
@@ -523,14 +657,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564587937",
     "email": "juventinah@yahoo.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "69",
     "name": "Juventina Herrera",
     "role": "Neighborhood Captain",
     "phone": "956-458-7937",
-    "email": "juventinah@yahoo.com"
+    "email": "juventinah@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "70",
@@ -538,52 +676,66 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563732024",
     "email": "saragailb@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "70",
     "name": "Roxanne Gonzalez",
     "role": "Neighborhood Captain",
     "phone": "956-272-7233",
-    "email": "roxgonzalez23@gmail.com"
+    "email": "roxgonzalez23@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "72",
-    "name": "Mar\u00eda Elena Garc\u00eda",
+    "name": "María Elena García",
     "role": "Precinct Chair",
     "phone": "9564530420",
     "email": "marygarcia664@icloud.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "73",
-    "name": "Julio Garc\u00eda III",
+    "name": "Julio García III",
     "role": "Precinct Chair",
     "phone": "9565344113",
     "email": "j.g.III@hotmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "73",
-    "name": "James J S\u00e1nchez",
+    "name": "James J Sánchez",
     "role": "Neighborhood Captain",
     "phone": "956-280-1939",
-    "email": "Injurydoctorrgv@gmail.com"
+    "email": "Injurydoctorrgv@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "75",
-    "name": "Abraham S\u00e1nchez",
+    "name": "Abraham Sánchez",
     "role": "Precinct Chair",
     "phone": "9565188695",
     "email": "abramsanch05@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "75",
     "name": "Homero Basaldua",
     "role": "Neighborhood Captain",
     "phone": "956-844-7143",
-    "email": "homero.basaldua08@gmail.com"
+    "email": "homero.basaldua08@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "79",
@@ -591,23 +743,29 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566204533",
     "email": "moralesconstruction72@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "80",
-    "name": "Mar\u00eda Edith Lea\u00f1os Rodr\u00edguez",
+    "name": "María Edith Leaños Rodríguez",
     "role": "Precinct Chair",
     "phone": "9569468125",
     "email": "leanosedith00@gmail.com",
-    "city": "Sullivan"
+    "city": "Sullivan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "81",
-    "name": "Chris Eduardo \"Edward\" L\u00f3pez",
+    "name": "Chris Eduardo \"Edward\" López",
     "role": "Precinct Chair",
     "phone": "9567892228",
     "email": "edsworld956@hotmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "82",
@@ -615,14 +773,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9568213235",
     "email": "rgarza1767@gmail.com",
-    "city": "Granjeno"
+    "city": "Granjeno",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "82",
     "name": "Miranda Salinas",
     "role": "Neighborhood Captain",
     "phone": "956-570-3666",
-    "email": "mhern9235@yahoo.com"
+    "email": "mhern9235@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "83",
@@ -630,7 +792,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9568886848",
     "email": "davidbraedon2005@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "84",
@@ -638,22 +802,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9568787362",
     "email": "alma_butcher@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "85",
-    "name": "H\u00e9ctor Hugo Alvarado, Jr.",
+    "name": "Héctor Hugo Alvarado, Jr.",
     "role": "Precinct Chair",
     "phone": "9565324337",
     "email": "hidalgocounty85thprecinct@gmail.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "85",
     "name": "Romulo 'Romo' Sanchez, Jr.",
     "role": "Neighborhood Captain",
     "phone": "956-474-0652",
-    "email": "romosanchez44@outlook.com"
+    "email": "romosanchez44@outlook.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "87",
@@ -661,30 +831,38 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563521727",
     "email": "robertmaldonado875@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "88",
-    "name": "Elizabeth Rodr\u00edguez M\u00e1rquez",
+    "name": "Elizabeth Rodríguez Márquez",
     "role": "Precinct Chair",
     "phone": "9565634164",
     "email": "elizabethrodriguez.er956@gmail.com",
-    "city": "Alton"
+    "city": "Alton",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "90",
-    "name": "Domingo (Mingo) Rodr\u00edguez",
+    "name": "Domingo (Mingo) Rodríguez",
     "role": "Precinct Chair",
     "phone": "9562925272",
     "email": "mingorodriguez58@gmail.com",
-    "city": "Elsa"
+    "city": "Elsa",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "90",
     "name": "Arcadio Padilla, Jr.",
     "role": "Neighborhood Captain",
     "phone": "956-219-7476",
-    "email": "arcadiopadilla10@gmail.com"
+    "email": "arcadiopadilla10@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "93",
@@ -692,47 +870,59 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9569578095",
     "email": "karen.prewitt.71@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "94",
-    "name": "Rosa Mar\u00eda F\u00e9lix",
+    "name": "Rosa María Félix",
     "role": "Precinct Chair",
     "phone": "2109055518",
     "email": "rosamfelix@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "95",
-    "name": "Everardo \"Lalo\" Salda\u00f1a, Sr.",
+    "name": "Everardo \"Lalo\" Saldaña, Sr.",
     "role": "Precinct Chair",
     "phone": "9567153597",
     "email": "sanhas4@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "96",
-    "name": "Irma Garc\u00eda",
+    "name": "Irma García",
     "role": "Precinct Chair",
     "phone": "9562390999",
     "email": "irma.q.garcia@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "97",
-    "name": "Jos\u00e9 Enrique Flores",
+    "name": "José Enrique Flores",
     "role": "Precinct Chair",
     "phone": "9562129909",
     "email": "enrique.flores825@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "99",
-    "name": "Jovanna Hern\u00e1ndez",
+    "name": "Jovanna Hernández",
     "role": "Precinct Chair",
     "phone": "9562400214",
     "email": "jovhdz0142@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "100",
@@ -740,29 +930,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "2109965655",
     "email": "robert.h.moreno@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "100",
     "name": "Alexander David Perez",
     "role": "Neighborhood Captain",
     "phone": "956-821-4914",
-    "email": "egarcia5454@yahoo.com"
+    "email": "egarcia5454@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "100",
     "name": "Robert Hoffman",
     "role": "Neighborhood Captain",
     "phone": "956-458-6268",
-    "email": "rabobhoffman52@yahoo.com"
+    "email": "rabobhoffman52@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "101",
-    "name": "Marta Garc\u00eda-Rodr\u00edguez",
+    "name": "Marta García-Rodríguez",
     "role": "Precinct Chair",
     "phone": "9562225916",
     "email": "maratarodz77@gmail.com",
-    "city": "Palmhurst"
+    "city": "Palmhurst",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "102",
@@ -770,59 +968,75 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563692383",
     "email": "marysolumhogan@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "103",
-    "name": "Delia De Le\u00f3n Gil",
+    "name": "Delia De León Gil",
     "role": "Precinct Chair (Runoff)",
     "phone": "956-867-1075",
     "email": "delcali@yahoo.com",
-    "city": ""
+    "city": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "103",
-    "name": "Alma Gloria Garc\u00eda",
+    "name": "Alma Gloria García",
     "role": "Precinct Chair (Runoff)",
     "phone": "9562390999",
     "email": "almavamos@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "103",
     "name": "Delia De Leon Gil",
     "role": "Neighborhood Captain",
     "phone": "956-867-1075",
-    "email": "delcali@yahoo.com"
+    "email": "delcali@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "103",
     "name": "Matteo Garza",
     "role": "Neighborhood Captain",
     "phone": "956-616-2482",
-    "email": "matteogarza739@gmail.com"
+    "email": "matteogarza739@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "103",
     "name": "Meri L. Gomez",
     "role": "Neighborhood Captain",
     "phone": "956-605-1143",
-    "email": "merilgomez@aol.com"
+    "email": "merilgomez@aol.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "104",
     "name": "Gloria Maldonado-Lozano",
     "role": "Neighborhood Captain",
     "phone": "956-330-0759",
-    "email": "glorialozano01@yahoo.com"
+    "email": "glorialozano01@yahoo.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "105",
-    "name": "Lilia Elise Ram\u00edrez",
+    "name": "Lilia Elise Ramírez",
     "role": "Precinct Chair",
     "phone": "9565308434",
     "email": "liliaeramirez401@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "106",
@@ -830,7 +1044,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566480541",
     "email": "avmillard@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "107",
@@ -838,82 +1054,104 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564571240",
     "email": "arvera74@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "107",
     "name": "Jose Villarreal",
     "role": "Neighborhood Captain",
     "phone": "956-533-3344",
-    "email": "josevillarrealpc107@gmail.com"
+    "email": "josevillarrealpc107@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "107",
     "name": "Jason Andrew Delattre",
     "role": "Neighborhood Captain",
     "phone": "956-957-1912",
-    "email": "jason.delattre01@gmail.com"
+    "email": "jason.delattre01@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "107",
     "name": "Chris Vera",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "107",
     "name": "Mrs. Delattre",
     "role": "Block Worker",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "109",
-    "name": "Mar\u00eda E. Mendoza",
+    "name": "María E. Mendoza",
     "role": "Precinct Chair",
     "phone": "9563090456",
     "email": "marie195967@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "110",
-    "name": "Jes\u00fas Montalvo",
+    "name": "Jesús Montalvo",
     "role": "Precinct Chair",
     "phone": "9565326175",
     "email": "jessemontalvo8384@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "111",
-    "name": "Sharon Aisha Hern\u00e1ndez",
+    "name": "Sharon Aisha Hernández",
     "role": "Precinct Chair",
     "phone": "9563732464",
     "email": "aishasharon@yahoo.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "112",
-    "name": "Betty P\u00e9rez",
+    "name": "Betty Pérez",
     "role": "Precinct Chair",
     "phone": "9562723591",
     "email": "bettyperez271@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "113",
-    "name": "Jesse C\u00e1rdenas",
+    "name": "Jesse Cárdenas",
     "role": "Precinct Chair",
     "phone": "9564635907",
     "email": "cfsr1990@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "113",
     "name": "Norma Chapa",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "114",
@@ -921,22 +1159,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562618652",
     "email": "9562618652del@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "114",
     "name": "Yolanda Reyna-Gonzalez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "115",
-    "name": "Hermila Garc\u00eda",
+    "name": "Hermila García",
     "role": "Precinct Chair",
     "phone": "9564985558",
     "email": "g.hermila@yahoo.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "116",
@@ -944,22 +1188,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563136673",
     "email": "asiaamaya46@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "116",
     "name": "Ana Salem",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "117",
-    "name": "Dora Guzm\u00e1n",
+    "name": "Dora Guzmán",
     "role": "Precinct Chair",
     "phone": "9568211988",
     "email": "mzdormae@aol.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "118",
@@ -967,15 +1217,19 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564835449",
     "email": "jeansofie80@gmail.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "119",
-    "name": "Leticia Rodr\u00edguez Pe\u00f1a",
+    "name": "Leticia Rodríguez Peña",
     "role": "Precinct Chair",
     "phone": "9564546208",
     "email": "lrpuente@yahoo.com",
-    "city": "Edcouch"
+    "city": "Edcouch",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "120",
@@ -983,14 +1237,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567332934",
     "email": "Deborah78596@gmail.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "120",
     "name": "Marisela 'Mary' Alaniz",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "122",
@@ -998,37 +1256,47 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565151511",
     "email": "millie8407@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "124",
-    "name": "Paul M. Vazald\u00faa",
+    "name": "Paul M. Vazaldúa",
     "role": "Precinct Chair",
     "phone": "9564516775",
     "email": "paulmv555@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "124",
-    "name": "David H. Trevi\u00f1o",
+    "name": "David H. Treviño",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "125",
-    "name": "Mar\u00eda Isabel Perales",
+    "name": "María Isabel Perales",
     "role": "Precinct Chair",
     "phone": "9565690955",
     "email": "miperales50@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "125",
     "name": "Julio D. Lozano",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "126",
@@ -1036,14 +1304,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567899301",
     "email": "jvsolis1@sbcglobal.net",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "126",
     "name": "Ana Marcus",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "127",
@@ -1051,14 +1323,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564387452",
     "email": "eescobedosr54@yahoo.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "127",
     "name": "Hector Garza",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "132",
@@ -1066,14 +1342,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567337292",
     "email": "hcdp132@mail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "132",
     "name": "Jorge 'George' Rosales",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "134",
@@ -1081,52 +1361,66 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566558213",
     "email": "nora.medinafnp@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "136",
-    "name": "Valent\u00edn Victorino Guerra",
+    "name": "Valentín Victorino Guerra",
     "role": "Precinct Chair",
     "phone": "4142931195",
     "email": "valentin.guerra@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "136",
     "name": "Carmen T. Guerrero",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "142",
-    "name": "Mar\u00eda A. Recio",
+    "name": "María A. Recio",
     "role": "Precinct Chair",
     "phone": "9566030952",
     "email": "reciomary922@icloud.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "142",
     "name": "Marivel L. Garza",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "145",
-    "name": "Yolanda G. Trevi\u00f1o",
+    "name": "Yolanda G. Treviño",
     "role": "Precinct Chair",
     "phone": "9564580990",
     "email": "ytrevino4646@yahoo.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "145",
     "name": "Jessica E. Ramos",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "146",
@@ -1134,14 +1428,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566558344",
     "email": "olgalcardoza@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "146",
     "name": "Daniel Gonzalez",
     "role": "Neighborhood Captain",
     "phone": "956-975-7651",
-    "email": "drewgonzalez10@gmail.com"
+    "email": "drewgonzalez10@gmail.com",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "147",
@@ -1149,59 +1447,75 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564425357",
     "email": "diana.morales91@gmail.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "147",
     "name": "Marcos Medina",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "151",
-    "name": "Jos\u00e9 Frank P\u00e9rez",
+    "name": "José Frank Pérez",
     "role": "Precinct Chair",
     "phone": "9564727401",
     "email": "perezfrank19610@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "151",
     "name": "Roberto Perez, Jr.",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "153",
-    "name": "Melissa Ch\u00e1vez",
+    "name": "Melissa Chávez",
     "role": "Precinct Chair",
     "phone": "9564571719",
     "email": "jesmel1974@gmail.com",
-    "city": "Monte Alto"
+    "city": "Monte Alto",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "153",
     "name": "Veronica Chavez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "154",
-    "name": "Juan P. Oliv\u00e1n",
+    "name": "Juan P. Oliván",
     "role": "Precinct Chair",
     "phone": "9564577123",
     "email": "jpolivan@sbcglobal.net",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "154",
     "name": "Edgar Olivan",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "155",
@@ -1209,29 +1523,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566840657",
     "email": "normavreyes@yahoo.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "155",
     "name": "Albert Campos",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "156",
-    "name": "Ana Paola Garc\u00eda",
+    "name": "Ana Paola García",
     "role": "Precinct Chair",
     "phone": "9568782716",
     "email": "aglight234@gmail.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "156",
     "name": "Luis R. Martinez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "160",
@@ -1239,29 +1561,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562834669",
     "email": "ksg210@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "160",
     "name": "Samuel V. Reyes",
     "role": "Neighborhood Captain",
     "phone": "956-651-3002",
-    "email": "samuelreyes2007@gmail.com"
+    "email": "samuelreyes2007@gmail.com",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "161",
-    "name": "Joe David Garc\u00eda",
+    "name": "Joe David García",
     "role": "Precinct Chair",
     "phone": "9568008864",
     "email": "apex0378557@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "161",
-    "name": "Carlos J. Trevi\u00f1o",
+    "name": "Carlos J. Treviño",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "162",
@@ -1269,22 +1599,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564676030",
     "email": "prisylla@etiksolutions.us",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "162",
     "name": "Gabriel O. Cruz",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "163",
-    "name": "Abel Carre\u00f3n Mart\u00ednez",
+    "name": "Abel Carreón Martínez",
     "role": "Precinct Chair",
     "phone": "9565030207",
     "email": "abelcarreongodfirst@gmail.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "164",
@@ -1292,38 +1628,48 @@ const chairDataList2026 = [
     "role": "Precinct Chair (Runoff)",
     "phone": "9564572902",
     "email": "eddieluna624@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "164",
-    "name": "Catalina Pe\u00f1a",
+    "name": "Catalina Peña",
     "role": "Precinct Chair (Runoff)",
     "phone": "956-467-2232",
     "email": "catalinapena081@gmail.com",
-    "city": ""
+    "city": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "165",
-    "name": "Roxanne Gonz\u00e1lez",
+    "name": "Roxanne González",
     "role": "Precinct Chair",
     "phone": "9562727233",
     "email": "roxgonzalez23@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "167",
-    "name": "Clarissa Ram\u00edrez",
+    "name": "Clarissa Ramírez",
     "role": "Precinct Chair",
     "phone": "9565717778",
     "email": "msclaramirez@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "167",
     "name": "Miguel Santiago",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "169",
@@ -1331,14 +1677,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564514463",
     "email": "bri241512@gmail.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "169",
     "name": "Eduardo Villa",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "174",
@@ -1346,37 +1696,47 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567320525",
     "email": "abeliprado@gmail.com",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "174",
     "name": "Rosalinda Prado",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "175",
-    "name": "Jos\u00e9 David Guerra",
+    "name": "José David Guerra",
     "role": "Precinct Chair",
     "phone": "9564590493",
     "email": "",
-    "city": "Donna"
+    "city": "Donna",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "176",
-    "name": "Alberto Rodr\u00edguez",
+    "name": "Alberto Rodríguez",
     "role": "Precinct Chair",
     "phone": "9563407534",
     "email": "albert.rodrigueztx@gmail.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "176",
     "name": "Jesus F. Perez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "177",
@@ -1384,14 +1744,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564604983",
     "email": "nelliemedina0723@gmail.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "177",
     "name": "Roberto Medina",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "179",
@@ -1399,22 +1763,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563557543",
     "email": "serna76.ss@gmail.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "180",
-    "name": "Gerardo Garc\u00eda, Jr.",
+    "name": "Gerardo García, Jr.",
     "role": "Precinct Chair",
     "phone": "9566852685",
     "email": "Jergarcia19@gmail.com",
-    "city": "Hargill"
+    "city": "Hargill",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "180",
     "name": "Ruben D. Salinas",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "183",
@@ -1422,14 +1792,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9564781357",
     "email": "rolandotransports@gmail.com",
-    "city": "Alton"
+    "city": "Alton",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "183",
     "name": "Jaime L. Garcia",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "187",
@@ -1437,14 +1811,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "3233710829",
     "email": "arturo90976@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "187",
     "name": "Sandra Morales",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "192",
@@ -1452,14 +1830,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562791294",
     "email": "melzmed@yahoo.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "192",
     "name": "David M. Garcia",
     "role": "Neighborhood Captain",
     "phone": "956-800-8864",
-    "email": "apex0378557@aol.com"
+    "email": "apex0378557@aol.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "193",
@@ -1467,29 +1849,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "5129661815",
     "email": "alexcappstx@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "193",
     "name": "Juan E. Lopez",
     "role": "Neighborhood Captain",
     "phone": "956-485-0409",
-    "email": "Vicky.lpz68@gmail.com"
+    "email": "Vicky.lpz68@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "194",
-    "name": "Emily Jocelyn Rodr\u00edguez",
+    "name": "Emily Jocelyn Rodríguez",
     "role": "Precinct Chair",
     "phone": "9569004712",
     "email": "remily040@gmail.com",
-    "city": "Palmview"
+    "city": "Palmview",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "194",
     "name": "Sara V. Martinez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "195",
@@ -1497,76 +1887,96 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "8135233641",
     "email": "kathryncharvey@aol.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "195",
     "name": "Rebecca L. Torres",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "196",
-    "name": "Arminda Garc\u00eda",
+    "name": "Arminda García",
     "role": "Precinct Chair",
     "phone": "8105138463",
     "email": "armindag1604@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "199",
-    "name": "Melissa L\u00f3pez Jalomo",
+    "name": "Melissa López Jalomo",
     "role": "Precinct Chair",
     "phone": "9568213880",
     "email": "melja62@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "200",
-    "name": "Mia Coraz\u00f3n Salazar",
+    "name": "Mia Corazón Salazar",
     "role": "Precinct Chair",
     "phone": "2102450209",
     "email": "miacorazonrealtor@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "201",
-    "name": "Jaime Eduardo Gonz\u00e1lez",
+    "name": "Jaime Eduardo González",
     "role": "Precinct Chair",
     "phone": "9565663523",
     "email": "jimgonzalez64@yahoo.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "201",
     "name": "Javier O. Salinas",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "203",
-    "name": "Mario Adrian Su\u00e1rez",
+    "name": "Mario Adrian Suárez",
     "role": "Precinct Chair",
     "phone": "9565664576",
     "email": "95marioasuarez@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "207",
-    "name": "Rosendo Villagr\u00e1n, Jr.",
+    "name": "Rosendo Villagrán, Jr.",
     "role": "Precinct Chair",
     "phone": "9565305516",
     "email": "gene12_2000@yahoo.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "207",
     "name": "Silvia R. Chavez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "211",
@@ -1574,14 +1984,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "6145073191",
     "email": "nicknathan@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "211",
     "name": "Omar G. Reyes",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "214",
@@ -1589,7 +2003,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair (Runoff)",
     "phone": "956-998-6936",
     "email": "fcastillo14@icloud.com",
-    "city": ""
+    "city": "",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "214",
@@ -1597,7 +2013,9 @@ const chairDataList2026 = [
     "role": "Precinct Chair (Runoff)",
     "phone": "9563783333",
     "email": "mitzy2125@icloud.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "216",
@@ -1605,14 +2023,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567096118",
     "email": "madeleine.croll@gmail.com",
-    "city": "McAllen"
+    "city": "McAllen",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "216",
     "name": "Andres J. Valdez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "221",
@@ -1620,22 +2042,28 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "956-331-7690",
     "email": "",
-    "city": ""
+    "city": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "221",
     "name": "Julio Garza",
     "role": "Neighborhood Captain",
     "phone": "956-369-2023",
-    "email": "juliogarza18@gmail.com"
+    "email": "juliogarza18@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "222",
-    "name": "Marissa Marmolejo Mart\u00ednez",
+    "name": "Marissa Marmolejo Martínez",
     "role": "Precinct Chair",
     "phone": "9563109261",
     "email": "marissamarmolejo217@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "225",
@@ -1643,29 +2071,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565352822",
     "email": "elbertobravo3@gmail.com",
-    "city": "La Blanca"
+    "city": "La Blanca",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "225",
     "name": "Luisa F. Moreno",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "226",
-    "name": "Gustavo Padr\u00f3n Guerra",
+    "name": "Gustavo Padrón Guerra",
     "role": "Precinct Chair",
     "phone": "9568218433",
     "email": "gguerravv@gmail.com",
-    "city": "Hidalgo"
+    "city": "Hidalgo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "226",
     "name": "Hector M. Santiago",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "227",
@@ -1673,14 +2109,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565584491",
     "email": "rezainvestmentsllc@yahoo.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "227",
     "name": "Mar V. Hernandez",
     "role": "Neighborhood Captain",
     "phone": "956-624-0206",
-    "email": "marvhernandez95747@gmail.com"
+    "email": "marvhernandez95747@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "228",
@@ -1688,29 +2128,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562075177",
     "email": "jesmel1974@gmail.com",
-    "city": "San Juan"
+    "city": "San Juan",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "228",
     "name": "Margarita S. Castillo",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "230",
-    "name": "Jos\u00e9 Robbie Ju\u00e1rez",
+    "name": "José Robbie Juárez",
     "role": "Precinct Chair",
     "phone": "9563307809",
     "email": "jdesign1920@gmail.com",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "230",
     "name": "Ruben C. Garza",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "234",
@@ -1718,14 +2166,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562491577",
     "email": "heriberto.rangel00@gmail.com",
-    "city": "Hidalgo"
+    "city": "Hidalgo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "234",
     "name": "Roberto M. Flores",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "235",
@@ -1733,14 +2185,18 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9566858920",
     "email": "Bfonz33@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "235",
     "name": "Veronica T. Rosales",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "238",
@@ -1748,29 +2204,37 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9563406820",
     "email": "evelynizaguirre0228@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Has Access",
+    "contactLog": []
   },
   {
     "precinct": "238",
     "name": "David P. Sanchez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "239",
-    "name": "Roel Alberto \u00c1vila",
+    "name": "Roel Alberto Ávila",
     "role": "Precinct Chair",
     "phone": "9564938418",
     "email": "roelavila@sbcglobal.net",
-    "city": "Edinburg"
+    "city": "Edinburg",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "239",
     "name": "Alicia L. Hernandez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "240",
@@ -1778,44 +2242,56 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9562215245",
     "email": "mr_guajardo@yahoo.com",
-    "city": "Pharr"
+    "city": "Pharr",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "240",
     "name": "Samuel J. Martinez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "244",
-    "name": "Betty J. (Alaniz) Ram\u00edrez",
+    "name": "Betty J. (Alaniz) Ramírez",
     "role": "Precinct Chair",
     "phone": "9563600602",
     "email": "bettyjramirezzz@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "244",
     "name": "Jaime C. Cantu",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "245",
-    "name": "Jos\u00e9 Santamar\u00eda",
+    "name": "José Santamaría",
     "role": "Precinct Chair",
     "phone": "9564605380",
     "email": "jsanta_maria@hotmail.com",
-    "city": "Alamo"
+    "city": "Alamo",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "245",
-    "name": "Mario V. Salda\u00f1a",
+    "name": "Mario V. Saldaña",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "249",
@@ -1823,44 +2299,56 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9567893195",
     "email": "rollie1717@yahoo.com",
-    "city": "Mercedes"
+    "city": "Mercedes",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "249",
     "name": "Elena F. Dominguez",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "250",
-    "name": "Ismael Miguel Garc\u00eda, Jr.",
+    "name": "Ismael Miguel García, Jr.",
     "role": "Precinct Chair",
     "phone": "9564630583",
     "email": "flashback1982@gmail.com",
-    "city": "Weslaco"
+    "city": "Weslaco",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "250",
-    "name": "Jos\u00e9 Torres, Jr.",
+    "name": "José Torres, Jr.",
     "role": "Neighborhood Captain",
     "phone": "956-472-9600",
-    "email": "1982jtorres@gmail.com"
+    "email": "1982jtorres@gmail.com",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "254",
-    "name": "Jessica Lizbeth S\u00e1nchez",
+    "name": "Jessica Lizbeth Sánchez",
     "role": "Precinct Chair",
     "phone": "9563608760",
     "email": "jessiica.sanchez3@gmail.com",
-    "city": "Mission"
+    "city": "Mission",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "254",
     "name": "Rebecca O. Lozano",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "257",
@@ -1868,21 +2356,27 @@ const chairDataList2026 = [
     "role": "Precinct Chair",
     "phone": "9565800302",
     "email": "lizzette_arechiga@yahoo.com",
-    "city": "La Joya"
+    "city": "La Joya",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "257",
     "name": "Antonio R. Ruiz",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   },
   {
     "precinct": "265",
     "name": "Jessica N. Pena",
     "role": "Neighborhood Captain",
     "phone": "",
-    "email": ""
+    "email": "",
+    "vanStatus": "Pending",
+    "contactLog": []
   }
 ];
 
