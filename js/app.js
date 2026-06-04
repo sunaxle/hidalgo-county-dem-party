@@ -34,19 +34,33 @@ document.addEventListener('DOMContentLoaded', () => {
     backdrop.addEventListener('click', toggleDrawer);
   }
 
+  // Inject hamburger menu for TX Clone Navbar if missing
+  const txNav = document.querySelector('.tx-clone-nav');
+  const txNavLinks = document.querySelector('.tx-clone-nav-links');
+  if (txNav && txNavLinks && !document.querySelector('.tx-mobile-menu-btn')) {
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'tx-mobile-menu-btn';
+    menuBtn.innerHTML = '&#9776;';
+    txNav.insertBefore(menuBtn, txNav.firstChild);
+
+    menuBtn.addEventListener('click', () => {
+      txNavLinks.classList.toggle('active');
+    });
+  }
+
   // Mobile Dropdown Toggle (Accordion)
   const dropdowns = document.querySelectorAll('.dropdown');
   dropdowns.forEach(dropdown => {
-    const span = dropdown.querySelector('span');
-    if (span) {
+    const trigger = dropdown.querySelector('span, a');
+    if (trigger) {
       // Force hardware constraints dynamically for iOS Safari caches
-      span.style.webkitUserSelect = 'none';
-      span.style.userSelect = 'none';
-      span.style.webkitTouchCallout = 'none';
-      span.style.cursor = 'pointer';
-      span.style.webkitTapHighlightColor = 'transparent';
+      trigger.style.webkitUserSelect = 'none';
+      trigger.style.userSelect = 'none';
+      trigger.style.webkitTouchCallout = 'none';
+      trigger.style.cursor = 'pointer';
+      trigger.style.webkitTapHighlightColor = 'transparent';
 
-      span.addEventListener('click', (e) => {
+      trigger.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
           e.preventDefault();
           dropdown.classList.toggle('active');

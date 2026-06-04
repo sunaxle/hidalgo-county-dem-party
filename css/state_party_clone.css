@@ -117,6 +117,16 @@ html, body.tx-clone {
   background-color: #e65600;
 }
 
+.tx-mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--tx-navy);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
 /* Mobile Responsiveness for Navigation */
 @media (max-width: 768px) {
   .tx-clone-nav {
@@ -126,6 +136,14 @@ html, body.tx-clone {
     z-index: 5000;
   }
   
+  .tx-mobile-menu-btn {
+    display: block;
+    position: absolute;
+    top: 1.2rem;
+    left: 1rem;
+    z-index: 9999;
+  }
+
   /* Demote translate overlay */
   #google_translate_element {
     z-index: 1 !important;
@@ -146,16 +164,22 @@ html, body.tx-clone {
     height: 70px;
   }
   .tx-clone-nav-links {
+    display: none; /* Hide by default */
     flex-wrap: wrap;
     gap: 1.25rem 0.75rem;
     margin-top: 1rem;
     justify-content: center;
     position: relative;
     z-index: 9999;
+    width: 100%;
+  }
+  .tx-clone-nav-links.active {
+    display: flex; /* Show when active */
   }
   .tx-clone-nav-links a, 
   .tx-clone-nav-links .nav-item, 
-  .tx-clone-nav-links .dropdown > span {
+  .tx-clone-nav-links .dropdown > span,
+  .tx-clone-nav-links .dropdown > a {
     font-size: 0.95rem;
     padding: 0.4rem 0.6rem;
     touch-action: manipulation; /* Eliminate iOS tap highlight delay/blocking */
