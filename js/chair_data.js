@@ -126,9 +126,8 @@ const chairDataList2026 = [
   },
   {
     "precinct": "18",
-    "name": "Andrea Gisselle Torres",
+    "name": "Andrea Torres",
     "role": "Precinct Chair",
-    "phone": "9566278718",
     "email": "andrea.torres1301@gmail.com",
     "city": "McAllen"
   },
