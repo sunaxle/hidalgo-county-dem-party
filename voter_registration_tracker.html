@@ -468,14 +468,13 @@
 <script src="js/a11y.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      if (typeof historicalVoterData !== 'undefined') {
-        const generalData = historicalVoterData.filter(d => d.type === 'General Election').sort((a, b) => a.year - b.year);
-        const currentCount = generalData[generalData.length - 1].count;
+      if (typeof voterRegistrationData !== 'undefined') {
+        const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
         document.getElementById('current-count').textContent = currentCount.toLocaleString();
         
         const ctx = document.getElementById('voterChart').getContext('2d');
-        const labels = generalData.map(d => d.year.toString());
-        const data = generalData.map(d => d.count);
+        const labels = voterRegistrationData.map(d => d.date);
+        const data = voterRegistrationData.map(d => d.count);
         
         const lowGoalData = new Array(labels.length).fill(voterRegistrationGoals.lowGoal);
         const highGoalData = new Array(labels.length).fill(voterRegistrationGoals.highGoal);
@@ -486,7 +485,7 @@
             labels: labels,
             datasets: [
               {
-                label: 'Registered Voters (General Elections)',
+                label: 'Registered Voters',
                 data: data,
                 borderColor: '#38bdf8',
                 backgroundColor: 'rgba(56, 189, 248, 0.1)',
@@ -525,7 +524,7 @@
             },
             scales: {
               y: {
-                min: 250000,
+                min: 450000,
                 max: 510000,
                 grid: { color: 'rgba(255,255,255,0.05)' },
                 ticks: { color: '#94a3b8', font: { family: 'Inter' } }
