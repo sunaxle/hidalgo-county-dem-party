@@ -52,6 +52,24 @@
 </script>
 </head>
 <body class="tx-clone">
+    <!-- Live Voter Registration Countdown Banner -->
+    <div id="voter-countdown-banner" style="background: linear-gradient(135deg, #b71c1c 0%, #d32f2f 100%); color: white; text-align: center; padding: 12px 20px; font-weight: bold; font-family: 'Montserrat', sans-serif; font-size: 14px; position: relative; z-index: 1001; box-shadow: 0 2px 5px rgba(0,0,0,0.15); display: flex; flex-direction: column; align-items: center; gap: 4px;">
+        <div style="font-size: 16px; text-transform: uppercase; letter-spacing: 0.5px;">⚡ Help Us Register 20,000 More Voters! ⚡</div>
+        <div>Texas Voter Registration Deadline: <span id="registration-deadline-date" style="color: #ffd700;">October 5, 2026</span> (<span id="days-remaining-count" style="color: #ffd700;">--</span> Days Remaining)</div>
+        <a href="volunteer.html" style="color: white; text-decoration: underline; margin-top: 4px; font-size: 12px;">Become a Block Captain to Help Us Reach Our Goal &rarr;</a>
+    </div>
+    <script>
+    (function() {
+        const deadline = new Date('2026-10-05T23:59:59-05:00');
+        const now = new Date();
+        const diffTime = deadline - now;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const countEl = document.getElementById('days-remaining-count');
+        if (countEl) {
+            countEl.textContent = diffDays > 0 ? diffDays : 0;
+        }
+    })();
+    </script>
 
       <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
@@ -154,8 +172,7 @@
 
   <!-- Announcement Banner -->
   <div style="background-color: #fbbf24; color: #0f172a; text-align: center; padding: 1rem; font-weight: 600;">
-    🚨 <strong>Upcoming Event:</strong> Notice of Canvass for the May 26, 2026 Primary Election on June 4th at 1 p.m. 
-    <a href="events.html" style="color: #0f172a; text-decoration: underline; margin-left: 0.5rem;">Click here for details & Zoom link</a>
+    🔥 <strong>BREAKING:</strong> The Hidalgo County Democratic Party officially launches the "Road to 500k" Voter Registration Drive! <a href="road_to_500k_press_release.html" style="color: #0f172a; text-decoration: underline; margin-left: 0.5rem; font-weight: 800;">Read the Chairman's Press Release</a>
   </div>
 
   <header class="tx-clone-hero">
