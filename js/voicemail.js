@@ -47,7 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Upload raw audio to Firebase Storage
             const timestamp = Date.now();
             const storageRef = ref(storage, `voicemails/voicemail_${timestamp}.webm`);
-            await uploadBytes(storageRef, audioBlob);
+            
+            const metadata = {
+              customMetadata: {
+                firstName: document.getElementById('vm-first-name') ? document.getElementById('vm-first-name').value : '',
+                lastName: document.getElementById('vm-last-name') ? document.getElementById('vm-last-name').value : '',
+                phone: document.getElementById('vm-phone') ? document.getElementById('vm-phone').value : '',
+                email: document.getElementById('vm-email') ? document.getElementById('vm-email').value : ''
+              }
+            };
+            
+            await uploadBytes(storageRef, audioBlob, metadata);
 
             // Once uploaded, the backend Cloud Function will trigger, transcribe it, and save to Firestore
             recordStatus.innerHTML = '<span style="color: #4ade80;">Success! Your voice message has been sent to the Chairman. ✅</span>';

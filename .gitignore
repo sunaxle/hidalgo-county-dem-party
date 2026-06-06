@@ -1,2 +1,6 @@
 data/planc2333_all.zip
 .gstack/
+
+functions/.env
+firebase-debug.log
+functions/node_modules/
