@@ -90,6 +90,36 @@
       font-size: 0.95rem;
       color: var(--text-main);
     }
+    
+    /* Digital Voicemail Styles */
+    .voicemail-btn {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
+      transition: all 0.3s ease;
+    }
+    .voicemail-btn:hover {
+      transform: scale(1.05);
+      background: #0ea5e9;
+    }
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); background: #ef4444; }
+      70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); background: #dc2626; }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); background: #ef4444; }
+    }
+    .recording-pulse {
+      animation: pulse-red 1.5s infinite;
+    }
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -329,8 +359,19 @@
   <section class="container fade-in" style="margin-top: 2rem;">
     <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
       <h2>Make Your Voice Heard</h2>
-      <p style="max-width: 600px; margin: 0 auto 2rem; color: #fff;">This party only works when we work together. If you have an issue, a pain point, or an idea, send it our way.</p>
-      <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Submit Your Thoughts</a>
+      <p style="max-width: 600px; margin: 0 auto 1rem; color: #fff;">This party only works when we work together. If you have an issue, a pain point, or an idea, send it our way.</p>
+      
+      <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.05);">
+        <h3 style="margin-top: 0; color: #38bdf8;">Leave a Digital Voicemail 🎤</h3>
+        <p style="font-size: 0.9rem; color: #94a3b8; max-width: 400px; margin: 0 auto;">Don't like typing? Tap the mic to record a voice message for the party chairman. It will be transcribed automatically.</p>
+        
+        <button id="record-btn" class="voicemail-btn" aria-label="Record Voice Message">
+          <span id="record-icon">🎤</span>
+        </button>
+        <p id="record-status" style="font-weight: 600; font-size: 1.1rem; min-height: 24px;">Tap to record a voice message</p>
+      </div>
+
+      <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Or Submit a Typed Message</a>
     </div>
   </section>
 
@@ -345,11 +386,13 @@
     </div>
     <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
     <div style="margin-top: 0.5rem;"><a href="precinct_toolkit.html" style="color: #64748b; text-decoration: none; font-size: 0.85rem;">🔒 Chair Toolkit</a></div>
+    <div style="margin-top: 0.5rem;"><a href="changelog.html" style="color: #38bdf8; text-decoration: none; font-size: 0.85rem;">🚀 Feature Updates</a></div>
     <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
   </footer>
 
   <script src="js/app.js"></script>
 <script src="js/value_counter.js"></script>
+<script type="module" src="js/voicemail.js"></script>
 
   <!-- Google Translate -->
   <script type="text/javascript">
