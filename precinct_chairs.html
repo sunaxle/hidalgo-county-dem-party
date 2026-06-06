@@ -591,14 +591,27 @@
 
     <div class="table-container" style="position: relative;">
       
-      <div id="password-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(15, 23, 42, 0.4); z-index: 10; border-radius: 8px;">
-        <div class="glass-card" style="padding: 2.5rem; text-align: center; max-width: 450px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255,255,255,0.1);">
-          <h3 style="color: #facc15; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Restricted Access</h3>
-          <p style="color: #e2e8f0; font-size: 1rem; margin-bottom: 1rem;">Please enter a password to see precinct chair information.</p>
-          <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem;">Please request password at <a href="mailto:info@hidalgocountydems.org" style="color: #38bdf8;">info@hidalgocountydems.org</a>.</p>
-          <input type="password" id="chair-password" class="search-input" placeholder="Password" style="margin-bottom: 1rem; width: 100%; text-align: center; padding-left: 0;">
-          <button id="btn-unlock" class="btn btn-primary" style="width: 100%;">Unlock Directory</button>
-          <div id="password-error" style="color: #ef4444; font-size: 0.85rem; margin-top: 0.5rem; display: none;">Incorrect password.</div>
+      <div id="sos-links-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(15, 23, 42, 0.4); z-index: 10; border-radius: 8px;">
+        <div class="glass-card" style="padding: 2.5rem; text-align: center; max-width: 550px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3);">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
+          <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Official State Rosters</h3>
+          <p style="color: #e2e8f0; font-size: 1rem; margin-bottom: 1.5rem;">Due to privacy and security concerns, direct contact information for Precinct Chairs is no longer hosted publicly on this website. You can find the official, public rosters maintained by the State of Texas below.</p>
+          
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <a href="https://www.sos.state.tx.us/elections/voter/current.shtml" target="_blank" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
+              <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">TX Secretary of State</strong>
+              <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Current Election Information & Rosters</span>
+            </a>
+            
+            <a href="https://emr.sos.texas.gov/cpc-filings/cpc-contact-report.aspx" target="_blank" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
+              <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">SOS Election Management System</strong>
+              <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Precinct Chair Contact Report Search</span>
+            </a>
+          </div>
+          
+          <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">Need to contact the local party directly?<br><a href="mailto:info@hidalgocountydems.org" style="color: #38bdf8;">info@hidalgocountydems.org</a></p>
+          </div>
         </div>
       </div>
 
