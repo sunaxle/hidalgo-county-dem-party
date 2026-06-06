@@ -432,7 +432,7 @@
 <div class="tx-clone-nav-accent-bar"></div>
 <!-- Hero Section -->
 <header class="civics-hero"><h1>Voter Registration Goals</h1><p>Tracking our progress towards a historic turnout in Hidalgo County.</p></header>
-<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title">Live Goal Tracker</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div></div></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><canvas height="200" id="voterChart" width="400"></canvas></div></div><div class="gov-section"><h2 class="civics-section-title">We Need You To Hit These Goals</h2><div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 3rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><h3 style="color: #34d399; font-size: 1.75rem; margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 800;">Become a Volunteer Deputy Registrar</h3><p style="font-size: 1.15rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">To hit our 500k stretch goal by the October deadline, we need an army of certified VDRs organizing in their neighborhoods. The party provides the clipboards, the forms, and the training. You provide the boots on the ground.</p><a href="vdr_portal.html" style="display: inline-block; padding: 1rem 3rem; background: linear-gradient(45deg, #34d399, #10b981); color: white; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">Get Certified Now</a></div></div></main>
+<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title">Live Goal Tracker</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div></div></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><canvas height="200" id="voterChart" width="400"></canvas></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;"><h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Historical Voter Registration Data</h3><table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #94a3b8;"><th style="padding: 1rem;">Year</th><th style="padding: 1rem;">Election Type</th><th style="padding: 1rem;">Registered Voters</th></tr></thead><tbody id="historicalDataTableBody"></tbody></table></div></div><div class="gov-section"><h2 class="civics-section-title">We Need You To Hit These Goals</h2><div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 3rem 2rem; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><h3 style="color: #34d399; font-size: 1.75rem; margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 800;">Become a Volunteer Deputy Registrar</h3><p style="font-size: 1.15rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">To hit our 500k stretch goal by the October deadline, we need an army of certified VDRs organizing in their neighborhoods. The party provides the clipboards, the forms, and the training. You provide the boots on the ground.</p><a href="vdr_portal.html" style="display: inline-block; padding: 1rem 3rem; background: linear-gradient(45deg, #34d399, #10b981); color: white; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease;">Get Certified Now</a></div></div></main>
 <!-- Modal -->
 <div class="civics-backdrop" id="civicsBackdrop"></div>
 <div class="civics-modal" id="civicsModal">
@@ -469,21 +469,66 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
       try {
-        if (typeof voterRegistrationData !== 'undefined' && voterRegistrationData.length > 0) {
+        if (typeof historicalVoterData !== 'undefined' && typeof voterRegistrationData !== 'undefined') {
+          // Get historical data for general elections
+          const generalElections = historicalVoterData.filter(d => d.type === 'General Election');
+          const historicalLabels = generalElections.map(d => d.year.toString());
+          const historicalCounts = generalElections.map(d => d.count);
+          
+          // Get the latest 2026 data
           const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
           document.getElementById('current-count').textContent = currentCount.toLocaleString();
+          
+          // Combine labels and data
+          const labels = [...historicalLabels, '2026 (Current)'];
+          const data = [...historicalCounts, currentCount];
           
           const chartElement = document.getElementById('voterChart');
           if (chartElement) {
             const ctx = chartElement.getContext('2d');
-            const labels = voterRegistrationData.map(d => d.date);
-            const data = voterRegistrationData.map(d => d.count);
             
             const lowGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.lowGoal : 480000;
             const highGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.highGoal : 500000;
             
+            // Goals only extend across the whole chart for reference
             const lowGoalData = new Array(labels.length).fill(lowGoal);
             const highGoalData = new Array(labels.length).fill(highGoal);
+            
+            // Populate the historical data table
+            const tbody = document.getElementById('historicalDataTableBody');
+            if (tbody) {
+              const allData = [...historicalVoterData, { year: 2026, type: 'Current Tracking', count: currentCount }];
+              // Sort by year descending
+              allData.sort((a, b) => b.year - a.year);
+              
+              allData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+                if (index % 2 === 0) tr.style.background = 'rgba(255,255,255,0.02)';
+                
+                const tdYear = document.createElement('td');
+                tdYear.style.padding = '1rem';
+                tdYear.style.fontWeight = 'bold';
+                tdYear.style.color = '#fff';
+                tdYear.textContent = row.year;
+                
+                const tdType = document.createElement('td');
+                tdType.style.padding = '1rem';
+                tdType.style.color = '#cbd5e1';
+                tdType.textContent = row.type;
+                
+                const tdCount = document.createElement('td');
+                tdCount.style.padding = '1rem';
+                tdCount.style.color = '#38bdf8';
+                tdCount.style.fontWeight = 'bold';
+                tdCount.textContent = row.count.toLocaleString();
+                
+                tr.appendChild(tdYear);
+                tr.appendChild(tdType);
+                tr.appendChild(tdCount);
+                tbody.appendChild(tr);
+              });
+            }
             
             new Chart(ctx, {
               type: 'line',
@@ -491,15 +536,19 @@
                 labels: labels,
                 datasets: [
                   {
-                    label: 'Registered Voters',
+                    label: 'Registered Voters (General Elections)',
                     data: data,
                     borderColor: '#38bdf8',
                     backgroundColor: 'rgba(56, 189, 248, 0.1)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.1,
-                    pointBackgroundColor: '#fff',
-                    pointRadius: 5
+                    pointBackgroundColor: function(context) {
+                        return context.dataIndex === context.dataset.data.length - 1 ? '#fcd34d' : '#fff';
+                    },
+                    pointRadius: function(context) {
+                        return context.dataIndex === context.dataset.data.length - 1 ? 8 : 5;
+                    }
                   },
                   {
                     label: 'Baseline Goal (' + (lowGoal/1000) + 'k)',
@@ -526,14 +575,34 @@
                 plugins: {
                   legend: {
                     labels: { color: '#cbd5e1', font: { family: 'Inter' } }
+                  },
+                  tooltip: {
+                      callbacks: {
+                          label: function(context) {
+                              let label = context.dataset.label || '';
+                              if (label) {
+                                  label += ': ';
+                              }
+                              if (context.parsed.y !== null) {
+                                  label += new Intl.NumberFormat('en-US').format(context.parsed.y);
+                              }
+                              return label;
+                          }
+                      }
                   }
                 },
                 scales: {
                   y: {
-                    min: 450000,
+                    min: 250000,
                     max: 510000,
                     grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+                    ticks: { 
+                        color: '#94a3b8', 
+                        font: { family: 'Inter' },
+                        callback: function(value, index, values) {
+                            return value / 1000 + 'k';
+                        }
+                    }
                   },
                   x: {
                     grid: { color: 'rgba(255,255,255,0.05)' },
@@ -544,7 +613,7 @@
             });
           }
         } else {
-          console.warn("voterRegistrationData is missing or empty.");
+          console.warn("voter registration data arrays are missing or empty.");
         }
       } catch (e) {
         console.error("Error initializing voter tracker chart:", e);

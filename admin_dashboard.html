@@ -329,10 +329,34 @@
       </div>
     </div>
 
-    <h2 class="db-section-title" style="animation-delay: 0.2s;">Live Databases</h2>
+    <h2 class="db-section-title" style="animation-delay: 0.2s;">Communications Command Center</h2>
+    <div class="db-grid" style="animation-delay: 0.25s; margin-bottom: 3rem;">
+      <div class="db-card" style="grid-column: 1 / -1; border-color: rgba(239, 68, 68, 0.5);">
+        <div class="db-icon">🚨</div>
+        <h3>Smart SMS Broadcast</h3>
+        <p>Instantly blast an emergency SMS text message to all 200+ Precinct Chairs simultaneously.</p>
+        <textarea id="smsMessageInput" placeholder="Type your urgent message here..." style="width: 100%; height: 100px; background: rgba(15,23,42,0.8); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; font-family: 'Inter', sans-serif; resize: vertical;"></textarea>
+        <div style="margin-bottom: 1rem;">
+          <input type="tel" id="smsTestNumber" placeholder="Test Mode: Enter your cell number (e.g. +19561234567)" style="width: 100%; background: rgba(15,23,42,0.8); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 0.75rem; font-family: 'Inter', sans-serif;">
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button id="sendTestSmsBtn" class="db-link" style="background: #eab308; color: white; cursor: pointer; border: none; font-size: 1rem; flex: 1; justify-content: center;">
+            Test Broadcast (1 Number)
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </button>
+          <button id="sendSmsBtn" class="db-link" style="background: #ef4444; color: white; cursor: pointer; border: none; font-size: 1rem; flex: 1; justify-content: center;">
+            Broadcast to 200 Chairs
+            <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+          </button>
+        </div>
+        <div id="smsStatusMsg" style="margin-top: 1rem; font-size: 0.9rem; font-weight: 600; display: none;"></div>
+      </div>
+    </div>
+
+    <h2 class="db-section-title" style="animation-delay: 0.3s;">Live Databases</h2>
 
     <!-- Database Link Cards -->
-    <div class="db-grid" style="animation-delay: 0.3s;">
+    <div class="db-grid" style="animation-delay: 0.35s;">
       
       <!-- Volunteer Intake DB -->
       <div class="db-card">
@@ -383,7 +407,84 @@
     }
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sendSmsBtn = document.getElementById('sendSmsBtn');
+      const sendTestSmsBtn = document.getElementById('sendTestSmsBtn');
+      const smsMessageInput = document.getElementById('smsMessageInput');
+      const smsStatusMsg = document.getElementById('smsStatusMsg');
 
+      // Shared logic for both buttons
+      const handleSmsSend = async (isLive) => {
+        const message = smsMessageInput.value;
+        if (!message || message.trim() === '') {
+          smsStatusMsg.style.display = 'block';
+          smsStatusMsg.style.color = '#ef4444';
+          smsStatusMsg.textContent = 'Please enter a message to broadcast.';
+          return;
+        }
+
+        const testNumber = document.getElementById('smsTestNumber').value;
+        if (!isLive && (!testNumber || testNumber.trim() === '')) {
+          smsStatusMsg.style.display = 'block';
+          smsStatusMsg.style.color = '#eab308';
+          smsStatusMsg.textContent = 'Please enter a test phone number first.';
+          return;
+        }
+
+        if (isLive) {
+          if (!confirm("⚠️ This is the LIVE broadcast button! You are about to message all 200 precinct chairs. Are you absolutely sure?")) {
+            return;
+          }
+        }
+
+        // Visual feedback
+        const activeBtn = isLive ? sendSmsBtn : sendTestSmsBtn;
+        const originalText = activeBtn.innerHTML;
+        activeBtn.innerHTML = 'Broadcasting... ⏳';
+        sendSmsBtn.style.opacity = '0.7';
+        sendTestSmsBtn.style.opacity = '0.7';
+        sendSmsBtn.disabled = true;
+        sendTestSmsBtn.disabled = true;
+        smsStatusMsg.style.display = 'none';
+
+        try {
+          const response = await fetch('https://us-central1-hcdp-digital-inbox.cloudfunctions.net/sendSmsBlast', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: { message: message, testNumber: isLive ? '' : testNumber } })
+          });
+
+          const result = await response.json();
+          
+          smsStatusMsg.style.display = 'block';
+          if (response.ok && result.result && result.result.success) {
+            smsStatusMsg.style.color = '#10b981'; // Green
+            smsStatusMsg.textContent = '✅ ' + result.result.message;
+            smsMessageInput.value = ''; // clear
+          } else {
+            throw new Error(result.error ? result.error.message : 'Failed to send SMS.');
+          }
+        } catch (error) {
+          console.error('SMS Error:', error);
+          smsStatusMsg.style.display = 'block';
+          smsStatusMsg.style.color = '#ef4444';
+          smsStatusMsg.textContent = '❌ Error: ' + error.message;
+        } finally {
+          activeBtn.innerHTML = originalText;
+          sendSmsBtn.style.opacity = '1';
+          sendTestSmsBtn.style.opacity = '1';
+          sendSmsBtn.disabled = false;
+          sendTestSmsBtn.disabled = false;
+        }
+      };
+
+      if (sendSmsBtn) sendSmsBtn.addEventListener('click', () => handleSmsSend(true));
+      if (sendTestSmsBtn) sendTestSmsBtn.addEventListener('click', () => handleSmsSend(false));
+    });
+  </script>
   <script src="js/a11y.js"></script>
 </body>
 </html>
