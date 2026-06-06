@@ -3,7 +3,12 @@ import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs
 
 const firebaseConfig = {
   projectId: "hcdp-digital-inbox",
-  storageBucket: "hcdp-digital-inbox.appspot.com"
+  appId: "1:884194084346:web:ee44e3410c73322a631043",
+  storageBucket: "hcdp-digital-inbox.firebasestorage.app",
+  apiKey: "AIzaSyBMSgg__pJEm6NESKJe6l72UydEWZpdMhw",
+  authDomain: "hcdp-digital-inbox.firebaseapp.com",
+  messagingSenderId: "884194084346",
+  projectNumber: "884194084346"
 };
 
 const app = initializeApp(firebaseConfig);
