@@ -9,20 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 1. TIER 1 & 2: Executive Real Data Extraction
     // ==========================================
-    if (typeof chairDataList !== 'undefined') {
-        const uniquePrecincts = new Set();
-        let blockCaptainCount = 0;
+    try {
+        const dataList = typeof chairDataList2026 !== 'undefined' ? chairDataList2026 : (typeof chairDataList !== 'undefined' ? chairDataList : null);
+        if (dataList) {
+            const uniquePrecincts = new Set();
+            let blockCaptainCount = 0;
 
-        chairDataList.forEach(person => {
-            if (person.role.toLowerCase().includes("chair")) {
-                uniquePrecincts.add(person.precinct);
-            } else if (person.role.toLowerCase().includes("captain")) {
-                blockCaptainCount++;
-            }
-        });
+            dataList.forEach(person => {
+                if (person.role && person.role.toLowerCase().includes("chair")) {
+                    uniquePrecincts.add(person.precinct);
+                } else if (person.role && person.role.toLowerCase().includes("captain")) {
+                    blockCaptainCount++;
+                }
+            });
 
-        document.getElementById('stat-precinct-chairs').innerText = uniquePrecincts.size;
-        document.getElementById('stat-block-captains').innerText = blockCaptainCount;
+            const statChairs = document.getElementById('stat-precinct-chairs');
+            if (statChairs) statChairs.innerText = uniquePrecincts.size;
+            
+            const statCaptains = document.getElementById('stat-block-captains');
+            if (statCaptains) statCaptains.innerText = blockCaptainCount;
+        }
+    } catch (e) {
+        console.error("Error loading tier 1/2 data:", e);
     }
 
     // ==========================================

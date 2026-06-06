@@ -187,78 +187,102 @@
   <script src="js/chair_data.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const tbody = document.getElementById('chairTableBody');
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      
-      let currentFilter = 'all';
-      
-      // Filter out any chairs that DO NOT have an email address
-      const validChairs = chairDataList2026.filter(chair => chair.email && chair.email.trim() !== '');
-      
-      function getStatusClass(status) {
-        if (status === 'Has Access') return 'status-access';
-        if (status === 'Opted Out') return 'status-optout';
-        return 'status-pending';
-      }
-      
-      function renderTable() {
-        tbody.innerHTML = '';
-        let accessCount = 0;
-        let pendingCount = 0;
-        let optOutCount = 0;
+      try {
+        const tbody = document.getElementById('chairTableBody');
+        const filterBtns = document.querySelectorAll('.filter-btn');
         
-        validChairs.forEach(chair => {
-          const status = chair.vanStatus || 'Pending';
-          const logs = chair.contactLog || [];
+        if (!tbody) {
+          console.warn("Table body element not found.");
+          return;
+        }
+
+        let currentFilter = 'all';
+        
+        // Filter out any chairs that DO NOT have an email address
+        const validChairs = (typeof chairDataList2026 !== 'undefined') 
+            ? chairDataList2026.filter(chair => chair && chair.email && chair.email.trim() !== '')
+            : [];
+            
+        if (validChairs.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No valid chair data available.</td></tr>';
+            return;
+        }
+        
+        function getStatusClass(status) {
+          if (status === 'Has Access') return 'status-access';
+          if (status === 'Opted Out') return 'status-optout';
+          return 'status-pending';
+        }
+        
+        function renderTable() {
+          tbody.innerHTML = '';
+          let accessCount = 0;
+          let pendingCount = 0;
+          let optOutCount = 0;
           
-          if (status === 'Has Access') accessCount++;
-          else if (status === 'Opted Out') optOutCount++;
-          else pendingCount++;
+          validChairs.forEach(chair => {
+            const status = chair.vanStatus || 'Pending';
+            const logs = chair.contactLog || [];
+            
+            if (status === 'Has Access') accessCount++;
+            else if (status === 'Opted Out') optOutCount++;
+            else pendingCount++;
+            
+            if (currentFilter !== 'all' && status !== currentFilter) return;
+            
+            const tr = document.createElement('tr');
+            
+            let logHtml = '<em>No recent outreach logged.</em>';
+            if (logs.length > 0) {
+              logHtml = '<ul>' + logs.map(l => `<li>${l.date || 'Unknown Date'}: ${l.method || 'Unknown Method'} (by ${l.agent || 'Unknown'})</li>`).join('') + '</ul>';
+            }
+            
+            tr.innerHTML = `
+              <td><strong>${chair.precinct || 'N/A'}</strong></td>
+              <td>${chair.name || 'Unknown'}<br><small style="color:#64748b">${chair.email || ''} • ${chair.phone || 'No Phone'}</small></td>
+              <td>${chair.role || 'Unknown'}</td>
+              <td><span class="status-badge ${getStatusClass(status)}">${status}</span></td>
+              <td class="contact-log">${logHtml}</td>
+            `;
+            tbody.appendChild(tr);
+          });
           
-          if (currentFilter !== 'all' && status !== currentFilter) return;
+          // Update Metrics based ONLY on valid chairs
+          const total = validChairs.length;
+          const statTotal = document.getElementById('statTotal');
+          const statAccess = document.getElementById('statAccess');
+          const statPending = document.getElementById('statPending');
+          const statOptOut = document.getElementById('statOptOut');
+          const progress = document.getElementById('progressBar');
           
-          const tr = document.createElement('tr');
+          if (statTotal) statTotal.textContent = total;
+          if (statAccess) statAccess.textContent = accessCount;
+          if (statPending) statPending.textContent = pendingCount;
+          if (statOptOut) statOptOut.textContent = optOutCount;
           
-          let logHtml = '<em>No recent outreach logged.</em>';
-          if (logs.length > 0) {
-            logHtml = '<ul>' + logs.map(l => `<li>${l.date}: ${l.method} (by ${l.agent})</li>`).join('') + '</ul>';
+          if (progress) {
+            const pct = total > 0 ? Math.round((accessCount / total) * 100) : 0;
+            progress.style.width = pct + '%';
+            progress.textContent = pct + '%';
           }
-          
-          tr.innerHTML = `
-            <td><strong>${chair.precinct}</strong></td>
-            <td>${chair.name}<br><small style="color:#64748b">${chair.email} • ${chair.phone || 'No Phone'}</small></td>
-            <td>${chair.role}</td>
-            <td><span class="status-badge ${getStatusClass(status)}">${status}</span></td>
-            <td class="contact-log">${logHtml}</td>
-          `;
-          tbody.appendChild(tr);
-        });
+        }
         
-        // Update Metrics based ONLY on valid chairs
-        const total = validChairs.length;
-        document.getElementById('statTotal').textContent = total;
-        document.getElementById('statAccess').textContent = accessCount;
-        document.getElementById('statPending').textContent = pendingCount;
-        document.getElementById('statOptOut').textContent = optOutCount;
+        renderTable();
         
-        const pct = total > 0 ? Math.round((accessCount / total) * 100) : 0;
-        const progress = document.getElementById('progressBar');
-        progress.style.width = pct + '%';
-        progress.textContent = pct + '%';
+        // Filtering Logic
+        if (filterBtns && filterBtns.length > 0) {
+          filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+              filterBtns.forEach(b => b.classList.remove('active'));
+              e.target.classList.add('active');
+              currentFilter = e.target.getAttribute('data-filter');
+              renderTable();
+            });
+          });
+        }
+      } catch (e) {
+        console.error("Error initializing VAN dashboard:", e);
       }
-      
-      renderTable();
-      
-      // Filtering Logic
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
-          currentFilter = e.target.getAttribute('data-filter');
-          renderTable();
-        });
-      });
-      
     });
   </script>
 </body>

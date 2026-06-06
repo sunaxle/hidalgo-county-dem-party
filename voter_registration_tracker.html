@@ -468,74 +468,86 @@
 <script src="js/a11y.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      if (typeof voterRegistrationData !== 'undefined') {
-        const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
-        document.getElementById('current-count').textContent = currentCount.toLocaleString();
-        
-        const ctx = document.getElementById('voterChart').getContext('2d');
-        const labels = voterRegistrationData.map(d => d.date);
-        const data = voterRegistrationData.map(d => d.count);
-        
-        const lowGoalData = new Array(labels.length).fill(voterRegistrationGoals.lowGoal);
-        const highGoalData = new Array(labels.length).fill(voterRegistrationGoals.highGoal);
-        
-        new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: 'Registered Voters',
-                data: data,
-                borderColor: '#38bdf8',
-                backgroundColor: 'rgba(56, 189, 248, 0.1)',
-                borderWidth: 3,
-                fill: true,
-                tension: 0.1,
-                pointBackgroundColor: '#fff',
-                pointRadius: 5
+      try {
+        if (typeof voterRegistrationData !== 'undefined' && voterRegistrationData.length > 0) {
+          const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
+          document.getElementById('current-count').textContent = currentCount.toLocaleString();
+          
+          const chartElement = document.getElementById('voterChart');
+          if (chartElement) {
+            const ctx = chartElement.getContext('2d');
+            const labels = voterRegistrationData.map(d => d.date);
+            const data = voterRegistrationData.map(d => d.count);
+            
+            const lowGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.lowGoal : 480000;
+            const highGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.highGoal : 500000;
+            
+            const lowGoalData = new Array(labels.length).fill(lowGoal);
+            const highGoalData = new Array(labels.length).fill(highGoal);
+            
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'Registered Voters',
+                    data: data,
+                    borderColor: '#38bdf8',
+                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.1,
+                    pointBackgroundColor: '#fff',
+                    pointRadius: 5
+                  },
+                  {
+                    label: 'Baseline Goal (' + (lowGoal/1000) + 'k)',
+                    data: lowGoalData,
+                    borderColor: '#f472b6',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                  },
+                  {
+                    label: 'Stretch Goal (' + (highGoal/1000) + 'k)',
+                    data: highGoalData,
+                    borderColor: '#34d399',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                  }
+                ]
               },
-              {
-                label: 'Baseline Goal (480k)',
-                data: lowGoalData,
-                borderColor: '#f472b6',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0
-              },
-              {
-                label: 'Stretch Goal (500k)',
-                data: highGoalData,
-                borderColor: '#34d399',
-                borderWidth: 2,
-                borderDash: [5, 5],
-                fill: false,
-                pointRadius: 0
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    labels: { color: '#cbd5e1', font: { family: 'Inter' } }
+                  }
+                },
+                scales: {
+                  y: {
+                    min: 450000,
+                    max: 510000,
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+                  },
+                  x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#94a3b8', font: { family: 'Inter' } }
+                  }
+                }
               }
-            ]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                labels: { color: '#cbd5e1', font: { family: 'Inter' } }
-              }
-            },
-            scales: {
-              y: {
-                min: 450000,
-                max: 510000,
-                grid: { color: 'rgba(255,255,255,0.05)' },
-                ticks: { color: '#94a3b8', font: { family: 'Inter' } }
-              },
-              x: {
-                grid: { color: 'rgba(255,255,255,0.05)' },
-                ticks: { color: '#94a3b8', font: { family: 'Inter' } }
-              }
-            }
+            });
           }
-        });
+        } else {
+          console.warn("voterRegistrationData is missing or empty.");
+        }
+      } catch (e) {
+        console.error("Error initializing voter tracker chart:", e);
       }
     });
     </script></body>
