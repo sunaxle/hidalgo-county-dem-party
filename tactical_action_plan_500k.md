@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Tactical Action Plan: The Road to 500k Registered Voters
 
 ## 1. Executive Summary

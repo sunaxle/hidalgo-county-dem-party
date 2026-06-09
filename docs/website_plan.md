@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Website Development Plan
 
 This document serves as the comprehensive plan to synthesize our research and structure the new interactive website.

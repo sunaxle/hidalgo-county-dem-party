@@ -1,34 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Value Calculation variables
-    // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
-    const standardRate = 85.00;
-    const dataRate = 125.00; // Premium rate for data analysis & interactive dataviz
-    
-    let standardHours = 319.5; // Legacy logged hours
-    let dataHours = 0.0;
-    
-    // Log new sessions
-    standardHours += 23.5; // Site-wide template, Dynamic Routing System, Phase 2 Google Sheets CRM
-    dataHours += 20.0; // Data Portal maps, Gap Tracker algorithms, D3 Volunteer physics engine
-    
-    // Recent Work logging (Mar 24)
-    standardHours += 32.0; // Mobile Responsiveness UI Audit, Grassroots Chat Upgrades, CRM Pages & Pipeline Dashboard, AI Logos, Theme Customization
-    dataHours += 8.0; // Dashboard Data Population, Combining Precinct Data
-    
-    // April 2026 Operations
-    standardHours += 25.0; // Civics Portals, 2026 Roster UI, VDR Partner Integration, Ballot Board Explainer
-    dataHours += 15.0; // PII scrubbing algorithms, 2026 data reconciliation pipelines, LUPE Campaign engineering
-    
-    // May/June 2026 Operations
-    standardHours += 15.0; // System maintenance, script generation, and general programming
-    dataHours += 25.0; // VAN Runoff data parsing, Precinct proportional turnout estimates, and data analytics
-    
-    let totalValue = (standardRate * standardHours) + (dataRate * dataHours);
+  // Value Calculation variables
+  // Estimating standard agency/freelance rates from 2021-2024 for full stack Web Dev
+  const standardRate = 85.0;
+  const dataRate = 125.0; // Premium rate for data analysis & interactive dataviz
 
-    // Create the footer element
-    const valueFooter = document.createElement("div");
-    valueFooter.className = "volunteer-value-banner";
-    valueFooter.innerHTML = `
+  let standardHours = 319.5; // Legacy logged hours
+  let dataHours = 0.0;
+
+  // Log new sessions
+  standardHours += 23.5; // Site-wide template, Dynamic Routing System, Phase 2 Google Sheets CRM
+  dataHours += 20.0; // Data Portal maps, Gap Tracker algorithms, D3 Volunteer physics engine
+
+  // Recent Work logging (Mar 24)
+  standardHours += 32.0; // Mobile Responsiveness UI Audit, Grassroots Chat Upgrades, CRM Pages & Pipeline Dashboard, AI Logos, Theme Customization
+  dataHours += 8.0; // Dashboard Data Population, Combining Precinct Data
+
+  // April 2026 Operations
+  standardHours += 25.0; // Civics Portals, 2026 Roster UI, VDR Partner Integration, Ballot Board Explainer
+  dataHours += 15.0; // PII scrubbing algorithms, 2026 data reconciliation pipelines, LUPE Campaign engineering
+
+  // May/June 2026 Operations
+  standardHours += 15.0; // System maintenance, script generation, and general programming
+  dataHours += 25.0; // VAN Runoff data parsing, Precinct proportional turnout estimates, and data analytics
+
+  let totalValue = standardRate * standardHours + dataRate * dataHours;
+
+  // Create the footer element
+  const valueFooter = document.createElement("div");
+  valueFooter.className = "volunteer-value-banner";
+  valueFooter.innerHTML = `
         <div class="volunteer-value-content" style="
             text-align: center; 
             padding: 1rem; 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
             This digital infrastructure was developed by volunteer computer programmers. 
             <br/>
             <span style="color: var(--accent); font-weight: bold; font-size: 1.1rem;">
-                Estimated Market Value: $${totalValue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} 
+                Estimated Market Value: $${totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} 
             </span> 
             <span style="font-size: 0.8rem; opacity: 0.8; margin-left: 0.5rem;">
                 (${(standardHours + dataHours).toLocaleString()} total hrs)
@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
-    const sustainingBanner = document.createElement("div");
-    sustainingBanner.className = "sustaining-member-banner";
-    sustainingBanner.innerHTML = `
+  const sustainingBanner = document.createElement("div");
+  sustainingBanner.className = "sustaining-member-banner";
+  sustainingBanner.innerHTML = `
         <div style="text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, #1e3a8a, #0f172a); color: white; border-top: 2px solid var(--accent); position: relative; z-index: 10;">
             <h3 style="margin: 0 0 0.5rem 0; font-size: 1.4rem; color: #fff;">Become a Sustaining Member</h3>
             <p style="margin: 0 auto 1.5rem auto; font-size: 1rem; max-width: 600px; color: #cbd5e1;">
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
-    // Append to the very end of the body
-    document.body.appendChild(sustainingBanner);
-    document.body.appendChild(valueFooter);
+  // Append to the very end of the body
+  document.body.appendChild(sustainingBanner);
+  document.body.appendChild(valueFooter);
 });

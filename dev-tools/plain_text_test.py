@@ -1,19 +1,22 @@
-import smtplib
-from email.message import EmailMessage
-import sys
 import getpass
+import smtplib
+import sys
+from email.message import EmailMessage
+
 
 def run_diagnostic():
     sender_email = "info@hidalgocountydems.org"
     print("\n--- INITIATING PURE PLAIN-TEXT DIAGNOSTIC ---")
     sender_password = getpass.getpass(f"🔑 Enter SMTP password for {sender_email}: ")
 
-    # No HTML. No links. Just plain text. 
+    # No HTML. No links. Just plain text.
     msg = EmailMessage()
-    msg.set_content("If you receive this, it proves that Google was blocking the HTML hyperlinks, not your domain.")
-    msg['Subject'] = "Diagnostic: Plain Text Test"
-    msg['From'] = sender_email
-    msg['To'] = "romerodeab@gmail.com"
+    msg.set_content(
+        "If you receive this, it proves that Google was blocking the HTML hyperlinks, not your domain."
+    )
+    msg["Subject"] = "Diagnostic: Plain Text Test"
+    msg["From"] = sender_email
+    msg["To"] = "romerodeab@gmail.com"
 
     try:
         print("\n[Connecting...]")
@@ -24,6 +27,7 @@ def run_diagnostic():
         print("\n✅ Sent plain text message.")
     except Exception as e:
         print(f"\n❌ ERROR: {e}")
+
 
 if __name__ == "__main__":
     run_diagnostic()

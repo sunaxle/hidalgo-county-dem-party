@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Weekend of Action: June 6-7, 2026 - Email Templates
 
 ## Template 1: General Volunteer Call to Action

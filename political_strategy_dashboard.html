@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+
   <meta name="description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -339,7 +341,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: 1.5rem;
-      outline: none;
+      
       border-bottom: 1px solid rgba(255,255,255,0.1);
       padding-bottom: 5px;
       transition: border-color 0.2s;
@@ -366,7 +368,7 @@
       font-family: 'Montserrat', sans-serif;
       min-height: 120px;
       resize: vertical;
-      outline: none;
+      
       transition: border-color 0.2s;
     }
     .notes-textarea:focus { border-color: #38bdf8; }
@@ -498,7 +500,7 @@
 
       return (
         <div className="hub-container">
-          <svg className="hub-circle">
+          <svg aria-hidden="true" className="hub-circle">
             <circle className="hub-bg" cx="140" cy="140" r={radius} />
             <circle 
               className="hub-progress" 
@@ -587,7 +589,7 @@
 
     const SVGConnections = ({ nodes, connections }) => {
       return (
-        <svg className="svg-layer">
+        <svg aria-hidden="true" className="svg-layer">
           <defs>
             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="3" result="blur" />

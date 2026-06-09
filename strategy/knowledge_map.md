@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Hidalgo County Democratic Party - Strategy & Knowledge Map
 
 This document serves as the central hub for leadership strategy, ongoing initiatives, and qualitative notes regarding the operations of the Hidalgo County Democratic Party. As you upload voice memos and share thoughts, we will synthesize them into this knowledge base.

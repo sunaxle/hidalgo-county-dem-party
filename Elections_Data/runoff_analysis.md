@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Hidalgo County Primary Runoff Analysis
 
 This report analyzes the official precinct-by-precinct voting data for the most recent primary runoff.

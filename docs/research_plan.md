@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Precinct Recruitment Research Plan
 
 ## Current State of Affairs (Hidalgo County)

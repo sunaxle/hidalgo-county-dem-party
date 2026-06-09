@@ -1,3 +1,5 @@
+[[Politics]]
+
 # mobile-text-linter
 
 To install dependencies:

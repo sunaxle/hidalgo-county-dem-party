@@ -1,13 +1,14 @@
 :root {
-  --tx-navy: #002D54;
-  --tx-orange: #FD5F00;
-  --tx-sky: #00AEF3;
-  --tx-light-blue: #A8C5DA;
-  --tx-white: #FFFFFF;
+  --tx-navy: #002d54;
+  --tx-orange: #fd5f00;
+  --tx-sky: #00aef3;
+  --tx-light-blue: #a8c5da;
+  --tx-white: #ffffff;
 }
 
-html, body.tx-clone {
-  font-family: 'Montserrat', 'Inter', sans-serif;
+html,
+body.tx-clone {
+  font-family: "Montserrat", "Inter", sans-serif;
   background-color: var(--tx-white);
   color: var(--tx-navy);
   margin: 0;
@@ -57,8 +58,9 @@ html, body.tx-clone {
   margin-bottom: 0.2rem;
 }
 
-.tx-clone-logo-text-left, .tx-clone-logo-text-right {
-  font-family: 'Alfa Slab One', 'Rockwell', 'Courier Bold', serif;
+.tx-clone-logo-text-left,
+.tx-clone-logo-text-right {
+  font-family: "Alfa Slab One", "Rockwell", "Courier Bold", serif;
   font-size: 3.2rem;
   font-weight: 400; /* Alfa Slab One is naturally heavy */
   letter-spacing: -1.5px;
@@ -135,7 +137,7 @@ html, body.tx-clone {
     padding: 1.5rem 1rem;
     z-index: 5000;
   }
-  
+
   .tx-mobile-menu-btn {
     display: block;
     position: absolute;
@@ -148,11 +150,11 @@ html, body.tx-clone {
   #google_translate_element {
     z-index: 1 !important;
   }
-  
+
   .tx-clone-nav-socials {
     justify-content: center;
     width: 100%;
-    margin-top: 2rem; 
+    margin-top: 2rem;
     pointer-events: none; /* Prevent static icons from capturing erroneous taps */
   }
   .tx-clone-nav-center {
@@ -176,8 +178,8 @@ html, body.tx-clone {
   .tx-clone-nav-links.active {
     display: flex; /* Show when active */
   }
-  .tx-clone-nav-links a, 
-  .tx-clone-nav-links .nav-item, 
+  .tx-clone-nav-links a,
+  .tx-clone-nav-links .nav-item,
   .tx-clone-nav-links .dropdown > span,
   .tx-clone-nav-links .dropdown > a {
     font-size: 0.95rem;
@@ -206,7 +208,7 @@ html, body.tx-clone {
     border: none;
     background: transparent;
   }
-  
+
   /* Fallback for JS manual toggle */
   .tx-clone-nav-links .dropdown.active .dropdown-content {
     display: block !important;
@@ -225,7 +227,9 @@ html, body.tx-clone {
 
 /* Hero */
 .tx-clone-hero {
-  background-image: linear-gradient(rgba(0, 45, 84, 0.7), rgba(0, 45, 84, 0.8)), url('../images/hidalgo-exterior-d2100-675.avif');
+  background-image:
+    linear-gradient(rgba(0, 45, 84, 0.7), rgba(0, 45, 84, 0.8)),
+    url("../images/hidalgo-exterior-d2100-675.avif");
   background-size: cover;
   background-position: center;
   padding: 8rem 5%;
@@ -238,7 +242,8 @@ html, body.tx-clone {
   min-height: 80vh;
 }
 
-.tx-clone-hero-left, .tx-clone-hero-right {
+.tx-clone-hero-left,
+.tx-clone-hero-right {
   flex: 1;
   min-width: 300px;
 }
@@ -249,7 +254,7 @@ html, body.tx-clone {
   color: var(--tx-navy);
   padding: 3.5rem 2.5rem;
   border-radius: 8px; /* Sharper corners */
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .tx-clone-form-group {
@@ -264,13 +269,14 @@ html, body.tx-clone {
   border-radius: 4px;
   font-size: 1.1rem;
   background: #f9f9f9;
-  outline: none;
-  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-family: "Montserrat", "Inter", sans-serif;
   transition: border-color 0.3s ease;
 }
 
 .tx-clone-hero-left input:focus {
   border-color: var(--tx-navy);
+  outline: 3px solid var(--tx-navy);
+  outline-offset: 2px;
   background: white;
 }
 
@@ -283,7 +289,7 @@ html, body.tx-clone {
   border: none;
   border-radius: 4px;
   font-size: 1.25rem;
-  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-family: "Montserrat", "Inter", sans-serif;
   font-weight: 800;
   cursor: pointer;
   text-transform: uppercase;
@@ -304,7 +310,7 @@ html, body.tx-clone {
   text-transform: capitalize;
   background: none;
   -webkit-text-fill-color: white;
-  text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .tx-clone-hero-btns {
@@ -320,7 +326,7 @@ html, body.tx-clone {
   border-radius: 4px;
   text-decoration: none;
   font-weight: 800;
-  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-family: "Montserrat", "Inter", sans-serif;
   font-size: 1.15rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -425,8 +431,8 @@ html, body.tx-clone {
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  font-family: 'Montserrat', 'Inter', sans-serif;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  font-family: "Montserrat", "Inter", sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   letter-spacing: 1px;
 }
 
@@ -489,7 +495,7 @@ html, body.tx-clone {
 }
 
 .tx-clone-footer p {
-  color: #A8C5DA;
+  color: #a8c5da;
   margin-bottom: 0.5rem;
 }
 
@@ -525,7 +531,7 @@ html, body.tx-clone {
   left: 0;
   background-color: #ffffff;
   min-width: 200px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   z-index: 2000;

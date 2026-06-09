@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Hidalgo County Primary Runoff Canvas Analysis
 
 ## 1. Voting Methods Breakdown (Democratic Primary)

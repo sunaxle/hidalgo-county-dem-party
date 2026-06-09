@@ -1,14 +1,16 @@
-import smtplib
-from email.message import EmailMessage
-import sys
 import getpass
+import smtplib
+import sys
+from email.message import EmailMessage
 
 TEMPLATE_FILE = "dev-tools/top_tier_blast_preview.html"
 MY_EMAIL = "romerodeab@gmail.com"
 
+
 def load_template():
-    with open(TEMPLATE_FILE, "r", encoding="utf-8") as f:
+    with open(TEMPLATE_FILE, encoding="utf-8") as f:
         return f.read()
+
 
 if __name__ == "__main__":
     sender_email = "info@hidalgocountydems.org"
@@ -21,10 +23,12 @@ if __name__ == "__main__":
         sys.exit(1)
 
     msg = EmailMessage()
-    msg.add_alternative(html_content, subtype='html')
-    msg['Subject'] = "🚀 Major Launch: Massive Updates to the Hidalgo Dems Digital Infrastructure"
-    msg['From'] = sender_email
-    msg['To'] = MY_EMAIL
+    msg.add_alternative(html_content, subtype="html")
+    msg["Subject"] = (
+        "🚀 Major Launch: Massive Updates to the Hidalgo Dems Digital Infrastructure"
+    )
+    msg["From"] = sender_email
+    msg["To"] = MY_EMAIL
 
     print("Connecting to mail.hidalgocountydems.org via 465 (SSL)...")
     try:

@@ -1,8 +1,13 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    match /voicemails/{fileName} {
+      allow create: if request.resource.size < 50 * 1024 * 1024
+                    && request.resource.contentType.matches('audio/.*');
+      allow read, update, delete: if false;
+    }
     match /{allPaths=**} {
-      allow read, write: if true; // Temporarily open for audio uploads
+      allow read, write: if false;
     }
   }
 }

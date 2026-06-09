@@ -1,3 +1,5 @@
+[[Politics]]
+
 # Hidalgo County Democratic Party: Brand Identity & Vision
 
 > **Note to user:** Please fill this document out with the core reasoning behind building this platform. Our AI agents will refer back to this whenever making design, copy, or structural decisions on the website so it always remains aligned with your strategy.

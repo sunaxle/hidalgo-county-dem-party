@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Intent-Based Navigation - HCDP</title>
+  <meta name="description" content="Demonstrating instant pre-rendering and fluid view transitions using the Speculation Rules API.">
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Speculation Rules API for Intent-based Pre-rendering -->
+  <script type="speculationrules">
+  {
+    "prerender": [
+      {
+        "source": "list",
+        "urls": ["volunteer.html", "vote.html", "about.html"],
+        "eagerness": "moderate"
+      },
+      {
+        "source": "document",
+        "where": {
+          "and": [
+            { "href_matches": "/*" },
+            { "not": { "selector_matches": ".no-prerender" } }
+          ]
+        },
+        "eagerness": "conservative"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* View Transitions Configuration */
+    @view-transition {
+      navigation: auto;
+    }
+    
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.4s;
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .intent-container {
+      max-width: 1200px;
+      margin: 120px auto 40px;
+      padding: 0 20px;
+    }
+    
+    .hero-zone {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 3rem 1rem;
+      background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .hero-zone h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      view-transition-name: hero-title;
+    }
+    
+    .hero-zone p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    /* Interactive Card with Functional Motion */
+    .intent-card {
+      display: block;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: #f8fafc;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    
+    /* Glow effect follows mouse intent */
+    .intent-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, rgba(34, 211, 238, 0.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .intent-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(34, 211, 238, 0.1);
+    }
+    
+    .intent-card:hover::before {
+      opacity: 1;
+    }
+    
+    .intent-card:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+    
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+    
+    .intent-card:hover .card-icon {
+      transform: scale(1.1) translateY(-5px);
+    }
+    
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Individual view transition names for seamless expansion */
+    #card-volunteer { view-transition-name: card-volunteer; }
+    #card-vote { view-transition-name: card-vote; }
+    #card-about { view-transition-name: card-about; }
+    
+  </style>
+</head>
+<body>
+  <!-- Nav Placeholder -->
+  <div id="nav-placeholder"></div>
+
+  <div class="intent-container">
+    <div class="hero-zone">
+      <h1>Instant Navigation</h1>
+      <p>Hover over a card to trigger background pre-rendering via the Speculation Rules API. When you click, the page load will be nearly instantaneous with a fluid cross-document view transition.</p>
+    </div>
+
+    <div class="nav-grid">
+      <!-- Volunteer Card -->
+      <a href="volunteer.html" class="intent-card" id="card-volunteer">
+        <div class="card-icon">🤝</div>
+        <div class="card-title">Get Involved</div>
+        <div class="card-desc">Join the grassroots movement. Pre-renders the Volunteer hub on hover.</div>
+      </a>
+      
+      <!-- Vote Card -->
+      <a href="vote.html" class="intent-card" id="card-vote">
+        <div class="card-icon">🗳️</div>
+        <div class="card-title">Voter Resources</div>
+        <div class="card-desc">Find polling locations and ID requirements instantly.</div>
+      </a>
+      
+      <!-- About Card -->
+      <a href="about.html" class="intent-card" id="card-about">
+        <div class="card-icon">🌟</div>
+        <div class="card-title">Our Mission</div>
+        <div class="card-desc">Learn about the party's platform and history seamlessly.</div>
+      </a>
+    </div>
+    
+    <div style="margin-top: 4rem; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.2);">
+      <h3 style="color: var(--accent); margin-bottom: 1rem;">Developer Console Simulator</h3>
+      <div id="log-output" style="font-family: monospace; font-size: 0.85rem; color: #4ade80; min-height: 80px;">
+        > Speculation Rules engine initialized.<br>
+        > Waiting for user intent...
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load standard navbar
+    fetch('nav_fragment.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+      })
+      .catch(e => console.log('Navigation fetch omitted for mockup'));
+
+    // Simulated logging for demonstration
+    const logger = document.getElementById('log-output');
+    const cards = document.querySelectorAll('.intent-card');
+    
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', (e) => {
+        const url = card.getAttribute('href');
+        logger.innerHTML += `<br>> <strong>[INTENT DETECTED]</strong> Aggressively pre-rendering <span style="color:white;">${url}</span> in background...`;
+        logger.scrollTop = logger.scrollHeight;
+      });
+      
+      card.addEventListener('click', (e) => {
+        // Prevent default only if browser doesn't support View Transitions natively yet to simulate it
+        if (!document.startViewTransition) {
+          e.preventDefault();
+          logger.innerHTML += `<br>> <strong>[TRANSITION INITIATED]</strong> Executing fallback animation to <span style="color:white;">${card.getAttribute('href')}</span>.`;
+          logger.scrollTop = logger.scrollHeight;
+          setTimeout(() => window.location.href = card.getAttribute('href'), 300);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+[[Politics]]
+
 Subject: Urgent: Request Your Precinct VAN Access Today!
 
 Hi [Name],

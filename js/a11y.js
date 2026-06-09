@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Inject the floating UI securely into the DOM
-    const a11yHTML = `
+  // 1. Inject the floating UI securely into the DOM
+  const a11yHTML = `
         <div id="a11y-widget-container">
             <button id="a11y-toggle-btn" aria-label="Open Accessibility Menu" title="Accessibility Options">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -40,60 +40,60 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     `;
 
-    document.body.insertAdjacentHTML('beforeend', a11yHTML);
+  document.body.insertAdjacentHTML("beforeend", a11yHTML);
 
-    // 2. Cache DOM elements
-    const toggleBtn = document.getElementById('a11y-toggle-btn');
-    const closeBtn = document.getElementById('a11y-close-btn');
-    const menu = document.getElementById('a11y-menu');
-    const hcToggle = document.getElementById('a11y-hc-toggle');
-    const ltToggle = document.getElementById('a11y-lt-toggle');
-    const rmToggle = document.getElementById('a11y-rm-toggle');
+  // 2. Cache DOM elements
+  const toggleBtn = document.getElementById("a11y-toggle-btn");
+  const closeBtn = document.getElementById("a11y-close-btn");
+  const menu = document.getElementById("a11y-menu");
+  const hcToggle = document.getElementById("a11y-hc-toggle");
+  const ltToggle = document.getElementById("a11y-lt-toggle");
+  const rmToggle = document.getElementById("a11y-rm-toggle");
 
-    // 3. UI Interactions
-    toggleBtn.addEventListener('click', () => menu.classList.toggle('active'));
-    closeBtn.addEventListener('click', () => menu.classList.remove('active'));
+  // 3. UI Interactions
+  toggleBtn.addEventListener("click", () => menu.classList.toggle("active"));
+  closeBtn.addEventListener("click", () => menu.classList.remove("active"));
 
-    // 4. Preference Synchronization
-    const applyPreferences = () => {
-        // High Contrast
-        if (hcToggle.checked) {
-            document.body.classList.add('a11y-high-contrast');
-            localStorage.setItem('a11y-hc', 'true');
-        } else {
-            document.body.classList.remove('a11y-high-contrast');
-            localStorage.setItem('a11y-hc', 'false');
-        }
+  // 4. Preference Synchronization
+  const applyPreferences = () => {
+    // High Contrast
+    if (hcToggle.checked) {
+      document.body.classList.add("a11y-high-contrast");
+      localStorage.setItem("a11y-hc", "true");
+    } else {
+      document.body.classList.remove("a11y-high-contrast");
+      localStorage.setItem("a11y-hc", "false");
+    }
 
-        // Large Text
-        if (ltToggle.checked) {
-            document.body.classList.add('a11y-large-text');
-            localStorage.setItem('a11y-lt', 'true');
-        } else {
-            document.body.classList.remove('a11y-large-text');
-            localStorage.setItem('a11y-lt', 'false');
-        }
+    // Large Text
+    if (ltToggle.checked) {
+      document.body.classList.add("a11y-large-text");
+      localStorage.setItem("a11y-lt", "true");
+    } else {
+      document.body.classList.remove("a11y-large-text");
+      localStorage.setItem("a11y-lt", "false");
+    }
 
-        // Reduced Motion
-        if (rmToggle.checked) {
-            document.body.classList.add('a11y-reduced-motion');
-            localStorage.setItem('a11y-rm', 'true');
-        } else {
-            document.body.classList.remove('a11y-reduced-motion');
-            localStorage.setItem('a11y-rm', 'false');
-        }
-    };
+    // Reduced Motion
+    if (rmToggle.checked) {
+      document.body.classList.add("a11y-reduced-motion");
+      localStorage.setItem("a11y-rm", "true");
+    } else {
+      document.body.classList.remove("a11y-reduced-motion");
+      localStorage.setItem("a11y-rm", "false");
+    }
+  };
 
-    // 5. Event Listeners for Toggles
-    hcToggle.addEventListener('change', applyPreferences);
-    ltToggle.addEventListener('change', applyPreferences);
-    rmToggle.addEventListener('change', applyPreferences);
+  // 5. Event Listeners for Toggles
+  hcToggle.addEventListener("change", applyPreferences);
+  ltToggle.addEventListener("change", applyPreferences);
+  rmToggle.addEventListener("change", applyPreferences);
 
-    // 6. Initial Load Check
-    if (localStorage.getItem('a11y-hc') === 'true') hcToggle.checked = true;
-    if (localStorage.getItem('a11y-lt') === 'true') ltToggle.checked = true;
-    if (localStorage.getItem('a11y-rm') === 'true') rmToggle.checked = true;
-    
-    // Apply state to body instantly
-    applyPreferences();
+  // 6. Initial Load Check
+  if (localStorage.getItem("a11y-hc") === "true") hcToggle.checked = true;
+  if (localStorage.getItem("a11y-lt") === "true") ltToggle.checked = true;
+  if (localStorage.getItem("a11y-rm") === "true") rmToggle.checked = true;
+
+  // Apply state to body instantly
+  applyPreferences();
 });
