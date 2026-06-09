@@ -432,7 +432,22 @@
 <div class="tx-clone-nav-accent-bar"></div>
 <!-- Hero Section -->
 <header class="civics-hero"><h1>Voter Registration Goals</h1><p>Tracking our progress towards a historic turnout in Hidalgo County.</p></header>
-<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title">Live Goal Tracker</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div></div></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><canvas height="200" id="voterChart" width="400"></canvas></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;"><h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Historical Voter Registration Data</h3><table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #94a3b8;"><th style="padding: 1rem;">Year</th><th style="padding: 1rem;">Election Type</th><th style="padding: 1rem;">Registered Voters</th></tr></thead><tbody id="historicalDataTableBody"></tbody></table></div>
+<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title">Live Goal Tracker</h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div></div></div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+  <div class="civics-card" style="text-align: center; cursor: default;">
+    <h3 style="color: #94a3b8;">Average Daily Rate</h3>
+    <div id="daily-rate" style="font-size: 3rem; font-weight: 800; color: #fcd34d; font-family: 'Alfa Slab One', cursive;">--/day</div>
+    <p style="color: #cbd5e1; margin-top: 0.5rem;">New voters registered per day</p>
+  </div>
+  <div class="civics-card" style="text-align: center; cursor: default; background: rgba(168, 85, 247, 0.1); border-color: rgba(168, 85, 247, 0.3);">
+    <h3 style="color: #d8b4fe;">Projected Total by Oct 5th</h3>
+    <div id="projected-total" style="font-size: 3rem; font-weight: 800; color: white; font-family: 'Alfa Slab One', cursive;">---,---</div>
+    <p style="color: #e9d5ff; margin-top: 0.5rem; font-weight: 600;" id="projected-diff">-- voters short of goal</p>
+  </div>
+</div>
+
+<div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><canvas height="200" id="voterChart" width="400"></canvas></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;"><h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Historical Voter Registration Data</h3><table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #94a3b8;"><th style="padding: 1rem;">Year</th><th style="padding: 1rem;">Election Type</th><th style="padding: 1rem;">Registered Voters</th></tr></thead><tbody id="historicalDataTableBody"></tbody></table></div>
 
 <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;">
   <h3 style="color: #fcd34d; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Daily Tracking & 30-Day Trend</h3>
@@ -497,6 +512,49 @@
           // Get the latest 2026 data
           const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
           document.getElementById('current-count').textContent = currentCount.toLocaleString();
+          
+          // Calculate Projections
+          if (voterRegistrationData.length > 1) {
+            const firstData = voterRegistrationData[0];
+            const lastData = voterRegistrationData[voterRegistrationData.length - 1];
+            
+            // Fix parsing by forcing a specific time to avoid UTC-date-shift issues
+            const firstDate = new Date(firstData.date + 'T12:00:00Z');
+            const lastDate = new Date(lastData.date + 'T12:00:00Z');
+            const daysElapsed = (lastDate - firstDate) / (1000 * 60 * 60 * 24);
+            const totalChange = lastData.count - firstData.count;
+            
+            let dailyRate = 0;
+            if (daysElapsed > 0) {
+              dailyRate = totalChange / daysElapsed;
+            }
+            
+            const targetDateStr = (typeof voterRegistrationGoals !== 'undefined' && voterRegistrationGoals.targetDate) ? voterRegistrationGoals.targetDate : "2026-10-05";
+            const targetDate = new Date(targetDateStr + 'T12:00:00Z');
+            const daysRemaining = Math.max(0, (targetDate - lastDate) / (1000 * 60 * 60 * 24));
+            
+            const projectedAddition = dailyRate * daysRemaining;
+            const projectedTotal = Math.round(currentCount + projectedAddition);
+            
+            const rateEl = document.getElementById('daily-rate');
+            const projEl = document.getElementById('projected-total');
+            const diffEl = document.getElementById('projected-diff');
+            const lowGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.lowGoal : 480000;
+            
+            if (rateEl) rateEl.textContent = `+${Math.round(dailyRate)}/day`;
+            if (projEl) projEl.textContent = projectedTotal.toLocaleString();
+            
+            if (diffEl) {
+              if (projectedTotal < lowGoal) {
+                const shortBy = lowGoal - projectedTotal;
+                diffEl.textContent = `⚠ ${shortBy.toLocaleString()} voters short of the 480k minimum goal!`;
+                diffEl.style.color = '#fca5a5'; // Red warning
+              } else {
+                diffEl.textContent = `On track to hit goal!`;
+                diffEl.style.color = '#86efac'; // Green success
+              }
+            }
+          }
           
           // Combine labels and data
           const labels = [...historicalLabels, '2026 (Current)'];
