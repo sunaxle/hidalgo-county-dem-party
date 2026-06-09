@@ -445,6 +445,20 @@
     <div id="projected-total" style="font-size: 3rem; font-weight: 800; color: white; font-family: 'Alfa Slab One', cursive;">---,---</div>
     <p style="color: #e9d5ff; margin-top: 0.5rem; font-weight: 600;" id="projected-diff">-- voters short of goal</p>
   </div>
+  <div class="civics-card" style="text-align: center; cursor: default; background: rgba(52, 211, 153, 0.05); border-color: rgba(52, 211, 153, 0.2);">
+    <h3 style="color: #34d399;">Required Daily Rate</h3>
+    <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 1.5rem;">
+      <div>
+        <div id="req-rate-480" style="font-size: 2.2rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">--</div>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.25rem;">for 480k base</p>
+      </div>
+      <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.1);"></div>
+      <div>
+        <div id="req-rate-500" style="font-size: 2.2rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">--</div>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin-top: 0.25rem;">for 500k stretch</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"><canvas height="200" id="voterChart" width="400"></canvas></div><div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;"><h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Historical Voter Registration Data</h3><table style="width: 100%; border-collapse: collapse; text-align: left;"><thead><tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #94a3b8;"><th style="padding: 1rem;">Year</th><th style="padding: 1rem;">Election Type</th><th style="padding: 1rem;">Registered Voters</th></tr></thead><tbody id="historicalDataTableBody"></tbody></table></div>
@@ -540,6 +554,7 @@
             const projEl = document.getElementById('projected-total');
             const diffEl = document.getElementById('projected-diff');
             const lowGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.lowGoal : 480000;
+            const highGoal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.highGoal : 500000;
             
             if (rateEl) rateEl.textContent = `+${Math.round(dailyRate)}/day`;
             if (projEl) projEl.textContent = projectedTotal.toLocaleString();
@@ -553,6 +568,16 @@
                 diffEl.textContent = `On track to hit goal!`;
                 diffEl.style.color = '#86efac'; // Green success
               }
+            }
+            
+            // Calculate Required Rates
+            const req480 = document.getElementById('req-rate-480');
+            const req500 = document.getElementById('req-rate-500');
+            if (daysRemaining > 0) {
+              const reqDaily480 = Math.max(0, (lowGoal - currentCount) / daysRemaining);
+              const reqDaily500 = Math.max(0, (highGoal - currentCount) / daysRemaining);
+              if (req480) req480.textContent = `+${Math.ceil(reqDaily480)}`;
+              if (req500) req500.textContent = `+${Math.ceil(reqDaily500)}`;
             }
           }
           
