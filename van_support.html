@@ -104,7 +104,6 @@
   
   <link rel="stylesheet" href="css/state_party_clone.css" />
 
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
 <script>
@@ -122,101 +121,8 @@
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
 <style>
-    .van-dashboard-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    .metrics-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      margin-bottom: 40px;
-      text-align: center;
-      border-top: 4px solid var(--primary-blue);
-    }
-    .progress-container {
-      width: 100%;
-      background-color: #e2e8f0;
-      border-radius: 20px;
-      margin: 20px 0;
-      height: 24px;
-      overflow: hidden;
-    }
-    .progress-bar {
-      height: 100%;
-      background-color: var(--primary-blue);
-      text-align: center;
-      color: white;
-      font-weight: bold;
-      line-height: 24px;
-      transition: width 0.5s ease-in-out;
-    }
-    .chair-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .chair-table th, .chair-table td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #e2e8f0;
-      color: #334155;
-    }
-    .chair-table th {
-      background-color: #f8fafc;
-      font-weight: 700;
-      color: #334155;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-    }
-    .chair-table tr:hover {
-      background-color: #f1f5f9;
-    }
     
-    .status-badge {
-      padding: 6px 12px;
-      border-radius: 9999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .status-pending { background-color: #fef08a; color: #854d0e; }
-    .status-access { background-color: #bbf7d0; color: #166534; }
-    .status-optout { background-color: #fecaca; color: #991b1b; }
     
-    .contact-log {
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-    .contact-log ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-    
-    .filters {
-      margin-bottom: 20px;
-      display: flex;
-      gap: 15px;
-    }
-    .filter-btn {
-      padding: 8px 16px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      background: white;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .filter-btn.active {
-      background: var(--primary-blue);
-      color: white;
-      border-color: var(--primary-blue);
-    }
   </style>
 </head>
 <body class="tx-clone">
@@ -419,62 +325,7 @@
       </main>
   </section>
 
-  <!-- VAN Access Dashboard -->
-  <section class="container fade-in" style="margin-bottom: 4rem;">
-    <main class="van-dashboard-container">
-    <h1 style="color: var(--primary-blue); font-weight: 900; margin-bottom: 10px;">VAN Access Dashboard</h1>
-    <p style="font-size: 1.1rem; color: #475569; margin-bottom: 30px;">Track Precinct Chair VAN onboarding and communication logs.<br><em>*Note: Chairs without an email address on file have been excluded from these metrics.</em></p>
-    
-    <div class="metrics-card">
-      <h2 style="margin-bottom: 15px;">Onboarding Progress</h2>
-      <div class="progress-container">
-        <div class="progress-bar" id="progressBar" style="width: 0%;">0%</div>
-      </div>
-      <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-        <div>
-          <div style="font-size: 2rem; font-weight: bold; color: var(--primary-blue);" id="statTotal">0</div>
-          <div style="color: #64748b; font-size: 0.9rem; text-transform: uppercase;">Total Chairs<br><small>(With Emails)</small></div>
-        </div>
-        <div>
-          <div style="font-size: 2rem; font-weight: bold; color: #166534;" id="statAccess">0</div>
-          <div style="color: #64748b; font-size: 0.9rem; text-transform: uppercase;">Have Access</div>
-        </div>
-        <div>
-          <div style="font-size: 2rem; font-weight: bold; color: #854d0e;" id="statPending">0</div>
-          <div style="color: #64748b; font-size: 0.9rem; text-transform: uppercase;">Pending</div>
-        </div>
-        <div>
-          <div style="font-size: 2rem; font-weight: bold; color: #991b1b;" id="statOptOut">0</div>
-          <div style="color: #64748b; font-size: 0.9rem; text-transform: uppercase;">Opted Out</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="filters" id="filterContainer">
-      <button class="filter-btn active" data-filter="all">All Valid Chairs</button>
-      <button class="filter-btn" data-filter="Pending">Pending Only</button>
-      <button class="filter-btn" data-filter="Has Access">Has Access</button>
-      <button class="filter-btn" data-filter="Opted Out">Opted Out</button>
-    </div>
-
-    <div style="overflow-x: auto;">
-      <table class="chair-table">
-        <thead>
-          <tr>
-            <th>Precinct</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>VAN Status</th>
-            <th>Recent Outreach Log</th>
-          </tr>
-        </thead>
-        <tbody id="chairTableBody">
-          <!-- Populated by JS -->
-        </tbody>
-      </table>
-    </div>
-  </main>
-  </section>
+  
 
   <!-- Footer -->
   <footer class="tx-clone-footer">
@@ -503,106 +354,5 @@
 
   <script src="js/a11y.js"></script>
 
-<script src="js/chair_data.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      try {
-        const tbody = document.getElementById('chairTableBody');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        
-        if (!tbody) {
-          console.warn("Table body element not found.");
-          return;
-        }
-
-        let currentFilter = 'all';
-        
-        // Filter out any chairs that DO NOT have an email address
-        const validChairs = (typeof chairDataList2026 !== 'undefined') 
-            ? chairDataList2026.filter(chair => chair && chair.email && chair.email.trim() !== '')
-            : [];
-            
-        if (validChairs.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No valid chair data available.</td></tr>';
-            return;
-        }
-        
-        function getStatusClass(status) {
-          if (status === 'Has Access') return 'status-access';
-          if (status === 'Opted Out') return 'status-optout';
-          return 'status-pending';
-        }
-        
-        function renderTable() {
-          tbody.innerHTML = '';
-          let accessCount = 0;
-          let pendingCount = 0;
-          let optOutCount = 0;
-          
-          validChairs.forEach(chair => {
-            const status = chair.vanStatus || 'Pending';
-            const logs = chair.contactLog || [];
-            
-            if (status === 'Has Access') accessCount++;
-            else if (status === 'Opted Out') optOutCount++;
-            else pendingCount++;
-            
-            if (currentFilter !== 'all' && status !== currentFilter) return;
-            
-            const tr = document.createElement('tr');
-            
-            let logHtml = '<em>No recent outreach logged.</em>';
-            if (logs.length > 0) {
-              logHtml = '<ul>' + logs.map(l => `<li>${l.date || 'Unknown Date'}: ${l.method || 'Unknown Method'} (by ${l.agent || 'Unknown'})</li>`).join('') + '</ul>';
-            }
-            
-            tr.innerHTML = `
-              <td><strong>${chair.precinct || 'N/A'}</strong></td>
-              <td>${chair.name || 'Unknown'}<br><small style="color:#64748b">${chair.email || ''} • ${chair.phone || 'No Phone'}</small></td>
-              <td>${chair.role || 'Unknown'}</td>
-              <td><span class="status-badge ${getStatusClass(status)}">${status}</span></td>
-              <td class="contact-log">${logHtml}</td>
-            `;
-            tbody.appendChild(tr);
-          });
-          
-          // Update Metrics based ONLY on valid chairs
-          const total = validChairs.length;
-          const statTotal = document.getElementById('statTotal');
-          const statAccess = document.getElementById('statAccess');
-          const statPending = document.getElementById('statPending');
-          const statOptOut = document.getElementById('statOptOut');
-          const progress = document.getElementById('progressBar');
-          
-          if (statTotal) statTotal.textContent = total;
-          if (statAccess) statAccess.textContent = accessCount;
-          if (statPending) statPending.textContent = pendingCount;
-          if (statOptOut) statOptOut.textContent = optOutCount;
-          
-          if (progress) {
-            const pct = total > 0 ? Math.round((accessCount / total) * 100) : 0;
-            progress.style.width = pct + '%';
-            progress.textContent = pct + '%';
-          }
-        }
-        
-        renderTable();
-        
-        // Filtering Logic
-        if (filterBtns && filterBtns.length > 0) {
-          filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-              filterBtns.forEach(b => b.classList.remove('active'));
-              e.target.classList.add('active');
-              currentFilter = e.target.getAttribute('data-filter');
-              renderTable();
-            });
-          });
-        }
-      } catch (e) {
-        console.error("Error initializing VAN dashboard:", e);
-      }
-    });
-  </script>
 </body>
 </html>
