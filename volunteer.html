@@ -3,110 +3,218 @@
 <head>
   <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
 
+  <meta name="description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volunteer Hub - Hidalgo Dems</title>
-  <meta name="description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
+  <title>Volunteer Hub | Hidalgo Dems</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
-    .volunteer-hero {
-      text-align: center;
+    /* Hall of Fame specific styles */
+    .hof-header {
       padding-top: 120px;
-      padding-bottom: 4rem;
+      text-align: center;
+      margin-bottom: 3rem;
     }
     
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    .tier-container {
+      margin-bottom: 4rem;
+    }
+    
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .tier-header h2 {
+      margin: 0;
+      color: var(--accent);
+      font-size: 1.8rem;
+    }
+    
+    .tier-badge {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border: 1px solid rgba(0, 240, 255, 0.3);
     }
 
-    .action-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
+    /* Executive Leadership Cards */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .leadership-card {
+      background: rgba(15, 23, 42, 0.6);
       border: 1px solid var(--glass-border);
-      border-radius: 1rem;
-      padding: 2.5rem;
+      border-radius: 12px;
+      padding: 2rem;
       text-align: center;
-      transition: var(--transition);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    .leadership-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .leadership-card h3 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    
+    .leadership-card p {
+      color: #94a3b8;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    /* Hall of Fame Grids (Block Walkers, Phone Bankers, etc.) */
+    .hof-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .hof-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1.5rem;
       display: flex;
-      flex-direction: column;
-      height: 100%;
+      align-items: center;
+      gap: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .hof-card:hover {
+      background: rgba(0, 240, 255, 0.05);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+    
+    .hof-rank {
+      font-size: 2rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.2);
+      min-width: 40px;
+    }
+    
+    .hof-top-3 .hof-rank {
+      color: #ffd700; /* Gold for top 3 */
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .hof-info h4 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    
+    .hof-info p {
+      margin: 0;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Spanish Translation Task Force */
+    .spanish-club-section {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 58, 138, 0.4));
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 4rem;
       position: relative;
       overflow: hidden;
     }
-
-    .action-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
+    
+    .spanish-club-header {
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .spanish-club-header h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .spanish-club-header p {
+      color: #cbd5e1;
+      max-width: 600px;
     }
 
-    .action-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      border-color: rgba(34, 211, 238, 0.2);
+    .spanish-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      position: relative;
+      z-index: 2;
     }
 
-    .action-card:hover::before {
-      transform: scaleX(1);
+    .translator-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .action-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-    }
-
-    .action-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+    .translator-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
       color: #fff;
     }
 
-    .action-card p {
-      flex-grow: 1;
-      margin-bottom: 2rem;
+    .request-translation-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: #3b82f6;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+    .request-translation-btn:hover {
+      background: #2563eb;
     }
 
-    .skills-section {
-      background: rgba(15, 23, 42, 0.8);
-      border-top: 1px solid var(--glass-border);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 5rem 0;
-      margin-top: 5rem;
+    /* Decorative background icon for Spanish section */
+    .bg-icon {
+      position: absolute;
+      right: -5%;
+      bottom: -20%;
+      font-size: 15rem;
+      opacity: 0.05;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .skill-tag {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      text-align: center;
-      font-weight: 600;
-      color: var(--accent);
-      transition: var(--transition);
-    }
-
-    .skill-tag:hover {
-      background: rgba(34, 211, 238, 0.1);
-      border-color: var(--accent);
-    }
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -130,17 +238,13 @@
   <link rel="stylesheet" href="css/a11y.css">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Volunteer Hub - Hidalgo Dems">
-  <meta property="og:description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
+  <meta property="og:title" content="Volunteer Hall of Fame | Hidalgo County Democrats">
+  <meta property="og:description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
 </head>
 <body class="tx-clone">
-<!-- Dynamic Background Shapes -->
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
-
-  <!-- Navigation -->
+<!-- Navigation -->
       <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
@@ -178,13 +282,11 @@
           <div class="dropdown-content">
           <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Chair Hub 🧭</a>
             <a href="donation_scenarios.html" style="color: #ec4899; font-weight: 800;">Donation Goals 💸</a>
-            <a href="volunteer.html">Volunteer</a>
+            <a href="volunteer.html" style="color: #4ade80; font-weight: 800;">Volunteer Hub</a>
             <a href="arena_training.html">The Arena</a>
             <a href="van_support.html" style="color: #38bdf8; font-weight: 600;">VAN Support Center 💻</a>
             <a href="vote.html">Resources</a>
             <a href="precinct_completion.html">Gap Tracker</a>
-            <a href="volunteer_dashboard.html">Volunteer Metrics</a>
-            <a href="volunteer_roster.html" style="color: #4ade80; font-weight: 600;">Volunteer Roster</a>
             <a href="sustaining_members.html" style="color: #f59e0b; font-weight: 600;">Sustaining Members ⭐</a>
             <a href="election_workers.html" style="color: #c084fc; font-weight: 800;">Election Workers 📋</a>
             <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
@@ -236,212 +338,171 @@
     </div>
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
+  <!-- Demonstration Mode Disclaimer Banner -->
+  <div class="demo-banner" style="background-color: #ef4444; color: white; text-align: center; padding: 1rem; margin-top: 4rem; z-index: 50; position: relative; font-weight: 500; font-size: 0.95rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border-bottom: 2px solid #b91c1c;">
+    <span style="font-size: 1.1rem; margin-right: 8px;">⚠️</span>
+    <strong>DEMONSTRATION MODE:</strong> The metrics and individual records displayed on this page are simulated mock data generated for layout testing purposes only. They do not represent official Hidalgo County Democratic Party figures or personnel.
+  </div>
 
-  <!-- Hero Section -->
-  <header class="volunteer-hero container fade-in">
-    <h1>Become a Volunteer</h1>
-    <p style="max-width: 800px; margin: 0 auto 2rem;">Thank you for stepping up to help the Hidalgo County Democratic Party. We have opportunities that fit all schedules, backgrounds, and skill levels. Tell us how you want to help build our community.</p>
-    <a href="https://www.mobilize.us/hidalgocountydemocraticparty/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">View Volunteer Shifts</a>
-  </header>
 
-  <!-- Action Categories -->
-  <section class="container" style="padding-top: 0;">
-    <div class="fade-in">
-      <h2 style="text-align: left; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem; margin-bottom: 1rem;">Choose Your Path</h2>
+  <main class="container fade-in">
+    <div class="hof-header">
+      <h1>Volunteer Hall of Fame</h1>
+      <p style="color: #94a3b8; max-width: 650px; margin: 0 auto;">Recognizing the grassroots organizers and dedicated party members who build the foundation of our local democracy. Track our operational metrics across all field tiers.</p>
     </div>
-    
-    <div class="action-grid">
+
+    <!-- Tier 1 & 2: Structural Leadership -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Executive Field Leadership</h2>
+        <span class="tier-badge">Tier 1 & 2</span>
+      </div>
       
-      <!-- Election Workers -->
-      <div class="action-card fade-in">
-        <div class="action-icon">🗳️</div>
-        <h3>Election Workers</h3>
-        <p>Democracy requires honest hands to function. Sign up to be an Election Judge or Clerk and help run the polling locations in Hidalgo County.</p>
-        <a href="contact.html" class="btn btn-secondary" style="width: 100%;">Sign Up to Work</a>
-      </div>
-
-      <!-- Precinct Chairs -->
-      <div class="action-card fade-in" style="transition-delay: 0.1s;">
-        <div class="action-icon">🏘️</div>
-        <h3>Precinct Chairs</h3>
-        <p>Be the leader in your own neighborhood. Precinct Chairs are the backbone of our party, organizing their immediate community and getting out the vote.</p>
-        <a href="contact.html" class="btn btn-secondary" style="width: 100%;">Become a Chair</a>
-      </div>
-
-      <!-- Canvassing / Blockwalking -->
-      <div class="action-card fade-in" style="transition-delay: 0.2s;">
-        <div class="action-icon">👟</div>
-        <h3>Blockwalking & Phones</h3>
-        <p>Join the <strong>Texas Together Weekend of Action!</strong> We are hosting block walks this weekend in Alamo, McAllen, and Pharr. Join us to elect Democrats up and down the ballot!</p>
-        <a href="https://www.mobilize.us/texastogether/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="width: 100%; background-color: var(--accent); color: var(--primary);">Sign Up on Mobilize</a>
-      </div>
-
-      <!-- Candidates -->
-      <div class="action-card fade-in" style="transition-delay: 0.3s;">
-        <div class="action-icon">⭐</div>
-        <h3>Run for Office</h3>
-        <p>We need strong, fact-based leaders at every level—from the school board to the state house. Learn what it takes to get on the ballot.</p>
-        <a href="contact.html" class="btn btn-secondary" style="width: 100%;">Candidate Info</a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Volunteer Intake Form (Component Gallery Showcase) -->
-  <section class="container fade-in" style="margin-top: 5rem; margin-bottom: 5rem; max-width: 800px;">
-    
-    <!-- Skeleton Loading State -->
-    <div id="form-skeleton" style="display: block;">
-      <h2 style="text-align: left; margin-bottom: 2rem;">Loading Intake Form...</h2>
-      <div class="form-card" style="margin-top: 0;">
-        <div class="skeleton-text"></div>
-        <div class="skeleton-text short"></div>
-        <div class="skeleton-box" style="height: 50px; margin-top: 2rem;"></div>
-        <div class="skeleton-box" style="height: 50px; margin-top: 1.5rem;"></div>
-        <div class="skeleton-box" style="height: 120px; margin-top: 2rem;"></div>
+      <div class="leadership-grid">
+        <div class="leadership-card">
+          <h3 id="stat-countychair">1</h3>
+          <p>County Chair</p>
+        </div>
+        <div class="leadership-card">
+          <h3 id="stat-precinct-chairs">0</h3>
+          <p>Active Precinct Chairs</p>
+        </div>
+        <div class="leadership-card">
+          <h3 id="stat-block-captains">0</h3>
+          <p>Active Neighborhood Captains</p>
+        </div>
       </div>
     </div>
 
-    <!-- Actual Form -->
-    <div id="volunteer-form-container" style="display: none;">
-      <h2 style="text-align: left; border-bottom: 2px solid var(--glass-border); padding-bottom: 0.5rem; margin-bottom: 1rem;">Complete Your Profile</h2>
-      <p style="color: var(--text-muted); margin-bottom: 2rem;">Tell us how and when you'd like to get involved. Our data team will securely sync your preferences with the VAN.</p>
+    <!-- Spanish Translation Team -->
+    <div class="spanish-club-section">
+      <div class="bg-icon">A/あ</div>
+      <div class="spanish-club-header">
+        <h2>Spanish Translation Task Force</h2>
+        <p>Our top 10 bilingual contributors who handle official party translation tasks, ensuring all Hidalgo County communications, materials, and outreach are fully accessible.</p>
+      </div>
       
-      <form id="volunteer-form" class="form-card" style="margin-top: 0;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-          <div class="form-group">
-            <label class="form-label">First Name</label>
-            <input type="text" class="form-input" placeholder="e.g. Jane" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input type="text" class="form-input" placeholder="e.g. Doe" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" placeholder="jane@example.com" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Preferred Region</label>
-          <select class="form-select">
-            <option>McAllen / Mission / Edinburg</option>
-            <option>Pharr / San Juan / Alamo</option>
-            <option>Weslaco / Donna / Mercedes</option>
-            <option>Deep South (Progreso, etc.)</option>
-          </select>
-        </div>
-
-        <div class="form-group" style="margin-top: 2.5rem;">
-          <label class="form-label" style="font-size: 1.1rem; color: #fff;">Specialized Skills</label>
-          <p style="font-size: 0.9rem; margin-bottom: 1.5rem;">Select any areas where you have professional experience.</p>
-          
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            <label class="form-check-group">
-              <input type="checkbox"> Bilingual (Eng/Spa)
-            </label>
-            <label class="form-check-group">
-              <input type="checkbox"> VAN / Data Entry
-            </label>
-            <label class="form-check-group">
-              <input type="checkbox"> Graphic Design
-            </label>
-            <label class="form-check-group">
-              <input type="checkbox"> Social Media Mgmt
-            </label>
-            <label class="form-check-group">
-              <input type="checkbox"> Legal / Lawyer
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group" style="margin-top: 2.5rem;">
-          <label class="form-label">Additional Comments</label>
-          <textarea class="form-textarea" rows="4" placeholder="Anything else we should know?"></textarea>
-        </div>
-
-        <div class="form-toggle-wrapper" style="margin-top: 2rem; margin-bottom: 2.5rem; padding: 1.5rem; border: 1px solid var(--glass-border); border-radius: 8px; background: rgba(0,0,0,0.2);">
-          <label class="form-toggle">
-            <input type="checkbox" checked>
-            <span class="toggle-slider"></span>
-          </label>
-          <div>
-            <strong style="display: block; color: #fff;">Receive SMS Updates</strong>
-            <span style="font-size: 0.85rem;">Standard msg & data rates may apply.</span>
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem;" id="submit-btn">
-          <span class="spinner"></span>
-          <span class="btn-text">Submit Profile</span>
-        </button>
-      </form>
+      <div class="spanish-grid" id="spanish-team-grid">
+        <!-- Rendered via JS -->
+      </div>
+      
+      <a href="mailto:translation@hcdp.com" class="request-translation-btn">Submit Material for Translation →</a>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="tx-clone-footer">
-    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
-    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
-      <p>info@hidalgocountydems.org</p>
-      <p>(956) 672-7274</p>
-      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
-      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    <!-- Tier 3: Block Walkers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Hall of Fame: Block Walkers</h2>
+        <span class="tier-badge">Tier 3</span>
+      </div>
+      <div class="hof-grid" id="block-walkers-grid">
+        <!-- Rendered via JS -->
+      </div>
     </div>
-    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
-    <div style="margin-top: 0.5rem;"><a href="precinct_toolkit.html" style="color: #64748b; text-decoration: none; font-size: 0.85rem;">🔒 Chair Toolkit</a></div>
-    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
-  </footer>
 
-  <script src="js/app.js"></script>
-<script src="js/value_counter.js"></script>
+    <!-- Tier 4: Phone Bankers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Hall of Fame: Phone Bankers</h2>
+        <span class="tier-badge">Tier 4</span>
+      </div>
+      <div class="hof-grid" id="phone-bankers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
 
-  <!-- Google Translate -->
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- Tier 5: Letter Writers -->
+    <div class="tier-container">
+      <div class="tier-header">
+        <h2>Letter Writers Team</h2>
+        <span class="tier-badge">Tier 5</span>
+      </div>
+      <div class="hof-grid" id="letter-writers-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
 
-  <!-- Component Gallery Form Logic -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Skeleton loader demo
-      setTimeout(() => {
-        document.getElementById('form-skeleton').style.display = 'none';
-        const formContainer = document.getElementById('volunteer-form-container');
-        formContainer.style.display = 'block';
-        formContainer.classList.add('fade-in');
+  </main>
+
+<main class="container fade-in" style="padding-top: 120px; padding-bottom: 60px;">
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+      <h1 style="color: var(--accent); font-size: 3rem; margin-bottom: 1rem;">Volunteer Roster</h1>
+      <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7;">
+        Access our live volunteer database. Search for your own generated profile by typing your first and last name below to connect with your designated Precinct Chair.
+      </p>
+      
+      <!-- Dynamic Search -->
+      <div style="margin-top: 3rem; background: rgba(0,0,0,0.3); padding: 3rem 2rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <h3 style="margin-top: 0; color: #fff; font-size: 1.5rem;">Find Your Profile</h3>
+        <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 2rem;">Search by Precinct Number to locate your leadership.</p>
         
-        // Trigger reflow to restart animation
-        void formContainer.offsetWidth;
-        formContainer.classList.add('visible');
-      }, 1500);
+        <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 600px; margin: 0 auto;">
+            <!-- Precinct Search -->
+            <div>
+                <div style="display: flex; gap: 1rem;">
+                  <input type="number" id="precinct-search-input" placeholder="e.g. 14" style="flex: 1; padding: 1rem 1.5rem; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 1.1rem;  transition: border-color 0.2s, box-shadow 0.2s;" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 10px rgba(34,211,238,0.2)';" onblur="this.style.borderColor='#334155'; this.style.boxShadow='none';">
+                  <button id="precinct-search-btn" class="btn btn-primary" style="border: 2px solid var(--accent); cursor: pointer; padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; background: transparent; color: var(--accent); transition: all 0.2s;" onmouseover="this.style.background='var(--accent)'; this.style.color='#020617'; this.style.boxShadow='0 0 15px rgba(34,211,238,0.4)';" onmouseout="this.style.background='transparent'; this.style.color='var(--accent)'; this.style.boxShadow='none';">Go</button>
+                </div>
+                <div id="precinct-search-error" style="color: #ef4444; margin-top: 0.5rem; display: none; font-weight: 600; text-align:left;"></div>
+            </div>
 
-      // Submit Spinner demo
-      const form = document.getElementById('volunteer-form');
-      const submitBtn = document.getElementById('submit-btn');
+            <!-- Name Search -->
+            <div>
+                <label style="display:block; text-align:left; color:#cbd5e1; margin-bottom:0.5rem; font-weight:600; font-size:0.9rem;">Search by Volunteer Name</label>
+                <div style="display: flex; gap: 1rem;">
+                  <input type="text" id="name-search-input" placeholder="e.g. Jane Doe" style="flex: 1; padding: 1rem 1.5rem; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 1.1rem;  transition: border-color 0.2s, box-shadow 0.2s;" onfocus="this.style.borderColor='var(--accent)'; this.style.boxShadow='0 0 10px rgba(34,211,238,0.2)';" onblur="this.style.borderColor='#334155'; this.style.boxShadow='none';">
+                  <button id="name-search-btn" class="btn btn-primary" style="border: 2px solid var(--accent); cursor: pointer; padding: 1rem 2rem; font-size: 1.1rem; font-weight: bold; background: transparent; color: var(--accent); transition: all 0.2s;" onmouseover="this.style.background='var(--accent)'; this.style.color='#020617'; this.style.boxShadow='0 0 15px rgba(34,211,238,0.4)';" onmouseout="this.style.background='transparent'; this.style.color='var(--accent)'; this.style.boxShadow='none';">Search</button>
+                </div>
+                <div id="name-search-error" style="color: #ef4444; margin-top: 0.5rem; display: none; font-weight: 600; text-align:left;"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Profiles Hook -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4rem; margin-top: 5rem;">
+      <h2 id="roster-title" style="text-align: center; color: #fff; margin-bottom: 1rem;">Grassroots Volunteer Directory (<span id="total-vol-count">0</span>)</h2>
+      <p style="color: #94a3b8; text-align: center; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+         Filter by the first letter of the volunteer's <b>Last Name</b> natively stored in the database.
+      </p>
       
-      if(form && submitBtn) {
-        form.addEventListener('submit', (e) => {
-          e.preventDefault();
-          submitBtn.classList.add('loading');
-          submitBtn.disabled = true;
-          
-          setTimeout(() => {
-            submitBtn.classList.remove('loading');
-            submitBtn.innerHTML = '<span class="btn-text" style="opacity: 1;">✔️ Profile Submitted</span>';
-            submitBtn.style.background = '#10b981'; // Success green
-            submitBtn.style.color = '#fff';
-            form.reset();
-          }, 2000);
-        });
-      }
-    });
-  </script>
+      <!-- Zip Code Filter -->
+      <div id="zipcode-filter" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <!-- JS will populate zip code buttons here -->
+      </div>
+
+      <!-- Congressional District Filter -->
+      <div style="margin-bottom: 2rem;">
+        <p style="color: #38bdf8; text-align: center; font-weight: 600; margin-bottom: 0.8rem; font-size: 0.9rem; text-transform: uppercase;">Filter by Federal Map Lines:</p>
+        <div id="cd-filter" style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; max-width: 900px; margin-left: auto; margin-right: auto; position: relative; z-index: 50; touch-action: manipulation;">
+          <!-- JS will populate CD buttons here -->
+        </div>
+      </div>
+
+      <!-- A-Z Gravity Filter -->
+      <div id="alphabet-filter" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 3rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+        <!-- JS will populate A-Z buttons here -->
+      </div>
+
+      <div id="bubble-container" style="width: 100%; height: 75vh; min-height: 700px; position: relative; overflow: hidden; border-radius: 16px; border: 1px solid rgba(14, 165, 233, 0.2); background: radial-gradient(circle at center, rgba(14, 165, 233, 0.05) 0%, transparent 70%); margin-top: 2rem;">
+        <p id="bubble-loading" style="color: #94a3b8; text-align: center; margin-top: 300px; position: absolute; width: 100%;">Initializing Physics Engine...</p>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+  <script src="js/chair_data.js"></script>
+  <script src="js/volunteer_dashboard.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Demonstration Mode Disclaimer Banner -->
+  <div class="demo-banner" style="background-color: #ef4444; color: white; text-align: center; padding: 1rem; z-index: 50; position: relative; font-weight: 500; font-size: 0.95rem; border-top: 2px solid #b91c1c;">
+    <span style="font-size: 1.1rem; margin-right: 8px;">⚠️</span>
+    <strong>DEMONSTRATION MODE:</strong> The metrics and individual records displayed on this page are simulated mock data generated for layout testing purposes only. They do not represent official Hidalgo County Democratic Party figures or personnel.
+  </div>
+
 
   <script src="js/a11y.js"></script>
 </body>

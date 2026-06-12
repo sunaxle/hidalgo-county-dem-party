@@ -6,7 +6,7 @@
   <meta name="description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Community Hub | Hidalgo Democrats</title>
+  <title>Community Hub Preview | Hidalgo Dems</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -497,6 +497,137 @@
     </div>
 
   </main>
+<div style="text-align: center; margin: 4rem 0;">
+    <h1 style="color: #ef4444; font-size: 3rem; background: #fee2e2; padding: 1rem; border-radius: 8px; border: 2px dashed #f87171;">PREVIEW: MERGED COMMUNITY INBOX</h1>
+</div>
+
+
+<div style="text-align: center; margin: 4rem 0;">
+    <h1 style="color: #ef4444; font-size: 3rem; background: #fee2e2; padding: 1rem; border-radius: 8px; border: 2px dashed #f87171;">PREVIEW: MERGED COMMUNITY INTAKE</h1>
+</div>
+<main class="container fade-in">
+    <section class="hub-hero">
+      <h1 style="font-size: 3rem; margin-bottom: 1rem;">Community <span style="color: var(--primary);">Inbox</span></h1>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+        Your voice matters. Whether you're sharing an inspiring organizer story, calling out a precinct issue, or dropping a line, select an option below to securely route your submission to the Hidalgo County Democratic Party.
+      </p>
+    </section>
+
+    <!-- Category Selection Grid -->
+    <div id="category-selection" class="category-grid fade-in">
+      <div class="category-btn" onclick="openForm('storyForm', 'Share a Story', 'Tell us about the incredible organizing work happening in your neighborhood.')">
+        <div class="category-icon">📖</div>
+        <h3>Share a Story</h3>
+        <p>Highlight local volunteers, community events, and grassroots wins.</p>
+      </div>
+
+      <div class="category-btn" onclick="openForm('issueForm', 'Call It Out', 'Report a specific issue impacting your precinct or voting location.')">
+        <div class="category-icon">🚨</div>
+        <h3>Report an Issue</h3>
+        <p>Flag missing signs, voter suppression, or precinct-level concerns.</p>
+      </div>
+
+      <div class="category-btn" onclick="openForm('eventForm', 'Submit an Event', 'Add your upcoming Democratic club meeting or block walk to our radar.')">
+        <div class="category-icon">📅</div>
+        <h3>Submit an Event</h3>
+        <p>Coordinate rallies, watch parties, and neighborhood meetings.</p>
+      </div>
+
+      <div class="category-btn" onclick="openForm('generalForm', 'General Feedback', 'Have a suggestion, question, or inquiry? Let us know here.')">
+        <div class="category-icon">💬</div>
+        <h3>General Feedback</h3>
+        <p>Reach out to the County Chair and the Executive Committee directly.</p>
+      </div>
+    </div>
+
+    <!-- Form Container (Hidden by Default) -->
+    <div id="form-container" class="fade-in">
+      <button class="back-btn" onclick="closeForm()">
+        <span>←</span> Back to Categories
+      </button>
+
+      <div class="form-header">
+        <h2 id="dynamic-form-title">Form Title</h2>
+        <p id="dynamic-form-desc" style="color: var(--text-muted);">Form Description</p>
+      </div>
+
+      <!-- 1. Story Form -->
+      <form id="storyForm" class="intake-subform">
+        <div class="common-fields-injection"></div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Story Title</label>
+          <input type="text" name="story_title" placeholder="e.g., Record turnout at McAllen Blockwalk" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Your Story</label>
+          <textarea name="story_message" rows="5" placeholder="Share your experience..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Story</button>
+      </form>
+
+      <!-- 2. Issue Form -->
+      <form id="issueForm" class="intake-subform">
+        <div class="common-fields-injection"></div>
+        <div class="form-group-half">
+          <div class="form-group">
+            <label>Precinct Number</label>
+            <input type="text" name="precinct" placeholder="e.g., Pct 15" required>
+          </div>
+          <div class="form-group">
+            <label>Issue Type</label>
+            <select name="issue_type" required>
+              <option value="">-- Select Category --</option>
+              <option value="Polling Location">Polling Location Issue</option>
+              <option value="Missing Signs">Missing / Vandalized Signs</option>
+              <option value="Accessibility">Accessibility Concern</option>
+              <option value="Voter ID">Voter ID / Registration Issue</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Issue Details</label>
+          <textarea name="issue_message" rows="5" placeholder="Please describe what happened, when, and exactly where..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Report Issue</button>
+      </form>
+
+      <!-- 3. Event Form -->
+      <form id="eventForm" class="intake-subform">
+        <div class="common-fields-injection"></div>
+        <div class="form-group-half">
+          <div class="form-group">
+            <label>Event Name</label>
+            <input type="text" name="event_name" placeholder="e.g., Young Dems Mixer" required>
+          </div>
+          <div class="form-group">
+            <label>Date & Time</label>
+            <input type="text" name="event_date" placeholder="e.g., Oct 24th @ 6:00 PM" required>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Event Location & Details</label>
+          <textarea name="event_message" rows="4" placeholder="Full address, RSVP link, and event description..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Event</button>
+      </form>
+
+      <!-- 4. General Form -->
+      <form id="generalForm" class="intake-subform">
+        <div class="common-fields-injection"></div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Subject</label>
+          <input type="text" name="subject" placeholder="What is this regarding?" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Message</label>
+          <textarea name="general_message" rows="5" placeholder="Your inquiry or feedback..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </main>
+
 
   <!-- Modal -->
   <div class="civics-backdrop" id="civicsBackdrop"></div>
