@@ -107,42 +107,7 @@
       overflow: hidden;
     }
 
-    /* Instagram Gallery Styles */
-    .insta-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .insta-item {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      overflow: hidden;
-      border-radius: 0.5rem;
-      cursor: pointer;
-    }
-    .insta-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .insta-item:hover img {
-      transform: scale(1.1);
-    }
-    .insta-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(34, 211, 238, 0.4); /* primary accent mix */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .insta-item:hover .insta-overlay {
-      opacity: 1;
-    }
+
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -417,28 +382,7 @@
     </div>
   </section>
 
-  <!-- Instagram Highlights Gallery -->
-  <section class="container fade-in" style="padding-top: 4rem;">
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <h2 style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><span style="color: transparent; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); -webkit-background-clip: text; background-clip: text;">Instagram</span> Highlights</h2>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Our favorite moments from the campaign trail and community events.</p>
-    </div>
-    
-    <div class="insta-gallery fade-in">
-      <div class="insta-item"><img src="images/insta1.jpg" alt="Ig Photo 1"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta2.jpg" alt="Ig Photo 2"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta3.jpg" alt="Ig Photo 3"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta4.jpg" alt="Ig Photo 4"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta5.jpg" alt="Ig Photo 5"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta6.jpg" alt="Ig Photo 6"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta7.jpg" alt="Ig Photo 7"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta8.jpg" alt="Ig Photo 8"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta9.jpg" alt="Ig Photo 9"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta10.jpg" alt="Ig Photo 10"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta11.jpg" alt="Ig Photo 11"><div class="insta-overlay">❤️</div></div>
-      <div class="insta-item"><img src="images/insta12.jpg" alt="Ig Photo 12"><div class="insta-overlay">❤️</div></div>
-    </div>
-  </section>
+
 
   <!-- Community Actions -->
   <section class="container fade-in" style="margin-top: 2rem;">
