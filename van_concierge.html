@@ -98,6 +98,30 @@
     .btn:hover {
       background: #2563eb;
     }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -107,7 +131,24 @@
       <h1>VAN Concierge Service</h1>
       <p>Don't have time to learn new software? No problem. We will pull the data you need and email it to you directly as a clean, printable PDF walk list.</p>
       
-      <form action="#" method="POST" id="conciergeForm">
+      <form id="conciergeForm">
+        
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" class="form-control" required placeholder="Jane Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" required placeholder="jane@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="precinct">Precinct Number</label>
+          <input type="text" id="precinct" name="precinct" class="form-control" required placeholder="107">
+        </div>
+
+        <h3 style="margin-top: 2rem; color: #fff;">Select your list:</h3>
         <div class="option-group">
           
           <label class="option-card">
@@ -142,11 +183,32 @@
   </div>
 
   <script>
+    // REPLACE THIS URL with your deployed Google Apps Script Web App URL
+    const WEB_APP_URL = "YOUR_WEB_APP_URL_HERE";
+
     document.getElementById('conciergeForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const selected = document.querySelector('input[name="list_type"]:checked').value;
-      alert("Success! The Field Director has been notified and will email you the " + selected + " list within 24 hours.");
-      // Here you would hook into your existing Google Apps Script or Firebase function
+      
+      const btn = document.querySelector('button[type="submit"]');
+      btn.innerText = "Sending...";
+      btn.disabled = true;
+
+      const formData = new FormData(this);
+      const data = new URLSearchParams(formData);
+
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        body: data
+      })
+      .then(response => response.text())
+      .then(result => {
+        document.querySelector('.glass-card').innerHTML = "<h1>✅ Success!</h1><p>The Field Director has received your request and will email you the list within 24 hours.</p>";
+      })
+      .catch(error => {
+        alert("There was an error sending your request. Please try again or email us directly.");
+        btn.innerText = "Send Me My List";
+        btn.disabled = false;
+      });
     });
   </script>
 
