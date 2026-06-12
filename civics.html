@@ -6,7 +6,7 @@
   <meta name="description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Civics 101 | Hidalgo Democrats</title>
+  <title>Civics | Hidalgo Democrats</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -338,7 +338,7 @@
   <link rel="stylesheet" href="css/a11y.css">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Civics 101 | Hidalgo Democrats">
+  <meta property="og:title" content="Civics | Hidalgo Democrats">
   <meta property="og:description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
@@ -400,8 +400,7 @@
                 <div class="nav-item dropdown">
           <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Community ▼</a>
           <div class="dropdown-content">
-            <a href="civics_101.html" style="color: #fcd34d; font-weight: 800;">Civics 101 📚</a>
-            <a href="civics_102.html" style="color: #fca5a5; font-weight: 800;">Civics 102 🎓</a>
+            <a href="civics.html" style="color: #fcd34d; font-weight: 800;">Civics 📚</a>
             <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
             <a href="ballot_board_explainer.html">Ballot Board Process</a>
             <a href="chat.html" style="color: #2dd4bf; font-weight: 800;">Grassroots Live Chat ⚡</a>
@@ -447,7 +446,7 @@
 
   <!-- Hero Section -->
   <header class="civics-hero">
-    <h1>Civics 101</h1>
+    <h1>Civics</h1>
     <p>Everything you need to know to effectively interact with your government and the Democratic Party. Empowerment starts with education.</p>
   </header>
 
@@ -458,7 +457,7 @@
       <span>/</span>
       <a href="community.html">Community</a>
       <span>/</span>
-      <span style="color: #fff;">Civics 101</span>
+      <span style="color: #fff;">Civics</span>
     </nav>
 
     <blockquote class="system-quote fade-in">
@@ -574,6 +573,19 @@
       </div>
     </div>
 
+    <!-- Section 1: Advanced Party Concepts -->
+    <div class="party-section">
+      <h2 class="civics-section-title">Party Leadership & Caucuses</h2>
+      <div class="civics-grid">
+        
+        <div class="civics-card" data-lesson="state_of_party">
+          <div class="start-badge">START HERE</div>
+          <div class="civics-card-icon">📈</div>
+          <h3>State of the Party</h3>
+          <p>Current nationwide and state status, including national and state democratic leadership.</p>
+          <div class="status-action"><span>▶</span> Read Lesson</div>
+        </div>
+
     <!-- FAQ Accordion & Stepper -->
     <div class="faq-section" style="margin-top: 4rem;">
       <h2 class="civics-section-title">Frequently Asked Questions</h2>
@@ -632,12 +644,7 @@
       </div>
     </div>
 
-    <!-- Next Page Link -->
-    <div style="text-align: center; margin-top: 5rem; margin-bottom: 2rem;" class="fade-in">
-      <a href="civics_102.html" style="display: inline-block; padding: 1rem 3rem; background: linear-gradient(45deg, var(--civics-accent-1), var(--civics-accent-2)); color: white; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-        Next: Civics 102 &rarr;
-      </a>
-    </div>
+    
 
   </main>
 
@@ -844,6 +851,65 @@
             <li><strong>Calling Your Reps:</strong> A phone call is worth 100 emails. Call their local district office, state your name, your zip code, your issue, and exactly how you want them to vote. Be polite to the young staffer taking the message, but be firm on your position!</li>
             <li><strong>Tracking Legislation:</strong> Use tools like <em>Texas Legislature Online (TLO)</em> to set up email alerts for bills you care about so you know exactly when they are scheduled for a hearing and when you need to mobilize.</li>
           </ul>
+        `
+      }
+    ,
+      state_of_party: {
+        icon: '📈',
+        title: 'State of the Party',
+        content: `
+          <p>The Democratic Party has strong leadership guiding its strategy at both the national and state levels:</p>
+          <ul>
+            <li><strong>National (DNC):</strong> Currently led by Jaime Harrison, the Democratic National Committee coordinates the national strategy, funding, and the presidential nominating process.</li>
+            <li><strong>State (TDP):</strong> In Texas, the party is led by Gilberto Hinojosa, focusing on turning Texas blue, organizing massive grassroots efforts, and supporting down-ballot candidates across 254 counties.</li>
+          </ul>
+          <p>Understanding the current leadership and strategic goals helps local activists align their efforts with broader party objectives for maximum impact.</p>
+        `
+      },
+      caucuses: {
+        icon: '✊🏽',
+        title: 'The Power of Caucuses',
+        content: `
+          <p>A Caucus is a group of members of a given political party or organization who share common interests, demographics, or policy goals.</p>
+          <ul>
+            <li><strong>Hispanic Caucus, Black Caucus, LGBTQ+ Caucus, etc.:</strong> These groups organize to ensure their specific community issues are prioritized in the party platform and to support candidates who represent them.</li>
+            <li><strong>Progressive Caucus, Labor Caucus:</strong> Formed around ideological or economic priorities, these caucuses negotiate legislation as a unified voting block.</li>
+          </ul>
+          <p><strong>Voting Block Power:</strong> Caucuses hold massive power because they vote together. If a bill needs a majority to pass and a caucus refuses to vote 'yes' until their demands are met, they can force the rest of the party to negotiate. This makes caucuses effective tools for pushing specific agendas.</p>
+        `
+      },
+      vdr_transfers: {
+        icon: '📜',
+        title: 'VDR County Transfers',
+        content: `
+          <p>Being a Volunteer Deputy Registrar (VDR) is powerful, but in Texas, your certification is typically only valid in the specific county where you were trained—unless you transfer it!</p>
+          <p><strong>How to Transfer Your VDR Certificate:</strong></p>
+          <ol>
+            <li>If you are certified in one Texas county, you can request to be appointed as a VDR in another county <em>without having to take the training again</em>.</li>
+            <li>Contact the Voter Registrar's office of the new county and present your valid VDR certificate from your home county.</li>
+            <li>The new county will review your status and issue you a new certificate and receipt books valid for their jurisdiction.</li>
+          </ol>
+          <p><a href="vdr_portal.html" style="color: #38bdf8; font-weight: bold; text-decoration: underline;">Visit the VDR Portal</a> for more details and resources.</p>
+        `
+      },
+      run_for_office: {
+        icon: '🏛️',
+        title: 'Running for Office',
+        content: `
+          <p>Elections don't just happen at the national level. Local offices have the most direct impact on our daily lives, and the barrier to entry is lower than you think!</p>
+          <p><strong>Types of Offices & Why They Matter:</strong></p>
+          <ul>
+            <li><strong>School Board (ISD):</strong> Manages multimillion-dollar budgets, property taxes, and school curriculum. Often these races have shockingly low turnout, meaning every vote counts.</li>
+            <li><strong>City Council / Mayor:</strong> Controls local zoning, police/fire department funding, city parks, and municipal ordinances. They determine what gets built in your neighborhood.</li>
+            <li><strong>County Commissioners Court:</strong> Manages county hospitals, elections, emergency services, and county roads.</li>
+            <li><strong>State Legislature:</strong> State Representatives/Senators write state laws (like voting rights, reproductive rights, public education funding).</li>
+          </ul>
+          <p><strong>Basic Requirements to Run:</strong></p>
+          <ul>
+            <li>For most local offices (City Council, School Board), you typically need to be a US Citizen, 18+ years old, a registered voter, and a resident of the district for at least 6 months to 1 year prior to the filing deadline.</li>
+            <li>There is usually a modest filing fee or a requirement to gather a certain number of petition signatures from registered voters in the district.</li>
+          </ul>
+          <p>If you're interested in running, the first step is to contact the party to learn about campaign training resources like "The Arena" or local candidate bootcamps!</p>
         `
       }
     };
