@@ -4,19 +4,327 @@
   <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
 
   <meta name="description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ballot Board Explained | Hidalgo County Democrats</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="js/gatekeeper.js"></script>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Archive | Hidalgo Democrats</title>
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/state_party_clone.css" />
+  <style>
+    :root {
+      --civics-bg: #0f172a;
+      --civics-card-bg: rgba(30, 41, 59, 0.7);
+      --civics-card-border: rgba(255, 255, 255, 0.1);
+      --civics-accent-1: #38bdf8;
+      --civics-accent-2: #818cf8;
+      --civics-accent-3: #f472b6;
+      --civics-accent-4: #34d399;
+    }
 
+    body.tx-clone {
+      background-color: var(--civics-bg);
+      color: #f8fafc;
+      overflow-x: hidden; /* Prevent horizontal scroll when modal opens */
+    }
+
+    .civics-hero {
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.8)), url('images/hero_bg_placeholder.jpg') center/cover;
+      position: relative;
+    }
+
+    .civics-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .civics-hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .civics-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .civics-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-1), var(--civics-accent-2));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .civics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 5rem;
+    }
+
+    .civics-card {
+      background: var(--civics-card-bg);
+      border: 1px solid var(--civics-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .civics-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .civics-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .civics-card:hover::before {
+      opacity: 1;
+    }
+
+    .civics-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .civics-card p {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 1rem;
+      flex-grow: 1;
+    }
+
+    .civics-card .status-action {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.05);
+      color: #cbd5e1;
+      align-self: flex-start;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    
+    .civics-card:hover .status-action {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .status-action span { margin-right: 0.5rem; }
+
+    /* specific accents for sections */
+    .party-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2)); }
+    .gov-section .civics-card::before { background: linear-gradient(90deg, var(--civics-accent-3), var(--civics-accent-4)); }
+
+    .gov-section .civics-section-title {
+      background: -webkit-linear-gradient(45deg, var(--civics-accent-3), var(--civics-accent-4));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .start-badge {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: linear-gradient(45deg, #ef4444, #f97316);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+      animation: pulse-badge 2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse-badge {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    /* Modals */
+    .civics-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .civics-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%) scale(0.95);
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      z-index: 2001;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .civics-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .civics-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .civics-modal-header {
+      padding: 2.5rem 2.5rem 1.5rem;
+      position: relative;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.05), transparent);
+    }
+    
+    .civics-modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      color: #94a3b8;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .civics-modal-close:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .civics-modal-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .civics-modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: white;
+      margin: 0;
+    }
+
+    .civics-modal-body {
+      padding: 0 2.5rem 3rem;
+      overflow-y: auto;
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+    }
+    
+    .civics-modal-body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    .civics-modal-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .civics-modal-body ul, .civics-modal-body ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .civics-modal-body li {
+      margin-bottom: 0.75rem;
+    }
+
+    .civics-modal-body strong {
+      color: white;
+      font-weight: 600;
+    }
+
+  </style>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
@@ -30,17 +338,14 @@
   <link rel="stylesheet" href="css/a11y.css">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Ballot Board Explained | Hidalgo County Democrats">
+  <meta property="og:title" content="Archive | Hidalgo Democrats">
   <meta property="og:description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
 </head>
 <body class="tx-clone">
-<!-- Dynamic Background Shapes -->
-  <div class="shape shape-1" style="left: -100px; right: auto;"></div>
 
-  <!-- Navigation -->
-      <nav class="tx-clone-nav">
+  <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
       <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
@@ -139,60 +444,38 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <!-- Page Header -->
-  <header class="page-header" style="min-height: 40vh;">
-    <div class="container fade-in">
-      <h1>Understanding the Ballot Board</h1>
-      <p style="max-width: 700px; margin: 0 auto; color: #cbd5e1;">A deep-dive into how mail-in, provisional, and election day ballots are actually processed and legally audited behind the scenes in Hidalgo County.</p>
-    </div>
+  <!-- Hero Section -->
+    <header class="civics-hero">
+    <h1>Archive</h1>
+    <p>Preserving our past campaigns, out-of-season tools, and historical data.</p>
   </header>
 
-  <section class="container" style="padding-top: 0;">
-    <div class="glass-card fade-in" style="padding: 4rem 2rem; max-width: 900px; margin: 0 auto; line-height: 1.8;">
-      <h2 style="color: var(--accent); font-size: 2.2rem; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">The Ballot Board: Process & Scheduling Explained</h2>
-      
-      <p style="font-size: 1.1rem; color: #e2e8f0; margin-bottom: 2rem;">
-        The scheduling for the <strong>Ballot Board</strong> (often acting as the Signature Verification Committee, Central Counting Station Committee, or Handcount Committee) is tightly regulated and varies slightly depending on the size of the election.
-      </p>
+    <main class="container fade-in" style="padding-top: 4rem; padding-bottom: 4rem; max-width: 900px; margin: 0 auto; min-height: 60vh;">
+    
+    <nav class="breadcrumbs fade-in" style="margin-bottom: 2rem;">
+      <a href="home.html">Home</a>
+      <span>/</span>
+      <a href="about.html">About</a>
+      <span>/</span>
+      <span style="color: #fff;">Archive</span>
+    </nav>
 
-      <h3 style="color: #38bdf8; margin-top: 2.5rem; margin-bottom: 1rem;">1. Pre-Election Day Preparation</h3>
-      <div style="background: rgba(15, 23, 42, 0.4); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #38bdf8; margin-bottom: 2rem;">
-        <p style="margin-top: 0;">While the Ballot Board <strong>cannot start counting ballots until after Early Voting closes</strong>, we are legally allowed to manually prepare ballots for counting before Early Voting concludes.</p>
-        <p style="margin-bottom: 0;"><strong>Recent Law Change:</strong> Early Voting now extends until the day immediately before Election Day. This compresses the preparation timeline, requiring massive coordination by the Elections Department to process ballots on the final Saturdays and Mondays preceding an election.</p>
-      </div>
+    <h2 style="font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; color: white;">Website Archive</h2>
+    <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6; margin-bottom: 3rem;">
+      Past campaigns, outdated resources, and historical pages have been preserved here for your reference.
+    </p>
 
-      <h3 style="color: #4ade80; margin-top: 2.5rem; margin-bottom: 1rem;">2. Election Day Counting Operations</h3>
-      <p>On Election Day, the Ballot Board typically arrives at <strong>9:00 AM</strong> and works continuously until the final count is momentarily finished. This exhaustive process includes:</p>
-      <ul style="color: #cbd5e1; margin-left: 1.5rem; margin-bottom: 2rem; list-style-type: square;">
-        <li style="margin-bottom: 0.5rem;">Reviewing and tabulating all mail ballots received via the USPS.</li>
-        <li style="margin-bottom: 0.5rem;">Downloading and reviewing all encrypted thumb drives extracted from Early Voting polling locations.</li>
-        <li style="margin-bottom: 0.5rem;">Processing the final thumb drives arriving late at night directly from Election Day polling locations.</li>
-      </ul>
-      <p style="font-style: italic; color: #94a3b8; font-size: 0.95rem;">(Note: Depending on voter turnout, the Board frequently works until 3:00 AM or even 5:30 AM the following Wednesday to achieve a result).</p>
-
-      <h3 style="color: #facc15; margin-top: 2.5rem; margin-bottom: 1rem;">3. Post-Election Day & Straggler Ballots</h3>
-      <p>The election does not legally end on Tuesday night. The Ballot Board reconvenes the following Tuesday to process "straggler" ballots, which legally have up to <strong>6 days</strong> after Election Day to arrive at the counting facility:</p>
-      <ul style="color: #cbd5e1; margin-left: 1.5rem; margin-bottom: 2rem; list-style-type: square;">
-        <li style="margin-bottom: 0.5rem;"><strong>Overseas Military/Civilian Ballots</strong></li>
-        <li style="margin-bottom: 0.5rem;"><strong>Corrected Carrier Envelopes:</strong> Mail ballots where a voter successfully "cured" a defect (e.g., missing signature) in time.</li>
-        <li style="margin-bottom: 0.5rem;"><strong>Provisional Ballots:</strong> Ballots requiring secondary verification of voter eligibility.</li>
-      </ul>
-      <p>Because these highly critical votes can alter razor-thin local margins, races are often not officially locked until the Tuesday following Election Day.</p>
-
-      <h3 style="color: #a78bfa; margin-top: 2.5rem; margin-bottom: 1rem;">4. The Handcount Audit Phase</h3>
-      <div style="background: rgba(15, 23, 42, 0.4); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #a78bfa; margin-bottom: 2rem;">
-        <p style="margin-top: 0; margin-bottom: 0.5rem;">Following the electronic tabulation, the Ballot Board morphs into the <strong>Handcount Committee</strong> to perform mandatory, intensive manual auditing of paper ballot receipts.</p>
-      </div>
-      <p>Per Texas Election Code (Chapter 127, Subchap H), the Secretary of State randomly selects specific polling locations. The Committee must manually hand-count <strong>every single paper ballot cast</strong> at those locations for at least three major races, cross-referencing their manual tally directly against the electronic voting system results to legally prove the machines were not tampered with. This labor-intensive process must usually begin within 72 hours of the polls closing.</p>
-
-      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-        <h4 style="color: #fff; margin-bottom: 1rem;">Why Serve on the Ballot Board?</h4>
-        <p style="color: #cbd5e1; margin-bottom: 1.5rem;">While Ballot Board hours are exceptionally demanding (and currently compensated at $12/hour by the county), the workers who staff this board are the ultimate defenders of democracy. By physically verifying signatures and tracking physical ballots, they are the boots on the ground keeping the electoral process transparent and fully operational.</p>
-        <p style="color: var(--accent); font-weight: 600;">"It is a heck of a way to serve your fellow citizens and keep the process working as well as possible." — Kenna Giffin</p>
-      </div>
+    <div style="display: grid; gap: 1rem;">
+      <a href="live_results.html" style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.2)';" onmouseout="this.style.background='rgba(30, 41, 59, 0.7)'; this.style.borderColor='rgba(255,255,255,0.1)';">
+        <div>
+          <h3 style="color: white; font-family: 'Montserrat', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">2024 Live Election Results 🗳️</h3>
+          <p style="color: #94a3b8; margin: 0; font-size: 0.95rem;">Historical dashboard for the 2024 election cycles.</p>
+        </div>
+        <span style="color: #64748b;">&rarr;</span>
+      </a>
     </div>
-  </section>
-  <!-- Footer -->
+  </main>
+
   <footer class="tx-clone-footer">
     <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
     <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
@@ -207,7 +490,8 @@
   </footer>
 
   <script src="js/app.js"></script>
-<script src="js/value_counter.js"></script>
+
+  
 
   <!-- Google Translate -->
   <script>
