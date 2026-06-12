@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donor Prospecting Tool | Finance Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
+    }
+    .header {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header-title h1 { font-size: 1.5rem; font-weight: 800; }
+    .header-title p { color: var(--primary); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+    
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .control-group label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); }
+    .control-group input, .control-group select {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    .btn {
+      background: var(--primary);
+      color: #0f172a;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-weight: 800;
+      border-radius: 4px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+    .btn:hover { opacity: 0.9; }
+    
+    .prospect-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .prospect-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s;
+    }
+    .prospect-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .prospect-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1rem;
+    }
+    .prospect-name { font-size: 1.25rem; font-weight: 800; }
+    .prospect-industry { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; }
+    .score-badge {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+    
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .metric {
+      display: flex;
+      flex-direction: column;
+    }
+    .metric-label { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800; }
+    .metric-value { font-size: 1.1rem; font-weight: 700; }
+    
+    .action-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      flex: 1;
+    }
+    .btn-outline:hover { background: rgba(56, 189, 248, 0.1); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-title">
+      <h1>Donor Prospecting Tool</h1>
+      <p>Finance & Development Dashboard</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn">Export List to CSV</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <div class="control-group">
+        <label>Search Name or Employer</label>
+        <input type="text" placeholder="e.g., Smith or H-E-B">
+      </div>
+      <div class="control-group">
+        <label>Minimum Capacity</label>
+        <select>
+          <option>Any</option>
+          <option>$1,000+</option>
+          <option>$5,000+</option>
+          <option>$10,000+</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Propensity Score</label>
+        <select>
+          <option>High (80-100)</option>
+          <option>Medium (50-79)</option>
+          <option>All Scores</option>
+        </select>
+      </div>
+      <div class="control-group" style="justify-content: flex-end;">
+        <button class="btn">Filter</button>
+      </div>
+    </div>
+
+    <div class="prospect-grid">
+      <!-- Example Prospect 1 -->
+      <div class="prospect-card">
+        <div class="prospect-header">
+          <div>
+            <div class="prospect-name">Elena Rodriguez</div>
+            <div class="prospect-industry">Healthcare / Physician</div>
+          </div>
+          <div class="score-badge" title="Propensity Score">92/100</div>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Est. Capacity</span>
+            <span class="metric-value">$15,000</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Lifetime Given</span>
+            <span class="metric-value">$4,500</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Last Gift Date</span>
+            <span class="metric-value">Oct 2024</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Engagement</span>
+            <span class="metric-value">High</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-outline">Log Call</button>
+          <button class="btn btn-outline">View Profile</button>
+        </div>
+      </div>
+
+      <!-- Example Prospect 2 -->
+      <div class="prospect-card">
+        <div class="prospect-header">
+          <div>
+            <div class="prospect-name">Marcus Chen</div>
+            <div class="prospect-industry">Real Estate Developer</div>
+          </div>
+          <div class="score-badge" style="color: var(--warning); background: rgba(245, 158, 11, 0.1);">78/100</div>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Est. Capacity</span>
+            <span class="metric-value">$50,000</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Lifetime Given</span>
+            <span class="metric-value">$1,000</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Last Gift Date</span>
+            <span class="metric-value">Feb 2023</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Engagement</span>
+            <span class="metric-value">Medium</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-outline">Log Call</button>
+          <button class="btn btn-outline">View Profile</button>
+        </div>
+      </div>
+
+      <!-- Example Prospect 3 -->
+      <div class="prospect-card">
+        <div class="prospect-header">
+          <div>
+            <div class="prospect-name">Sarah Jenkins</div>
+            <div class="prospect-industry">Legal / Partner</div>
+          </div>
+          <div class="score-badge">88/100</div>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <span class="metric-label">Est. Capacity</span>
+            <span class="metric-value">$10,000</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Lifetime Given</span>
+            <span class="metric-value">$8,200</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Last Gift Date</span>
+            <span class="metric-value">Jan 2025</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">Engagement</span>
+            <span class="metric-value">Very High</span>
+          </div>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-outline">Log Call</button>
+          <button class="btn btn-outline">View Profile</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
