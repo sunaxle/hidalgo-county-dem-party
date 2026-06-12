@@ -28,10 +28,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Fetch data
   try {
-    const q = query(collection(db, "officials_directory"), orderBy("level", "asc"), orderBy("name", "asc"));
+    const q = query(collection(db, "officials_directory"));
     const snapshot = await getDocs(q);
     
     officials = snapshot.docs.map(doc => doc.data());
+    
+    // Sort manually to avoid requiring a composite index in Firestore
+    officials.sort((a, b) => {
+      if (a.level === b.level) {
+        return (a.name || '').localeCompare(b.name || '');
+      }
+      return (a.level || '').localeCompare(b.level || '');
+    });
+    
     renderGrid(officials);
   } catch (err) {
     console.error("Error loading officials:", err);
