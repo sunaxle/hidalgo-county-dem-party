@@ -146,8 +146,22 @@
       column-gap: 1.5rem;
       width: 100%;
     }
-    @media (max-width: 800px) { .gallery-grid { column-count: 2; } }
-    @media (max-width: 500px) { .gallery-grid { column-count: 1; } }
+    
+    @media (max-width: 900px) {
+      .gallery-grid { column-count: 2; }
+      .photo-gallery { columns: 2 250px; }
+    }
+    @media (max-width: 768px) { 
+      .gallery-grid { column-count: 1; }
+      .photo-gallery { columns: 1 auto; }
+      .grid-3 { 
+        display: grid; 
+        grid-template-columns: 1fr; 
+        gap: 1.5rem; 
+      }
+      .upload-row { flex-direction: column; }
+      #uploadBtn { width: 100%; }
+    }
     
     .dynamic-gallery-item {
       break-inside: avoid;
