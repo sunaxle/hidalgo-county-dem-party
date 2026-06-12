@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Social Media Wall - Hidalgo Dems</title>
+  <title>Social Photo Gallery - Hidalgo Dems</title>
   <meta name="description" content="Stay informed and follow top Texas Democratic leaders on social media.">
   <link rel="stylesheet" href="css/styles.css">
   <style>
@@ -108,6 +108,79 @@
     }
 
 
+  
+    /* Dynamic Masonry Gallery Styles */
+    .upload-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .upload-row {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
+    .form-control {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+    .form-control::placeholder {
+      color: #64748b;
+    }
+    #captionInput {
+      width: 100%;
+    }
+    #fileInput {
+      flex-grow: 1;
+    }
+    /* Pinterest-style Masonry Grid */
+    .gallery-grid {
+      column-count: 3;
+      column-gap: 1.5rem;
+      width: 100%;
+    }
+    @media (max-width: 800px) { .gallery-grid { column-count: 2; } }
+    @media (max-width: 500px) { .gallery-grid { column-count: 1; } }
+    
+    .dynamic-gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .dynamic-gallery-item:hover {
+      transform: scale(1.02);
+      border-color: #3b82f6;
+    }
+    .dynamic-gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .photo-caption {
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.3);
+    }
+    .loading-text {
+      text-align: center;
+      color: #94a3b8;
+      width: 100%;
+      margin-top: 2rem;
+    }
+
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -131,7 +204,7 @@
   <link rel="stylesheet" href="css/a11y.css">
 
   <!-- Open Graph Tags -->
-  <meta property="og:title" content="Social Media Wall - Hidalgo Dems">
+  <meta property="og:title" content="Social Photo Gallery - Hidalgo Dems">
   <meta property="og:description" content="Stay informed and follow top Texas Democratic leaders on social media.">
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
@@ -201,8 +274,7 @@
             <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
             <a href="ballot_board_explainer.html">Ballot Board Process</a>
             <a href="chat.html" style="color: #2dd4bf; font-weight: 800;">Grassroots Live Chat ⚡</a>
-            <a href="social_wall.html">Social Wall</a>
-            <a href="gallery.html" style="color: #38bdf8; font-weight: 800;">Photo Gallery 📸</a>
+            <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
             <a href="county_websites.html">TX Dems</a>
             <a href="south_texas_region.html">South TX</a>
             <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
@@ -244,8 +316,8 @@
   <!-- Hero Section -->
   <header class="page-header container fade-in">
     <div>
-      <h1>Stay Informed. Stay Engaged.</h1>
-      <p style="max-width: 800px; margin: 0 auto;">Follow the top voices pushing for progress in Texas and the Rio Grande Valley. Join the conversation online.</p>
+      <h1>Social Photo Gallery</h1>
+      <p style="max-width: 800px; margin: 0 auto;">Follow the top voices pushing for progress in Texas and the Rio Grande Valley, and check out photos from our latest events.</p>
     </div>
   </header>
 
@@ -358,6 +430,29 @@
     </div>
   </section>
 
+  
+  <!-- Live Community Photo Gallery -->
+  <section class="container fade-in" style="padding-top: 2rem;">
+    <div class="glass-card" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); margin-bottom: 2rem;">
+      <h2 style="margin-top: 0; font-size: 2.5rem; font-weight: 800; color: #fff;">Community Photo Gallery</h2>
+      <p style="color: #94a3b8; line-height: 1.6; font-size: 1.1rem; max-width: 600px;">Share your hard work! Upload photos from block walks, phone banks, or events to our live community gallery.</p>
+      
+      <div class="upload-section">
+        <input type="text" id="captionInput" class="form-control" placeholder="Description (Who, when, where?)">
+        <div class="upload-row">
+          <input type="file" id="fileInput" accept="image/*" class="form-control">
+          <button id="uploadBtn" class="btn btn-primary">Upload Photo</button>
+        </div>
+      </div>
+      <p id="uploadStatus" style="color: #38bdf8; display: none; margin-top: 1rem;">Uploading...</p>
+    </div>
+
+    <!-- The Grid -->
+    <div id="galleryGrid" class="gallery-grid">
+      <div class="loading-text" id="loadingText">Loading photos from Firebase...</div>
+    </div>
+  </section>
+
   <!-- Live Social Feeds -->
   <section class="container fade-in" style="padding-top: 2rem;">
     <div style="text-align: center; margin-bottom: 3rem;">
@@ -421,5 +516,120 @@
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script src="js/a11y.js"></script>
+
+  <!-- Firebase v9 Web SDK for Photo Gallery -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, listAll, getDownloadURL, getMetadata } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      projectId: "hcdp-digital-inbox",
+      appId: "1:884194084346:web:ee44e3410c73322a631043",
+      storageBucket: "hcdp-digital-inbox.firebasestorage.app",
+      apiKey: "AIzaSyBMSgg__pJEm6NESKJe6l72UydEWZpdMhw",
+      authDomain: "hcdp-digital-inbox.firebaseapp.com",
+      messagingSenderId: "884194084346"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    const fileInput = document.getElementById('fileInput');
+    const captionInput = document.getElementById('captionInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const loadingText = document.getElementById('loadingText');
+
+    async function loadGallery() {
+      try {
+        const listRef = ref(storage, 'community-photos');
+        const res = await listAll(listRef);
+        
+        galleryGrid.innerHTML = ''; 
+        
+        if (res.items.length === 0) {
+          galleryGrid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">No photos yet. Be the first to upload!</p>';
+          return;
+        }
+
+        for (const itemRef of res.items) {
+          const urlPromise = getDownloadURL(itemRef);
+          const metaPromise = getMetadata(itemRef);
+          
+          const [url, meta] = await Promise.all([urlPromise, metaPromise]);
+          
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'dynamic-gallery-item';
+          
+          const img = document.createElement('img');
+          img.src = url;
+          img.loading = "lazy";
+          imgContainer.appendChild(img);
+
+          const captionText = meta.customMetadata?.caption;
+          if (captionText) {
+            const captionDiv = document.createElement('div');
+            captionDiv.className = 'photo-caption';
+            captionDiv.innerText = captionText;
+            imgContainer.appendChild(captionDiv);
+          }
+          
+          galleryGrid.prepend(imgContainer); 
+        }
+      } catch (error) {
+        console.error("Error loading gallery:", error);
+        loadingText.innerText = "Error loading photos. Please check your connection.";
+      }
+    }
+
+    uploadBtn.addEventListener('click', async () => {
+      const file = fileInput.files[0];
+      const caption = captionInput.value.trim();
+
+      if (!file) {
+        alert("Please select a photo first!");
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File is too large! Please select an image under 10MB.");
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadStatus.style.display = 'block';
+      uploadStatus.innerText = "Uploading to Firebase...";
+
+      try {
+        const uniqueFileName = Date.now() + "_" + file.name;
+        const storageRef = ref(storage, 'community-photos/' + uniqueFileName);
+        
+        const metadata = {
+          customMetadata: {
+            caption: caption
+          }
+        };
+
+        await uploadBytes(storageRef, file, metadata);
+        
+        uploadStatus.innerText = "✅ Upload complete!";
+        fileInput.value = ""; 
+        captionInput.value = "";
+        
+        await loadGallery();
+        
+      } catch (error) {
+        console.error("Upload failed:", error);
+        alert("Upload failed. Make sure it's an image file under 10MB.");
+      } finally {
+        setTimeout(() => {
+          uploadStatus.style.display = 'none';
+          uploadBtn.disabled = false;
+        }, 3000);
+      }
+    });
+
+    loadGallery();
+  </script>
 </body>
 </html>
