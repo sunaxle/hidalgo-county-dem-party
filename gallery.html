@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Gallery | Hidalgo County Democrats</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --primary: #3b82f6;
+      --text: #f8fafc;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+    }
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    p {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    .upload-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .upload-row {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+    }
+    .form-control {
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
+      color: white;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+    .form-control::placeholder {
+      color: #64748b;
+    }
+    #captionInput {
+      width: 100%;
+    }
+    #fileInput {
+      flex-grow: 1;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn:hover {
+      background: #2563eb;
+    }
+    .btn:disabled {
+      background: #64748b;
+      cursor: not-allowed;
+    }
+    
+    /* Pinterest-style Masonry Grid */
+    .gallery-grid {
+      column-count: 3;
+      column-gap: 1.5rem;
+      width: 100%;
+    }
+    @media (max-width: 800px) { .gallery-grid { column-count: 2; } }
+    @media (max-width: 500px) { .gallery-grid { column-count: 1; } }
+    
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .gallery-item:hover {
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .photo-caption {
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      background: rgba(0,0,0,0.3);
+    }
+    .loading-text {
+      text-align: center;
+      color: #94a3b8;
+      width: 100%;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header & Upload Section -->
+    <div class="glass-card">
+      <h1>Community Photo Gallery</h1>
+      <p>Share your hard work! Upload photos from block walks, phone banks, or events to our live community gallery.</p>
+      
+      <div class="upload-section">
+        <input type="text" id="captionInput" class="form-control" placeholder="Description (Who, when, where?)">
+        <div class="upload-row">
+          <input type="file" id="fileInput" accept="image/*" class="form-control">
+          <button id="uploadBtn" class="btn">Upload Photo</button>
+        </div>
+      </div>
+      <p id="uploadStatus" style="color: #38bdf8; display: none; margin-top: 1rem;">Uploading...</p>
+    </div>
+
+    <!-- The Grid -->
+    <div id="galleryGrid" class="gallery-grid">
+      <div class="loading-text" id="loadingText">Loading photos from Firebase...</div>
+    </div>
+    
+  </div>
+
+  <!-- Firebase v9 Web SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, listAll, getDownloadURL, getMetadata } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+      projectId: "hcdp-digital-inbox",
+      appId: "1:884194084346:web:ee44e3410c73322a631043",
+      storageBucket: "hcdp-digital-inbox.firebasestorage.app",
+      apiKey: "AIzaSyBMSgg__pJEm6NESKJe6l72UydEWZpdMhw",
+      authDomain: "hcdp-digital-inbox.firebaseapp.com",
+      messagingSenderId: "884194084346"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    const fileInput = document.getElementById('fileInput');
+    const captionInput = document.getElementById('captionInput');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const uploadStatus = document.getElementById('uploadStatus');
+    const galleryGrid = document.getElementById('galleryGrid');
+    const loadingText = document.getElementById('loadingText');
+
+    async function loadGallery() {
+      try {
+        const listRef = ref(storage, 'community-photos');
+        const res = await listAll(listRef);
+        
+        galleryGrid.innerHTML = ''; 
+        
+        if (res.items.length === 0) {
+          galleryGrid.innerHTML = '<p style="text-align:center; width:100%; grid-column: 1/-1;">No photos yet. Be the first to upload!</p>';
+          return;
+        }
+
+        // Fetch URL and Metadata for each image
+        for (const itemRef of res.items) {
+          const urlPromise = getDownloadURL(itemRef);
+          const metaPromise = getMetadata(itemRef);
+          
+          const [url, meta] = await Promise.all([urlPromise, metaPromise]);
+          
+          const imgContainer = document.createElement('div');
+          imgContainer.className = 'gallery-item';
+          
+          const img = document.createElement('img');
+          img.src = url;
+          img.loading = "lazy";
+          imgContainer.appendChild(img);
+
+          // Add caption if it exists
+          const captionText = meta.customMetadata?.caption;
+          if (captionText) {
+            const captionDiv = document.createElement('div');
+            captionDiv.className = 'photo-caption';
+            captionDiv.innerText = captionText;
+            imgContainer.appendChild(captionDiv);
+          }
+          
+          galleryGrid.prepend(imgContainer); 
+        }
+      } catch (error) {
+        console.error("Error loading gallery:", error);
+        loadingText.innerText = "Error loading photos. Please check your connection.";
+      }
+    }
+
+    uploadBtn.addEventListener('click', async () => {
+      const file = fileInput.files[0];
+      const caption = captionInput.value.trim();
+
+      if (!file) {
+        alert("Please select a photo first!");
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File is too large! Please select an image under 10MB.");
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadStatus.style.display = 'block';
+      uploadStatus.innerText = "Uploading to Firebase...";
+
+      try {
+        const uniqueFileName = Date.now() + "_" + file.name;
+        const storageRef = ref(storage, 'community-photos/' + uniqueFileName);
+        
+        // Attach the description/caption as custom metadata
+        const metadata = {
+          customMetadata: {
+            caption: caption
+          }
+        };
+
+        await uploadBytes(storageRef, file, metadata);
+        
+        uploadStatus.innerText = "✅ Upload complete!";
+        fileInput.value = ""; 
+        captionInput.value = "";
+        
+        await loadGallery();
+        
+      } catch (error) {
+        console.error("Upload failed:", error);
+        alert("Upload failed. Make sure it's an image file under 10MB.");
+      } finally {
+        setTimeout(() => {
+          uploadStatus.style.display = 'none';
+          uploadBtn.disabled = false;
+        }, 3000);
+      }
+    });
+
+    loadGallery();
+  </script>
+</body>
+</html>
