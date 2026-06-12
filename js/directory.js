@@ -34,11 +34,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     officials = snapshot.docs.map(doc => doc.data());
     
     // Sort manually to avoid requiring a composite index in Firestore
+    // Sort by Level first (Federal -> State -> County), then by Name
+    const levelOrder = { "Federal": 1, "State": 2, "County": 3 };
+    
     officials.sort((a, b) => {
-      if (a.level === b.level) {
+      const levelA = levelOrder[a.level] || 99;
+      const levelB = levelOrder[b.level] || 99;
+      
+      if (levelA === levelB) {
         return (a.name || '').localeCompare(b.name || '');
       }
-      return (a.level || '').localeCompare(b.level || '');
+      return levelA - levelB;
     });
     
     renderGrid(officials);
