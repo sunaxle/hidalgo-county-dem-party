@@ -1,4 +1,4 @@
-const CACHE_NAME = 'join-app-v1';
+const CACHE_NAME = 'join-app-v2';
 const urlsToCache = [
   '/join.html',
   '/css/state_party_clone.css',
