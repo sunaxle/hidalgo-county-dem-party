@@ -1,13 +1,26 @@
-/**
- * Hidalgo County Democrats - Global Form Handler
- * Captures submissions from Contact and Subscribe pages and routes them to Google Sheets.
- */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// Initialize Firebase
+const firebaseConfig = {
+  projectId: "hcdp-digital-inbox",
+  appId: "1:884194084346:web:ee44e3410c73322a631043",
+  storageBucket: "hcdp-digital-inbox.firebasestorage.app",
+  apiKey: "AIzaSyBMSgg__pJEm6NESKJe6l72UydEWZpdMhw",
+  authDomain: "hcdp-digital-inbox.firebaseapp.com",
+  messagingSenderId: "884194084346",
+  projectNumber: "884194084346",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", () => {
-  // We will replace this URL with the live Google Web App URL once generated
-  const GOOGLE_WEBHOOK_URL =
-    "https://script.google.com/macros/s/AKfycbxPJWHK1yEj1Ki6HzgxySr5uRKtJOO-8uN7KcQMDni67s0TbOD0VbOlMqUQPwAn9-jF/exec";
-
   const forms = document.querySelectorAll("form");
 
   forms.forEach((form) => {
@@ -38,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
           else source = "Community Inbox";
         }
 
-        // Dynamically concatenate custom fields into the primary 'message' column for Google Sheets
+        // Dynamically concatenate custom fields into the primary 'message' column
         let combinedMessage =
           form.querySelector("#message")?.value ||
           form.querySelector('[name="story_message"]')?.value ||
@@ -69,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
           combinedMessage = extras.join("\n");
         }
 
-        // Construct Payload cleanly depending on which form was submitted
+        // Construct Payload cleanly
         const payload = {
           source: source,
           name:
@@ -103,17 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
           optInEmail: form.querySelector("#check-email")?.checked || false,
           optInCall: form.querySelector("#check-phone")?.checked || false,
           optInPerson: form.querySelector("#check-in-person")?.checked || false,
+          
+          timestamp: serverTimestamp()
         };
 
-        // Send to Google Apps Script
-        const response = await fetch(GOOGLE_WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors", // Google Apps Script requires no-cors for silent POSTs
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        // Send to Firebase Firestore
+        await addDoc(collection(db, "form_submissions"), payload);
 
         // Show Success Message natively within the form container
         form.innerHTML = `
