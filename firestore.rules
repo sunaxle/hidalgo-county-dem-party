@@ -9,6 +9,9 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if false;
     }
+    match /mail/{document=**} {
+      allow create: if true;
+    }
     match /community_stories/{document=**} {
       allow create: if true;
       allow read, update, delete: if false;

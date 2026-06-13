@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #333333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .header {
+    background: #0f172a;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  .header h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  .content {
+    padding: 30px;
+  }
+  .gif-container {
+    text-align: center;
+    margin: 20px 0;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .gif-container img {
+    max-width: 100%;
+    display: block;
+  }
+  .highlight {
+    font-weight: bold;
+    color: #2563eb;
+  }
+  .button-group {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .btn {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: 2px solid #2563eb;
+  }
+  .btn-secondary {
+    background-color: #ffffff;
+    color: #0f172a;
+    border: 2px solid #0f172a;
+  }
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #64748b;
+    background: #f8fafc;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h2>Your Precinct Superpower 🚀</h2>
+  </div>
+  
+  <div class="content">
+    <p>Hi {{First Name}},</p>
+    
+    <p>As a Precinct Chair, your time is your most valuable asset. If you are knocking on random doors hoping to find Democrats, you are working too hard.</p>
+    
+    <p>We want to give you access to <span class="highlight">VAN (Voter Activation Network)</span>. It is the ultimate superpower for organizers. It tells you exactly who the most reliable Democrats are in your specific neighborhood, saving you hundreds of hours of guesswork.</p>
+
+    <div class="gif-container">
+      <!-- In reality, this would be a hosted URL of the GIF. We use a placeholder path here -->
+      <img src="https://via.placeholder.com/800x600.png?text=VAN+Screen+Recording+GIF+Plays+Here" alt="VAN Tutorial Preview">
+    </div>
+
+    <p>We have two options to help you mobilize your neighborhood this weekend. Click the button below that works best for you:</p>
+
+    <div class="button-group">
+      <!-- Mailto link to easily request an account -->
+      <a href="mailto:chair@hidalgocountydemocraticparty.org?subject=I%20want%20VAN%20Access!&body=Please%20set%20up%20my%20VAN%20account." class="btn btn-primary">🎓 Set up my VAN Account</a>
+      
+      <!-- Link to the Concierge Web Form -->
+      <a href="https://yourwebsite.com/van_concierge.html" class="btn btn-secondary">🚀 I'm too busy, just cut my list for me</a>
+    </div>
+
+  </div>
+  
+  <div class="footer">
+    <p>Hidalgo County Democratic Party<br>Empowering our grassroots leaders.</p>
+  </div>
+</div>
+
+</body>
+</html>

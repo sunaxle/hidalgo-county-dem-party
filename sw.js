@@ -1,4 +1,4 @@
-const CACHE_NAME = 'join-app-v2';
+const CACHE_NAME = 'join-app-v3';
 const urlsToCache = [
   '/join.html',
   '/css/state_party_clone.css',
@@ -6,6 +6,7 @@ const urlsToCache = [
   '/js/app.js',
   '/js/form_handler.js',
   '/js/value_counter.js',
+  '/emails/welcome.html',
   '/images/facebook_1656248751972_6946810765393131439.webp',
   '/images/hidalgo_dems_logo.png',
   '/images/icon-192.png',

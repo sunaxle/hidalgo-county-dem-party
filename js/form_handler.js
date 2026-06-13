@@ -22,10 +22,12 @@ const db = getFirestore(app);
 
 function initForms() {
   const forms = document.querySelectorAll("form");
+  console.log("initForms called. Forms found:", forms.length);
 
   forms.forEach((form) => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      console.log("Form submit event intercepted!");
 
       // Prevent multiple submissions
       const submitBtn = form.querySelector('button[type="submit"]');
@@ -122,6 +124,35 @@ function initForms() {
 
         // Send to Firebase Firestore
         await addDoc(collection(db, "form_submissions"), payload);
+
+        // Trigger Automated Welcome Email via Firebase Extension
+        if (payload.email) {
+          try {
+            // Fetch the HTML template from our static assets
+            const templateRes = await fetch('/emails/welcome.html');
+            if (templateRes.ok) {
+              let htmlTemplate = await templateRes.text();
+              
+              // Inject dynamic variables
+              const firstName = payload.firstName || payload.name.split(' ')[0] || "Friend";
+              htmlTemplate = htmlTemplate.replace(/{{firstName}}/g, firstName);
+
+              // Add to mail collection for the Firebase Extension to process
+              await addDoc(collection(db, "mail"), {
+                to: payload.email,
+                message: {
+                  subject: "Welcome to the Party! 🇺🇸",
+                  html: htmlTemplate
+                }
+              });
+            } else {
+              console.error("Could not fetch welcome email template.");
+            }
+          } catch(emailErr) {
+            console.error("Failed to enqueue welcome email:", emailErr);
+            // Non-fatal, we don't want to crash the form submission if email fails
+          }
+        }
 
         // Show Success Message natively within the form container
         form.innerHTML = `
