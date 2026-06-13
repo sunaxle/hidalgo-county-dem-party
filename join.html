@@ -55,6 +55,11 @@
   <meta property="og:description" content="Official Website of the Hidalgo County Democratic Party. Empowering South Texas residents to build communities that represent them. Vote, Volunteer, and Get Involved.">
   <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
   <meta property="og:type" content="website">
+
+  <!-- PWA Requirements -->
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1e40af">
+  <link rel="apple-touch-icon" href="/images/icon-192.png">
 </head>
 <body class="tx-clone">
 
@@ -202,5 +207,20 @@
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script src="js/a11y.js"></script>
+
+  <!-- Register PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          })
+          .catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
