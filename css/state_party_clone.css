@@ -227,6 +227,7 @@ body.tx-clone {
 
 /* Hero */
 .tx-clone-hero {
+  box-sizing: border-box;
   background-image:
     linear-gradient(rgba(0, 45, 84, 0.7), rgba(0, 45, 84, 0.8)),
     url("../images/hidalgo-exterior-d2100-675.avif");
@@ -246,10 +247,12 @@ body.tx-clone {
 .tx-clone-hero-right {
   flex: 1;
   min-width: 300px;
+  box-sizing: border-box;
 }
 
 .tx-clone-hero-left {
   max-width: 450px;
+  box-sizing: border-box;
   background-color: white; /* Changed from glass to solid white for crispness */
   color: var(--tx-navy);
   padding: 3.5rem 2.5rem;
