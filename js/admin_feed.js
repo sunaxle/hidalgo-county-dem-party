@@ -57,18 +57,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = data.email || "N/A";
       const phone = data.phone || "N/A";
 
+      const message = data.message || "(No message)";
+
       tr.innerHTML = `
-        <td style="padding: 1rem; color: #94a3b8; font-size: 0.9rem;">${dateString}</td>
-        <td style="padding: 1rem; color: #f8fafc; font-weight: 600;">${name}</td>
-        <td style="padding: 1rem; color: #38bdf8;">
-          <a href="mailto:${email}" style="color: inherit; text-decoration: none;">${email}</a>
-        </td>
-        <td style="padding: 1rem; color: #94a3b8;">${phone}</td>
-        <td style="padding: 1rem;">
-          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">
+        <td style="padding: 1rem; color: #94a3b8; font-size: 0.9rem; vertical-align: top;">${dateString}</td>
+        <td style="padding: 1rem; vertical-align: top;">
+          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: inline-block;">
             ${formType}
           </span>
         </td>
+        <td style="padding: 1rem; vertical-align: top;">
+          <div style="color: #f8fafc; font-weight: 600; margin-bottom: 0.25rem;">${name}</div>
+          <div style="color: #38bdf8; font-size: 0.85rem; margin-bottom: 0.25rem;"><a href="mailto:${email}" style="color: inherit; text-decoration: none;">${email}</a></div>
+          <div style="color: #94a3b8; font-size: 0.85rem;">${phone}</div>
+        </td>
+        <td style="padding: 1rem; color: #e2e8f0; font-size: 0.95rem; vertical-align: top; line-height: 1.5; white-space: pre-wrap;">${message}</td>
       `;
       tbody.appendChild(tr);
     });
