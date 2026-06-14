@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     snapshot.forEach((doc) => {
       const data = doc.data();
       const tr = document.createElement("tr");
-      tr.style.borderBottom = "1px solid #e2e8f0";
+      tr.style.borderBottom = "1px solid #334155";
       
       // Handle timestamp safely
       let dateString = "Just now";
@@ -52,20 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
         dateString = date.toLocaleString();
       }
 
-      const formType = data.formType || "General Intake";
+      const formType = data.source || data.formType || "General Intake";
       const name = data.name || data.firstName + " " + (data.lastName || "") || "Unknown";
       const email = data.email || "N/A";
       const phone = data.phone || "N/A";
 
       tr.innerHTML = `
-        <td style="padding: 1rem; color: #64748b; font-size: 0.9rem;">${dateString}</td>
-        <td style="padding: 1rem; color: #0f172a; font-weight: 600;">${name}</td>
-        <td style="padding: 1rem; color: #2563eb;">
+        <td style="padding: 1rem; color: #94a3b8; font-size: 0.9rem;">${dateString}</td>
+        <td style="padding: 1rem; color: #f8fafc; font-weight: 600;">${name}</td>
+        <td style="padding: 1rem; color: #38bdf8;">
           <a href="mailto:${email}" style="color: inherit; text-decoration: none;">${email}</a>
         </td>
-        <td style="padding: 1rem; color: #64748b;">${phone}</td>
+        <td style="padding: 1rem; color: #94a3b8;">${phone}</td>
         <td style="padding: 1rem;">
-          <span style="background: rgba(59, 130, 246, 0.1); color: #2563eb; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">
+          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">
             ${formType}
           </span>
         </td>
