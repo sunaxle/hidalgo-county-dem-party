@@ -290,15 +290,37 @@ exports.notifyOnNewSubmission = onDocumentCreated("form_submissions/{docId}", as
 
     // 2. Auto-reply to the Submitter
     if (email && email !== 'N/A' && email.includes('@')) {
+      let subject = "";
+      let bodyText = "";
+      const source = data.source || formType;
+
+      if (source === "Subscribe" || source.includes("Newsletter")) {
+        subject = `Welcome to the Loop! 📩 News & Updates from the Hidalgo County Democrats`;
+        bodyText = `Hi ${firstName},\n\nThank you so much for stepping up and wanting to be involved with the Hidalgo County Democratic Party!\n\nYou are now officially on our list. Whenever there is breaking local news, upcoming events, or urgent calls to action that impact our community, you'll be among the first to know.\n\nWe believe that real change starts right here at home, and it's powered by folks like you staying informed and engaged.\n\nKeep an eye on your inbox, and we'll be in touch soon!\n\nIn Solidarity,\nThe Hidalgo County Democratic Party Team`;
+      } else if (source === "Join the Party" || source.includes("Volunteer")) {
+        subject = `Welcome to the Party, ${firstName}! Let's get to work. 🗳️`;
+        bodyText = `Hi ${firstName},\n\nWelcome to the Hidalgo County Democratic Party! We are absolutely thrilled that you are ready to roll up your sleeves and get involved.\n\nSouth Texas is the frontline of the fight for democracy, and we cannot do this without dedicated volunteers like you. Whether you're interested in block walking, making phone calls, or helping out at our events, there is a place for you here.\n\nWhat happens next?\nA member of our organizing team (or your local Precinct Chair) will be reaching out to you shortly to connect and help you plug into our upcoming volunteer opportunities.\n\nIn the meantime, be sure to check our Events Calendar on the website to see what's happening this week.\n\nThank you for standing with us. Let's win this!\n\nIn Solidarity,\nThe Hidalgo County Democratic Party Team`;
+      } else if (source === "Community Hub Inbox" || source.includes("Community")) {
+        subject = `Thank you for sharing with your community.`;
+        bodyText = `Hi ${firstName},\n\nThank you for submitting your thoughts to the Hidalgo County Community Hub.\n\nWhether you're reporting a neighborhood issue, sharing a story from the field, or leaving a note for our County Chair, your voice matters deeply to us. We review every single submission that comes through this portal.\n\nIf you reported an urgent issue (like voter suppression or a polling location problem), our Voter Protection team has been alerted. Otherwise, your story helps us keep a finger on the pulse of what matters most to our neighborhoods.\n\nThank you for being the eyes and ears of our community.\n\nBest regards,\nThe Hidalgo County Democratic Party Team`;
+      } else if (source === "Contact Us" || source.includes("Contact")) {
+        subject = `We've received your message!`;
+        bodyText = `Hi ${firstName},\n\nThank you for reaching out to the Hidalgo County Democratic Party!\n\nWe have successfully received your message. Our team is reviewing it and will route it to the appropriate person. Because our organization is primarily volunteer-run, please allow 24-48 hours for a direct response if your inquiry requires one.\n\nWe appreciate you taking the time to contact us.\n\nBest regards,\nThe Hidalgo County Democratic Party Team`;
+      } else {
+        // Fallback (Homepage or any other form)
+        subject = `Thanks for connecting with the Hidalgo County Democrats!`;
+        bodyText = `Hi ${firstName},\n\nThank you for reaching out via our website! We've received your message.\n\nWe are building a movement that represents all of South Texas, and we are grateful to have you with us. If you asked a specific question or requested materials, our team will follow up with you as soon as possible.\n\nThanks for your commitment to our community.\n\nIn Solidarity,\nThe Hidalgo County Democratic Party Team`;
+      }
+
       const userMailOptions = {
         from: '"Hidalgo County Democrats" <info@hidalgocountydems.org>',
         to: email,
-        subject: `Welcome to the Team! We received your submission`,
-        text: `Hi ${firstName},\n\nThank you for reaching out to the Hidalgo County Democratic Party! We have successfully received your submission for: ${formType}.\n\nOur team is reviewing your information and we will be in touch with you shortly. If you need immediate assistance or would like to send a direct message back to the party, please email us directly at info@hidalgocountydems.org.\n\nThank you for being part of the movement to build a better South Texas!\n\nBest regards,\nHidalgo County Democratic Party\n\n(Note: Please do not reply directly to this automated email. Send any individualized emails to info@hidalgocountydems.org)`,
+        subject: subject,
+        text: bodyText,
       };
 
       await transporter.sendMail(userMailOptions);
-      console.log(`Successfully sent auto-reply welcome email to ${email}`);
+      console.log(`Successfully sent tailored auto-reply welcome email to ${email} for source: ${source}`);
     }
 
   } catch (emailError) {
