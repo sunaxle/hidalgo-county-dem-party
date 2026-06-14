@@ -36,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
     tbody.innerHTML = "";
     
     if (snapshot.empty) {
-      tbody.innerHTML = `<tr><td colspan="5" style="padding: 2rem; text-align: center; color: #cbd5e1;">No submissions yet.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" style="padding: 2rem; text-align: center; color: #008f11; font-family: 'Courier New', Courier, monospace;">No submissions yet.</td></tr>`;
       return;
     }
 
     snapshot.forEach((doc) => {
       const data = doc.data();
       const tr = document.createElement("tr");
-      tr.style.borderBottom = "1px solid #334155";
+      tr.style.borderBottom = "1px dashed #008f11";
       
       // Handle timestamp safely
       let dateString = "Just now";
@@ -60,23 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = data.message || "(No message)";
 
       tr.innerHTML = `
-        <td style="padding: 1rem; color: #94a3b8; font-size: 0.9rem; vertical-align: top;">${dateString}</td>
+        <td style="padding: 1rem; color: #008f11; font-size: 0.9rem; vertical-align: top; font-family: 'Courier New', Courier, monospace;">${dateString}</td>
         <td style="padding: 1rem; vertical-align: top;">
-          <span style="background: rgba(56, 189, 248, 0.1); color: #38bdf8; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: inline-block;">
+          <span style="background: rgba(0, 255, 65, 0.1); color: #00ff41; padding: 0.25rem 0.5rem; border: 1px solid #008f11; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: inline-block; font-family: 'Courier New', Courier, monospace;">
             ${formType}
           </span>
         </td>
         <td style="padding: 1rem; vertical-align: top;">
-          <div style="color: #f8fafc; font-weight: 600; margin-bottom: 0.25rem;">${name}</div>
-          <div style="color: #38bdf8; font-size: 0.85rem; margin-bottom: 0.25rem;"><a href="mailto:${email}" style="color: inherit; text-decoration: none;">${email}</a></div>
-          <div style="color: #94a3b8; font-size: 0.85rem;">${phone}</div>
+          <div style="color: #00ff41; font-weight: 600; margin-bottom: 0.25rem; font-family: 'Courier New', Courier, monospace; text-shadow: 0 0 3px rgba(0,255,65,0.5);">${name}</div>
+          <div style="color: #008f11; font-size: 0.85rem; margin-bottom: 0.25rem; font-family: 'Courier New', Courier, monospace;"><a href="mailto:${email}" style="color: inherit; text-decoration: none;">${email}</a></div>
+          <div style="color: #008f11; font-size: 0.85rem; font-family: 'Courier New', Courier, monospace;">${phone}</div>
         </td>
-        <td style="padding: 1rem; color: #e2e8f0; font-size: 0.95rem; vertical-align: top; line-height: 1.5; white-space: pre-wrap;">${message}</td>
+        <td style="padding: 1rem; color: #00ff41; font-size: 0.95rem; vertical-align: top; line-height: 1.5; white-space: pre-wrap; font-family: 'Courier New', Courier, monospace;">${message}</td>
       `;
       tbody.appendChild(tr);
     });
   }, (error) => {
     console.error("Error fetching live feed:", error);
-    tbody.innerHTML = `<tr><td colspan="5" style="padding: 2rem; text-align: center; color: #ef4444;">Error loading live data. Do you have permission?</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="4" style="padding: 2rem; text-align: center; color: #ef4444; font-family: 'Courier New', Courier, monospace;">Error loading live data. Do you have permission?</td></tr>`;
   });
 });

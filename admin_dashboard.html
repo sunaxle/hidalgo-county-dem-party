@@ -10,13 +10,14 @@
   <style>
     /* Admin Dashboard Specific Overrides */
     body {
-      background: #0f172a;
-      color: #f8fafc;
+      background: #000000;
+      color: #00ff41;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     .admin-nav {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: #000000;
+      border-bottom: 1px solid #00ff41;
       padding: 1rem 2rem;
       display: flex;
       flex-wrap: wrap;
@@ -26,29 +27,33 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(10px);
     }
 
     .admin-logo {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 1.25rem;
       font-weight: 700;
-      color: #38bdf8;
+      color: #00ff41;
       letter-spacing: -0.025em;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      text-shadow: 0 0 5px #00ff41;
     }
 
     .logout-btn {
-      color: #94a3b8;
+      color: #008f11;
       text-decoration: none;
       font-size: 0.9rem;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 0.25rem;
     }
-    .logout-btn:hover { color: #ef4444; }
+    .logout-btn:hover { 
+      color: #00ff41; 
+      text-shadow: 0 0 5px #00ff41;
+    }
 
     .dashboard-container {
       max-width: 1200px;
@@ -58,14 +63,18 @@
 
     .welcome-header {
       margin-bottom: 3rem;
+      border-bottom: 1px dashed #008f11;
+      padding-bottom: 1rem;
     }
     .welcome-header h1 {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      color: #f8fafc;
+      color: #00ff41;
+      text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
     }
     .welcome-header p {
-      color: #94a3b8;
+      color: #008f11;
       font-size: 1.1rem;
     }
 
@@ -78,48 +87,56 @@
     }
 
     .metric-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-      border-radius: 12px;
+      background: #000000;
+      border: 1px solid #008f11;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+      border-radius: 4px;
       padding: 1.5rem;
       position: relative;
       overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .metric-card:hover {
+      border-color: #00ff41;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
     }
 
     .metric-card::before {
-      content: '';
+      content: '>';
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: #3b82f6;
+      top: 1.5rem;
+      right: 1.5rem;
+      color: #00ff41;
+      font-size: 1.5rem;
+      opacity: 0.5;
     }
-    .metric-card.green::before { background: #10b981; }
-    .metric-card.orange::before { background: #f59e0b; }
 
     .metric-title {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 0.85rem;
-      color: #94a3b8;
+      color: #008f11;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 0.5rem;
     }
 
     .metric-value {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 2.5rem;
       font-weight: 700;
-      color: #f8fafc;
+      color: #00ff41;
+      text-shadow: 0 0 5px #00ff41;
     }
 
     /* Database Links Grid */
     .db-section-title {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 1.5rem;
-      color: #f8fafc;
-      border-bottom: 1px solid #334155;
+      color: #00ff41;
+      border-bottom: 1px dashed #008f11;
       padding-bottom: 1rem;
       margin-bottom: 2rem;
+      text-shadow: 0 0 5px #00ff41;
     }
 
     .db-grid {
@@ -129,36 +146,38 @@
     }
 
     .db-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-      border-radius: 12px;
+      background: #000000;
+      border: 1px solid #008f11;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+      border-radius: 4px;
       padding: 2rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       height: 100%;
     }
 
     .db-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-      border-color: #38bdf8;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      border-color: #00ff41;
     }
 
     .db-icon {
       font-size: 2rem;
       margin-bottom: 1rem;
+      filter: grayscale(100%) sepia(100%) hue-rotate(80deg) saturate(300%) brightness(1.2);
     }
 
     .db-card h3 {
+      font-family: 'Courier New', Courier, monospace;
       font-size: 1.25rem;
       margin-bottom: 0.5rem;
-      color: #f8fafc;
+      color: #00ff41;
     }
 
     .db-card p {
-      color: #94a3b8;
+      color: #008f11;
       font-size: 0.95rem;
       line-height: 1.5;
       margin-bottom: 2rem;
@@ -169,20 +188,23 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(56, 189, 248, 0.1);
-      color: #38bdf8;
+      background: transparent;
+      color: #00ff41;
       text-decoration: none;
       padding: 0.75rem 1rem;
-      border-radius: 6px;
+      border: 1px solid #008f11;
+      border-radius: 0;
       font-weight: 600;
       font-size: 0.9rem;
       width: fit-content;
       transition: all 0.2s ease;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     .db-link:hover {
-      background: #38bdf8;
-      color: #0f172a;
+      background: #00ff41;
+      color: #000000;
+      box-shadow: 0 0 10px #00ff41;
     }
 
     /* Mobile specific adjustments */
@@ -208,7 +230,6 @@
         flex-direction: column !important;
       }
     }
-
   </style>
   <script src="js/gatekeeper.js"></script>
 
@@ -327,7 +348,6 @@
     <!-- Header -->
     <header class="welcome-header">
       <h1>Portal Dashboard</h1>
-      <p>Live datastreams and community access links.</p>
     </header>
 
     <!-- Top Level Metrics -->
@@ -348,13 +368,13 @@
 
     <h2 class="db-section-title" style="animation-delay: 0.2s;">Communications Command Center</h2>
     <div class="db-grid" style="animation-delay: 0.25s; margin-bottom: 3rem;">
-      <div class="db-card" style="grid-column: 1 / -1; border-color: rgba(239, 68, 68, 0.5);">
+      <div class="db-card" style="grid-column: 1 / -1; border-color: #008f11;">
         <div class="db-icon">🚨</div>
         <h3>Smart SMS Broadcast</h3>
         <p>Instantly blast an emergency SMS text message to all 200+ Precinct Chairs simultaneously.</p>
-        <textarea id="smsMessageInput" placeholder="Type your urgent message here..." style="width: 100%; height: 100px; background: rgba(15,23,42,0.8); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; font-family: 'Inter', sans-serif; resize: vertical;"></textarea>
+        <textarea id="smsMessageInput" placeholder="Type your urgent message here..." style="width: 100%; height: 100px; background: #000000; color: #00ff41; border: 1px solid #008f11; border-radius: 0; padding: 1rem; margin-bottom: 1rem; font-family: 'Courier New', Courier, monospace; resize: vertical; box-shadow: inset 0 0 5px rgba(0,255,65,0.2);"></textarea>
         <div style="margin-bottom: 1rem;">
-          <input type="tel" id="smsTestNumber" placeholder="Test Mode: Enter your cell number (e.g. +19561234567)" style="width: 100%; background: rgba(15,23,42,0.8); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 0.75rem; font-family: 'Inter', sans-serif;">
+          <input type="tel" id="smsTestNumber" placeholder="Test Mode: Enter your cell number (e.g. +19561234567)" style="width: 100%; background: #000000; color: #00ff41; border: 1px solid #008f11; border-radius: 0; padding: 0.75rem; font-family: 'Courier New', Courier, monospace; box-shadow: inset 0 0 5px rgba(0,255,65,0.2);">
         </div>
         <div class="sms-btn-container" style="display: flex; gap: 1rem;">
           <button id="sendTestSmsBtn" class="db-link" style="background: #eab308; color: white; cursor: pointer; border: none; font-size: 1rem; flex: 1; justify-content: center;">
@@ -390,17 +410,17 @@
 
     <h2 class="db-section-title" style="animation-delay: 0.4s; margin-top: 3rem;">Live Incoming Data Feed</h2>
     <div style="animation-delay: 0.45s; overflow-x: auto; margin-bottom: 4rem;">
-      <table style="width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid #334155;">
+      <table style="width: 100%; border-collapse: collapse; background: #000000; overflow: hidden; border: 1px solid #008f11; box-shadow: 0 0 10px rgba(0,255,65,0.1);">
         <thead>
-          <tr style="background: rgba(15, 23, 42, 0.5); border-bottom: 1px solid #334155; text-align: left;">
-            <th style="padding: 1rem; color: #94a3b8; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 15%;">Date</th>
-            <th style="padding: 1rem; color: #94a3b8; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 15%;">Source</th>
-            <th style="padding: 1rem; color: #94a3b8; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 20%;">Contact Info</th>
-            <th style="padding: 1rem; color: #94a3b8; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 50%;">Message</th>
+          <tr style="background: rgba(0, 255, 65, 0.05); border-bottom: 1px solid #008f11; text-align: left;">
+            <th style="padding: 1rem; color: #00ff41; font-family: 'Courier New', Courier, monospace; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 15%;">Date</th>
+            <th style="padding: 1rem; color: #00ff41; font-family: 'Courier New', Courier, monospace; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 15%;">Source</th>
+            <th style="padding: 1rem; color: #00ff41; font-family: 'Courier New', Courier, monospace; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 20%;">Contact Info</th>
+            <th style="padding: 1rem; color: #00ff41; font-family: 'Courier New', Courier, monospace; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; width: 50%;">Message</th>
           </tr>
         </thead>
         <tbody id="liveDataFeedBody">
-          <tr><td colspan="4" style="padding: 2rem; text-align: center; color: #94a3b8;">Loading live data stream...</td></tr>
+          <tr><td colspan="4" style="padding: 2rem; text-align: center; color: #008f11; font-family: 'Courier New', Courier, monospace;">Loading live data stream...</td></tr>
         </tbody>
       </table>
     </div>
