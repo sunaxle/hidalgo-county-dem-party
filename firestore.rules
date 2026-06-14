@@ -6,8 +6,8 @@ service cloud.firestore {
       allow write: if false;
     }
     match /form_submissions/{document=**} {
-      allow create: if true;
-      allow read, update, delete: if false;
+      allow create, read: if true;
+      allow update, delete: if false;
     }
     match /mail/{document=**} {
       allow create: if true;

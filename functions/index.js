@@ -277,15 +277,30 @@ exports.notifyOnNewSubmission = onDocumentCreated("form_submissions/{docId}", as
       }
     });
 
-    const mailOptions = {
+    // 1. Alert the Admin Team
+    const adminMailOptions = {
       from: '"HCDP Alerts" <info@hidalgocountydems.org>',
       to: 'info@hidalgocountydems.org',
       subject: `🚨 New Submission: ${formType} from ${firstName}`,
       text: `You have received a new form submission on the website!\n\nType: ${formType}\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}\n\nTimestamp: ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })}\n\nLog in to the Admin Dashboard to view all submissions.`,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(adminMailOptions);
     console.log("Successfully sent notification email to info@hidalgocountydems.org");
+
+    // 2. Auto-reply to the Submitter
+    if (email && email !== 'N/A' && email.includes('@')) {
+      const userMailOptions = {
+        from: '"Hidalgo County Democrats" <info@hidalgocountydems.org>',
+        to: email,
+        subject: `Welcome to the Team! We received your submission`,
+        text: `Hi ${firstName},\n\nThank you for reaching out to the Hidalgo County Democratic Party! We have successfully received your submission for: ${formType}.\n\nOur team is reviewing your information and we will be in touch with you shortly. If you need immediate assistance or would like to send a direct message back to the party, please email us directly at info@hidalgocountydems.org.\n\nThank you for being part of the movement to build a better South Texas!\n\nBest regards,\nHidalgo County Democratic Party\n\n(Note: Please do not reply directly to this automated email. Send any individualized emails to info@hidalgocountydems.org)`,
+      };
+
+      await transporter.sendMail(userMailOptions);
+      console.log(`Successfully sent auto-reply welcome email to ${email}`);
+    }
+
   } catch (emailError) {
     console.error("Failed to send email notification:", emailError);
   }
