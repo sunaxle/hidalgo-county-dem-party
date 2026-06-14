@@ -14,7 +14,7 @@ const db = getFirestore();
 
 let ai;
 
-exports.transcribeVoicemail = onObjectFinalized(async (event) => {
+exports.transcribeVoicemail = onObjectFinalized({ bucket: "hcdp-digital-inbox.firebasestorage.app" }, async (event) => {
   // Initialize the Gemini AI SDK lazily inside the function execution
   // This prevents local deployment compilation errors.
   if (!ai) {
@@ -167,4 +167,126 @@ exports.sendSmsBlast = onCall(async (request) => {
     success: true, 
     message: `SMS blast completed. ${successCount} sent, ${errorCount} failed.` 
   };
+});
+
+// Interactive AI Kiosk Assistant
+exports.askVoterQuestion = onCall(async (request) => {
+  const question = request.data.question;
+  
+  if (!question || question.trim() === '') {
+    throw new HttpsError('invalid-argument', 'Question content is required.');
+  }
+
+  // Initialize the Gemini AI SDK lazily
+  if (!ai) {
+    ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "PENDING_API_KEY" });
+  }
+
+  try {
+    const systemPrompt = `You are the official Digital Campaign Manager and voter assistant for the Hidalgo County Democratic Party. 
+Your job is to answer questions from voters accurately, politely, and concisely. 
+You must always encourage voters to vote for Democrats up and down the ballot. 
+Keep your answers under 3 paragraphs. Use bullet points if it makes the answer clearer.
+If you don't know the specific answer, direct them to call the party headquarters at (956) 672-7274 or email info@hidalgocountydems.org.`;
+
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: [
+            systemPrompt,
+            `Voter Question: ${question}`
+        ]
+    });
+
+    return {
+      success: true,
+      answer: response.text
+    };
+  } catch (error) {
+    console.error("AI Generation error:", error);
+    throw new HttpsError('internal', 'Failed to generate a response from the AI.');
+  }
+});
+
+const { onSchedule } = require("firebase-functions/v2/scheduler");
+
+// Automated SEO Inbound Traffic Engine
+exports.generateSEOArticle = onSchedule("every 24 hours", async (event) => {
+  // Initialize the Gemini AI SDK lazily
+  if (!ai) {
+    ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "PENDING_API_KEY" });
+  }
+
+  const systemPrompt = `You are an expert political blogger for the Hidalgo County Democratic Party in South Texas. 
+Write a highly engaging, 400-word SEO-optimized blog post about one of the following local issues:
+- How Democrats are bringing jobs to the Rio Grande Valley and supporting economic growth.
+- Tracking local issues like gas prices, inflation, and helping working families.
+- Helping out our teachers and fighting for public school funding.
+- Optimistic news of good governance in our cities, such as drainage improvements, infrastructure, new buildings, and community assets.
+
+Randomly select ONE of these topics and write a deep-dive, localized article.
+The tone should be informative, inspiring, and clearly advocate for Democratic values and community engagement.
+Use Markdown formatting for headers, bullet points, and bold text. 
+Return ONLY the raw markdown content. No conversational filler.`;
+
+  try {
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: [systemPrompt]
+    });
+
+    const content = response.text;
+    
+    // Extract a title from the first H1 or H2, or generate one
+    const titleMatch = content.match(/^#+\s+(.+)$/m);
+    const title = titleMatch ? titleMatch[1] : "Hidalgo County Politics Update";
+
+    await db.collection("seo_articles").add({
+      title: title,
+      content: content,
+      timestamp: new Date().toISOString()
+    });
+
+    console.log("Successfully generated and saved SEO article.");
+  } catch (error) {
+    console.error("Failed to generate SEO article:", error);
+  }
+});
+
+const { onDocumentCreated } = require("firebase-functions/v2/firestore");
+
+// Notification on New Form Submission
+exports.notifyOnNewSubmission = onDocumentCreated("form_submissions/{docId}", async (event) => {
+  const snapshot = event.data;
+  if (!snapshot) {
+    return;
+  }
+  const data = snapshot.data();
+
+  const firstName = data.firstName || data.name || 'Anonymous';
+  const lastName = data.lastName || '';
+  const phone = data.phone || 'N/A';
+  const email = data.email || 'N/A';
+  const formType = data.formType || 'General Intake';
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'info@hidalgocountydems.org',
+        pass: (process.env.EMAIL_APP_PASSWORD || '').replace(/\s+/g, '')
+      }
+    });
+
+    const mailOptions = {
+      from: '"HCDP Alerts" <info@hidalgocountydems.org>',
+      to: 'info@hidalgocountydems.org',
+      subject: `🚨 New Submission: ${formType} from ${firstName}`,
+      text: `You have received a new form submission on the website!\n\nType: ${formType}\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}\n\nTimestamp: ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })}\n\nLog in to the Admin Dashboard to view all submissions.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Successfully sent notification email to info@hidalgocountydems.org");
+  } catch (emailError) {
+    console.error("Failed to send email notification:", emailError);
+  }
 });
