@@ -13,9 +13,22 @@ service cloud.firestore {
       allow create: if true;
     }
     match /community_stories/{document=**} {
-      allow create: if true;
-      allow read, update, delete: if false;
+      allow create, read: if true;
+      allow update, delete: if false;
     }
+    
+    // New CRM Contacts Collection
+    match /contacts/{contactId} {
+      // Temporarily allow read/write for local dashboard testing.
+      // MUST restrict to request.auth != null once login UI is built.
+      allow read, write: if true;
+      
+      // Subcollection for activity logs
+      match /activity_log/{logId} {
+        allow read, write: if true;
+      }
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
