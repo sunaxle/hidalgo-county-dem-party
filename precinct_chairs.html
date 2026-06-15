@@ -459,167 +459,48 @@
 
   <!-- Hero Header -->
   <header class="directory-header container">
-    <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 8px; padding: 1rem; margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; width: 100%; box-sizing: border-box;">
-      <strong style="color: #ef4444; text-transform: uppercase;">⚠️ Roster Disclaimer</strong>
-      <p style="margin: 0.5rem 0 0; font-size: 0.95rem; color: #f87171;">This directory reflects the upcoming <strong>2026 - 2028 Party Term</strong> resulting from the Primary Election. These elected officials will officially take office on <strong>June 15th</strong>. Please be respectful of this transition period.</p>
-    </div>
-
-    <!-- Precinct Organizing Model -->
-    <div class="glass-card" style="margin: 2rem auto; padding: 2rem; max-width: 800px; text-align: left; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-      <h2 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem; text-align: center;">The Democratic Organizing Model</h2>
-      <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-        Welcome to the team! If you are a new Precinct Chair or Party Member, the task of reaching every voter in your neighborhood might seem daunting. That is why we use a proven grassroots organizing model. A Precinct Chair's job isn't to do it all alone—it's to build a team. By recruiting <strong>Neighborhood Captains</strong> (a modern, community-focused role replacing the traditional "Neighborhood Captain") and <strong>Super Volunteers</strong>, you can effectively organize thousands of voters.
-      </p>
-      
-      <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
-        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #facc15;">
-          <strong style="color: #facc15; font-size: 1.1rem; display: block;">1. Precinct Chair</strong>
-          <span style="color: #94a3b8; font-size: 0.95rem;">The elected leader who oversees the entire precinct strategy, sets the vision, and recruits Neighborhood Captains.</span>
-        </div>
-        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #3b82f6;">
-          <strong style="color: #3b82f6; font-size: 1.1rem; display: block;">2. Neighborhood Captains</strong>
-          <span style="color: #94a3b8; font-size: 0.95rem;">Community leaders responsible for a specific, manageable "turf" (like an apartment complex, a neighborhood, or a few streets).</span>
-        </div>
-        <div style="padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #4ade80;">
-          <strong style="color: #4ade80; font-size: 1.1rem; display: block;">3. Super Volunteers</strong>
-          <span style="color: #94a3b8; font-size: 0.95rem;">Dedicated activists who support their Neighborhood Captain by block walking, making phone calls, and registering voters in their assigned area.</span>
-        </div>
-      </div>
-
-      <h3 style="color: #e2e8f0; margin-bottom: 1rem; font-size: 1.2rem; text-align: center;">How the Math Works: The 5,000 Voter Precinct</h3>
-      <div style="background: rgba(0,0,0,0.3); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-        <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0 0 1rem 0; line-height: 1.5;">
-          Imagine your precinct has <strong>5,000 registered voters</strong>. Trying to reach them all by yourself is virtually impossible. But look at how manageable it becomes when you build your team:
-        </p>
-        <ul style="color: #a3e635; font-size: 0.95rem; line-height: 1.6; margin: 0; padding-left: 1.5rem; margin-bottom: 1rem;">
-          <li><strong>1 Precinct Chair</strong> recruits...</li>
-          <li><strong>7 Neighborhood Captains</strong>. Now the precinct is divided into 7 separate turfs of roughly 714 voters each.</li>
-          <li>Each Neighborhood Captain recruits a random set of <strong>1 to 5 Super Volunteers</strong> to help them.</li>
-        </ul>
-        <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0; line-height: 1.5;">
-          If a Neighborhood Captain recruits an average of 3 Super Volunteers, that creates a team of 4 people for that turf. <br><br>
-          <strong>714 voters ÷ 4 organizers = Only 178 voters per person!</strong><br><br>
-          By delegating to Neighborhood Captains and Super Volunteers, a massive precinct of 5,000 voters is completely covered through teamwork.
-        </p>
-      </div>
-    </div>
     <h1>Precinct Chair Directory</h1>
     <p style="max-width: 700px; margin: 1rem auto 1.5rem; color: var(--text-muted);">
       Your Precinct Chair is your neighborhood's direct link to the Hidalgo County Democratic Party. Explore the map below to find your precinct's leadership, or search the directory.
     </p>
-    <button onclick="document.getElementById('guideModal').style.display='flex'" class="btn btn-primary" style="background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); font-size: 1.1rem; padding: 0.8rem 2rem; box-shadow: 0 0 20px rgba(56,189,248,0.4); border: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-      <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-      Open Precinct Chair Guide
-    </button>
   </header>
 
-  <!-- Interactive Map Section -->
-  <section class="container fade-in">
-    <div id="precinct-info-panel" class="glass-card" style="display:none; margin-bottom: 1rem; padding: 1.5rem; border-left: 4px solid #facc15; background: rgba(15, 23, 42, 0.8);">
-        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-between;">
-            <div>
-                <h3 id="info-panel-title" style="margin: 0 0 0.5rem 0; color: #facc15; font-size: 1.5rem; font-weight: 800;">Precinct</h3>
-                <div id="info-panel-district" style="color: #e2e8f0; font-size: 1rem;"></div>
-            </div>
-            <div>
-                <div style="color: #94a3b8; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: bold;">Nearby Precincts</div>
-                <div id="info-panel-nearby" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <!-- badges go here -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="map-controls glass-card" style="margin-bottom: 1rem; padding: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
-      <span style="font-weight: bold; color: white;">Map View:</span>
-      <button id="btn-show-all" class="btn btn-sm" style="background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3);">Show All</button>
-      <button id="btn-show-filled" class="btn btn-sm" style="background: rgba(59, 130, 246, 0.4); border-color: #3b82f6;">Current Chairs</button>
-      <button id="btn-show-vacant" class="btn btn-sm" style="background: rgba(239, 68, 68, 0.4); border-color: #ef4444;">Vacant Precincts</button>
-    </div>
-    <div class="map-container">
-        <div id="map"></div>
-    </div>
-  </section>
+  <!-- Interactive Map Section removed -->
 
   <!-- Directory Section -->
   <section class="container" style="margin-bottom: 5rem;">
-    <!-- Congressional District Toggle -->
-    <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 50; touch-action: manipulation;">
-        <button class="cd-filter-btn" data-district="ALL" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4); touch-action: manipulation;">All Districts</button>
-        <button class="cd-filter-btn" data-district="15" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">TX-15 Only</button>
-        <button class="cd-filter-btn" data-district="28" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">TX-28 Only</button>
-    </div>
-
-    <!-- City Filter Toggle -->
-    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; position: relative; z-index: 50; touch-action: manipulation;">
-        <button class="city-filter-btn" data-city="ALL" style="background: var(--accent); color: #020617; border: 1px solid var(--accent); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 800; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 15px rgba(56,189,248,0.4); touch-action: manipulation;">All Cities</button>
-        <button class="city-filter-btn" data-city="Edinburg" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Edinburg</button>
-        <button class="city-filter-btn" data-city="McAllen" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">McAllen</button>
-        <button class="city-filter-btn" data-city="Mission" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Mission</button>
-        <button class="city-filter-btn" data-city="Pharr" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Pharr</button>
-        <button class="city-filter-btn" data-city="Weslaco" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Weslaco</button>
-        <button class="city-filter-btn" data-city="Alamo" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Alamo</button>
-        <button class="city-filter-btn" data-city="Donna" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">Donna</button>
-        <button class="city-filter-btn" data-city="San Juan" style="background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; touch-action: manipulation;">San Juan</button>
-    </div>
-
-    <div class="directory-controls">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by Name or Precinct Number...">
-      </div>
-      <div class="filter-controls">
-         <select id="roleFilter" class="search-input" style="padding-left: 1.5rem; cursor: pointer;">
-           <option value="all">All Roles</option>
-           <option value="chair">Precinct Chairs</option>
-           <option value="captain">Neighborhood Captains</option>
-         </select>
-      </div>
-    </div>
-
-    <div class="table-container" style="position: relative;">
-      
-      <div id="sos-links-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(15, 23, 42, 0.4); z-index: 10; border-radius: 8px;">
-        <div class="glass-card" style="padding: 2.5rem; text-align: center; max-width: 550px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3);">
-          <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
-          <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Official State Rosters</h3>
-          <p style="color: #e2e8f0; font-size: 1rem; margin-bottom: 1.5rem;">Due to privacy and security concerns, direct contact information for Precinct Chairs is no longer hosted publicly on this website. You can find the official, public rosters maintained by the State of Texas below.</p>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem 1rem;">
+      <div class="glass-card" style="padding: 2.5rem; text-align: center; max-width: 550px; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">🏛️</div>
+        <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1rem; font-size: 1.5rem;">Official State Rosters</h3>
+        <p style="color: #e2e8f0; font-size: 1rem; margin-bottom: 1.5rem;">Due to privacy and security concerns, direct contact information for Precinct Chairs is no longer hosted publicly on this website. You can find the official, public rosters maintained by the State of Texas below.</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <a href="https://www.sos.state.tx.us/elections/voter/current.shtml" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
+            <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">TX Secretary of State</strong>
+            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Current Election Information & Rosters</span>
+          </a>
           
-          <div style="display: flex; flex-direction: column; gap: 1rem;">
-            <a href="https://www.sos.state.tx.us/elections/voter/current.shtml" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
-              <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">TX Secretary of State</strong>
-              <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Current Election Information & Rosters</span>
-            </a>
-            
-            <a href="https://emr.sos.texas.gov/cpc-filings/cpc-contact-report.aspx" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
-              <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">SOS Election Management System</strong>
-              <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Precinct Chair Contact Report Search</span>
-            </a>
-          </div>
-          
-          <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
-            <p style="color: #94a3b8; font-size: 0.9rem; margin: 0;">Need to contact the local party directly?<br><a href="mailto:info@hidalgocountydems.org" style="color: #38bdf8;">info@hidalgocountydems.org</a></p>
-          </div>
+          <a href="https://emr.sos.texas.gov/cpc-filings/cpc-contact-report.aspx" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 100%; text-decoration: none; padding: 1rem;">
+            <strong style="display: block; color: #fff; margin-bottom: 0.25rem;">SOS Election Management System</strong>
+            <span style="font-size: 0.85rem; color: #94a3b8; font-weight: normal;">Precinct Chair Contact Report Search</span>
+          </a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div id="protected-content" style="filter: blur(10px); pointer-events: none; user-select: none; transition: filter 0.3s ease;">
-        <table class="directory-table">
-          <thead>
-            <tr>
-              <th width="10%">Pct</th>
-              <th width="40%">Name & Info</th>
-              <th width="25%">Role</th>
-              <th width="25%" style="text-align: right;">Action</th>
-            </tr>
-          </thead>
-          <tbody id="directoryBody">
-              <!-- Dynamically populated by JavaScript -->
-          </tbody>
-        </table>
-        <div id="noResults" class="no-results">
-          <h3>No leaders found matching your search.</h3>
-          <p>If your precinct is vacant, !</p>
-        </div>
+  
+  <section class="container fade-in" style="margin-bottom: 2rem;">
+    <div class="glass-card" style="text-align: center; padding: 2.5rem 2rem; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px;">
+      <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.5rem;">Precinct Chair Resources</h3>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+        <a href="resources/TDP-2021-Precinct-Chair-Guide (9).pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0; text-decoration: none; padding: 1rem 1.5rem; font-weight: 600; transition: all 0.2s;">
+          📄 TDP Precinct Chair Guide (PDF)
+        </a>
+        <a href="resources/county-chair-handbook (1).pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0; text-decoration: none; padding: 1rem 1.5rem; font-weight: 600; transition: all 0.2s;">
+          📘 County Chair Handbook (PDF)
+        </a>
       </div>
     </div>
   </section>
@@ -651,306 +532,9 @@
 
   <script src="js/app.js"></script>
 
-  <!-- Guide Modal Structure -->
-  <div id="guideModal" class="guide-modal-overlay">
-    <div class="guide-modal-content">
-      <div class="guide-modal-header">
-        <h2 class="guide-modal-title">Precinct Chair Guide</h2>
-        <button class="guide-close-btn" onclick="document.getElementById('guideModal').style.display='none'">✕</button>
-      </div>
-      <div class="guide-modal-body">
-        
-        <p style="color: #94a3b8; font-size: 1rem; text-align: center; margin-top: 0; margin-bottom: 1.5rem;">
-          Elections are truly won or lost in the precincts. Precinct chairs are crucial to ensuring strong support for Democratic candidates and issues. Here are the main roles of a Precinct Chair.
-        </p>
-        
-        <!-- Carousel -->
-        <div class="carousel-container" id="guideCarousel">
-          
-          <div class="carousel-slide active" data-index="0">
-            <h3 class="slide-title"><span>🤝</span> Neighborhood Organizer</h3>
-            <div class="slide-content">
-              <p>A Precinct Chair is the neighborhood organizer for the Democratic Party and an elected official with special duties.</p>
-              <p>You get to meet and help people in your neighborhood vote. You get to meet and help candidates get elected. The precinct is the smallest unit of our Party; however, it is the most essential unit.</p>
-            </div>
-          </div>
-          
-          <div class="carousel-slide" data-index="1">
-            <h3 class="slide-title"><span>🔍</span> Identify Voters (Canvassing)</h3>
-            <div class="slide-content">
-              <p>The first step is to get a list of Democratic voters in your precinct. You will receive access to the <strong>Voter Activation Network (VAN)</strong>.</p>
-              <p>Canvassing is the process of identifying voters and recording that information. Find out who your consistent Democratic voters are, who is a swing voter, and keep track of this data in VAN to help campaigns statewide.</p>
-            </div>
-          </div>
-
-          <div class="carousel-slide" data-index="2">
-            <h3 class="slide-title"><span>📝</span> Register Voters</h3>
-            <div class="slide-content">
-              <p>Always be ready to register a Democrat to vote by becoming a <strong>Volunteer Deputy Registrar (VDR)</strong>.</p>
-              <p>You can help people register to vote, change their address if they've moved, or get a replacement card. It's a short, free training offered by the County Elections Office.</p>
-            </div>
-          </div>
-
-          <div class="carousel-slide" data-index="3">
-            <h3 class="slide-title"><span>📢</span> Inform Voters</h3>
-            <div class="slide-content">
-              <p>You're the political leader in your precinct. Let your Democrats know of Democratic events, issues, upcoming elections, and ways they can be active.</p>
-              <p>Be a distribution hub for campaign yard signs, Democratic literature, stickers, pins, and t-shirts to promote local, statewide, and national candidates.</p>
-            </div>
-          </div>
-
-          <div class="carousel-slide" data-index="4">
-            <h3 class="slide-title"><span>🗳️</span> Get Out The Vote (GOTV)</h3>
-            <div class="slide-content">
-              <p>Getting voters to the polls is our #1 priority. Remind your Democrats about voting dates, times, and locations.</p>
-              <p>Encourage every voter to vote early. Call them, send personal texts, and use <strong>Blockwalking</strong> (door-to-door outreach) which is the single most effective way to boost voter turnout.</p>
-            </div>
-          </div>
-
-          <div class="carousel-slide" data-index="5">
-            <h3 class="slide-title"><span>⚖️</span> County Executive Committee (CEC)</h3>
-            <div class="slide-content">
-              <p>As a Precinct Chair, you also sit on the <strong>County Executive Committee (CEC)</strong>. Each county's Democratic Party is governed by the CEC.</p>
-              <p>You are a voting member representing your precinct. Your presence counts towards a quorum enabling official Party business to be conducted, rules to be made, and vacancies to be filled.</p>
-            </div>
-          </div>
-          
-        </div>
-
-        <div class="carousel-controls">
-          <button id="btnPrevSlide" class="carousel-btn" onclick="changeSlide(-1)" disabled>← Previous</button>
-          <span class="slide-indicator" id="slideIndicator">1 / 6</span>
-          <button id="btnNextSlide" class="carousel-btn" onclick="changeSlide(1)">Next →</button>
-        </div>
-
-        <!-- Resources -->
-        <div class="guide-resources">
-          <a href="resources/TDP-2021-Precinct-Chair-Guide (9).pdf" target="_blank" rel="noopener noreferrer" class="guide-resource-link">
-            📄 TDP Precinct Chair Guide (PDF)
-          </a>
-          <a href="resources/county-chair-handbook (1).pdf" target="_blank" rel="noopener noreferrer" class="guide-resource-link">
-            📘 County Chair Handbook (PDF)
-          </a>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const totalSlides = slides.length;
-
-    function changeSlide(direction) {
-      slides[currentSlide].classList.remove('active');
-      currentSlide += direction;
-      
-      if (currentSlide < 0) currentSlide = 0;
-      if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-      
-      slides[currentSlide].classList.add('active');
-      
-      document.getElementById('slideIndicator').innerText = (currentSlide + 1) + ' / ' + totalSlides;
-      
-      document.getElementById('btnPrevSlide').disabled = currentSlide === 0;
-      document.getElementById('btnNextSlide').disabled = currentSlide === totalSlides - 1;
-    }
-
-    // Close modal on outside click
-    document.getElementById('guideModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.style.display = 'none';
-      }
-    });
-  </script>
   
-  <!-- Map Data and Scripts -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="js/precinct_mapping_data.js"></script>
-  <script src="hidalgo-election-map/hidalgo_precincts.js"></script>
-  <script src="js/chair_data.js"></script>
-  <script src="hidalgo-election-map/map_chairs.js"></script>
-
-  <script>
-    // Dynamically build the table and Setup Live Search/Filter
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      const tbody = document.getElementById('directoryBody');
-      const searchInput = document.getElementById('searchInput');
-      const roleFilter = document.getElementById('roleFilter');
-      const noResults = document.getElementById('noResults');
-      
-      window.activeDistrict = 'ALL';
-      window.activeCity = 'ALL';
-      
-      // Build cd15List and cd28List synchronously from precinctDistricts
-      window.cd15List = precinctDistricts.filter(p => p.CD === '15' || p.CD === '15, 28' || p.CD === '28, 15').map(p => parseInt(p.PRECINCT, 10));
-      window.cd28List = precinctDistricts.filter(p => p.CD === '28' || p.CD === '15, 28' || p.CD === '28, 15').map(p => parseInt(p.PRECINCT, 10));
-
-      // Populate table immediately without fetch to avoid CORS file:// issues
-      chairDataList.forEach(person => {
-          const row = document.createElement('tr');
-          row.className = 'directory-row';
-          row.dataset.precinct = person.precinct;
-          row.dataset.name = person.name.toLowerCase();
-          row.dataset.role = person.role.toLowerCase();
-
-          const badgeClass = person.role === 'Neighborhood Captain' ? 'badge-captain' : 'badge-chair';
-
-          row.innerHTML = `
-              <td>
-                  <span class="pct-badge">${person.precinct}</span>
-                  ${(window.cd15List.includes(parseInt(person.precinct)) && window.cd28List.includes(parseInt(person.precinct))) ? '<br><span style="background:#ea580c; color:white; font-size:0.7rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; display:inline-block; margin-top: 5px;">Split District</span>' : ''}
-              </td>
-              <td class="name-cell">
-                  <strong>${person.name}</strong>
-                  <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px; display: flex; flex-direction: column; gap: 2px;">
-                      ${person.email && person.email.toLowerCase() !== 'no email' ? `<span>✉️ <a style="color: #94a3b8; text-decoration: none;" href="mailto:${person.email}">${person.email}</a></span>` : ''}
-                      ${person.phone && person.phone.trim() !== '' ? `<span>📞 <a style="color: #94a3b8; text-decoration: none;" href="tel:${person.phone}">${person.phone}</a></span>` : ''}
-                  </div>
-                  ${person.city ? `<div style="font-size: 0.8rem; color: #64748b; margin-top: 2px;">📍 ${person.city}</div>` : ''}
-              </td>
-              <td><span class="role-badge ${badgeClass}">${person.role}</span></td>
-              <td class="action-cell">
-                 <a href="mailto:${person.email}" class="btn btn-sm btn-outline">Contact</a>
-              </td>
-          `;
-          tbody.appendChild(row);
-      });
-
-      const rows = document.querySelectorAll('.directory-row');
-
-      function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            const roleTerm = roleFilter.value;
-            let visibleCount = 0;
-            let visiblePrecincts = new Set();
-
-            rows.forEach(row => {
-              const name = row.dataset.name;
-              const pct = row.dataset.precinct;
-              const role = row.dataset.role;
-              const pctInt = parseInt(pct, 10);
-              
-              const matchesSearch = name.includes(searchTerm) || pct === searchTerm || 
-                                    (window.activeNearbyPrecincts && window.activeNearbyPrecincts.includes(pctInt.toString()));
-              const matchesRole = roleTerm === 'all' || 
-                                 (roleTerm === 'chair' && role.includes('precinct chair')) ||
-                                 (roleTerm === 'captain' && role.includes('neighborhood captain'));
-                                 
-              let matchesDistrict = true;
-              if (window.activeDistrict === '15') matchesDistrict = window.cd15List.includes(pctInt);
-              if (window.activeDistrict === '28') matchesDistrict = window.cd28List.includes(pctInt);
-
-              let matchesCity = true;
-              if (window.activeCity !== 'ALL') {
-                  const precinctMapData = precinctDistricts.find(p => parseInt(p.PRECINCT, 10) === pctInt);
-                  if (precinctMapData) {
-                      matchesCity = (precinctMapData.CITY === window.activeCity);
-                  } else {
-                      matchesCity = false;
-                  }
-              }
-
-              if (matchesSearch && matchesRole && matchesDistrict && matchesCity) {
-                row.style.display = '';
-                visibleCount++;
-                visiblePrecincts.add(pct);
-              } else {
-                row.style.display = 'none';
-              }
-            });
-
-            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
-
-            if (window.updateMapFromSearch) {
-                window.updateMapFromSearch(Array.from(visiblePrecincts), searchTerm);
-            }
-          }
-
-          // Bind CD buttons
-          const cdBtns = document.querySelectorAll('.cd-filter-btn');
-          cdBtns.forEach(btn => {
-              btn.addEventListener('click', () => {
-                  window.activeDistrict = btn.dataset.district;
-                  // Reset styling
-                  cdBtns.forEach(b => {
-                      b.style.background = 'rgba(255,255,255,0.05)';
-                      b.style.color = '#94a3b8';
-                      b.style.borderColor = 'rgba(255,255,255,0.1)';
-                      b.style.boxShadow = 'none';
-                  });
-                  // Activate selected
-                  btn.style.background = 'var(--accent)';
-                  btn.style.color = '#020617';
-                  btn.style.borderColor = 'var(--accent)';
-                  btn.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
-                  filterTable();
-                  if(window.updateMapFromFilters) window.updateMapFromFilters();
-              });
-          });
-
-          // Bind City buttons
-          const cityBtns = document.querySelectorAll('.city-filter-btn');
-          cityBtns.forEach(btn => {
-              btn.addEventListener('click', () => {
-                  window.activeCity = btn.dataset.city;
-                  // Reset styling
-                  cityBtns.forEach(b => {
-                      b.style.background = 'rgba(255,255,255,0.05)';
-                      b.style.color = '#94a3b8';
-                      b.style.borderColor = 'rgba(255,255,255,0.1)';
-                      b.style.boxShadow = 'none';
-                  });
-                  // Activate selected
-                  btn.style.background = 'var(--accent)';
-                  btn.style.color = '#020617';
-                  btn.style.borderColor = 'var(--accent)';
-                  btn.style.boxShadow = '0 0 15px rgba(56,189,248,0.4)';
-                  filterTable();
-                  if(window.updateMapFromFilters) window.updateMapFromFilters();
-              });
-          });
-
-          searchInput.addEventListener('input', filterTable);
-          roleFilter.addEventListener('change', filterTable);
-          filterTable();
-          
-          window.activeNearbyPrecincts = [];
-          window.addEventListener('nearbyPrecinctsFound', (e) => {
-              const newNearby = e.detail.nearby || [];
-              if (JSON.stringify(window.activeNearbyPrecincts) !== JSON.stringify(newNearby)) {
-                  window.activeNearbyPrecincts = newNearby;
-                  filterTable(); 
-              }
-          });
-          
-          // Password protection logic
-          const btnUnlock = document.getElementById('btn-unlock');
-          const inputPassword = document.getElementById('chair-password');
-          const errorMsg = document.getElementById('password-error');
-          const overlay = document.getElementById('password-overlay');
-          const protectedContent = document.getElementById('protected-content');
-          
-          const attemptUnlock = () => {
-              if (inputPassword.value === 'ddddddd') {
-                  overlay.style.display = 'none';
-                  protectedContent.style.filter = 'none';
-                  protectedContent.style.pointerEvents = 'auto';
-                  protectedContent.style.userSelect = 'auto';
-              } else {
-                  errorMsg.style.display = 'block';
-              }
-          };
-          
-          btnUnlock.addEventListener('click', attemptUnlock);
-          inputPassword.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') attemptUnlock();
-          });
-    });
-  </script>
-<script src="js/value_counter.js"></script>
+  
+  <script src="js/value_counter.js"></script>
 
   <!-- Google Translate -->
   <script>
