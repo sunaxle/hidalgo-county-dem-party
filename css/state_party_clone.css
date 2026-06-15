@@ -564,7 +564,7 @@ body.tx-clone {
 @media (max-width: 768px) {
   html, body.tx-clone {
     max-width: 100vw !important;
-    overflow-x: hidden !important;
+    overflow-x: clip !important;
   }
   
   .tx-clone-hero h1 {
