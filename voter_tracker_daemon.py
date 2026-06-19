@@ -15,13 +15,13 @@ async def daily_voter_scrape(ctx: TriggerContext):
     """Daily trigger to scrape voter count and update JS file."""
     logging.info("TRIGGER: Fired daily voter registration scrape.")
     
-    count = scrape_voter_count()
+    date_str, count = scrape_voter_count()
     if count:
-        success = update_js_file(count)
+        success = update_js_file(count, date_str)
         if success:
-            await ctx.send(f"Successfully scraped and appended today's voter count: {count}")
+            await ctx.send(f"Successfully scraped and appended voter count for {date_str}: {count}")
         else:
-            await ctx.send(f"Scraped count ({count}), but failed to update JS file.")
+            await ctx.send(f"Scraped count ({count}) for {date_str}, but failed to update JS file.")
     else:
         logging.error("Failed to extract count.")
         await ctx.send("Failed to extract the live voter count from the Hidalgo County Elections site.")
