@@ -384,11 +384,10 @@
             </div>
         </div>
 <div class="nav-item dropdown">
-<a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Community ▼</a>
+<a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
 <div class="dropdown-content">
 <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
-<a href="texas_region.html">TX Dems & Region</a>
-<a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
+            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
 <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
 </div>
 </div>
@@ -419,7 +418,7 @@
 <div class="tx-clone-nav-accent-bar"></div>
 <!-- Hero Section -->
 <header class="civics-hero"><h1>Voter Registration Goals</h1><p>Tracking our progress towards a historic turnout in Hidalgo County.</p></header>
-<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title" style="margin-bottom: 0.5rem;">Live Goal Tracker</h2><p style="text-align: center; color: #94a3b8; font-size: 1.1rem; margin-bottom: 2rem; font-weight: 600;" id="live-countdown">--</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div></div></div>
+<main class="civics-container"><nav class="breadcrumbs fade-in"><a href="home.html">Home</a><span> / </span><span style="color: #fff;">Voter Tracker</span></nav><div class="party-section" style="margin-top: 2rem;"><h2 class="civics-section-title" style="margin-bottom: 0.5rem;">Live Goal Tracker</h2><p style="text-align: center; color: #94a3b8; font-size: 1.1rem; margin-bottom: 2rem; font-weight: 600;" id="live-countdown">--</p><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;"><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Current Registered Voters</h3><div id="current-count" style="font-size: 3rem; font-weight: 800; color: #38bdf8; font-family: 'Alfa Slab One', cursive;">---,---</div><p id="current-count-as-of" style="color: #cbd5e1; margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">--</p></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Baseline Goal (Low)</h3><div id="low-goal" style="font-size: 3rem; font-weight: 800; color: #f472b6; font-family: 'Alfa Slab One', cursive;">480,000</div><p id="low-goal-diff" style="color: #cbd5e1; margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">--</p></div><div class="civics-card" style="text-align: center; cursor: default;"><h3 style="color: #94a3b8;">Stretch Goal (High)</h3><div id="high-goal" style="font-size: 3rem; font-weight: 800; color: #34d399; font-family: 'Alfa Slab One', cursive;">500,000</div><p id="high-goal-diff" style="color: #cbd5e1; margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600;">--</p></div></div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
   <div class="civics-card" style="text-align: center; cursor: default;">
@@ -460,7 +459,8 @@
       <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); color: #94a3b8;">
         <th style="padding: 1rem;">Date</th>
         <th style="padding: 1rem;">Registered Voters</th>
-        <th style="padding: 1rem;">Daily Change</th>
+        <th style="padding: 1rem;">Change since Update</th>
+        <th style="padding: 1rem;">Avg. Daily Rate</th>
       </tr>
     </thead>
     <tbody id="dailyDataTableBody"></tbody>
@@ -514,8 +514,50 @@
           const historicalCounts = generalElections.map(d => d.count);
           
           // Get the latest 2026 data
-          const currentCount = voterRegistrationData[voterRegistrationData.length - 1].count;
+          const latestData = voterRegistrationData[voterRegistrationData.length - 1];
+          const currentCount = latestData.count;
+          const currentDate = latestData.date;
           document.getElementById('current-count').textContent = currentCount.toLocaleString();
+          
+          // Format "as of" date nicely
+          try {
+            const parts = currentDate.split('-');
+            const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('current-count-as-of').textContent = `As of ${formattedDate}`;
+          } catch (e) {
+            document.getElementById('current-count-as-of').textContent = `As of ${currentDate}`;
+          }
+          
+          // Calculate Goal Splits
+          const lowGoalVal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.lowGoal : 480000;
+          const highGoalVal = typeof voterRegistrationGoals !== 'undefined' ? voterRegistrationGoals.highGoal : 500000;
+          
+          const lowGoalDiff = lowGoalVal - currentCount;
+          const highGoalDiff = highGoalVal - currentCount;
+          
+          const lowGoalDiffEl = document.getElementById('low-goal-diff');
+          const highGoalDiffEl = document.getElementById('high-goal-diff');
+          
+          if (lowGoalDiffEl) {
+            if (lowGoalDiff > 0) {
+              lowGoalDiffEl.textContent = `Need ${lowGoalDiff.toLocaleString()} more`;
+              lowGoalDiffEl.style.color = '#fca5a5'; // subtle red
+            } else {
+              lowGoalDiffEl.textContent = `Goal Achieved! 🎉`;
+              lowGoalDiffEl.style.color = '#86efac'; // subtle green
+            }
+          }
+          
+          if (highGoalDiffEl) {
+            if (highGoalDiff > 0) {
+              highGoalDiffEl.textContent = `Need ${highGoalDiff.toLocaleString()} more`;
+              highGoalDiffEl.style.color = '#fca5a5'; // subtle red
+            } else {
+              highGoalDiffEl.textContent = `Goal Achieved! 🎉`;
+              highGoalDiffEl.style.color = '#86efac'; // subtle green
+            }
+          }
           
           // Calculate Projections
           if (voterRegistrationData.length > 1) {
@@ -662,11 +704,20 @@
                     tdChange.style.padding = '1rem';
                     tdChange.style.fontWeight = 'bold';
                     
-                    // Calculate change relative to previous chronological day
+                    const tdRate = document.createElement('td');
+                    tdRate.style.padding = '1rem';
+                    tdRate.style.fontWeight = 'bold';
+                    
+                    // Calculate change and daily rate relative to previous chronological day
                     // Since reversedDailyData is reversed, the previous day is at index + 1
                     let changeText = "-";
+                    let rateText = "-";
+                    
                     if (index < reversedDailyData.length - 1) {
-                        const diff = row.count - reversedDailyData[index + 1].count;
+                        const nextRow = reversedDailyData[index + 1];
+                        const diff = row.count - nextRow.count;
+                        
+                        // Change text
                         if (diff > 0) {
                             changeText = `+${diff.toLocaleString()}`;
                             tdChange.style.color = '#34d399'; // Green
@@ -677,15 +728,42 @@
                             changeText = "0";
                             tdChange.style.color = '#94a3b8'; // Gray
                         }
+                        
+                        // Avg Daily Rate calculation
+                        const currentDateObj = new Date(row.date + 'T12:00:00Z');
+                        const nextDateObj = new Date(nextRow.date + 'T12:00:00Z');
+                        const daysBetween = (currentDateObj - nextDateObj) / (1000 * 60 * 60 * 24);
+                        
+                        if (daysBetween > 0) {
+                            const dailyRate = diff / daysBetween;
+                            const roundedRate = Math.round(dailyRate * 10) / 10; // one decimal place
+                            if (roundedRate > 0) {
+                                rateText = `+${roundedRate.toLocaleString()}/day`;
+                                tdRate.style.color = '#34d399'; // Green
+                            } else if (roundedRate < 0) {
+                                rateText = `${roundedRate.toLocaleString()}/day`;
+                                tdRate.style.color = '#ef4444'; // Red
+                            } else {
+                                rateText = "0/day";
+                                tdRate.style.color = '#94a3b8'; // Gray
+                            }
+                        } else {
+                            rateText = "0/day";
+                            tdRate.style.color = '#94a3b8';
+                        }
                     } else {
                         changeText = "Initial";
                         tdChange.style.color = '#94a3b8';
+                        rateText = "Initial";
+                        tdRate.style.color = '#94a3b8';
                     }
                     tdChange.textContent = changeText;
+                    tdRate.textContent = rateText;
                     
                     tr.appendChild(tdDate);
                     tr.appendChild(tdCount);
                     tr.appendChild(tdChange);
+                    tr.appendChild(tdRate);
                     dailyTbody.appendChild(tr);
                 });
 
