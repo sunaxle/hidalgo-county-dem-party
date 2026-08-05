@@ -65,6 +65,7 @@
           <span>Action ▼</span>
           <div class="dropdown-content">
             <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
             <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
             <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
             <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
@@ -287,6 +288,49 @@
       <p>
         We believe that every Hidalgo County resident deserves a government that works for them. By organizing, mobilizing, and empowering our communities, we are building a progressive county where everyone thrives. The Hidalgo County Democratic Party stands on the frontlines for your rights.
       </p>
+    </div>
+  </section>
+
+  <!-- Poll Worker Recruitment Flyer Callout Section -->
+  <section id="poll-worker-footer-flyer" style="background: linear-gradient(135deg, #09132b 0%, #1e3a8a 100%); padding: 4rem 1.5rem; text-align: center; border-top: 3px solid #ef4444; border-bottom: 3px solid #38bdf8;">
+    <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; align-items: center;">
+      
+      <!-- Flyer Display Box -->
+      <div style="background: rgba(15, 23, 42, 0.8); border: 2px solid rgba(56, 189, 248, 0.5); border-radius: 16px; padding: 0.75rem; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        <a href="poll_worker.html" onclick="handlePollWorkerClick(event)">
+          <img src="images/become_a_poll_worker_flyer.jpg" alt="Become A Poll Worker Official Flyer - Hidalgo County Elections Department" style="width: 100%; height: auto; border-radius: 10px; display: block;">
+        </a>
+      </div>
+
+      <!-- Text & Call to Action -->
+      <div style="text-align: left; color: white;">
+        <div style="display: inline-block; padding: 0.35rem 1rem; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 20px; color: #f87171; font-weight: 800; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem;">
+          🚨 URGENT ELECTION DAY RECRUITMENT
+        </div>
+        <h2 style="font-family: 'Alfa Slab One', cursive; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin-bottom: 1rem; color: #ffffff;">
+          BECOME A POLL WORKER
+        </h2>
+        <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem;">
+          The Hidalgo County Elections Department is accepting applications for poll workers to serve in the <strong>November 3, 2026 General Election</strong>. Earn up to <strong>$19.00/hr</strong> and serve your community!
+        </p>
+
+        <!-- Rate highlights -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem;">
+          <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem;">Judge: $19/hr</span>
+          <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem;">Alt Judge: $17/hr</span>
+          <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem;">Clerk: $15/hr</span>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <a href="poll_worker.html" onclick="handlePollWorkerClick(event)" style="display: inline-block; background: linear-gradient(90deg, #ef4444, #dc2626); color: white; font-family: 'Alfa Slab One', cursive; font-size: 1.15rem; padding: 0.9rem 2rem; border-radius: 10px; text-decoration: none; box-shadow: 0 6px 20px rgba(239,68,68,0.4);">
+            LEARN MORE & APPLY ➔
+          </a>
+          <a href="https://www.hidalgocounty.us/105/Elections-Department#docaccess-5cfbc2b9cb9e64c2c864cf74d629c5be" target="_blank" rel="noopener noreferrer" onclick="handlePollWorkerClick(event)" style="display: inline-block; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 700; font-size: 0.95rem; padding: 0.9rem 1.5rem; border-radius: 10px; text-decoration: none;">
+            Official Portal ↗
+          </a>
+        </div>
+      </div>
+
     </div>
   </section>
 
