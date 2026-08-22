@@ -31,7 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const q = query(collection(db, "officials_directory"));
     const snapshot = await getDocs(q);
     
-    officials = snapshot.docs.map(doc => doc.data());
+    // Filter out outdated/non-candidate records like Colin Allred
+    officials = snapshot.docs
+      .map(doc => doc.data())
+      .filter(o => o.name && !o.name.toLowerCase().includes("allred") && o.name !== "Colin Allred");
     
     // Sort manually to avoid requiring a composite index in Firestore
     // Sort by Level first (Federal -> State -> County), then by Name
@@ -63,15 +66,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       let filtered = officials;
       
       if (filter === "candidate") {
-        filtered = officials.filter(o => o.type.toLowerCase().includes("candidate"));
+        filtered = officials.filter(o => o.type && o.type.toLowerCase().includes("candidate"));
       } else if (filter === "incumbent") {
-        filtered = officials.filter(o => o.type.toLowerCase().includes("incumbent") || o.type.toLowerCase().includes("officeholder"));
+        filtered = officials.filter(o => o.type && (o.type.toLowerCase().includes("incumbent") || o.type.toLowerCase().includes("officeholder")));
       } else if (filter === "federal") {
-        filtered = officials.filter(o => o.level.toLowerCase() === "federal");
+        filtered = officials.filter(o => o.level && o.level.toLowerCase() === "federal");
       } else if (filter === "state") {
-        filtered = officials.filter(o => o.level.toLowerCase() === "state");
+        filtered = officials.filter(o => o.level && o.level.toLowerCase() === "state");
       } else if (filter === "county") {
-        filtered = officials.filter(o => o.level.toLowerCase() === "county");
+        filtered = officials.filter(o => o.level && o.level.toLowerCase() === "county");
       }
       
       renderGrid(filtered);
@@ -107,12 +110,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.innerHTML = `
         <div class="candidate-photo">
           <img src="${official.photo_url || 'images/default_avatar.png'}" alt="${official.name}" onerror="this.src='images/facebook_1656248751972_6946810765393131439.webp'">
-          <span class="level-badge">${official.level}</span>
+          <span class="level-badge">${official.level || 'Federal'}</span>
         </div>
         <div class="candidate-info">
-          <span class="party-badge ${badgeClass}">${badgeText} | ${official.type}</span>
+          <span class="party-badge ${badgeClass}">${badgeText} | ${official.type || 'Candidate'}</span>
           <h3 class="candidate-name">${official.name}</h3>
-          <p class="candidate-race">${official.title}</p>
+          <p class="candidate-race">${official.title || ''}</p>
           <div class="candidate-links">
             ${socialLinks}
           </div>
