@@ -6,91 +6,149 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Democratic Directory | Hidalgo County Democrats</title>
-  <meta name="description" content="Meet the Democratic candidates running in 2024 and your current elected officials in Hidalgo County.">
+  <meta name="description" content="Meet the Democratic nominees, candidates, and elected officials representing Hidalgo County and Texas.">
   <link rel="stylesheet" href="css/styles.css">
   
   <style>
     .directory-hero {
       text-align: center;
-      padding-top: 150px;
-      padding-bottom: 3rem;
+      padding-top: 140px;
+      padding-bottom: 2.5rem;
     }
     .directory-hero span {
       display: block;
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 0.9rem;
       margin-bottom: 0.5rem;
+    }
+
+    /* Search & Filter Controls */
+    .controls-wrapper {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 0.9rem 1.25rem 0.9rem 3rem;
+      color: #fff;
+      font-size: 1rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+      background: rgba(15, 23, 42, 0.9);
+    }
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      color: #94a3b8;
+      pointer-events: none;
     }
 
     /* Filter Bar */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.6rem;
       justify-content: center;
-      margin-bottom: 4rem;
     }
     .filter-btn {
-      background: rgba(15, 23, 42, 0.6);
+      background: rgba(15, 23, 42, 0.65);
       border: 1px solid var(--glass-border);
-      color: var(--text-muted);
-      padding: 0.75rem 1.5rem;
+      color: #cbd5e1;
+      padding: 0.6rem 1.25rem;
       border-radius: 30px;
       cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
+      font-weight: 700;
+      transition: all 0.25s ease;
+      font-size: 0.88rem;
+      backdrop-filter: blur(8px);
     }
     .filter-btn:hover {
       background: rgba(255, 255, 255, 0.1);
       color: #fff;
+      transform: translateY(-1px);
     }
     .filter-btn.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #020617;
-      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.3);
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+    }
+
+    .results-count {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2rem;
+      text-align: center;
     }
 
     /* Candidate Grid */
     .candidate-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
-      margin-bottom: 4rem;
+      margin-bottom: 5rem;
     }
     
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .candidate-grid {
         grid-template-columns: 1fr;
         padding: 0 10px;
+        gap: 1.5rem;
       }
     }
 
     .candidate-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
     .candidate-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      border-color: rgba(56, 189, 248, 0.3);
     }
 
     .candidate-photo {
       width: 100%;
-      height: 250px;
-      background: #1e293b;
+      height: 220px;
+      background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
       position: relative;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -100,27 +158,41 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
+      opacity: 0.92;
+      transition: opacity 0.3s ease, transform 0.4s ease;
     }
     .candidate-card:hover .candidate-photo img {
       opacity: 1;
+      transform: scale(1.03);
     }
     
+    /* Level Badges */
     .level-badge {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.25rem 0.75rem;
+      backdrop-filter: blur(6px);
+      padding: 0.3rem 0.8rem;
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 800;
-      color: #fff;
       text-transform: uppercase;
       letter-spacing: 1px;
+    }
+    .level-badge.badge-federal {
+      background: rgba(3, 105, 161, 0.85);
+      border: 1px solid #38bdf8;
+      color: #e0f2fe;
+    }
+    .level-badge.badge-state {
+      background: rgba(180, 83, 9, 0.85);
+      border: 1px solid #f59e0b;
+      color: #fef3c7;
+    }
+    .level-badge.badge-county {
+      background: rgba(13, 148, 136, 0.85);
+      border: 1px solid #2dd4bf;
+      color: #ccfbf1;
     }
 
     .candidate-info {
@@ -129,51 +201,121 @@
       display: flex;
       flex-direction: column;
     }
-    .candidate-name {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 0.25rem;
-      color: #fff;
-    }
-    .candidate-race {
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 1rem;
+    
+    .status-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-bottom: 0.6rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
+    .status-badge.type-nominee {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #4ade80;
+    }
+    .status-badge.type-candidate {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      color: #fcd34d;
+    }
+    .status-badge.type-incumbent {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: #c084fc;
+    }
 
-    .candidate-links {
+    .candidate-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin: 0 0 0.35rem 0;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+    .candidate-race {
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0 0 1.25rem 0;
+      letter-spacing: 0.3px;
+    }
+
+    /* Action Links & Donate Button */
+    .card-actions {
       margin-top: auto;
       display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .btn-donate-actblue {
+      background: #0284c7;
+      color: #ffffff !important;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+    .btn-donate-actblue:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45);
+    }
+
+    .candidate-links {
+      display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.65rem 0.9rem;
     }
     .candidate-links a {
-      color: var(--text-muted);
+      color: #94a3b8;
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       transition: color 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.3rem;
+      font-weight: 500;
     }
     .candidate-links a:hover {
-      color: var(--primary);
+      color: #38bdf8;
     }
-    
-    /* Loading Skeleton */
+
+    /* Loading & Empty State */
     .skeleton-card {
       height: 400px;
       background: rgba(255,255,255,0.02);
-      border-radius: 16px;
+      border-radius: 18px;
       animation: pulse 1.5s infinite ease-in-out;
     }
     @keyframes pulse {
       0% { opacity: 0.6; }
       50% { opacity: 0.2; }
       100% { opacity: 0.6; }
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: #94a3b8;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
     }
   </style>
 
@@ -267,20 +409,30 @@
 
   <main class="container" style="max-width: 1200px; margin: 0 auto; min-height: 80vh;">
     <div class="directory-hero fade-in">
-      <span>Official Roster</span>
-      <h1 style="font-size: 3.5rem; text-transform: uppercase; margin-bottom: 1rem; color: white; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);">Democratic Directory</h1>
-      <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 700px; margin: 0 auto;">Meet the Democratic incumbents representing Hidalgo County and the candidates fighting to turn Texas Blue up and down the ballot.</p>
+      <span>Official Hidalgo County Roster</span>
+      <h1 style="font-size: 3.2rem; text-transform: uppercase; margin-bottom: 0.75rem; color: white; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);">Democratic Directory</h1>
+      <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 760px; margin: 0 auto;">Connect with Democratic nominees, candidates, and elected officials representing Hidalgo County and Texas across Federal, State, and County levels.</p>
     </div>
 
-    <!-- Filter Bar -->
-    <div class="filter-bar fade-in" id="filterBar">
-      <button class="filter-btn active" data-filter="all">View All</button>
-      <button class="filter-btn" data-filter="candidate">2026 Candidates</button>
-      <button class="filter-btn" data-filter="incumbent">Current Electeds</button>
-      <button class="filter-btn" data-filter="federal">Federal</button>
-      <button class="filter-btn" data-filter="state">State</button>
-      <button class="filter-btn" data-filter="county">County & Local</button>
+    <!-- Search & Filter Controls -->
+    <div class="controls-wrapper fade-in">
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="candidateSearchInput" class="search-input" placeholder="Search by name, office (e.g. 'Pulido', 'District 41', 'Judge')..." aria-label="Search Candidates">
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-filter="all">All Officials (35)</button>
+        <button class="filter-btn" data-filter="federal">Federal</button>
+        <button class="filter-btn" data-filter="state">State</button>
+        <button class="filter-btn" data-filter="county">County & Local</button>
+        <button class="filter-btn" data-filter="candidate">2026 Nominees & Candidates</button>
+        <button class="filter-btn" data-filter="incumbent">Elected Incumbents</button>
+      </div>
     </div>
+
+    <div id="resultsCount" class="results-count">Showing 35 officials & candidates</div>
 
     <!-- Directory Grid -->
     <div class="candidate-grid fade-in" id="directoryGrid">
@@ -307,7 +459,7 @@
       <div style="display: inline-block; border: 1px solid #64748b; padding: 0.5rem 1rem; margin-bottom: 1rem;">
         PAID FOR BY THE HIDALGO COUNTY DEMOCRATIC PARTY
       </div>
-      <p>&copy; 2024 Hidalgo County Democratic Party. All rights reserved.</p>
+      <p>&copy; 2026 Hidalgo County Democratic Party. All rights reserved.</p>
     </div>
   </footer>
 
