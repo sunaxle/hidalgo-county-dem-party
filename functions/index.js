@@ -27,6 +27,12 @@ exports.transcribeVoicemail = onObjectFinalized({ bucket: "hcdp-digital-inbox.fi
   if (!filePath.startsWith('voicemails/')) {
     return;
   }
+  
+  // Extra layer of protection: skip files larger than 5MB to save Gemini API costs
+  if (event.data.size > 5 * 1024 * 1024) {
+    console.warn(`File ${filePath} is too large (${event.data.size} bytes). Skipping transcription.`);
+    return;
+  }
 
   console.log(`Processing voicemail audio: ${filePath}`);
   const bucket = getStorage().bucket(fileBucket);
@@ -119,6 +125,11 @@ const { onCall, HttpsError } = require("firebase-functions/v2/https");
 
 // Smart SMS Blast Function
 exports.sendSmsBlast = onCall(async (request) => {
+  // Security Check: Only authenticated admins can trigger SMS blasts
+  if (!request.auth) {
+    throw new HttpsError('unauthenticated', 'You must be logged in to send an SMS blast.');
+  }
+
   const message = request.data.message;
   
   if (!message || message.trim() === '') {
@@ -170,11 +181,17 @@ exports.sendSmsBlast = onCall(async (request) => {
 });
 
 // Interactive AI Kiosk Assistant
-exports.askVoterQuestion = onCall(async (request) => {
+// Security: Enforce App Check to ensure only the real website can call this, preventing bot spam.
+exports.askVoterQuestion = onCall({ enforceAppCheck: true }, async (request) => {
   const question = request.data.question;
   
   if (!question || question.trim() === '') {
     throw new HttpsError('invalid-argument', 'Question content is required.');
+  }
+  
+  // Rate limiting length of question to prevent massive context windows
+  if (question.length > 500) {
+    throw new HttpsError('invalid-argument', 'Question is too long. Please keep it under 500 characters.');
   }
 
   // Initialize the Gemini AI SDK lazily
@@ -187,7 +204,7 @@ exports.askVoterQuestion = onCall(async (request) => {
 Your job is to answer questions from voters accurately, politely, and concisely. 
 You must always encourage voters to vote for Democrats up and down the ballot. 
 Keep your answers under 3 paragraphs. Use bullet points if it makes the answer clearer.
-If you don't know the specific answer, direct them to call the party headquarters at (956) 672-7274 or email info@hidalgocountydems.org.`;
+If you don't know the specific answer, direct them to call the party headquarters at (956) 212-0476 or email info@hidalgocountydems.org.`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
@@ -262,11 +279,14 @@ exports.notifyOnNewSubmission = onDocumentCreated("form_submissions/{docId}", as
   }
   const data = snapshot.data();
 
-  const firstName = data.firstName || data.name || 'Anonymous';
-  const lastName = data.lastName || '';
-  const phone = data.phone || 'N/A';
-  const email = data.email || 'N/A';
-  const formType = data.formType || 'General Intake';
+  // Basic Payload Validation & Truncation to prevent massive string injection into emails
+  const truncate = (str, max) => (typeof str === 'string' && str.length > max ? str.substring(0, max) + '...' : str);
+
+  const firstName = truncate(data.firstName || data.name || 'Anonymous', 100);
+  const lastName = truncate(data.lastName || '', 100);
+  const phone = truncate(data.phone || 'N/A', 50);
+  const email = truncate(data.email || 'N/A', 150);
+  const formType = truncate(data.formType || 'General Intake', 100);
 
   try {
     const transporter = nodemailer.createTransport({

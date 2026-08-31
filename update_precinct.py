@@ -1,37 +1,37 @@
-import re
+import os, glob
 
-with open('precinct_chairs.html', 'r') as f:
-    content = f.read()
+replacements = [
+    ("+1-956-672-7274", "+1-956-212-0476"),
+    ("(956) 672-7274", "(956) 212-0476"),
+    ("956-672-7274", "956-212-0476"),
+    ("9566727274", "9562120476"),
+    ("(956) 672 7274", "(956) 212 0476"),
+    ("956.672.7274", "956.212.0476"),
+]
 
-# 1. Remove the Open Precinct Chair Guide button
-pattern_btn = r'\s*<button onclick="document\.getElementById\(\'guideModal\'\)\.style\.display=\'flex\'".*?</button>'
-content = re.sub(pattern_btn, '', content, flags=re.DOTALL)
+modified_files = []
 
-# 2. Extract resources and place above CTA
-resources_html = '''
-  <section class="container fade-in" style="margin-bottom: 2rem;">
-    <div class="glass-card" style="text-align: center; padding: 2.5rem 2rem; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px;">
-      <h3 style="color: #38bdf8; margin-top: 0; margin-bottom: 1.5rem; font-size: 1.5rem;">Precinct Chair Resources</h3>
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-        <a href="resources/TDP-2021-Precinct-Chair-Guide (9).pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0; text-decoration: none; padding: 1rem 1.5rem; font-weight: 600; transition: all 0.2s;">
-          📄 TDP Precinct Chair Guide (PDF)
-        </a>
-        <a href="resources/county-chair-handbook (1).pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #e2e8f0; text-decoration: none; padding: 1rem 1.5rem; font-weight: 600; transition: all 0.2s;">
-          📘 County Chair Handbook (PDF)
-        </a>
-      </div>
-    </div>
-  </section>
-'''
+for root, dirs, files in os.walk("."):
+    dirs[:] = [d for d in dirs if d not in (".git", "node_modules", ".venv", "__pycache__", ".gstack", "Elections_Data", "2026_Election_Data")]
+    for file in files:
+        if file.endswith((".html", ".js", ".json", ".md", ".txt", ".css", ".offline")):
+            filepath = os.path.join(root, file)
+            try:
+                with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
+                    content = f.read()
+                
+                new_content = content
+                for old_val, new_val in replacements:
+                    new_content = new_content.replace(old_val, new_val)
+                
+                if new_content != content:
+                    with open(filepath, "w", encoding="utf-8") as f:
+                        f.write(new_content)
+                    modified_files.append(filepath)
+            except Exception as e:
+                print(f"Error processing {filepath}: {e}")
 
-# Find the CTA section
-pattern_cta = r'(<!-- CTA Section -->\s*<section class="container fade-in" style="margin-bottom: 5rem;">)'
-content = re.sub(pattern_cta, resources_html + r'\n  \1', content)
+print(f"Modified {len(modified_files)} files:")
+for f in modified_files:
+    print(f" - {f}")
 
-# 3. Remove the entire guideModal and associated scripts
-pattern_modal = r'<!-- Guide Modal Structure -->.*?</script>'
-content = re.sub(pattern_modal, '', content, flags=re.DOTALL)
-
-with open('precinct_chairs.html', 'w') as f:
-    f.write(content)
-print("Done updating.")

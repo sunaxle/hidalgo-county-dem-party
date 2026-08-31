@@ -32,6 +32,7 @@ const voterRegistrationData = [
   { date: "2026-07-20", count: 463410 },
   { date: "2026-07-29", count: 463468 },
   { date: "2026-08-07", count: 463468 },
+  { date: "2026-08-19", count: 463330 },
 ];
 
 const voterRegistrationGoals = {

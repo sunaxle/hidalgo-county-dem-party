@@ -26,3 +26,7 @@ jobs:
             .github/**
             Demographic data requests/**
             **/*.py
+            **/*.json
+            **/*.csv
+            functions/**
+            credentials.json
