@@ -1,5 +1,6 @@
 data/planc2333_all.zip
 .gstack/
+.agents/
 
 functions/.env
 firebase-debug.log

@@ -70,6 +70,13 @@ function renderGrid() {
 
   grid.innerHTML = "";
 
+  const customProfileMap = {
+    "84": { url: "alma.html", photo: "alma_butcher.png" },
+    "146": { url: "olga.html", photo: "olga_cardoza.png" },
+    "35": { url: "liza.html", photo: "" },
+    "25": { url: "daniela.html", photo: "" }
+  };
+
   chairs.forEach((chair, index) => {
     const isBlockCapt = chair.role === "Neighborhood Captain";
     const isBlockWorker = chair.role === "Block Worker";
@@ -79,21 +86,27 @@ function renderGrid() {
         ? "#3b82f6"
         : "#10b981"; // Orange for Worker, Blue for Capt, Green for Chair
 
-    let photoUrl =
-      chair.photo && chair.photo.trim().length > 0
+    const customInfo = customProfileMap[String(chair.precinct)];
+    const hasCustomProfile = customInfo && chair.role.includes("Precinct Chair");
+    const targetUrl = hasCustomProfile ? customInfo.url : `precinct.html?id=${chair.precinct}`;
+
+    let photoUrl = (customInfo && customInfo.photo && customInfo.photo.length > 0)
+      ? customInfo.photo
+      : (chair.photo && chair.photo.trim().length > 0
         ? chair.photo
         : "https://ui-avatars.com/api/?name=" +
           encodeURIComponent(chair.name) +
-          "&background=1e293b&color=38bdf8&size=256&font-size=0.4";
+          "&background=1e293b&color=38bdf8&size=256&font-size=0.4");
 
     // Add stagger property via inline style for animation
     const animDelay = (index * 0.05) % 1.5; // Cap at 1.5s for stagger loop
 
     const cardHtml = `
-            <div data-name="${chair.name.replace(/"/g, "").toLowerCase()}" data-pct="${chair.precinct}" data-role="${chair.role}" class="hub-card-hover stagger-fade-in" style="animation-delay: ${animDelay}s; background: rgba(255,255,255,0.05); padding: 0; border-radius: 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; cursor:pointer;" onclick="window.location.href='precinct.html?id=${chair.precinct}'">
+            <div data-name="${chair.name.replace(/"/g, "").toLowerCase()}" data-pct="${chair.precinct}" data-role="${chair.role}" class="hub-card-hover stagger-fade-in" style="animation-delay: ${animDelay}s; background: rgba(255,255,255,0.05); padding: 0; border-radius: 12px; text-align: center; border: 1px solid ${hasCustomProfile ? '#38bdf8' : 'rgba(255,255,255,0.1)'}; overflow: hidden; cursor:pointer; ${hasCustomProfile ? 'box-shadow: 0 0 15px rgba(56,189,248,0.25);' : ''}" onclick="window.location.href='${targetUrl}'">
                 <div style="height: 180px; width: 100%; overflow: hidden; position: relative;">
                     <img src="${photoUrl}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" class="card-img-zoom" alt="Profile Picture"/>
                     <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(15,23,42,1) 0%, rgba(15,23,42,0) 100%);"></div>
+                    ${hasCustomProfile ? '<div style="position: absolute; top: 10px; right: 10px; background: rgba(14,165,233,0.9); color: #020617; font-weight: 800; font-size: 0.7rem; padding: 0.25rem 0.6rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(0,0,0,0.4);">⭐ Profile Hub</div>' : ''}
                 </div>
                 <div style="padding: 1.5rem; position: relative;">
                     <div style="background: ${badgeColor}22; color: ${badgeColor}; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-top: -2.5rem; margin-bottom: 0.75rem; padding: 0.4rem 0.8rem; border-radius: 999px; display:inline-block; border: 1px solid ${badgeColor}55; backdrop-filter: blur(4px); position: relative; z-index: 2;">
