@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speech Reader & Teleprompter | HCDP</title>
+<script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #0f172a;
+    color: #1f2937;
+    overflow: hidden;
+  }
+  .split {
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  /* Left Panel (Reference / Outline View) */
+  #left-panel {
+    width: 32%;
+    background-color: #ffffff;
+    color: #1e293b;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    padding: 2.5rem 2rem 5rem 2rem;
+    border-right: 1px solid #e2e8f0;
+  }
+  #left-panel h1 { font-size: 1.6rem; color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+  #left-panel h2, #left-panel h3 { font-size: 1.25rem; color: #1e3a8a; margin-top: 1.5rem; }
+  #left-panel blockquote {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    margin: 1.2rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    color: #92400e;
+    font-size: 0.95rem;
+  }
+  #left-panel hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 1.5rem 0;
+  }
+
+  /* Draggable Divider */
+  #resizer {
+    width: 12px;
+    background-color: #1e293b;
+    cursor: col-resize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  #resizer:hover, #resizer:active {
+    background-color: #3b82f6;
+  }
+  #resizer::after {
+    content: "⋮";
+    color: #94a3b8;
+    font-size: 20px;
+  }
+
+  /* Right Panel (High-Contrast Prompter View) */
+  #right-panel {
+    flex: 1;
+    background-color: #0b0f19;
+    color: #f8fafc;
+    font-size: 3.2rem;
+    line-height: 1.45;
+    padding: 3.5rem 4.5rem 12rem 4.5rem;
+  }
+  #right-panel h1 {
+    font-size: 1.4em;
+    color: #60a5fa;
+    margin-top: 0.5em;
+    margin-bottom: 0.4em;
+    line-height: 1.2;
+  }
+  #right-panel h2, #right-panel h3 {
+    font-size: 1.15em;
+    color: #93c5fd;
+    margin-top: 1.2em;
+    margin-bottom: 0.3em;
+  }
+  #right-panel ul {
+    padding-left: 1.4em;
+    margin: 1em 0;
+  }
+  #right-panel li {
+    margin-bottom: 0.8em;
+  }
+  #right-panel strong {
+    color: #38bdf8;
+    font-weight: 700;
+  }
+  #right-panel hr {
+    border: none;
+    border-top: 2px dashed #334155;
+    margin: 2em 0;
+  }
+  #right-panel blockquote {
+    background: rgba(245, 158, 11, 0.12);
+    border-left: 8px solid #f59e0b;
+    color: #fef08a;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    font-size: 0.9em;
+  }
+  #right-panel blockquote strong {
+    color: #fde047;
+  }
+  #right-panel blockquote em {
+    color: #fef08a;
+  }
+
+  /* Floating Control Toolbar */
+  .control-bar {
+    position: fixed;
+    top: 12px;
+    right: 16px;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(10px);
+    border: 1px solid #334155;
+    padding: 8px 14px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: white;
+  }
+  select {
+    font-size: 0.95rem;
+    padding: 6px 12px;
+    background: #1e293b;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  select:focus {
+    outline: 2px solid #3b82f6;
+  }
+  .btn-group {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: #1e293b;
+    color: #e2e8f0;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  button:hover {
+    background: #334155;
+    color: white;
+    border-color: #64748b;
+  }
+  button.active {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: white;
+  }
+  .divider-v {
+    width: 1px;
+    height: 24px;
+    background: #334155;
+  }
+  .badge {
+    font-size: 0.75rem;
+    background: #1e293b;
+    border: 1px solid #475569;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #94a3b8;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="control-bar">
+  <select id="docSelect" onchange="loadDoc()">
+    <option value="menuOptionsRichard" selected>Speech: Menu of Options (Chair Richard Gonzales)</option>
+    <option value="menuOptions">Speech: Menu of Options (General)</option>
+    <option value="main">Previous: Precinct Chair Mini-Meeting</option>
+    <option value="qa">Hostile Audience Strategy & Q&A Prep</option>
+  </select>
+
+  <div class="divider-v"></div>
+
+  <div class="btn-group">
+    <button onclick="changeFontSize(-0.25)" title="Decrease font size">A-</button>
+    <span id="fontSizeDisplay" class="badge">3.2rem</span>
+    <button onclick="changeFontSize(0.25)" title="Increase font size">A+</button>
+  </div>
+
+  <div class="divider-v"></div>
+
+  <div class="btn-group">
+    <button id="scrollBtn" onclick="toggleAutoScroll()" title="Toggle Auto Scroll (Spacebar)">▶ Scroll</button>
+    <button onclick="adjustScrollSpeed(-1)" title="Slower scroll speed">🐢</button>
+    <span id="speedDisplay" class="badge">Speed: 2</span>
+    <button onclick="adjustScrollSpeed(1)" title="Faster scroll speed">🐇</button>
+  </div>
+
+  <div class="btn-group">
+    <button onclick="resetScroll()" title="Scroll to top">⏮ Top</button>
+  </div>
+</div>
+
+<div id="left-panel" class="split">
+  <div id="left-content"></div>
+</div>
+
+<div id="resizer"></div>
+
+<div id="right-panel" class="split">
+  <div id="right-content"></div>
+</div>
+
+<script>
+const menuOptionsRichardSpeech = `
+# Precinct Chair Speech: A Menu of Options and How the Party Supports You
+*(Estimated Delivery Time: ~4.5 Minutes | 64 Days to Nov 3, 2026)*
+
+---
+
+### Opening
+Thank you everyone for being here tonight—old and new precinct chairs who’ve all stepped up to be community leaders.
+
+As we stand here tonight, we are **exactly 64 days out** from Election Day on **Tuesday, November 3rd**—and early voting is even closer. Whenever people ask me where the real power of our party lives, I always give the same answer: **it doesn't live in Austin or in D.C. It lives right here in this room**, and in every single neighborhood across our county. 
+
+**Under the vision and leadership of our County Chair, Richard Gonzales**, we have made it our party's mission to ensure that real power is centered in our neighborhoods—giving you the backing, tools, and respect you deserve. You are the face of the party to your neighbors, and as we head into these final two months, that work matters more than ever.
+
+---
+
+### Acknowledging Traditional Field Work & Multilevel Civic Engagement
+Now, being 64 days out, when most people think about precinct work, they usually think of our core field operations happening right now: **block walks and phone banks**. And those field tactics are vital during this homestretch.
+
+But organizing isn't one-size-fits-all, and election season isn't the only time we need to be active. Our county spans multiple cities, school districts, county commissioner precincts, and state and congressional districts. Every single one of these levels impacts our everyday lives.
+
+Getting involved at City Hall, speaking up at a school board meeting, or building a relationship with your state representative's or congressional district's local staff—**that is all vital civic participation**, and it all counts toward building our grassroots presence.
+
+---
+
+### Menu of Options
+So tonight, I want to invite each of you to see where your interests fit into this bigger picture:
+
+* **Field Operations & Voter Contact:** Join or lead our active block walks and phone banks to connect directly with voters on your streets.
+* **Relational Organizing & Voter Planning (In the Works):** We are putting together a paid relational organizing program with TDP where you take a short online civics course and get compensated for making voting plans with your friends, family, and neighbors.
+* **Civic & Legislative Advocacy:** Attend City Hall meetings, school board sessions, or public hearings, and interact with our state and congressional district offices on key policy issues to keep your precinct informed.
+* **Team Building & Delegation:** Focus on recruiting 3–5 Neighborhood Captains to cover specific streets, or help manage voter lists and turf mapping in VAN.
+* **Party Governance & Policy:** Join one of our standing committees—like candidate recruitment, bylaws, or resolutions—or help lead our precinct caucuses and conventions.
+* **Community Presence & Service:** Organize a local park cleanup, host a "Coffee & Civics" morning at a neighborhood cafe to listen to community concerns, have a cookout at a park or home, or staff our party table at community festivals.
+* **Digital Media & Communications:** Run a neighborhood WhatsApp or Nextdoor group, write letters to the editor, or use your front porch as a distribution hub for yard signs and literature.
+* **Social Connections & Hospitality:** Host a debate watch party, a precinct potluck, or help us staff the sign-in desk to welcome new faces at our county party meetings.
+* **Election Protection & Operations:** Serve as a poll watcher, election worker, or help coordinate rides to the polls for seniors and disabled neighbors during Early Voting.
+
+---
+
+> 🟡 **[STAGE DIRECTION: AUDIENCE INTERACTION & PHOTO — PAUSE HERE]**
+> 
+> *(Look directly at the room, smile, and ask the following):*
+> 
+> *"Now, looking across all those options—by a quick show of hands, who here feels like you want to get involved, but you still need a little bit more guidance or help getting started at any level?"*
+> 
+> 👉 **[PAUSE — WAIT FOR HANDS TO GO UP ACROSS THE ROOM]**
+> 
+> *"Keep those hands up for just five seconds! I'm going to snap a quick photo of the room right now so our leadership team can personally follow up with each of you this week to get you connected and supported."*
+> 
+> 📸 **[TAKE PHOTO OF THE AUDIENCE / RAISED HANDS]**
+> 
+> *"Thank you! Look around the room—you are definitely not alone."*
+
+---
+
+### How the Party Supports You
+Now, you might be asking: *"That sounds great, but how does the party help me do all of this?"*
+
+**Under Chair Richard Gonzales's leadership**, we have made a core pledge to every single one of you: **You are not on an island, and you do not have to figure this out alone.** The county party exists to support you and amplify your work:
+
+* **TDP Organizers on the ground:** Texas Democratic Party organizers are onboarding right now to provide flexible support across our county—ready to join you for block walks, help staff tabling at local events, and assist with your precinct initiatives.
+* **We provide the infrastructure:** We get you set up with VAN credentials, precinct maps, and targeted voter lists through our Precinct Chair Directory & Hub.
+* **We provide training & materials:** We offer regular training sessions, supply you with our Precinct Onboarding Playbook, and stock you with yard signs, candidate literature, slate cards, and voter registration forms.
+* **We are your sounding board:** If you want to host an event in your neighborhood, engage on a local city or school board issue, or just want to bounce ideas off someone—**Chair Richard Gonzales and our leadership team are here for you.** Reach out anytime!
+
+---
+
+### Closing
+With just **64 days to go until November 3rd**, every conversation, every block, and every event counts. **Chair Richard Gonzales and our leadership team have built this support system and put these resources in place so that you have everything you need to succeed.** 
+
+Whatever your strength or passion is, there is a place for you in the Party. Pick one or two areas that energize you, use the resources the party has built for you, and let us know what you need to succeed.
+
+Thank you again for your leadership, your time, and your dedication. **Let's make Texas blue—not for one cycle, but for each one after!**
+`;
+
+const menuOptionsSpeech = `
+# Precinct Chair Speech: A Menu of Options and How the Party Supports You
+*(Estimated Delivery Time: ~4.5 Minutes | 64 Days to Nov 3, 2026)*
+
+---
+
+### Opening
+Thank you everyone for being here tonight—old and new precinct chairs who’ve all stepped up to be community leaders.
+
+As we stand here tonight, we are **exactly 64 days out** from Election Day on **Nov 3, 2026**—and early voting is even closer. Whenever people ask me where the real power of our party lives, I always give the same answer: **it doesn't live in Austin or in D.C. It lives right here in this room**, and in every single neighborhood across our county. You are the face of the party to your neighbors, and as we head into these final two months, that work matters more than ever.
+
+---
+
+### Acknowledging Traditional Field Work & Multilevel Civic Engagement
+Now, being 64 days out, when most people think about precinct work, they usually think of our core field operations happening right now: **block walks and phone banks**. And those field tactics are vital during this homestretch.
+
+But organizing isn't one-size-fits-all, and election season isn't the only time we need to be active. Our county spans multiple cities, school districts, county commissioner precincts, and state and congressional districts. Every single one of these levels impacts our everyday lives.
+
+Getting involved at City Hall, speaking up at a school board meeting, or building a relationship with your state representative's or congressional district's local staff—**that is all vital civic participation**, and it all counts toward building our grassroots presence.
+
+---
+
+### Menu of Options
+So tonight, I want to invite each of you to see where your interests fit into this bigger picture:
+
+* **Field Operations & Voter Contact:** Join or lead our active block walks and phone banks to connect directly with voters on your streets.
+* **Relational Organizing & Voter Planning (In the Works):** We are putting together a paid relational organizing program with TDP where you take a short online civics course and get compensated for making voting plans with your friends, family, and neighbors.
+* **Civic & Legislative Advocacy:** Attend City Hall meetings, school board sessions, or public hearings, and interact with our state and congressional district offices on key policy issues to keep your precinct informed.
+* **Team Building & Delegation:** Focus on recruiting 3–5 Neighborhood Captains to cover specific streets, or help manage voter lists and turf mapping in VAN.
+* **Party Governance & Policy:** Join one of our standing committees—like candidate recruitment, bylaws, or resolutions—or help lead our precinct caucuses and conventions.
+* **Community Presence & Service:** Organize a local park cleanup, host a "Coffee & Civics" morning at a neighborhood cafe to listen to community concerns, or staff our party table at community festivals.
+* **Digital Media & Communications:** Run a neighborhood WhatsApp or Nextdoor group, write letters to the editor, or use your front porch as a distribution hub for yard signs and literature.
+* **Social Connections & Hospitality:** Host a debate watch party, a precinct potluck, or help us staff the sign-in desk to welcome new faces at our county party meetings.
+* **Election Protection & Operations:** Serve as a poll watcher, election worker, or help coordinate rides to the polls for seniors and disabled neighbors during Early Voting.
+
+---
+
+> 🟡 **[STAGE DIRECTION: AUDIENCE INTERACTION & PHOTO — PAUSE HERE]**
+> 
+> *(Look directly at the room, smile, and ask the following):*
+> 
+> *"Now, looking across all those options—by a quick show of hands, who here feels like you want to get involved, but you still need a little bit more guidance or help getting started at any level?"*
+> 
+> 👉 **[PAUSE — WAIT FOR HANDS TO GO UP ACROSS THE ROOM]**
+> 
+> *"Keep those hands up for just five seconds! I'm going to snap a quick photo of the room right now so our leadership team can personally follow up with each of you this week to get you connected and supported."*
+> 
+> 📸 **[TAKE PHOTO OF THE AUDIENCE / RAISED HANDS]**
+> 
+> *"Thank you! Look around the room—you are definitely not alone."*
+
+---
+
+### How the Party Supports You
+Now, you might be asking: *"That sounds great, but how does the party help me do all of this?"*
+
+Here is our pledge to you: **You are not on an island, and you do not have to figure this out alone.** The county party exists to support you and amplify your work:
+
+* **TDP Organizers on the ground:** Texas Democratic Party organizers are onboarding right now to provide flexible support across our county—ready to join you for block walks, help staff tabling at local events, and assist with your precinct initiatives.
+* **We provide the infrastructure:** We get you set up with VAN credentials, precinct maps, and targeted voter lists through our Precinct Chair Directory & Hub.
+* **We provide training & materials:** We offer regular training sessions, supply you with our Precinct Onboarding Playbook, and stock you with yard signs, candidate literature, slate cards, and voter registration forms.
+* **We are your sounding board:** If you want to host an event in your neighborhood, engage on a local city or school board issue, or just want to bounce ideas off someone—leadership is here for you. Reach out anytime!
+
+---
+
+### Closing
+With just **64 days to go until November 03**, every conversation, every block, and every event counts. Whatever your strength or passion is, there is a place for you in the Party. Pick one or two areas that energize you, use the resources the party has built for you, and let us know what you need to succeed.
+
+Thank you again for your leadership, your time, and your dedication. **Let's make Texas blue—not just for one cycle, but for each one after!**
+`;
+
+const mainSpeech = `
+# Precinct Chair Mini-Meeting: Leading Our Neighborhoods to Victory in November
+
+As the grassroots leaders of the Hidalgo County Democratic Party, Precinct Chairs are the tip of the spear. Elections in the Rio Grande Valley aren't won by national TV ads—they are won block by block, neighbor to neighbor.
+
+**Our Focus is on the Ground:** We are the party's frontline. With November approaching fast, we cannot afford to wait for marching orders to start doing our jobs. The voters in your precincts are looking to us to protect their public schools, their jobs, and their rights. The true power of the Democratic Party doesn’t live in an office; it lives in this room. You don't need anyone's permission to organize your neighborhood.
+
+**We currently have historic numbers of Precinct Chairs.** Because of our aggressive recruitment, we now have enough active chairs to cover roughly **80% of the voting population** in Hidalgo County. That means our reach is unprecedented, and if every one of us engages our specific neighborhoods, our collective impact will be unstoppable. 
+
+Here are the key talking points to guide our strategy and actions leading up to November.
+
+## 1. Embrace the Precinct Chair "Lifestyle"
+* **It's Not Bureaucracy, It's Community:** If you look at the Texas Election Code, being a Precinct Chair sounds like a dry chore. But in reality, it is a highly social, rewarding, and fun lifestyle. Building a base starts with breaking the ice.
+* **Have Confidence in Our Message:** Never be afraid to proudly share our Democratic values. We stand for fully funded public schools, good-paying jobs, and accessible healthcare. That message *resonates* deeply with the people in the Valley. Have the confidence to spread it unapologetically, knowing you are fighting for exactly what our community wants and needs.
+* **You Are the Local Expert:** Nobody knows your neighborhood better than you do. You know if your area responds better to a weekend pachanga, a traditional block walk, or a neighborhood WhatsApp group. Trust your instincts on how to best engage your specific streets—there is no one-size-fits-all approach.
+* **The "Burgers in the Park" Lesson:** Look at Pct 107. They didn’t build their base with just cold calls. They hosted a "Free Burgers at the Park" community mixer. It is about drinking coffee with volunteers, throwing block parties, and getting to know the families on your street.
+* **Be the Ultimate Political Connector:** You are the gateway. You bring the mayor, the candidates, and the resources directly to your neighbors’ doorsteps (maybe over a slice of pizza). You give them a voice.
+
+## 2. Master the Basics & Build Regional Coalitions
+* **Know your turf & hit the doors:** Block walking and phone banking remain the undisputed most effective ways to increase turnout. Commit to a realistic goal. 
+* **No Chair is an Island:** Truly effective organizing doesn't stop at your border. Pull up the map of your precinct and look at the adjacent ones. Partner with neighboring chairs to co-host street block walks, pool volunteer resources, and transform individual precinct success into a massive, unstoppable regional voting bloc.
+
+## 3. Voter Registration & Education: The Road to 500K
+* **The Road to 500,000 Voters:** Hidalgo County currently has roughly 430,000 registered voters, but we have a fast-growing population. Our goal as a county party is to hit 500,000 registered voters. This is the critical mass needed to permanently secure the Valley as a Democratic firewall in Texas.
+* **Deputize and Mobilize:** If you aren't a Volunteer Deputy Registrar (VDR), become one. Every single Precinct Chair should be registering at least 5 new voters a month.
+* **Target the youth:** High schools and community colleges are goldmines for new voters. Many young people want to vote but don't know the deadlines or processes.
+
+## 4. The GOTV Push & The Proof of Power
+* **Early Voting is everything:** Do not wait until Election Day. Push every supporter you identify to vote during the Early Voting period (starting October 19th).
+* **The Proof is in the Numbers:** This organizing model is a proven math formula. In low-turnout runoffs, a well-organized core team of just 70+ volunteers can command 45% of the primary turnout in a precinct, effectively locking out the opposition. 
+* **The November Ceiling:** Organizing your core base now during the quiet periods builds the engine that will rally hundreds of "surge" voters in November. 
+
+## 5. How to Organize Without Burnout (The Multi-Tiered Network)
+* **The Trap of the "Lone Ranger":** Many new precinct chairs make the mistake of trying to knock on every door themselves. This leads to rapid burnout. Don't do it alone.
+* **The Precinct 107 Leadership Model:** Distribute the workload using a multi-tiered approach:
+    1. **Precinct Chair:** Act as the central manager and strategist.
+    2. **Neighborhood Captains (3–5 per precinct):** Divide your precinct into subdivisions and recruit leaders for those sectors.
+    3. **Block Workers (3–5 per subdivision):** Captains assign workers to just 1 or 2 streets.
+* **The "Power of 20" Data Model:** Empower every Neighborhood Captain to collect Name, Phone, Email, and Address for exactly 20 voters. This simple task systematically locks in 2% of your precinct's registered voters into our Texas Voter Activation Network (VAN).
+
+## 6. Selling the Whole Ticket (Top to Bottom)
+* **The Top of the Ticket drives the narrative:** While statewide and national races define the major battle lines, it's our job to bring those massive issues down to the neighborhood level. 
+* **Down-ballot races impact daily life:** Make sure your voters know about the crucial down-ballot races—like the State Board of Education, judicial races, and county commissioners.
+* **No candidate left behind:** Emphasize the importance of voting the *entire* ballot. "Bullet voting" hurts our local candidates. A rising tide lifts all boats.
+* **Seek Out and Connect with Campaigns:** Don't wait for campaigns to come to you. Actively seek out campaigns that need boots on the ground—whether it's James Talarico, Congressman Henry Cuellar, Gina Hinojosa, Bobby Pulido, or organizations like Texas Together. Get connected with their field directors so you can bring their resources, materials, and energy directly into your precinct.
+
+## 7. Immediate Next Steps (The Call to Action)
+* **Request Your VAN Access:** To find the likely Democrats on your block, you need access immediately. Email the party or fill out the TDP VAN Request Page.
+* **Sign Up for Precinct Chair 101:** Get trained. Book your shift on Mobilize right now.
+* **Explore the Onboarding Hub:** Bookmark the HCDP Chair Onboarding Page to review your playbook, checklists, and survey forms.
+
+***
+
+**The Bottom Line:**
+Thank you for stepping up. We don't win by hoping people show up; we win by doing the hard, granular work of organizing our own backyards. Make the best of it, have fun out there, and let's get to work turning Hidalgo County solid blue!
+`;
+
+const qaPrep = `
+# Hostile Audience Strategy & Q&A Prep
+
+When presenting to a group that is anti-county chair, deeply concerned with transparency, and highly critical of the party's current output, your goal is to **pivot their frustration into localized action.** You cannot fix the county-wide legal battles today, but you *can* empower them to control their own precincts.
+
+## Part 1: How to Subtly Address the Elephant in the Room
+You want to validate their feelings of frustration and their desire for "truth and transparency" *without* taking sides in the legal battle or validating the infighting.
+
+**Suggested Framing / Speaking Points:**
+* **Acknowledge the Urgency:** *"We are the party's frontline. With November approaching fast, we cannot afford to wait for marching orders to start doing our jobs. The voters in your precincts are looking to us to protect their public schools, their jobs, and their rights."*
+* **The Cavalry Isn't Coming:** *"The truth is, the timeline is short and the work ahead of us is massive. If we wait, we lose November. The cavalry isn't coming—we are the cavalry."*
+* **Decentralize the Power:** *"The true power of the Democratic Party doesn’t live in an office title. It lives in this room. You don't need anyone's permission to organize your neighborhood. You are the local expert."*
+
+---
+
+## Part 2: Anticipated Hostile Questions & How to Pivot
+When they throw complaints at you, validate the premise, but pivot the solution back to *them* and the precinct-level organizing model.
+
+### Q1: "The county party isn't doing anything right now to help us."
+**The Pivot (Empowerment):** 
+"You're right that things are fractured at the top right now, and it's incredibly frustrating. But that is exactly why I am standing in front of you today. We cannot let administrative paralysis cost us the November election. The Precinct Chair model is brilliant because it's decentralized. You don't need the county party's permission to host a block walk, recruit 3 block captains, or throw a 'Burgers in the Park' event. We have to take ownership of our own backyards."
+
+### Q2: "Our VAN (Voter Activation Network) numbers suck. The data is terrible."
+**The Pivot (Actionable Solution):**
+"I agree with you. The data we have right now is not where it needs to be. But the only way the VAN numbers get better is if we clean them ourselves, block by block. That is exactly why we are pushing the 'Power of 20' model. If every chair here just gets solid, verified data for 20 neighbors and we plug that into VAN, we fix the data problem from the ground up. We have to build the database we want."
+
+### Q3: "Are we ever going to get together as a full County Executive Committee?"
+**The Pivot (Focus on What We Can Control):**
+"I want us all in one room as much as you do. Transparency demands that we meet. But while those legal and administrative hurdles are being fought out, the clock is ticking toward early voting. We cannot afford to pause. That is why we are heavily relying on 'Regional Coalitions.' If the whole county can't meet right now, then you need to partner with your 4 or 5 adjacent precinct chairs and build your own regional team to cover each other's blind spots."
+
+### Q4: "How can you be up here representing a County Chair who is being sued/investigated?"
+**The Pivot (Redefining Your Role):**
+"I'm not here today to represent the courtroom or the legal battles. I am here representing the November ballot. My only allegiance right now is to making sure James Talarico, our SBOE candidates, and our local judges don't lose because we were too busy fighting each other to knock on doors. My goal is to make sure *you* have the tools to win your precinct, regardless of what happens at headquarters."
+
+### Q5: "Where is the money/resources? The campaigns aren't helping us either."
+**The Pivot (Proactive Seeking):**
+"That is exactly why one of our key strategies today is 'Seek Out and Connect.' Do not wait for the party or the campaigns to bring the flyers to your porch. We have to be aggressive. Reach out directly to the field directors for Cuellar, Talarico, or Texas Together. Tell them 'I have a team of 5 block captains, give me literature.' When you show them you have an organized precinct, they will give you the resources."
+`;
+
+const docMap = {
+  menuOptionsRichard: menuOptionsRichardSpeech,
+  menuOptions: menuOptionsSpeech,
+  main: mainSpeech,
+  qa: qaPrep
+};
+
+function loadDoc() {
+  const selection = document.getElementById('docSelect').value;
+  const content = docMap[selection] || menuOptionsRichardSpeech;
+  
+  const htmlContent = marked.parse(content);
+  document.getElementById('left-content').innerHTML = htmlContent;
+  document.getElementById('right-content').innerHTML = htmlContent;
+}
+
+// Initial load
+loadDoc();
+
+// Font sizing logic
+let currentFontSize = 3.2; // rem
+function changeFontSize(amount) {
+  currentFontSize = Math.round((currentFontSize + amount) * 100) / 100;
+  if (currentFontSize < 1.2) currentFontSize = 1.2;
+  if (currentFontSize > 6.0) currentFontSize = 6.0;
+  document.getElementById('right-panel').style.fontSize = currentFontSize + 'rem';
+  document.getElementById('fontSizeDisplay').textContent = currentFontSize + 'rem';
+}
+
+// Auto-Scroll Logic
+let isScrolling = false;
+let scrollInterval = null;
+let scrollSpeed = 2; // px per tick
+
+function toggleAutoScroll() {
+  isScrolling = !isScrolling;
+  const btn = document.getElementById('scrollBtn');
+  if (isScrolling) {
+    btn.classList.add('active');
+    btn.textContent = '⏸ Pause';
+    startScrolling();
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '▶ Scroll';
+    stopScrolling();
+  }
+}
+
+function startScrolling() {
+  stopScrolling();
+  scrollInterval = setInterval(() => {
+    const rightPanel = document.getElementById('right-panel');
+    rightPanel.scrollTop += scrollSpeed;
+  }, 40);
+}
+
+function stopScrolling() {
+  if (scrollInterval) {
+    clearInterval(scrollInterval);
+    scrollInterval = null;
+  }
+}
+
+function adjustScrollSpeed(delta) {
+  scrollSpeed += delta;
+  if (scrollSpeed < 1) scrollSpeed = 1;
+  if (scrollSpeed > 10) scrollSpeed = 10;
+  document.getElementById('speedDisplay').textContent = 'Speed: ' + scrollSpeed;
+}
+
+function resetScroll() {
+  document.getElementById('right-panel').scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('left-panel').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Keyboard shortcuts (Space to toggle scroll, Up/Down for speed)
+window.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' && e.target.tagName !== 'SELECT' && e.target.tagName !== 'INPUT') {
+    e.preventDefault();
+    toggleAutoScroll();
+  } else if (e.key === '=' || e.key === '+') {
+    changeFontSize(0.25);
+  } else if (e.key === '-' || e.key === '_') {
+    changeFontSize(-0.25);
+  }
+});
+
+// Resizer logic
+const resizer = document.getElementById('resizer');
+const leftPanel = document.getElementById('left-panel');
+let isResizing = false;
+
+resizer.addEventListener('mousedown', function(e) {
+  isResizing = true;
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+});
+
+document.addEventListener('mousemove', function(e) {
+  if (!isResizing) return;
+  let newWidth = (e.clientX / window.innerWidth) * 100;
+  if (newWidth < 10) newWidth = 10;
+  if (newWidth > 90) newWidth = 90;
+  leftPanel.style.width = newWidth + '%';
+});
+
+document.addEventListener('mouseup', function(e) {
+  if (isResizing) {
+    isResizing = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poll Worker Policy & Reform Report - Hidalgo County Democratic Party</title>
+  <meta name="description" content="Read our policy report on overcoming Hidalgo County's 400 poll worker shortage through split shifts (4-hr, 6-hr, 8-hr), training portal modernization, and Elections Administrator recommendations.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;700;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/state_party_clone.css">
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q577ZL75XM');
+  </script>
+
+  <style>
+    :root {
+      --rf-bg: #0b1329;
+      --rf-card-bg: rgba(30, 41, 59, 0.75);
+      --rf-accent: #38bdf8;
+      --rf-red: #ef4444;
+      --rf-gold: #fcd34d;
+      --rf-green: #34d399;
+      --rf-border: rgba(255, 255, 255, 0.12);
+    }
+
+    body.rf-page {
+      background-color: var(--rf-bg);
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    .rf-hero {
+      background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 50%, #0b1329 100%);
+      padding: 140px 1.5rem 3.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .rf-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: #ffffff;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .rf-hero p {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 850px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.65;
+    }
+
+    .rf-container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 6rem 1.5rem;
+    }
+
+    .problem-solution-card {
+      background: var(--rf-card-bg);
+      border: 1px solid var(--rf-border);
+      border-radius: 18px;
+      padding: 2.25rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .card-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .badge-urgent { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-solution { background: rgba(52, 211, 153, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-statute { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2col { grid-template-columns: 1fr; }
+    }
+
+    .box-problem {
+      background: rgba(239, 68, 68, 0.06);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .box-solution {
+      background: rgba(52, 211, 153, 0.06);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .box-problem h4 { color: #f87171; font-size: 1.15rem; margin-bottom: 0.75rem; font-weight: 800; }
+    .box-solution h4 { color: #34d399; font-size: 1.15rem; margin-bottom: 0.75rem; font-weight: 800; }
+
+    .box-problem p, .box-solution p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .statute-quote {
+      background: rgba(15, 23, 42, 0.7);
+      border-left: 4px solid var(--rf-accent);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 10px 10px 0;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .request-list-item {
+      display: flex;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .request-number {
+      background: var(--rf-accent);
+      color: #0b1329;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .request-text h4 {
+      margin: 0 0 0.4rem 0;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .request-text p {
+      margin: 0;
+      color: #94a3b8;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body class="tx-clone rf-page">
+
+  <!-- Navigation Header -->
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+      <a href="https://www.facebook.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://instagram.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg></a>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="press.html">Press & Media 📰</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="democratic_directory.html" style="color: #3b82f6; font-weight: 800;">Officials & Candidates</a>
+            <a href="changelog.html" style="color: #34d399; font-weight: 800;">New Features 🚀</a>
+            <a href="archive.html" style="color: #94a3b8; font-weight: 600;">Archive 🗄️</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
+            <a href="poll_worker_reform.html" style="color: #fcd34d; font-weight: 800;">Poll Worker Policy & Reforms 📜</a>
+            <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
+            <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
+            <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
+            <a href="vote.html">Voter Resources</a>
+            
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-top: 0.5rem; margin-bottom: 0.25rem;">For Organizers</div>
+            <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Precinct Toolkit 🧰</a>
+            <a href="van_support.html" style="color: #38bdf8; font-weight: 600;">VAN Support 💻</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
+          <div class="dropdown-content">
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
+            <a href="cec_history.html" style="color: #a855f7; font-weight: 800;">CEC Meeting History 📜</a>
+            <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
+            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
+            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="poll_worker_reform.html" style="color: #fcd34d; font-weight: 800;">Poll Worker Policy & Reforms 📜</a>
+            <a href="share_stories.html" style="color: #ef4444; font-weight: 800;">Share Your Story 📢</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="community_intake.html">Community Inbox</a>
+            <a href="civics.html" style="color: #fcd34d; font-weight: 800;">Civics 📚</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="join.html" style="color: #fca5a5; font-weight: 800;">Join the Party 🤝</a>
+            <a href="leave_a_voicemail.html">Leave a Voicemail</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank" rel="noopener noreferrer">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Banner -->
+  <section class="rf-hero">
+    <div style="display: inline-block; padding: 0.35rem 1rem; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 20px; color: var(--rf-accent); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;">
+      HCDP Election Protection & Policy Report
+    </div>
+    <h1>Poll Worker Policy & Reform Report</h1>
+    <p>
+      Addressing the 400-worker shortage in Hidalgo County by identifying administrative bottlenecks, proposing flexible split shifts (4-hr, 6-hr, 8-hr), streamlining poll worker training, and requesting official action from the Elections Administrator.
+    </p>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="rf-container">
+
+    <!-- Executive Summary Card -->
+    <div class="problem-solution-card">
+      <span class="card-badge badge-urgent">Executive Summary • Priority Issue</span>
+      <h2 style="font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">
+        Why Is Hidalgo County Short 400 Poll Workers?
+      </h2>
+      <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+        Despite recent pay increases approved by the county ($19/hr for Election Judges, $17/hr for Alternate Judges, and $15/hr for Clerks), the Hidalgo County Democratic Party and grassroots organizers have compiled widespread feedback explaining why polling locations remain severely understaffed for the November 3, 2026 General Election.
+      </p>
+      
+      <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--rf-border); border-radius: 12px; padding: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: center;">
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 800; color: #ef4444;">400</div>
+          <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700;">Worker Shortfall</div>
+        </div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 800; color: #fcd34d;">14–16 hrs</div>
+          <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700;">Current Shift Length</div>
+        </div>
+        <div>
+          <div style="font-size: 2.2rem; font-weight: 800; color: #38bdf8;">§ 32.072</div>
+          <div style="font-size: 0.85rem; color: #cbd5e1; text-transform: uppercase; font-weight: 700;">TX Election Code Relief</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Friction 1: 15-Hour Shifts vs Split Shifts -->
+    <div class="problem-solution-card">
+      <span class="card-badge badge-solution">Reform #1 • Shift Flexibility</span>
+      <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">
+        1. Exhausting 15+ Hour Shift Marathons vs. Flexible Split Shifts
+      </h3>
+
+      <div class="grid-2col">
+        <div class="box-problem">
+          <h4>❌ Current Problem: The 15-Hour Barrier</h4>
+          <p>
+            Currently, applicants are mandated to work a continuous shift from <strong>5:45 a.m. to 9:45 p.m.+</strong>. This single requirement disqualifies working parents, caregivers, students with class schedules, and elderly residents who cannot endure 16 consecutive hours on their feet.
+          </p>
+        </div>
+
+        <div class="box-solution">
+          <h4>✅ Proposed Solution: 4-Hour, 6-Hour & 8-Hour Split Shifts</h4>
+          <p>
+            Request the Hidalgo County Elections Administrator establish option for <strong>split shifts (e.g. Morning 5:45 AM–12:00 PM, Afternoon 12:00 PM–5:00 PM, Evening 4:30 PM–CLOSE)</strong>. Splitting shifts immediately unlocks hundreds of willing applicants.
+          </p>
+        </div>
+      </div>
+
+      <div class="statute-quote">
+        <strong>📜 Texas Election Code § 32.072 (Selectivity of Shift Lengths):</strong><br>
+        <em>"The authority conducting an election may authorize election clerks to work less than the total number of hours the polling place is open. An election clerk authorized to work part-time may begin work after the polls open or leave before the polls close."</em>
+      </div>
+    </div>
+
+    <!-- Core Friction 2: Training & Onboarding Cumbersome Process -->
+    <div class="problem-solution-card">
+      <span class="card-badge badge-statute">Reform #2 • Onboarding Modernization</span>
+      <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">
+        2. Streamlining the Cumbersome Poll Worker Training Process
+      </h3>
+
+      <div class="grid-2col">
+        <div class="box-problem">
+          <h4>❌ Current Problem: Cumbersome Portal Setup</h4>
+          <p>
+            Applicants report that navigating the online poll worker training portal requires complex multi-step self-registration, creating confusion and causing high drop-off rates before training completion.
+          </p>
+        </div>
+
+        <div class="box-solution">
+          <h4>✅ Proposed Solution: 1-Click Registration & Hybrid Support</h4>
+          <p>
+            Provide streamlined direct links, step-by-step video guides, and hybrid in-person training sessions at local precinct centers. HCDP will offer a <strong>Poll Worker Concierge Desk</strong> to walk applicants through registration.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Official Requests for Elections Administrator -->
+    <div class="problem-solution-card">
+      <span class="card-badge badge-urgent">Formal Administrative Requests</span>
+      <h3 style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 1.25rem;">
+        Formal Recommendations for the Hidalgo County Elections Administrator
+      </h3>
+
+      <div class="request-list-item">
+        <div class="request-number">1</div>
+        <div class="request-text">
+          <h4>Authorize Split Shifts for November 3, 2026 General Election</h4>
+          <p>Utilize statutory authority under TX Election Code § 32.072 to offer 4-hour, 6-hour, and 8-hour split shift options for Election Clerks across all county polling locations.</p>
+        </div>
+      </div>
+
+      <div class="request-list-item">
+        <div class="request-number">2</div>
+        <div class="request-text">
+          <h4>Publish Simplified Onboarding & Training Manuals</h4>
+          <p>Issue a streamlined, single-page training registration guide in English and Spanish to reduce digital onboarding drop-off rates.</p>
+        </div>
+      </div>
+
+      <div class="request-list-item">
+        <div class="request-number">3</div>
+        <div class="request-text">
+          <h4>Establish Quarterly Poll Worker Advisory Council</h4>
+          <p>Create a formal advisory body comprised of experienced election judges, precinct chairs, and poll clerks to regularly review administrative updates, equipment feedback, and compensation timelines.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section 4: County Meeting Minutes & News Archive -->
+    <div class="problem-solution-card">
+      <span class="card-badge badge-statute">County Records & Legal References</span>
+      <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 1rem;">
+        Hidalgo County Election Board Records & Legislative Context
+      </h3>
+      
+      <p style="color: #cbd5e1; font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.25rem;">
+        A review of recent Hidalgo County Commissioners Court & Election Board proceedings confirms:
+      </p>
+
+      <ul style="color: #cbd5e1; line-height: 1.7; padding-left: 1.5rem; font-size: 0.95rem;">
+        <li style="margin-bottom: 0.75rem;"><strong>Hourly Rate Adjustment:</strong> The County Commissioners Court approved increased hourly rates ($19/hr Judge, $17/hr Alt Judge, $15/hr Clerk) to address recruiting deficits.</li>
+        <li style="margin-bottom: 0.75rem;"><strong>Mandatory Training Mandate:</strong> Texas Secretary of State rules require certified training completion prior to each election cycle.</li>
+        <li style="margin-bottom: 0.75rem;"><strong>Statutory Authority for Split Shifts:</strong> Texas Election Code § 32.072 provides full legal authority to implement part-time clerk positions without requiring additional legislative action.</li>
+      </ul>
+
+      <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        <a href="poll_worker.html" class="btn btn-primary" style="background: #ef4444; border-color: #ef4444; padding: 0.8rem 1.8rem; font-family: 'Alfa Slab One', cursive;">
+          BECOME A POLL WORKER ➔
+        </a>
+        <a href="https://www.hidalgocounty.us/105/Elections-Department" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.8rem 1.5rem;">
+          Official Elections Dept Portal ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Formal Communication & Open Letter to Elections Administrator -->
+    <div id="formal-email-administrator" class="problem-solution-card" style="border-color: var(--rf-accent);">
+      <span class="card-badge badge-solution">Formal Policy Letter & Email Template</span>
+      <h3 style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 0.75rem;">
+        ✉️ Formal Letter & Communication to Hidalgo County Elections Administrator
+      </h3>
+      <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+        Below is the formal administrative request and collaborative partnership proposal prepared for submission to the Hidalgo County Elections Administrator (<code>elections@co.hidalgo.tx.us</code>). Precinct chairs, election advocates, and community members can copy or send this letter directly.
+      </p>
+
+      <!-- Email Template Box -->
+      <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 1.75rem; color: #e2e8f0; font-size: 0.95rem; line-height: 1.65; position: relative;">
+        
+        <div style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 1.25rem;">
+          <div><strong>To:</strong> Hidalgo County Elections Administrator &lt;<a href="mailto:elections@co.hidalgo.tx.us" style="color: #38bdf8;">elections@co.hidalgo.tx.us</a>&gt;</div>
+          <div style="margin-top: 0.3rem;"><strong>Cc:</strong> Hidalgo County Democratic Party Executive Committee &lt;<a href="mailto:info@hidalgocountydems.org" style="color: #38bdf8;">info@hidalgocountydems.org</a>&gt;</div>
+          <div style="margin-top: 0.3rem;"><strong>Subject:</strong> Formal Partnership Proposal & Administrative Recommendations: Poll Worker Recruitment, Split Shifts (§ 32.072), and Onboarding Optimization for Nov 3, 2026</div>
+        </div>
+
+        <div id="email-body-text" style="white-space: pre-wrap; font-family: 'Inter', sans-serif;">Dear Elections Administrator & Department Officers,
+
+On behalf of election workers, precinct chairs, and community voting rights advocates across Hidalgo County, we appreciate your office’s dedication to managing free, fair, and accessible elections. As we prepare for the November 3, 2026 General Election, we recognize the vital mission facing your department to staff polling places across all county precincts.
+
+Based on feedback from veteran election judges and prospective applicants, we wish to submit formal recommendations to address the current 400-poll worker deficit and offer our organizational resources to support your recruitment drive:
+
+1. Authorization of Flexible Split Shifts (Texas Election Code § 32.072):
+Mandating 14- to 16-hour continuous shifts (5:45 AM to 9:45 PM+) remains the single largest barrier preventing working parents, caregivers, students, and seniors from serving. Under TX Election Code § 32.072 & § 32.073, your office holds statutory authority to authorize split shifts (e.g., 4-hour, 6-hour, or 8-hour shifts) for election clerks. Authorizing split shifts will immediately unlock hundreds of available applicants.
+
+2. Modernization of the Online Training & Onboarding Portal:
+Applicants report high drop-off rates due to multi-step portal registration friction. We recommend issuing single-page onboarding guides and offering hybrid in-person training. To support your staff, our community coalition offers to host voluntary Applicant Concierge Desks to walk applicants through registration.
+
+3. High School & College Student Clerk Program (TX Election Code § 32.0511):
+Expanding student election clerk recruitment with UTRGV, STC, and high schools provides young residents with hands-on civic leadership while filling clerk positions.
+
+4. Transparent Stipend Payment Schedules:
+Providing clear written payout timelines upon training completion builds trust and boosts worker retention.
+
+Our Party's Offer of Direct Support:
+The Hidalgo County Democratic Party is prepared to mobilize our 257 precinct chairs, digital platforms, and volunteer network to co-recruit and fill the 400-worker gap. We request a meeting to discuss these recommendations and partner on recruitment.
+
+Thank you for your service to Hidalgo County voters.
+
+Respectfully submitted,
+
+Hidalgo County Democratic Party & Election Protection Coalition
+Email: info@hidalgocountydems.org | Phone: (956) 212-0476</div>
+
+        <!-- Action Utility Buttons -->
+        <div style="margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
+          <button onclick="copyAdminEmail()" style="background: var(--rf-accent); color: #0b1329; border: none; font-weight: 800; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.5rem; transition: background 0.2s ease;">
+            <span id="copy-btn-icon">📋</span> <span id="copy-btn-text">Copy Email Text</span>
+          </button>
+          
+          <a href="mailto:elections@co.hidalgo.tx.us?cc=info@hidalgocountydems.org&subject=Formal%20Partnership%20Proposal%20%26%20Administrative%20Recommendations%3A%20Poll%20Worker%20Recruitment%2C%20Split%20Shifts%20(%C2%A7%2032.072)%2C%20and%20Onboarding%20Optimization%20for%20Nov%203%2C%202026&body=Dear%20Elections%20Administrator%20%26%20Department%20Officers%2C%0A%0AOn%20behalf%20of%20election%20workers%2C%20precinct%20chairs%2C%20and%20community%20voting%20rights%20advocates%20across%20Hidalgo%20County%2C%20we%20wish%20to%20submit%20formal%20recommendations%20to%20address%20the%20current%20400-poll%20worker%20deficit%20and%20offer%20our%20organizational%20resources%20to%20support%20your%20recruitment%20drive.%0A%0A1.%20Authorization%20of%20Flexible%20Split%20Shifts%20(Texas%20Election%20Code%20%C2%A7%2032.072)%0A2.%20Modernization%20of%20the%20Online%20Training%20%26%20Onboarding%20Portal%0A3.%20Expanded%20Student%20Clerk%20Partnerships%20(TX%20Election%20Code%20%C2%A7%2032.0511)%0A4.%20Transparent%20Stipend%20Payment%20Schedules%0A%0AWe%20welcome%20the%20opportunity%20to%20partner%20with%20your%20department%20to%20fill%20the%20400-worker%20shortage.%0A%0ARespectfully%2D%0AHidalgo%20County%20Democratic%20Party" class="btn btn-secondary" style="padding: 0.8rem 1.5rem;">
+            ✉️ Open in Email Client (mailto)
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Script for One-Click Copy -->
+    <script>
+      function copyAdminEmail() {
+        const text = document.getElementById('email-body-text').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          const icon = document.getElementById('copy-btn-icon');
+          const btnText = document.getElementById('copy-btn-text');
+          icon.innerText = '✓';
+          btnText.innerText = 'Email Copied!';
+          setTimeout(() => {
+            icon.innerText = '📋';
+            btnText.innerText = 'Copy Email Text';
+          }, 2500);
+        });
+      }
+    </script>
+  </main>
+
+  <!-- Footer -->
+  <footer class="tx-clone-footer" style="background-color: #090d16; border-top: 1px solid rgba(255,255,255,0.1); padding: 3rem 1.5rem; text-align: center; color: #94a3b8; font-size: 0.9rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p style="margin-bottom: 0.5rem; color: #cbd5e1; font-weight: 600;">Pol. Ad. Paid for by the Hidalgo County Democratic Party</p>
+      <p style="margin-bottom: 1rem; font-size: 0.85rem;">814 Del Oro Ln, Pharr, TX 78577 • Phone: (956) 212-0476 • Email: info@hidalgocountydems.org</p>
+      <p style="font-size: 0.8rem; color: #64748b;">© 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

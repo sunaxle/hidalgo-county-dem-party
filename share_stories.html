@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidalgo County Democrats - Share Our Stories</title>
+  <meta name="description" content="A platform for South Texans to share their real, lived experiences regarding the issues that matter most: Cost of Living, Immigration, Economy, Abortion, and Jobs/AI.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .story-hero {
+      padding-top: 8rem;
+      padding-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+    
+    .story-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .story-hero p {
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .issue-filter {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem 0;
+    }
+
+    /* Base Filter Button */
+    .filter-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 0.8rem 1.5rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    /* Active State per Issue Theme */
+    .filter-btn.active-all {
+      background: var(--accent);
+      color: var(--bg-dark);
+      border-color: var(--accent);
+    }
+    .filter-btn.active-living {
+      background: #10b981; /* Green */
+      color: #fff;
+      border-color: #10b981;
+    }
+    .filter-btn.active-immigration {
+      background: #f59e0b; /* Amber */
+      color: #fff;
+      border-color: #f59e0b;
+    }
+    .filter-btn.active-economy {
+      background: #3b82f6; /* Blue */
+      color: #fff;
+      border-color: #3b82f6;
+    }
+    .filter-btn.active-abortion {
+      background: #e11d48; /* Red/Rose */
+      color: #fff;
+      border-color: #e11d48;
+    }
+    .filter-btn.active-ai {
+      background: #8b5cf6; /* Purple */
+      color: #fff;
+      border-color: #8b5cf6;
+    }
+
+    .story-masonry {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .story-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Thematic Top Border based on Issue */
+    .theme-border-living { border-top: 4px solid #10b981; }
+    .theme-border-immigration { border-top: 4px solid #f59e0b; }
+    .theme-border-economy { border-top: 4px solid #3b82f6; }
+    .theme-border-abortion { border-top: 4px solid #e11d48; }
+    .theme-border-ai { border-top: 4px solid #8b5cf6; }
+
+    .story-badge {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .badge-living { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.5); }
+    .badge-immigration { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border: 1px solid rgba(245, 158, 11, 0.5); }
+    .badge-economy { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.5); }
+    .badge-abortion { background: rgba(225, 29, 72, 0.2); color: #fda4af; border: 1px solid rgba(225, 29, 72, 0.5); }
+    .badge-ai { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); }
+
+    .story-content {
+      color: #f8fafc;
+      font-size: 1rem;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .story-content::before {
+      content: '"';
+      font-size: 2rem;
+      color: var(--text-muted);
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    .story-author {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .story-author::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--text-muted);
+    }
+
+    /* Submission Form Container */
+    .story-form-container {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-top: 5rem;
+      box-shadow: 0 10px 40px rgba(34, 211, 238, 0.1);
+    }
+
+    .story-form-container h2 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: inherit;
+      transition: all 0.3s;
+    }
+    
+    .form-control:focus {
+      
+      border-color: var(--accent);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    select.form-control option {
+      background: var(--bg-dark);
+      color: #fff;
+    }
+
+    /* --- Raw Communications Board (Angry Mode) --- */
+    #raw-communications-board {
+      display: none; /* Hidden by Default */
+      margin-top: 2rem;
+    }
+
+    /* Gritty, terminal-style layout */
+    .raw-feed-container {
+      background: #000;
+      border: 2px solid #ef4444; /* Alert Red */
+      border-radius: 8px;
+      padding: 2rem;
+      font-family: 'Courier New', Courier, monospace;
+      color: #fca5a5;
+      box-shadow: inset 0 0 30px rgba(239, 68, 68, 0.2);
+    }
+
+    .raw-message {
+      border-bottom: 1px dashed #ef4444;
+      padding: 1.5rem 0;
+    }
+
+    .raw-message:last-child {
+      border-bottom: none;
+    }
+
+    .raw-tag {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+      padding: 0.2rem 0.5rem;
+      font-weight: bold;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ef4444;
+    }
+
+    .raw-text {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    
+    .raw-meta {
+      font-size: 0.8rem;
+      color: #7f1d1d;
+      margin-top: 0.5rem;
+    }
+
+    /* The Angry Button Toggle */
+    .angry-btn {
+      background: transparent;
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      padding: 0.8rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      margin-left: 2rem;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .angry-btn:hover, .angry-btn.engaged {
+      background: #ef4444;
+      color: #fff;
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.8);
+    }
+
+    /* Utility class injected by JS */
+    body.angry-mode .shape-1, body.angry-mode .shape-2 {
+      background: rgba(239, 68, 68, 0.1) !important; /* Turn background red */
+    }
+
+    /* Hulk Smash Solution Buttons */
+    .hulk-btn {
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid #16a34a; /* Radioactive Green */
+      color: #16a34a;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .hulk-btn:hover {
+      background: #16a34a;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(22, 163, 74, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* Full-Screen Solution Modal */
+    .solution-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .solution-modal-content {
+      background: #000;
+      border: 3px solid #16a34a;
+      border-radius: 12px;
+      padding: 3rem;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 0 40px rgba(22, 163, 74, 0.3);
+      text-align: left;
+      position: relative;
+      animation: modal-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modal-slam {
+      0% { transform: scale(3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .solution-header {
+      color: #16a34a;
+      font-size: 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed #16a34a;
+      padding-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .solution-text {
+      color: #f8fafc;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .close-modal-btn {
+      background: transparent;
+      border: 2px solid #ef4444;
+      color: #ef4444;
+      padding: 0.5rem 1.5rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .close-modal-btn:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+  </style>
+  <script src="js/gatekeeper.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q577ZL75XM');
+</script>
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Hidalgo County Democrats - Share Our Stories">
+  <meta property="og:description" content="A platform for South Texans to share their real, lived experiences regarding the issues that matter most: Cost of Living, Immigration, Economy, Abortion, and Jobs/AI.">
+  <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
+  <meta property="og:type" content="website">
+</head>
+<body class="tx-clone">
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+      <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+      <a href="https://www.facebook.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://instagram.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg></a>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="press.html">Press & Media 📰</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="democratic_directory.html" style="color: #3b82f6; font-weight: 800;">Officials & Candidates</a>
+            <a href="changelog.html" style="color: #34d399; font-weight: 800;">New Features 🚀</a>
+            <a href="archive.html" style="color: #94a3b8; font-weight: 600;">Archive 🗄️</a>
+          </div>
+        </div>
+
+                <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
+            <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
+            <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
+            <a href="vote.html">Voter Resources</a>
+            
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-top: 0.5rem; margin-bottom: 0.25rem;">For Organizers</div>
+            <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Precinct Toolkit 🧰</a>
+            <a href="van_support.html" style="color: #38bdf8; font-weight: 600;">VAN Support 💻</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+            </div>
+        </div>
+
+                <div class="nav-item dropdown">
+          <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
+          <div class="dropdown-content">
+            <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
+            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
+            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="share_stories.html" style="color: #ef4444; font-weight: 800;">Share Your Story 📢</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="community_intake.html">Community Inbox</a>
+            <a href="civics.html" style="color: #fcd34d; font-weight: 800;">Civics 📚</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="join.html" style="color: #fca5a5; font-weight: 800;">Join the Party 🤝</a>
+            <a href="leave_a_voicemail.html">Leave a Voicemail</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank" rel="noopener noreferrer">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Title Header -->
+  <header class="story-hero container fade-in">
+    <h1>Share Our <span style="color: var(--accent);">Stories.</span></h1>
+    <p>
+      Politics isn't just theory—it's profoundly personal. This board exists to amplify the real, lived experiences of South Texans regarding the five critical issues defining our community today.
+    </p>
+
+    <!-- Filter Buttons (visual only for now) -->
+    <div class="issue-filter">
+      <button class="filter-btn active-all">👁️ View All</button>
+      <button class="filter-btn">🛒 Cost of Living</button>
+      <button class="filter-btn">🛂 Immigration</button>
+      <button class="filter-btn">📈 Economy</button>
+      <button class="filter-btn">🩺 Healthcare & Abortion</button>
+      <button class="filter-btn">🤖 Jobs & A.I.</button>
+      <button class="angry-btn" id="angryToggleBtn">😡 The Angry Button</button>
+    </div>
+  </header>
+
+  <!-- Main Content Section -->
+  <section class="container fade-in" style="padding-bottom: 5rem;">
+    
+    <div class="story-masonry">
+      
+      <!-- Cost of Living Story -->
+      <article class="story-card theme-border-living">
+        <span class="story-badge badge-living">Cost of Living</span>
+        <p class="story-content">
+          My property taxes in McAllen have skyrocketed over the last three years while my salary as a teacher has remained perfectly stagnant. We shouldn't be priced out of the neighborhoods we grew up in just to subsidize corporate tax breaks.
+        </p>
+        <span class="story-author">Maria R., Educator</span>
+      </article>
+
+      <!-- Immigration Story -->
+      <article class="story-card theme-border-immigration">
+        <span class="story-badge badge-immigration">Immigration</span>
+        <p class="story-content">
+          Using our border as a political prop in Austin hurts our local economy and degrades our binational culture. We need comprehensive reform that respects the dignity of families, stops the theater of deploying state troopers for photo-ops, and focuses on real, systemic solutions.
+        </p>
+        <span class="story-author">Javier M., Small Business Owner</span>
+      </article>
+
+      <!-- Healthcare / Abortion Story -->
+      <article class="story-card theme-border-abortion">
+        <span class="story-badge badge-abortion">Healthcare & Abortion</span>
+        <p class="story-content">
+          The sweeping bans passed by extremists in the state legislature are actively endangering women in Hidalgo County. My sister had to travel out of state for an emergency procedure to save her life. Medical decisions belong between a patient and their doctor—period.
+        </p>
+        <span class="story-author">Anonymous, Pharr</span>
+      </article>
+
+      <!-- Economy Story -->
+      <article class="story-card theme-border-economy">
+        <span class="story-badge badge-economy">Economy</span>
+        <p class="story-content">
+          Working a fast-food job used to be a stepping stone, now it's necessary for families to survive. We need to raise the minimum wage. Nobody working a full forty hours a week in South Texas should be living below the poverty line.
+        </p>
+        <span class="story-author">Carlos D., Student Worker</span>
+      </article>
+
+      <!-- Jobs & AI Story -->
+      <article class="story-card theme-border-ai">
+        <span class="story-badge badge-ai">Jobs & A.I.</span>
+        <p class="story-content">
+          As a freelance graphic designer, I am seeing entire local contracts get handed over to automated generation models. We need our representatives to start building frameworks that protect human labor and intellectual property before local artists and creatives are entirely displaced.
+        </p>
+        <span class="story-author">Elena T., Creative Professional</span>
+      </article>
+
+      <!-- Another Cost of Living Story -->
+      <article class="story-card theme-border-living">
+        <span class="story-badge badge-living">Cost of Living</span>
+        <p class="story-content">
+          The price of groceries at HEB compared to 2019 is frankly terrifying. I'm a single mother of two and trying to stretch my budget has become a daily nightmare. We need leadership that focuses on corporate price gouging instead of culture wars.
+        </p>
+        <span class="story-author">Sandra L., Edinburg</span>
+      </article>
+
+    </div>
+
+    <!-- Raw Communications Feed (Hidden by Default) -->
+    <div id="raw-communications-board">
+      <div class="raw-feed-container fade-in">
+        <h2 style="color: #ef4444; border-bottom: 2px solid #ef4444; padding-bottom: 0.5rem; margin-bottom: 1rem; font-family: sans-serif;">RAW COMMUNITY FEED // UNFILTERED</h2>
+        
+        <div class="raw-message">
+          <span class="raw-tag">Wealth Gap & Monopolies</span>
+          <p class="raw-text">"Information about how the wealth gap affects us. Statistics about the wealth gap and comparisons to the realities for working class people who rely on government employment... How to fight to change by emphasizing the Power of the People despite the power of the few who monopolize everything so as to shut us and democracy out... the billionaire, bottomless pits of greed must be reigned in. They own us."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_01 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Wealth Gap Protocol" data-solution="PROPOSED SOLUTION: Immediately tax billionaire unrealized gains, expand federal union protections for all workers (including gig economies), and aggressively overturn Citizens United to strip monopolistic corporate money out of local elections. Let the people govern.">HULK SMASH // VIEW SOLUTION</button>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Veterans Services</span>
+          <p class="raw-text">"Service to Vets having been cut... realities for working class people who rely on government employment (which DOGE has diminished)..."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_02 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Veterans Protection Directive" data-solution="PROPOSED SOLUTION: Block all attempts at VA privatization, reinstate and expand funding for federal workforce housing, and aggressively counter DOGE budget cuts that target essential services for working-class veterans and their families.">HULK SMASH // VIEW SOLUTION</button>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Housing Crisis</span>
+          <p class="raw-text">"Renters' and homeowners' challenges. Housing. Average people with extraordinary challenges need representation..."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_03 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Housing Intervention Plan" data-solution="PROPOSED SOLUTION: Outlaw corporate hoarding of single-family homes by hedge funds, strictly limit rent-hikes over a set percentage, and aggressively expand first-time homebuyer assistance grants. Housing is a human necessity, not a Wall Street portfolio asset.">HULK SMASH // VIEW SOLUTION</button>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Education Interference</span>
+          <p class="raw-text">"Education being dictated to conform with a white nationalist agenda... This information needs to be front and center every single day coming from Democrats and in Spanish too!"</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_04 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Public Education Defense" data-solution="PROPOSED SOLUTION: Instantly defund all destructive voucher scams draining RGV schools, aggressively increase per-student state funding, and ban political extremists from dictating historical truth and curriculums in community classrooms.">HULK SMASH // VIEW SOLUTION</button>
+        </div>
+
+        <div class="raw-message">
+          <span class="raw-tag">Voter Suppression (SAVE Act)</span>
+          <p class="raw-text">"The SAVE act is evil. Period. And so transparently so. I don't do fb, but I looked at the feed. I don't use fb because I don't support billionaire 'business'. Closed fb acct a year after fb was born bc I could see it appeals to vanity & is a trap."</p>
+          <div class="raw-meta">SYS_LOG: VOLUNTEER_SUBMISSION_05 // HIGH URGENCY</div>
+          <button class="hulk-btn" data-title="Voting Rights Enforcement" data-solution="PROPOSED SOLUTION: Violently oppose the SAVE Act's transparent suppression efforts. Demand immediate passage of the John Lewis Voting Rights Advancement Act and federally mandate expanded early voting locations across all Hidalgo County precincts.">HULK SMASH // VIEW SOLUTION</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Submit Form -->
+    <div class="story-form-container fade-in" id="submission-form-box">
+      <h2>Add Your Voice to the Board</h2>
+      <p style="color: var(--text-muted); text-align: center; margin-bottom: 2rem;">
+        Your story validates others. Select a critical issue and share your perspective below. Information is verified before posting to ensure a safe, constructive platform.
+      </p>
+      
+      <form id="shareStoryForm" style="max-width: 600px; margin: 0 auto;">
+        
+        <div class="form-group">
+          <label class="form-label" for="storyName">Name or Initials (Optional)</label>
+          <input type="text" id="storyName" class="form-control" placeholder="e.g. John D. or Anonymous">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="storyIssue">Select the Critical Issue</label>
+          <select id="storyIssue" class="form-control" required>
+            <option value="" disabled selected>-- Choose an Issue --</option>
+            <option value="living">Cost of Living</option>
+            <option value="immigration">Immigration & the Border</option>
+            <option value="economy">Economy & Wages</option>
+            <option value="abortion">Healthcare & Abortion</option>
+            <option value="ai">Jobs & Artificial Intelligence</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="storyText">Your Story</label>
+          <textarea id="storyText" class="form-control" rows="5" placeholder="Share your experience..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">Submit Story</button>
+
+      </form>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 212-0476</p>
+      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
+      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    <div style="margin-top: 0.5rem;"><a href="precinct_toolkit.html" style="color: #64748b; text-decoration: none; font-size: 0.85rem;">🔒 Chair Toolkit</a></div>
+    <div style="margin-top: 0.5rem;"><a href="admin.html" style="color: #3b82f6; text-decoration: none; font-size: 0.85rem;">🌻 Portal</a></div>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
+
+  <!-- Hulk Smash Solution Modal -->
+  <div id="solutionModal" class="solution-modal">
+    <div class="solution-modal-content">
+      <div id="modalTitle" class="solution-header">POLICY RESOLUTION</div>
+      <p id="modalSolution" class="solution-text">Solution text injects here.</p>
+      <button class="close-modal-btn" id="closeModalBtn">Dismiss</button>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script type="module" src="js/share_stories.js"></script>
+  
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <!-- Angry Button Toggle Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const angryBtn = document.getElementById('angryToggleBtn');
+      const masonryGrid = document.querySelector('.story-masonry');
+      const submitBox = document.getElementById('submission-form-box');
+      const rawBoard = document.getElementById('raw-communications-board');
+      
+      let isAngryMode = false;
+
+      angryBtn.addEventListener('click', () => {
+        isAngryMode = !isAngryMode;
+
+        if (isAngryMode) {
+          // Engage Angry Mode
+          angryBtn.classList.add('engaged');
+          angryBtn.innerText = "🛑 Return to Normal";
+          document.body.classList.add('angry-mode');
+          
+          masonryGrid.style.display = 'none';
+          submitBox.style.display = 'none';
+          rawBoard.style.display = 'block';
+
+        } else {
+          // Revert to Normal Mode
+          angryBtn.classList.remove('engaged');
+          angryBtn.innerText = "😡 The Angry Button";
+          document.body.classList.remove('angry-mode');
+          
+          masonryGrid.style.display = 'grid';
+          submitBox.style.display = 'block';
+          rawBoard.style.display = 'none';
+        }
+      });
+
+      // --- Hulk Smash Modal Logic ---
+      const solutionModal = document.getElementById('solutionModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalSolution = document.getElementById('modalSolution');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const hulkBtns = document.querySelectorAll('.hulk-btn');
+
+      // Open Modal on Smash
+      hulkBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          modalTitle.innerText = `[ ${btn.getAttribute('data-title')} ]`;
+          modalSolution.innerText = btn.getAttribute('data-solution');
+          solutionModal.style.display = 'flex';
+        });
+      });
+
+      // Close Modal logic
+      closeModalBtn.addEventListener('click', () => {
+        solutionModal.style.display = 'none';
+      });
+
+      // Close Modal if clicked outside the content box
+      solutionModal.addEventListener('click', (e) => {
+        if (e.target === solutionModal) {
+          solutionModal.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
+  <script src="js/a11y.js"></script>
+</body>
+</html>

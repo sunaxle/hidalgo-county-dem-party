@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voter Priorities Check - HCDP</title>
+  <meta name="description" content="Help us understand what matters most to you in Hidalgo County.">
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+    
+    .quiz-container {
+      max-width: 800px;
+      margin: 120px auto 40px;
+      padding: 0 20px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .quiz-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      backdrop-filter: blur(12px);
+      text-align: center;
+      position: absolute;
+      width: calc(100% - 40px);
+      top: 100px;
+      opacity: 0;
+      transform: translateX(50px);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    
+    .quiz-card.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
+      top: 0;
+    }
+    
+    .quiz-card.completed {
+      opacity: 0;
+      transform: translateX(-50px);
+      pointer-events: none;
+      position: absolute;
+    }
+    
+    .question-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.3;
+    }
+    
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    @media (min-width: 600px) {
+      .options-grid.two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .quiz-option {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.25rem;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .quiz-option:hover, .quiz-option:focus-visible {
+      background: rgba(34, 211, 238, 0.1);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    
+    .quiz-option.selected {
+      background: var(--accent);
+      color: #0f172a;
+      border-color: var(--accent);
+    }
+    
+    .option-icon {
+      font-size: 1.5rem;
+    }
+    
+    .text-input-wrapper {
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .quiz-input {
+      width: 100%;
+      padding: 1.25rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.2rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    
+    .quiz-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .next-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+    .next-btn.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .next-btn:hover {
+      background: var(--primary-hover);
+      transform: scale(1.05);
+    }
+    
+    /* Reward State */
+    .reward-card {
+      text-align: center;
+    }
+    .reward-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav Placeholder -->
+  <div id="nav-placeholder"></div>
+
+  <div class="quiz-container">
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="quiz-card active" id="card-1">
+      <h2 class="question-title">Which Hidalgo County issue impacts you the most?</h2>
+      <div class="options-grid two-col" role="radiogroup">
+        <button class="quiz-option" data-value="infrastructure" onclick="selectOption(this, 1)">
+          <span class="option-icon">🚧</span> Infrastructure & Drainage
+        </button>
+        <button class="quiz-option" data-value="healthcare" onclick="selectOption(this, 1)">
+          <span class="option-icon">🏥</span> Healthcare Access
+        </button>
+        <button class="quiz-option" data-value="education" onclick="selectOption(this, 1)">
+          <span class="option-icon">📚</span> Public Education Funding
+        </button>
+        <button class="quiz-option" data-value="economy" onclick="selectOption(this, 1)">
+          <span class="option-icon">💼</span> Jobs & Wages
+        </button>
+      </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="quiz-card" id="card-2">
+      <h2 class="question-title">How do you prefer to stay updated?</h2>
+      <div class="options-grid" role="radiogroup">
+        <button class="quiz-option" data-value="text" onclick="selectOption(this, 2)">
+          <span class="option-icon">📱</span> Quick Text Updates
+        </button>
+        <button class="quiz-option" data-value="email" onclick="selectOption(this, 2)">
+          <span class="option-icon">📧</span> Detailed Weekly Emails
+        </button>
+        <button class="quiz-option" data-value="social" onclick="selectOption(this, 2)">
+          <span class="option-icon">🌐</span> Social Media
+        </button>
+      </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="quiz-card" id="card-3">
+      <h2 class="question-title">What's the best email to send your customized voter guide to?</h2>
+      <div class="text-input-wrapper">
+        <input type="email" class="quiz-input" id="userEmail" placeholder="you@example.com" oninput="checkInput(this, 3)">
+      </div>
+      <button class="next-btn" id="btn-3" onclick="submitQuiz()">Send My Guide</button>
+    </div>
+
+    <!-- Completion / Reward -->
+    <div class="quiz-card reward-card" id="card-4">
+      <div class="reward-icon">🎉</div>
+      <h2 class="question-title">You're All Set!</h2>
+      <p style="font-size: 1.2rem; color: #94a3b8; margin-bottom: 2rem;">
+        Your customized guide focusing on <strong id="dynamic-issue" style="color: var(--accent);">your top issue</strong> is being generated.
+      </p>
+      <div style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); padding: 1.5rem; border-radius: 12px; color: #86efac; max-width: 400px; margin: 0 auto;">
+        <strong>Bonus Unlocked:</strong> You've earned the "Active Citizen" digital badge for your community profile!
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Load standard navbar
+    fetch('nav_fragment.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('nav-placeholder').innerHTML = data;
+      })
+      .catch(e => console.log('Navigation fetch omitted for mockup'));
+
+    let currentStep = 1;
+    const totalSteps = 3;
+    const userResponses = {};
+
+    function updateProgress() {
+      const percentage = ((currentStep - 1) / totalSteps) * 100;
+      document.getElementById('progressBar').style.width = `${percentage}%`;
+    }
+
+    function selectOption(button, step) {
+      // Deselect siblings
+      const siblings = button.parentElement.querySelectorAll('.quiz-option');
+      siblings.forEach(sib => sib.classList.remove('selected'));
+      
+      // Select clicked
+      button.classList.add('selected');
+      
+      // Store response
+      userResponses[`step_${step}`] = button.getAttribute('data-value');
+      
+      // Auto-advance after a short delay for single-choice
+      setTimeout(() => {
+        advanceCard(step);
+      }, 400);
+    }
+
+    function checkInput(input, step) {
+      const btn = document.getElementById(`btn-${step}`);
+      // Simple email validation
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+      if (isValid) {
+        btn.classList.add('active');
+        userResponses[`step_${step}`] = input.value;
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+
+    function advanceCard(current) {
+      document.getElementById(`card-${current}`).classList.remove('active');
+      document.getElementById(`card-${current}`).classList.add('completed');
+      
+      currentStep++;
+      
+      if(currentStep <= totalSteps) {
+        document.getElementById(`card-${currentStep}`).classList.add('active');
+      }
+      updateProgress();
+    }
+
+    function submitQuiz() {
+      // In a real app, send userResponses to Data Warehouse/API here
+      console.log('Zero-Party Data Collected:', userResponses);
+      
+      // Update dynamic text
+      const issueMap = {
+        'infrastructure': 'Infrastructure & Drainage',
+        'healthcare': 'Healthcare Access',
+        'education': 'Public Education Funding',
+        'economy': 'Jobs & Wages'
+      };
+      const selectedIssue = issueMap[userResponses['step_1']] || 'Local Issues';
+      document.getElementById('dynamic-issue').innerText = selectedIssue;
+      
+      // Show completion
+      document.getElementById(`card-3`).classList.remove('active');
+      document.getElementById(`card-3`).classList.add('completed');
+      document.getElementById(`card-4`).classList.add('active');
+      
+      // Full progress
+      document.getElementById('progressBar').style.width = '100%';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <meta name="description" content="Local Hidalgo County politics, news, and updates. Stay informed on property taxes, school funding, and democratic initiatives.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News & Archives | Hidalgo Democrats</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <style>
+    .news-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      padding: 6rem 2rem 3rem 2rem;
+      text-align: center;
+      color: white;
+    }
+    .news-header h1 {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 3.5rem;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+    }
+    .disclaimer-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 2rem auto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .news-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      display: grid;
+      gap: 3rem;
+    }
+    .article-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border-top: 4px solid #38bdf8;
+    }
+    .article-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: #0f172a;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .article-meta {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .article-content {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #334155;
+    }
+    .article-content h2, .article-content h3 {
+      color: #0f172a;
+      margin-top: 2rem;
+    }
+    .skeleton {
+      animation: pulse 1.5s infinite ease-in-out;
+      background: #e2e8f0;
+      border-radius: 4px;
+      height: 20px;
+      margin-bottom: 10px;
+    }
+    @keyframes pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body class="tx-clone">
+
+  <nav class="tx-clone-nav">
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        <a href="news.html" class="nav-item active">News & Archives</a>
+        <a href="join.html" class="nav-item">Join the Party</a>
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <header class="news-header">
+    <h1>Digital Archives & News</h1>
+    <p style="font-size: 1.2rem; color: #cbd5e1;">Stay up to date with the latest issues impacting the Rio Grande Valley.</p>
+    
+    <div class="disclaimer-box">
+      <strong>⚠️ Disclaimer:</strong> This content is generated via automated processes for organic digital archiving and traffic flow. It does not necessarily represent the official platform, endorsed opinions, or direct communications of the Hidalgo County Democratic Party.
+    </div>
+  </header>
+
+  <section class="news-container" id="newsFeed">
+    <!-- Skeleton Loading State -->
+    <div class="article-card" id="loadingState">
+      <div class="skeleton" style="width: 80%; height: 35px; margin-bottom: 20px;"></div>
+      <div class="skeleton" style="width: 30%; height: 15px; margin-bottom: 40px;"></div>
+      <div class="skeleton" style="width: 100%;"></div>
+      <div class="skeleton" style="width: 100%;"></div>
+      <div class="skeleton" style="width: 90%;"></div>
+      <div class="skeleton" style="width: 95%;"></div>
+    </div>
+  </section>
+
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 212-0476</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script type="module" src="js/news.js"></script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Poll Worker - Hidalgo County Democratic Party</title>
+  <meta name="description" content="Apply to become a Poll Worker for the November 3, 2026 General Election in Hidalgo County. Earn up to $19/hr as an Election Judge, Alternate Judge, or Clerk.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;700;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/state_party_clone.css">
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q577ZL75XM');
+  </script>
+
+  <style>
+    :root {
+      --pw-bg: #0b1329;
+      --pw-card-bg: rgba(30, 41, 59, 0.75);
+      --pw-accent: #38bdf8;
+      --pw-red: #ef4444;
+      --pw-gold: #fcd34d;
+      --pw-border: rgba(255, 255, 255, 0.12);
+    }
+
+    body.pw-page {
+      background-color: var(--pw-bg);
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    .pw-hero {
+      background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 50%, #0b1329 100%);
+      padding: 140px 1.5rem 3.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      border-bottom: 3px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .pw-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      color: #ffffff;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .pw-hero p {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      line-height: 1.6;
+    }
+
+    .pw-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem 1.5rem;
+    }
+
+    /* Main Grid Layout */
+    .pw-main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 992px) {
+      .pw-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Flyer Image Display */
+    .flyer-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid rgba(56, 189, 248, 0.4);
+      border-radius: 18px;
+      padding: 1rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flyer-box img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+
+    /* Pay Rate & Info Cards */
+    .info-card {
+      background: var(--pw-card-bg);
+      border: 1px solid var(--pw-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin-bottom: 1.75rem;
+    }
+
+    .info-card h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Pay Rate Badges */
+    .pay-rate-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .pay-role {
+      font-weight: 700;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+    }
+
+    .pay-amount {
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--pw-gold);
+    }
+
+    /* Requirement List */
+    .req-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .req-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .req-icon {
+      color: #34d399;
+      font-weight: 800;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* Action Buttons */
+    .pw-btn-primary {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+      color: #ffffff;
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 1.25rem;
+      padding: 1.1rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .pw-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(239, 68, 68, 0.6);
+    }
+
+    .pw-btn-secondary {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--pw-accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .pw-btn-secondary:hover {
+      background: var(--pw-accent);
+      color: #0b1329;
+    }
+
+    /* FAQ Section */
+    .faq-item {
+      background: var(--pw-card-bg);
+      border: 1px solid var(--pw-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-answer {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body class="tx-clone pw-page">
+
+  <!-- Main Navigation Header -->
+  <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+      <a href="https://www.facebook.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://instagram.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg></a>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="press.html">Press & Media 📰</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="democratic_directory.html" style="color: #3b82f6; font-weight: 800;">Officials & Candidates</a>
+            <a href="changelog.html" style="color: #34d399; font-weight: 800;">New Features 🚀</a>
+            <a href="archive.html" style="color: #94a3b8; font-weight: 600;">Archive 🗄️</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
+            <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
+            <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
+            <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
+            <a href="vote.html">Voter Resources</a>
+            
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-top: 0.5rem; margin-bottom: 0.25rem;">For Organizers</div>
+            <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Precinct Toolkit 🧰</a>
+            <a href="van_support.html" style="color: #38bdf8; font-weight: 600;">VAN Support 💻</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
+          <div class="dropdown-content">
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
+            <a href="cec_history.html" style="color: #a855f7; font-weight: 800;">CEC Meeting History 📜</a>
+            <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
+            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
+            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="share_stories.html" style="color: #ef4444; font-weight: 800;">Share Your Story 📢</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="community_intake.html">Community Inbox</a>
+            <a href="civics.html" style="color: #fcd34d; font-weight: 800;">Civics 📚</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="join.html" style="color: #fca5a5; font-weight: 800;">Join the Party 🤝</a>
+            <a href="leave_a_voicemail.html">Leave a Voicemail</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank" rel="noopener noreferrer">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Header -->
+  <section class="pw-hero">
+    <div style="display: inline-block; padding: 0.35rem 1rem; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); border-radius: 20px; color: #f87171; font-weight: 800; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem;">
+      🚨 400 Applicants Short • November 3, 2026 Election
+    </div>
+    <h1>Become a Poll Worker</h1>
+    <p>
+      The Hidalgo County Elections Department is accepting applications for poll workers to serve in the upcoming November 3, 2026 General Election. Earn competitive hourly pay, protect democracy, and support your local community!
+    </p>
+
+    <!-- Live Counter Widget -->
+    <div style="max-width: 600px; margin: 0 auto; background: rgba(15, 23, 42, 0.8); border: 2px solid #ef4444; border-radius: 16px; padding: 1.25rem 2rem; backdrop-filter: blur(10px); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.2);">
+      <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #cbd5e1; font-weight: 700;">Remaining Applicants Needed Goal</div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin: 0.3rem 0;">
+        <span id="pw-page-counter" style="font-size: 3.2rem; font-family: 'Alfa Slab One', cursive; color: #38bdf8; text-shadow: 0 0 15px rgba(56,189,248,0.5);">400</span>
+        <span style="font-size: 1.2rem; font-weight: 800; color: #ef4444;">REMAINING</span>
+      </div>
+      <div style="font-size: 0.8rem; color: #94a3b8;">Target: 900 Total Applicants Needed for Full Coverage</div>
+    </div>
+
+    <!-- Reform Report Advocacy Callout -->
+    <div style="margin-top: 1.5rem;">
+      <a href="poll_worker_reform.html" style="display: inline-flex; align-items: center; gap: 0.6rem; background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; padding: 0.6rem 1.4rem; border-radius: 30px; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(252, 211, 77, 0.25)'" onmouseout="this.style.background='rgba(252, 211, 77, 0.15)'">
+        <span>📜 READ OUR POLICY REPORT:</span> Split Shifts (4-hr/6-hr/8-hr), Training Portal Reform & Administrator Demands ➔
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content Grid -->
+  <main class="pw-container">
+    <div class="pw-main-grid">
+      
+      <!-- Column 1: Full Official Flyer Display -->
+      <div>
+        <div class="flyer-box">
+          <a href="https://www.hidalgocounty.us/105/Elections-Department#docaccess-5cfbc2b9cb9e64c2c864cf74d629c5be" target="_blank" rel="noopener noreferrer" onclick="trackPollWorkerClick()">
+            <img src="images/become_a_poll_worker_flyer.jpg" alt="Become a Poll Worker Official Flyer - Hidalgo County Elections Department">
+          </a>
+        </div>
+        <div style="text-align: center; margin-top: 1rem; color: #94a3b8; font-size: 0.88rem;">
+          🔍 Click flyer above to view official Hidalgo County portal
+        </div>
+      </div>
+
+      <!-- Column 2: Details, Rates, Requirements & Direct Action Buttons -->
+      <div>
+        
+        <!-- Pay Rates Card -->
+        <div class="info-card">
+          <h3>💵 New Hourly Pay Rate Increase</h3>
+          <div class="pay-rate-item">
+            <span class="pay-role">Election Judge</span>
+            <span class="pay-amount">$19.00 / hr</span>
+          </div>
+          <div class="pay-rate-item">
+            <span class="pay-role">Alternate Election Judge</span>
+            <span class="pay-amount">$17.00 / hr</span>
+          </div>
+          <div class="pay-rate-item">
+            <span class="pay-role">Election Clerk</span>
+            <span class="pay-amount">$15.00 / hr</span>
+          </div>
+        </div>
+
+        <!-- Requirements Card -->
+        <div class="info-card">
+          <h3>📋 Eligibility & Work Requirements</h3>
+          <ul class="req-list">
+            <li>
+              <span class="req-icon">✓</span>
+              <span><strong>Must be a registered voter</strong> of Hidalgo County, Texas.</span>
+            </li>
+            <li>
+              <span class="req-icon">✓</span>
+              <span><strong>Poll Worker Training Required</strong> (Paid training provided prior to Election Day).</span>
+            </li>
+            <li>
+              <span class="req-icon">✓</span>
+              <span><strong>Must work on Election Day</strong>: November 3, 2026 from <strong>5:45 a.m. to 9:00 p.m.</strong></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Apply Call to Action Card -->
+        <div class="info-card" style="border-color: var(--pw-accent);">
+          <h3>📝 How to Submit Your Application</h3>
+          <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5;">
+            Ready to become an Election Hero? You can apply directly online through the county portal or email your completed application.
+          </p>
+
+          <a href="https://www.hidalgocounty.us/105/Elections-Department#docaccess-5cfbc2b9cb9e64c2c864cf74d629c5be" target="_blank" rel="noopener noreferrer" class="pw-btn-primary" onclick="trackPollWorkerClick()">
+            APPLY ONLINE NOW ➔
+          </a>
+
+          <a href="mailto:elections@co.hidalgo.tx.us" class="pw-btn-secondary" style="margin-bottom: 0.75rem;">
+            ✉️ Email Application to elections@co.hidalgo.tx.us
+          </a>
+
+          <div style="text-align: center; margin-top: 1rem; color: #94a3b8; font-size: 0.88rem;">
+            📞 Questions? Call Hidalgo County Elections Office: <strong style="color: #fff;">(956) 318-2570</strong>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Frequently Asked Questions (FAQ) Section -->
+    <h2 style="font-size: 1.8rem; font-weight: 800; color: #ffffff; margin-bottom: 1.5rem; text-align: center;">
+      ❓ Frequently Asked Questions
+    </h2>
+
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="faq-item">
+        <div class="faq-question">Q: Do poll workers get paid for attending mandatory training?</div>
+        <div class="faq-answer">
+          Yes! The Hidalgo County Elections Department pays poll workers for attending required training sessions prior to Election Day.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Q: What is the difference between an Election Judge and an Election Clerk?</div>
+        <div class="faq-answer">
+          Election Judges supervise the polling place, ensure compliance with Texas Election Code, and oversee ballot security. Election Clerks assist voters with check-in, verify voter IDs, and issue ballots.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Q: What if I am not currently registered to vote in Hidalgo County?</div>
+        <div class="faq-answer">
+          You must be a registered voter to serve as a poll worker. You can check your registration status or register to vote through our <a href="vote.html" style="color: #38bdf8; text-decoration: underline;">Voter Resources Page</a> before applying.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Q: Can high school students serve as poll workers?</div>
+        <div class="faq-answer">
+          Yes! Eligible high school students aged 16 or older who meet student election clerk criteria can apply with school and parental permission.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="tx-clone-footer" style="background-color: #090d16; border-top: 1px solid rgba(255,255,255,0.1); padding: 3rem 1.5rem; text-align: center; color: #94a3b8; font-size: 0.9rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <p style="margin-bottom: 0.5rem; color: #cbd5e1; font-weight: 600;">Pol. Ad. Paid for by the Hidalgo County Democratic Party</p>
+      <p style="margin-bottom: 1rem; font-size: 0.85rem;">814 Del Oro Ln, Pharr, TX 78577 • Phone: (956) 212-0476 • Email: info@hidalgocountydems.org</p>
+      <p style="font-size: 0.8rem; color: #64748b;">© 2026 Hidalgo County Democratic Party. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Counter Script -->
+  <script>
+    function trackPollWorkerClick() {
+      const currentClicks = localStorage.getItem('hcdp_pollworker_click_count') ? parseInt(localStorage.getItem('hcdp_pollworker_click_count'), 10) : 0;
+      localStorage.setItem('hcdp_pollworker_click_count', currentClicks + 1);
+      updatePageCounter();
+    }
+
+    function updatePageCounter() {
+      const storedClicks = localStorage.getItem('hcdp_pollworker_click_count');
+      const clicks = storedClicks ? parseInt(storedClicks, 10) : 0;
+      const remaining = Math.max(0, 400 - clicks);
+      const el = document.getElementById('pw-page-counter');
+      if (el) el.innerText = remaining;
+    }
+
+    document.addEventListener('DOMContentLoaded', updatePageCounter);
+  </script>
+
+</body>
+</html>

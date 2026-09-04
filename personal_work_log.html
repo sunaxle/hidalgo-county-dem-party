@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>The Organizer's Ledger | Hidalgo Democrats</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Inter:wght@400;500;600;800&amp;family=Montserrat:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+  <link href="css/state_party_clone.css" rel="stylesheet">
+  <style>
+    :root {
+      --civics-bg: #0f172a;
+      --civics-card-bg: rgba(30, 41, 59, 0.7);
+      --civics-card-border: rgba(255, 255, 255, 0.1);
+      --civics-accent-1: #38bdf8;
+      --civics-accent-2: #818cf8;
+    }
+
+    body.tx-clone {
+      background-color: var(--civics-bg);
+      color: #f8fafc;
+    }
+
+    .civics-hero {
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 58, 138, 0.8));
+      position: relative;
+    }
+
+    .civics-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .civics-hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .civics-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .log-form-container {
+      background: var(--civics-card-bg);
+      border: 1px solid var(--civics-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .category-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .category-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #cbd5e1;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .category-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .active-category {
+      background: white !important;
+      color: var(--civics-bg) !important;
+      border-color: white !important;
+    }
+
+    .task-input {
+      width: 100%;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      min-height: 100px;
+      resize: vertical;
+      margin-bottom: 1.5rem;
+    }
+
+    .task-input:focus {
+      outline: none;
+      border-color: var(--civics-accent-1);
+    }
+
+    .agent-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+
+    .agent-toggle input {
+      width: 1.2rem;
+      height: 1.2rem;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      background: linear-gradient(90deg, var(--civics-accent-1), var(--civics-accent-2));
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+    }
+
+    .stats-container h3 {
+      color: #d8b4fe;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .stats-container .number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      font-family: 'Alfa Slab One', cursive;
+    }
+  </style>
+</head>
+<body class="tx-clone">
+<nav class="tx-clone-nav">
+  <div class="tx-clone-nav-center">
+    <a class="tx-clone-logo" href="home.html">
+      <img alt="HDP Logo" class="tx-clone-logo-img" src="images/facebook_1656248751972_6946810765393131439.webp"/>
+    </a>
+    <div class="tx-clone-nav-links">
+      <a class="nav-item" href="admin.html">← Back to Portal</a>
+    </div>
+  </div>
+</nav>
+<div class="tx-clone-nav-accent-bar"></div>
+
+<header class="civics-hero">
+  <h1>The Organizer's Ledger</h1>
+  <p>Your private, encrypted log of all the hard work, verifications, and orchestrations you do for the party.</p>
+</header>
+
+<main class="civics-container">
+
+  <div class="stats-container">
+    <div>
+      <h3>Estimated Time Saved via Swarm</h3>
+      <p style="color: #cbd5e1; margin-top: 0.5rem; font-size: 0.9rem;">Automated agents handling heavy lifting.</p>
+    </div>
+    <div class="number" id="agent-hours-saved">0.0 hrs</div>
+  </div>
+
+  <div class="log-form-container">
+    <h3 style="margin-top: 0; margin-bottom: 1.5rem; font-family: 'Montserrat', sans-serif; color: white;">Log New Activity</h3>
+    <form id="work-log-form">
+      <div class="category-selector">
+        <button class="category-btn" data-category="📞 Call">📞 Call</button>
+        <button class="category-btn" data-category="✉️ Email">✉️ Email</button>
+        <button class="category-btn" data-category="✅ Verification">✅ Verification</button>
+        <button class="category-btn" data-category="🧠 Agent Operations">🧠 Agent Operations</button>
+        <button class="category-btn active-category" data-category="🤝 Organizing">🤝 Organizing</button>
+      </div>
+
+      <textarea class="task-input" id="task-input" placeholder="What did you just accomplish? (e.g. 'Emailed bank routing details to volunteer')" required></textarea>
+
+      <label class="agent-toggle">
+        <input type="checkbox" id="is-agent-toggle">
+        I orchestrated a sub-agent to do this for me (Counts towards time saved)
+      </label>
+
+      <button type="submit" class="submit-btn">Save to Local Ledger</button>
+    </form>
+  </div>
+
+  <h2 style="font-family: 'Montserrat', sans-serif; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 2rem;">Activity Timeline</h2>
+  
+  <div id="timeline-container">
+    <!-- JS populates this -->
+  </div>
+
+</main>
+
+<script src="js/work_log.js"></script>
+</body>
+</html>

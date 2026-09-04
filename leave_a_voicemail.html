@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/webp" href="images/facebook_1656248751972_6946810765393131439.webp">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Inbox - Hidalgo Dems</title>
+  <meta name="description" content="A public log of anonymous feedback, inquiries, and pain points submitted by the community.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .masonry-grid {
+      column-count: 2;
+      column-gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 768px) {
+      .masonry-grid {
+        column-count: 1;
+      }
+    }
+    .inbox-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      break-inside: avoid;
+      transition: var(--transition);
+      position: relative;
+    }
+    .inbox-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34, 211, 238, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .tag-infrastructure { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .tag-voting { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+    .tag-general { background: rgba(167, 139, 250, 0.15); color: #c084fc; }
+    .tag-healthcare { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    
+    .message-content {
+      font-size: 1.125rem;
+      color: #fff;
+      font-weight: 400;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .message-content::before {
+      content: '"';
+      font-size: 3rem;
+      font-family: serif;
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      opacity: 0.1;
+      color: var(--accent);
+    }
+    .submission-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .admin-response {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(34, 211, 238, 0.05);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .admin-response h4 {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .admin-response p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    
+    /* Digital Voicemail Styles */
+    .voicemail-btn {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(34, 211, 238, 0.4);
+      transition: all 0.3s ease;
+    }
+    .voicemail-btn:hover {
+      transform: scale(1.05);
+      background: #0ea5e9;
+    }
+    @keyframes pulse-red {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); background: #ef4444; }
+      70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); background: #dc2626; }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); background: #ef4444; }
+    }
+    .recording-pulse {
+      animation: pulse-red 1.5s infinite;
+    }
+  </style>
+  <script src="js/gatekeeper.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/state_party_clone.css" />
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q577ZL75XM');
+</script>
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Community Inbox - Hidalgo Dems">
+  <meta property="og:description" content="A public log of anonymous feedback, inquiries, and pain points submitted by the community.">
+  <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
+  <meta property="og:type" content="website">
+</head>
+<body class="tx-clone">
+<!-- Dynamic Background Shapes -->
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+
+  <!-- Navigation -->
+      <nav class="tx-clone-nav">
+    <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
+    <div class="tx-clone-nav-socials">
+      <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+      <a href="https://www.facebook.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      <a href="https://instagram.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg></a>
+    </div>
+    <div class="tx-clone-nav-center">
+      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+        <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
+      </a>
+      <div class="tx-clone-nav-links">
+        <a href="home.html" class="nav-item">Home</a>
+        
+        <div class="nav-item dropdown">
+          <span>About ▼</span>
+          <div class="dropdown-content">
+            <a href="explainer.html" style="color: #38bdf8; font-weight: 800;">Democracy Coded 🧠</a>
+            <a href="about.html">About Us</a>
+            <a href="press.html">Press & Media 📰</a>
+            <a href="bylaws.html">Bylaws</a>
+            <a href="democratic_directory.html" style="color: #3b82f6; font-weight: 800;">Officials & Candidates</a>
+            <a href="changelog.html" style="color: #34d399; font-weight: 800;">New Features 🚀</a>
+            <a href="archive.html" style="color: #94a3b8; font-weight: 600;">Archive 🗄️</a>
+          </div>
+        </div>
+
+                <div class="nav-item dropdown">
+          <span>Action ▼</span>
+          <div class="dropdown-content">
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
+            <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
+            <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
+            <a href="vote.html">Voter Resources</a>
+            
+            <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-top: 0.5rem; margin-bottom: 0.25rem;">For Organizers</div>
+            <a href="chair_onboarding.html" style="color: #fcd34d; font-weight: 800;">Precinct Toolkit 🧰</a>
+            <a href="van_support.html" style="color: #38bdf8; font-weight: 600;">VAN Support 💻</a>
+            <a href="arena_training.html">The Arena</a>
+            <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
+            <a href="precinct_chairs.html">Precinct Chairs</a>
+            </div>
+        </div>
+
+                <div class="nav-item dropdown">
+          <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
+          <div class="dropdown-content">
+            <a href="social_wall.html" style="color: #38bdf8; font-weight: 800;">Social Photo Gallery 📸</a>
+            <a href="caucuses.html" style="color: #60a5fa; font-weight: 800;">Party Caucuses 🤝</a>
+            <a href="events.html" style="color: #fb923c; font-weight: 800;">Events Calendar 📅</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Issues ▼</span>
+          <div class="dropdown-content">
+            <a href="share_stories.html" style="color: #ef4444; font-weight: 800;">Share Your Story 📢</a>
+            <a href="interactive_precincts.html">Live Precinct Issues</a>
+            <a href="community_intake.html">Community Inbox</a>
+            <a href="civics.html" style="color: #fcd34d; font-weight: 800;">Civics 📚</a>
+          </div>
+        </div>
+
+        <div class="nav-item dropdown">
+          <span>Connect ▼</span>
+          <div class="dropdown-content">
+            <a href="join.html" style="color: #fca5a5; font-weight: 800;">Join the Party 🤝</a>
+            <a href="leave_a_voicemail.html">Leave a Voicemail</a>
+            <a href="community_intake.html">Community Notes</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="tx-clone-nav-right">
+      <a href="https://secure.actblue.com/donate/hidalgocountydems" class="tx-clone-btn-donate" target="_blank" rel="noopener noreferrer">DONATE</a>
+    </div>
+  </nav>
+  <div class="tx-clone-nav-accent-bar"></div>
+
+  <!-- Hero Section & Voicemail -->
+  <header class="page-header container fade-in" style="padding-bottom: 2rem;">
+    <div>
+      <h1>Leave a Voicemail</h1>
+      <p style="max-width: 800px; margin: 0 auto 2rem;">Make your voice heard. This party only works when we work together. If you have an issue, a pain point, or an idea, send it our way.</p>
+    </div>
+  </header>
+
+  <section class="container fade-in" style="padding-top: 0; padding-bottom: 4rem;">
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem; max-width: 800px; margin: 0 auto;">
+      <div style="background: rgba(0,0,0,0.2); padding: 2rem; border-radius: 1rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.05);">
+        <h3 style="margin-top: 0; color: #38bdf8; font-size: 1.5rem;">Digital Voicemail 🎤</h3>
+        <p style="font-size: 0.95rem; color: #94a3b8; max-width: 400px; margin: 0 auto 1.5rem;">Don't like typing? Tap the mic to record a voice message for the party chairman. It will be transcribed automatically.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">First Name (Optional)</label>
+            <input type="text" id="vm-first-name" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;" placeholder="Jane">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">Last Name (Optional)</label>
+            <input type="text" id="vm-last-name" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;" placeholder="Doe">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">Phone Number (Optional)</label>
+            <input type="tel" id="vm-phone" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;" placeholder="(956) 555-5555">
+          </div>
+          <div>
+            <label style="display: block; font-size: 0.85rem; color: #cbd5e1; margin-bottom: 0.25rem;">Email (Optional - to get a copy)</label>
+            <input type="email" id="vm-email" class="form-control" style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white;" placeholder="jane@example.com">
+          </div>
+        </div>
+
+        <button id="record-btn" class="voicemail-btn" aria-label="Record Voice Message">
+          <span id="record-icon">🎤</span>
+        </button>
+        <p id="record-status" style="font-weight: 600; font-size: 1.1rem; min-height: 24px;">Tap to record a voice message</p>
+      </div>
+
+      <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Or Submit a Typed Message</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="tx-clone-footer">
+    <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
+    <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
+      <p>info@hidalgocountydems.org</p>
+      <p>(956) 212-0476</p>
+      <p style="margin-top: 1.5rem; color: #38bdf8;">Questions About Voting?<br>Call us at 1-844-TX-VOTES</p>
+      <p style="margin-top: 1.5rem; color: #a3e635;">Send Checks to:<br>Hidalgo County Democratic Party<br>814 Del Oro Ln<br>Pharr, TX 78577</p>
+    </div>
+    <p style="font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.3); display: inline-block; padding: 1.5rem; border-radius: 4px; color: white;">Pol. Adv. paid for by the Hidalgo County Democratic Party. Not authorized by any candidate or candidate's committee.</p>
+    <div style="margin-top: 0.5rem;"><a href="precinct_toolkit.html" style="color: #64748b; text-decoration: none; font-size: 0.85rem;">🔒 Chair Toolkit</a></div>
+    <div style="margin-top: 0.5rem;"><a href="changelog.html" style="color: #38bdf8; text-decoration: none; font-size: 0.85rem;">🚀 Feature Updates</a></div>
+    <div style="margin-top: 0.5rem;"><a href="archive.html" style="color: #94a3b8; text-decoration: none; font-size: 0.85rem;">🗄️ Website Archive</a></div>
+    <div style="margin-top: 0.5rem;"><a href="political_strategy_dashboard.html" style="color: #c084fc; text-decoration: none; font-size: 0.85rem;">🔒 Data Dashboard</a></div>
+    <div style="margin-top: 0.5rem;"><a href="admin.html" style="color: #3b82f6; text-decoration: none; font-size: 0.85rem;">🌻 Portal</a></div>
+    <div style="margin-top: 1.5rem;"><a href="standards.html" style="color: #94a3b8; text-decoration: underline; font-size: 0.85rem;">Platform Disclaimers & Community Standards</a></div>
+  </footer>
+
+  <script src="js/app.js"></script>
+<script src="js/value_counter.js"></script>
+<script type="module" src="js/voicemail.js"></script>
+
+  <!-- Google Translate -->
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es,en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script src="js/a11y.js"></script>
+</body>
+</html>
