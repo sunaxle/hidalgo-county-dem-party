@@ -130,8 +130,29 @@ function initForms() {
           timestamp: serverTimestamp()
         };
 
+        // Forward immediately to party email & romerodeab@gmail.com
+        try {
+          await fetch("https://formsubmit.co/ajax/romerodeab@gmail.com", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+              _subject: `[HCDP Web Submission] ${source} - ${payload.name || payload.firstName || 'New Lead'}`,
+              _cc: "info@hidalgocountydems.org",
+              _template: "table",
+              ...payload,
+              timestamp: new Date().toLocaleString()
+            })
+          });
+        } catch(fsErr) {
+          console.warn("FormSubmit notice:", fsErr);
+        }
+
         // Send to Firebase Firestore
-        await addDoc(collection(db, "form_submissions"), payload);
+        try {
+          await addDoc(collection(db, "form_submissions"), payload);
+        } catch(fbErr) {
+          console.warn("Firestore notice:", fbErr);
+        }
 
         // Trigger Automated Welcome Email via Firebase Extension
         if (payload.email) {

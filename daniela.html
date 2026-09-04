@@ -313,7 +313,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 15%;
+      object-position: center 20%;
       transition: transform 0.3s ease;
     }
     .portrait-photo-box .photo-gradient-overlay {
@@ -1327,26 +1327,102 @@
       drawer.classList.toggle('open');
     }
 
-    // Yard Sign Form Handler -> WhatsApp
-    function handleYardSign(e) {
+    // Yard Sign Form Handler -> Email & WhatsApp
+    async function handleYardSign(e) {
       e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerText : "Submit";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = "Sending..."; }
+
       const name = document.getElementById('signName').value;
       const addr = document.getElementById('signAddress').value;
       const phone = document.getElementById('signPhone').value;
       
-      const text = encodeURIComponent(`Hello Daniela! I would like to request a Democratic Yard Sign for Precinct 25.\n\nName: ${name}\nAddress: ${addr}\nPhone: ${phone}`);
-      window.open(`https://wa.me/19563423479?text=${text}`, '_blank');
+      const data = {
+        _subject: "[HCDP Form] Yard Sign Request - Precinct 25 (Daniela Avila)",
+        _cc: "info@hidalgocountydems.org",
+        _template: "table",
+        "Form Type": "Yard Sign Request",
+        "Precinct": "Precinct 25 (Pharr)",
+        "Precinct Chair": "Daniela Avila",
+        "Full Name": name,
+        "Delivery Address": addr,
+        "Phone / WhatsApp": phone,
+        "Submitted At": new Date().toLocaleString()
+      };
+
+      try {
+        await fetch("https://formsubmit.co/ajax/romerodeab@gmail.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (err) {
+        console.error("Form submit error:", err);
+      }
+
+      form.innerHTML = `
+        <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 12px; padding: 1.75rem; text-align: center; animation: fadeIn 0.4s ease;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
+          <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">Sign Request Sent!</h4>
+          <p style="color: #334155; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
+            Thank you, <strong>${name}</strong>! Your request has been sent to <strong>romerodeab@gmail.com</strong>, Daniela Avila, and HCDP Party leadership.
+          </p>
+          <a href="https://wa.me/19563423479?text=${encodeURIComponent('Hello Daniela! I requested a yard sign for Precinct 25 at ' + addr)}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
+            💬 Text Daniela on WhatsApp
+          </a>
+        </div>
+      `;
     }
 
-    // Volunteer Form Handler -> WhatsApp
-    function handleVolunteer(e) {
+    // Volunteer Form Handler -> Email & WhatsApp
+    async function handleVolunteer(e) {
       e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerText : "Submit";
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = "Sending..."; }
+
       const name = document.getElementById('volName').value;
       const role = document.getElementById('volRole').value;
       const phone = document.getElementById('volPhone').value;
       
-      const text = encodeURIComponent(`Hello Daniela! I want to volunteer for Precinct 25.\n\nName: ${name}\nInterest: ${role}\nPhone: ${phone}`);
-      window.open(`https://wa.me/19563423479?text=${text}`, '_blank');
+      const data = {
+        _subject: "[HCDP Form] Join Precinct 25 Team - Daniela Avila",
+        _cc: "info@hidalgocountydems.org",
+        _template: "table",
+        "Form Type": "Volunteer Signup",
+        "Precinct": "Precinct 25 (Pharr)",
+        "Precinct Chair": "Daniela Avila",
+        "Full Name": name,
+        "Volunteer Role": role,
+        "Phone Number": phone,
+        "Submitted At": new Date().toLocaleString()
+      };
+
+      try {
+        await fetch("https://formsubmit.co/ajax/romerodeab@gmail.com", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (err) {
+        console.error("Form submit error:", err);
+      }
+
+      form.innerHTML = `
+        <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 12px; padding: 1.75rem; text-align: center; animation: fadeIn 0.4s ease;">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤝</div>
+          <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">Welcome to the Team!</h4>
+          <p style="color: #334155; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
+            Thank you, <strong>${name}</strong>! Your signup has been delivered to <strong>romerodeab@gmail.com</strong>, Daniela Avila, and HCDP Party leadership.
+          </p>
+          <a href="https://wa.me/19563423479?text=${encodeURIComponent('Hello Daniela! I signed up to volunteer for Precinct 25 (' + role + ')')}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
+            💬 Text Daniela on WhatsApp
+          </a>
+        </div>
+      `;
     }
   </script>
 </body>

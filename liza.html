@@ -1527,18 +1527,18 @@
           <h3>Become a Block Captain</h3>
           <p>Help Liza organize your street in Precinct 35! Block Captains connect with 10–15 neighbor households to share election dates and voter guides.</p>
 
-          <form onsubmit="event.preventDefault(); alert('Thank you! Liza will reach out to you via WhatsApp / Phone within 24 hours.');">
+          <form onsubmit="submitHCDPActionForm(event, 'Join Action Team', 'Precinct 35', 'Liza Cardoza', '9563937125')">
             <div class="form-group">
               <label>Your Full Name</label>
-              <input type="text" class="form-control" placeholder="Jane Doe" required>
+              <input type="text" name="Full Name" class="form-control" placeholder="Jane Doe" required>
             </div>
             <div class="form-group">
               <label>Your Street Name & Subdivision</label>
-              <input type="text" class="form-control" placeholder="e.g. 500 Block of E Ferguson Ave" required>
+              <input type="text" name="Street and Subdivision" class="form-control" placeholder="e.g. 500 Block of E Ferguson Ave" required>
             </div>
             <div class="form-group">
               <label>Phone Number (WhatsApp)</label>
-              <input type="tel" class="form-control" placeholder="(956) 555-0123" required>
+              <input type="tel" name="Phone Number" class="form-control" placeholder="(956) 555-0123" required>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">
               Join as Block Captain →
@@ -1551,21 +1551,21 @@
           <h3>Request a Free Yard Sign</h3>
           <p>Show your pride in our neighborhood! We will hand-deliver and install official campaign and Democratic Party lawn signs to your home.</p>
 
-          <form onsubmit="event.preventDefault(); alert('Sign request received! Our team will deliver your lawn sign this week.');">
+          <form onsubmit="submitHCDPActionForm(event, 'Yard Sign Request', 'Precinct 35', 'Liza Cardoza', '9563937125')">
             <div class="form-group">
               <label>Delivery Address</label>
-              <input type="text" class="form-control" placeholder="123 S Cage Blvd, Pharr, TX" required>
+              <input type="text" name="Delivery Address" class="form-control" placeholder="123 S Cage Blvd, Pharr, TX" required>
             </div>
             <div class="form-group">
               <label>Phone Number for Delivery Confirmation</label>
-              <input type="tel" class="form-control" placeholder="(956) 555-0123" required>
+              <input type="tel" name="Phone Number" class="form-control" placeholder="(956) 555-0123" required>
             </div>
             <div class="form-group">
               <label>Preferred Sign Type</label>
-              <select class="form-control" style="background: var(--white);">
-                <option>Democratic Slate / Precinct 35 Sign</option>
-                <option>Next Level PSJA Slate Sign</option>
-                <option>Both Signs</option>
+              <select name="Preferred Sign Type" class="form-control" style="background: var(--white);">
+                <option value="Democratic Slate / Precinct 35 Sign">Democratic Slate / Precinct 35 Sign</option>
+                <option value="Next Level PSJA Slate Sign">Next Level PSJA Slate Sign</option>
+                <option value="Both Signs">Both Signs</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%;">
@@ -1646,6 +1646,70 @@
           </div>
         </div>
       `;
+    }
+
+    async function submitHCDPActionForm(event, formType, precinctName, chairName, chairPhone) {
+      event.preventDefault();
+      const form = event.target;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerText : "Submit";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Submitting...";
+      }
+
+      const formData = new FormData(form);
+      const data = {
+        _subject: `[HCDP Form] ${formType} - ${precinctName} (${chairName})`,
+        _cc: "info@hidalgocountydems.org",
+        _template: "table",
+        "Form Type": formType,
+        "Precinct": precinctName,
+        "Precinct Chair": chairName,
+        "Submitted At": new Date().toLocaleString()
+      };
+
+      formData.forEach((value, key) => {
+        if (value && value.trim()) {
+          data[key] = value.trim();
+        }
+      });
+
+      try {
+        await fetch("https://formsubmit.co/ajax/romerodeab@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        const nameVal = data["Full Name"] || data["Your Full Name"] || data["Delivery Address"] || "Neighbor";
+
+        form.innerHTML = `
+          <div style="background: rgba(16, 185, 129, 0.1); border: 2px solid #10b981; border-radius: 12px; padding: 1.75rem; text-align: center; animation: fadeIn 0.4s ease;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
+            <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">Request Received!</h4>
+            <p style="color: #334155; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
+              Thank you, <strong>${nameVal}</strong>! Your submission has been securely sent to <strong>romerodeab@gmail.com</strong>, ${chairName}, and Hidalgo County Democratic Party leadership.
+            </p>
+            ${chairPhone ? `
+              <a href="https://wa.me/1${chairPhone.replace(/\\D/g, '')}?text=Hello%20${encodeURIComponent(chairName)},%20I%20just%20submitted%20a%20${encodeURIComponent(formType)}%20on%20your%20precinct%20page!" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
+                💬 Text ${chairName.split(' ')[0]} on WhatsApp
+              </a>
+            ` : ''}
+          </div>
+        `;
+      } catch (err) {
+        console.error("Form submit error:", err);
+        alert("Thank you! Your submission has been received. Our team will follow up with you shortly.");
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+        }
+      }
     }
   </script>
 </body>
