@@ -74,7 +74,7 @@ function renderGrid() {
     "84": { url: "alma.html", photo: "alma_butcher.png" },
     "146": { url: "olga.html", photo: "olga_cardoza.png" },
     "35": { url: "liza.html", photo: "" },
-    "25": { url: "daniela.html", photo: "" }
+    "25": { url: "daniela.html", photo: "daniela_avila.png" }
   };
 
   chairs.forEach((chair, index) => {
