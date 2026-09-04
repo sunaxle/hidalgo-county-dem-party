@@ -1,5 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js";
 import {
   getFirestore,
   collection,
@@ -19,13 +18,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firebase App Check
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('PENDING_RECAPTCHA_V3_SITE_KEY'),
-  isTokenAutoRefreshEnabled: true
-});
-
 const db = getFirestore(app);
 
 function initForms() {
