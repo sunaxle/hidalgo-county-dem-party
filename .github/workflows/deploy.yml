@@ -11,6 +11,11 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
       
+      - name: 🔒 Set correct file permissions
+        run: |
+          find . -type d -exec chmod 755 {} +
+          find . -type f -exec chmod 644 {} +
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -19,7 +24,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
           local-dir: ./
-          state-name: .ftp-deploy-sync-state-v2.json
+          state-name: .ftp-deploy-sync-state-v3.json
           exclude: |
             **/.git*
             **/.git*/**
