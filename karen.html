@@ -9,10 +9,10 @@
   
   <title>Karen Louise Prewitt | Hidalgo County Democratic Precinct Chair - Precinct 93 (Mission, TX)</title>
   
-  <meta name="description" content="Official website of Karen Louise Prewitt, Democratic Party Precinct Chair for Precinct 93 in Mission, Hidalgo County, TX. 'Precinct 93: Community First • Organizing Mission • Protecting Our Vote.' Polling information, WhatsApp group, rides to the polls, yard signs, and grassroots leadership.">
-  <meta name="keywords" content="Karen Prewitt, Karen Louise Prewitt, Precinct Chair 93, Precinct 93, Mission TX Democrats, Hidalgo County Democratic Party, Mission Boys and Girls Club, Mission Polling Site, RGV Democrats, Texas CD-28">
+  <meta name="description" content="Official website of Karen Louise Prewitt, Democratic Party Precinct Chair for Precinct 93 in Mission, Hidalgo County, TX. 'Precinct 93: Community First • Organizing Mission • Protecting Our Vote.' Polling at Veterans Memorial Pavilion, WhatsApp group, rides to the polls, yard signs, and Texas Democratic Slate.">
+  <meta name="keywords" content="Karen Prewitt, Karen Louise Prewitt, Precinct Chair 93, Precinct 93, Veterans Memorial Pavilion Mission TX, Mission TX Democrats, Texans Deserve Better, Vote Democrat, Gina Hinojosa, James Talarico, Nathan Johnson, Vikki Goodwin, Clayton Tucker, Sarah Eckhardt, Ben Flores, Jon Rosenthal, Hidalgo County Democratic Party, Texas CD-28">
   <meta property="og:title" content="Karen Louise Prewitt | Precinct Chair 93 - Mission, TX">
-  <meta property="og:description" content="Community First • Organizing Mission • Protecting Our Vote across Hidalgo County Precinct 93.">
+  <meta property="og:description" content="Community First • Organizing Mission • Protecting Our Vote. Official Precinct 93 Portal & Polling at Veterans Memorial Pavilion.">
   <meta property="og:image" content="./karen_prewitt.png">
   <meta property="og:type" content="website">
 
@@ -514,7 +514,7 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
 
-    /* ===== POLLING LOCATION & VOTING HUB ===== */
+    /* ===== POLLING LOCATION & VOTING HUB (VETERANS MEMORIAL PAVILION) ===== */
     #polling { background: #FFFFFF; border-bottom: 1px solid var(--border); }
     .polling-grid {
       display: grid;
@@ -526,8 +526,8 @@
       background: var(--light-bg);
       border-radius: var(--radius-lg);
       padding: 2.5rem 2.25rem;
-      border: 2px solid var(--border);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      border: 2px solid var(--dem-blue);
+      box-shadow: 0 12px 32px rgba(0,68,201,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -547,14 +547,15 @@
     }
     .polling-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: var(--navy);
       margin-bottom: 0.5rem;
     }
     .polling-address {
-      font-size: 1.05rem;
-      color: var(--muted);
+      font-size: 1.1rem;
+      color: var(--dem-blue-dark);
+      font-weight: 700;
       margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
@@ -579,6 +580,69 @@
       border: 2px solid var(--border);
       min-height: 380px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    /* ===== CAMPAIGN & DEMOCRATIC SLATE SECTION ===== */
+    #slate-section {
+      background: linear-gradient(180deg, #0A192F 0%, #002B82 100%);
+      color: #FFFFFF;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .slate-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+      margin-top: 2rem;
+    }
+    .slate-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(56,189,248,0.3);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .slate-img-container {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.15);
+      margin-bottom: 1.5rem;
+      background: #000;
+      text-align: center;
+    }
+    .slate-img-container img {
+      width: 100%;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .slate-img-container:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Comparison Difference Section */
+    .diff-banner {
+      background: var(--white);
+      color: var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-top: 3rem;
+      border: 2px solid var(--gold);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .diff-img-box {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      border: 1px solid var(--border);
+      text-align: center;
+      background: #f8fafc;
     }
 
     /* ===== RIDES TO POLLS & ASSISTANCE ===== */
@@ -769,14 +833,14 @@
 
     /* Responsive */
     @media (max-width: 968px) {
-      .hero-container, .whatsapp-card, .polling-grid, .ride-banner, .action-grid, .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-container, .whatsapp-card, .polling-grid, .slate-grid, .diff-banner, .ride-banner, .action-grid, .footer-container { grid-template-columns: 1fr; gap: 2rem; }
       .stats-strip, .dates-grid, .priorities-grid { grid-template-columns: 1fr 1fr; }
       .nav-links { display: none; }
       .mobile-menu-toggle { display: block; }
     }
     @media (max-width: 600px) {
       .stats-strip, .dates-grid, .priorities-grid { grid-template-columns: 1fr; }
-      .chair-message-card, .whatsapp-card { padding: 2rem 1.5rem; }
+      .chair-message-card, .whatsapp-card, .slate-card, .diff-banner { padding: 2rem 1.25rem; }
     }
   </style>
 </head>
@@ -809,8 +873,8 @@
         <li><a href="home.html" class="nav-pill-link">🏠 Party Home</a></li>
         <li><a href="precinct_profiles.html" class="nav-pill-link">🏛️ Precinct Hub</a></li>
         <li><a href="#message">Letter from Chair</a></li>
-        <li><a href="#whatsapp-hub">WhatsApp Group</a></li>
-        <li><a href="#polling">Polling Site</a></li>
+        <li><a href="#polling">Veterans Pavilion Site</a></li>
+        <li><a href="#slate-section">Democratic Slate</a></li>
         <li><a href="#action">Rides & Signs</a></li>
         <li><a href="tel:9569578095" class="btn-nav-call">📞 (956) 957-8095</a></li>
       </ul>
@@ -825,7 +889,8 @@
       <a href="precinct_chairs.html">📋 Precinct Chairs Roster</a>
       <a href="#message" onclick="toggleMenu()">Letter from Chair</a>
       <a href="#whatsapp-hub" onclick="toggleMenu()">Mission Precinct 93 WhatsApp Group</a>
-      <a href="#polling" onclick="toggleMenu()">Nearest Polling Site</a>
+      <a href="#polling" onclick="toggleMenu()">Veterans Memorial Pavilion Site</a>
+      <a href="#slate-section" onclick="toggleMenu()">2026 Democratic Slate</a>
       <a href="#dates" onclick="toggleMenu()">2026 Election Dates</a>
       <a href="#action" onclick="toggleMenu()">Rides & Yard Signs</a>
       <a href="tel:9569578095" style="color: #10b981;">📞 Call Karen: (956) 957-8095</a>
@@ -846,8 +911,8 @@
         <div class="hero-actions">
           <a href="tel:9569578095" class="btn btn-primary">📞 Call Karen</a>
           <a href="https://chat.whatsapp.com/JVs9YBOVaIQ2o3JAT6wDy0" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">📱 Join WhatsApp Group</a>
-          <a href="#polling" class="btn btn-gold">📍 Mission Polling Site</a>
-          <a href="precinct_profiles.html" class="btn btn-outline">🏛️ Precinct Directory</a>
+          <a href="#polling" class="btn btn-gold">📍 Veterans Memorial Pavilion</a>
+          <a href="#slate-section" class="btn btn-outline">🗳️ 2026 Democratic Slate</a>
         </div>
       </div>
 
@@ -876,8 +941,8 @@
         <div class="stat-val">Precinct Chair 93</div>
       </div>
       <div class="stat-box">
-        <div class="stat-label">Community Hub</div>
-        <div class="stat-val">Mission, Texas</div>
+        <div class="stat-label">Primary Polling Site</div>
+        <div class="stat-val">Veterans Pavilion</div>
       </div>
       <div class="stat-box">
         <div class="stat-label">Direct Contact</div>
@@ -914,8 +979,9 @@
           <div class="message-body">
             <p><strong>Dear Neighbors, Friends, and Families of Precinct 93 in Mission,</strong></p>
             <p>Welcome to our official precinct portal! As your Democratic Precinct Chair, I am deeply committed to serving our Mission community, making sure your voices are heard, and ensuring every single neighbor has access to the ballot box.</p>
+            <p>Our primary designated voting location for Precinct 93 is the <strong>Veterans Memorial Pavilion (300 S. Inspiration Road, Mission, TX)</strong>. Whether during Early Voting or on Election Day, making a plan to vote is the most powerful tool we have to protect our public schools, healthcare, and working families.</p>
             <p>Grassroots democracy thrives when we stay connected. That is why we have launched the <strong>Mission Precinct 93 Info</strong> WhatsApp community group, where we share verified voting updates, important community meetings, election deadlines, and local resources directly with you.</p>
-            <p>Whether you need to register to vote, check your registration status, request a free Democratic yard sign, or arrange a ride to the polls for you or an elderly family member, our team is right here to help.</p>
+            <p>Whether you need to register to vote, check your registration status, request a free Democratic yard sign, or arrange a free ride to the Veterans Memorial Pavilion for you or an elderly family member, our team is right here to help.</p>
             <p>Please feel free to call me directly at <strong>(956) 957-8095</strong> or join our WhatsApp community group below. Together, we are building a stronger, more informed, and united Mission!</p>
             <p style="font-size: 1.15rem; font-weight: 800; color: var(--dem-blue); margin-top: 1.5rem;">
               Precinct 93: Community First • Protecting Our Vote.<br>
@@ -930,6 +996,7 @@
           <div class="message-body">
             <p><strong>Estimados vecinos, amigos y familias del Precinto 93 en Mission:</strong></p>
             <p>¡Bienvenidos a nuestro portal oficial de precinto! Como su Presidenta Demócrata de Precinto, estoy profundamente comprometida con servir a nuestra comunidad de Mission, asegurar que sus voces sean escuchadas y garantizar que cada vecino tenga acceso pleno al voto.</p>
+            <p>Nuestro centro de votación principal designado para el Precinto 93 es el <strong>Veterans Memorial Pavilion (300 S. Inspiration Road, Mission, TX)</strong>. Ya sea durante la Votación Anticipada o el Día de las Elecciones, hacer un plan para votar es la herramienta más poderosa que tenemos para defender nuestras escuelas públicas, atención médica y familias trabajadoras.</p>
             <p>La democracia de base prospera cuando nos mantenemos conectados. Por eso hemos lanzado el grupo de WhatsApp <strong>Mission Precinct 93 Info</strong>, donde compartimos noticias electorales verificadas, avisos de juntas comunitarias y recursos locales directamente con ustedes.</p>
             <p>Ya sea que necesite registrarse para votar, revisar el estado de su registro, solicitar un letrero de jardín gratuito para su césped o coordinar transporte para ir a votar, nuestro equipo está aquí para apoyarle.</p>
             <p>Por favor llámeme directamente al <strong>(956) 957-8095</strong> o únase a nuestro grupo de WhatsApp. ¡Juntos construiremos un Mission más fuerte, informado y unido!</p>
@@ -1007,25 +1074,25 @@
     </div>
   </section>
 
-  <!-- Nearest Polling Location Hub -->
+  <!-- Official Polling Location Hub (Veterans Memorial Pavilion) -->
   <section id="polling">
     <div class="container">
       <div class="section-label">Your Local Voting Hub</div>
-      <h2 class="section-title">Mission Polling Locations</h2>
+      <h2 class="section-title">Official Precinct 93 Polling Location</h2>
       <div class="section-rule"></div>
 
       <div class="polling-grid">
         <div class="polling-card">
           <div>
-            <span class="polling-hub-badge">Primary Neighborhood Polling Site</span>
-            <h3 class="polling-title">Mission Boys & Girls Club / City Hall Hub</h3>
-            <p class="polling-address">📍 700 S 1st St, Mission, TX 78572</p>
+            <span class="polling-hub-badge">🌟 Best Polling Site for Precinct 93</span>
+            <h3 class="polling-title">Veterans Memorial Pavilion</h3>
+            <p class="polling-address">📍 300 S. Inspiration Road, Mission, Texas 78572</p>
 
             <div class="info-row">
               <div class="info-icon">🕒</div>
               <div class="info-content">
                 <strong>Voting Hours</strong>
-                <span>Early Voting: 7:00 AM – 7:00 PM (Mon–Sat), 10:00 AM – 4:00 PM (Sun)<br>Election Day: 7:00 AM – 7:00 PM</span>
+                <span>Early Voting (Oct 19–30): 7:00 AM – 7:00 PM (Mon–Sat), 10:00 AM – 4:00 PM (Sun)<br>Election Day (Nov 3): 7:00 AM – 7:00 PM</span>
               </div>
             </div>
 
@@ -1033,21 +1100,21 @@
               <div class="info-icon">♿</div>
               <div class="info-content">
                 <strong>Accessibility & Curbside</strong>
-                <span>Fully ADA accessible. Curbside voting is available for voters with mobility needs. Contact Karen for curbside support upon arrival.</span>
+                <span>Fully ADA accessible with dedicated curbside voting spaces for voters with physical or mobility needs. Contact Karen directly for curbside support upon arrival.</span>
               </div>
             </div>
 
             <div class="info-row">
               <div class="info-icon">🆔</div>
               <div class="info-content">
-                <strong>What to Bring</strong>
+                <strong>What to Bring to the Polls</strong>
                 <span>Approved Photo ID (Texas Driver License, Texas Personal ID, US Passport, Military ID, or Voter Certificate).</span>
               </div>
             </div>
           </div>
 
           <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem;">
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Mission+Boys+and+Girls+Club+700+S+1st+St+Mission+TX+78572" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=300+S+Inspiration+Rd+Mission+TX+78572" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
               🗺️ Get Driving Directions
             </a>
             <a href="tel:9569578095" class="btn btn-gold">
@@ -1056,17 +1123,17 @@
           </div>
         </div>
 
-        <!-- Google Map Card -->
+        <!-- Google Map Card for Veterans Memorial Pavilion -->
         <div class="map-embed-box">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.943183561918!2d-98.32634782386928!3d26.212283991060935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8665a3d76bc932f9%3A0xe54e195155f89c68!2sMission%2C%20TX!5e0!3m2!1sen!2sus!4v1709500000000!5m2!1sen!2sus" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.887258071854!2d-98.36398912386866!3d26.21661629108044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8665a25b306b3f7d%3A0xb35a39626b9f6b98!2s300%20S%20Inspiration%20Rd%2C%20Mission%2C%20TX%2078572!5e0!3m2!1sen!2sus!4v1709500000000!5m2!1sen!2sus" 
             width="100%" 
             height="100%" 
             style="border:0; min-height: 380px;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
-            title="Mission Voting Hub Map">
+            title="Veterans Memorial Pavilion - 300 S Inspiration Rd, Mission, TX">
           </iframe>
         </div>
       </div>
@@ -1074,18 +1141,112 @@
       <!-- Need a Ride Banner -->
       <div class="ride-banner">
         <div>
-          <h3>🚗 Need a Ride to Go and Vote?</h3>
+          <h3>🚗 Need a Free Ride to Veterans Memorial Pavilion?</h3>
           <p>
-            No car? Mobility concerns? We’ve got you covered! Karen Prewitt and our Precinct 93 volunteer network provide <strong>free, safe rides to the polls</strong> during Early Voting and on Election Day.
+            No car? Mobility concerns? We’ve got you covered! Karen Prewitt and our Precinct 93 volunteer driver network provide <strong>free, safe rides to the polls</strong> during Early Voting and on Election Day.
           </p>
         </div>
         <div style="text-align: right; display: flex; flex-direction: column; gap: 0.75rem; justify-content: center;">
           <a href="tel:9569578095" class="btn btn-gold" style="justify-content: center; font-size: 1rem;">
             📞 Call Karen: (956) 957-8095
           </a>
-          <a href="https://wa.me/19569578095?text=Hello%20Karen,%20I%20need%20a%20ride%20to%20the%20polling%20location%20in%20Precinct%2093!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="justify-content: center;">
+          <a href="https://wa.me/19569578095?text=Hello%20Karen,%20I%20need%20a%20ride%20to%20the%20Veterans%20Memorial%20Pavilion%20polling%20site%20in%20Precinct%2093!" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="justify-content: center;">
             💬 WhatsApp for a Free Ride
           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campaign & 2026 Democratic Slate Section -->
+  <section id="slate-section">
+    <div class="container">
+      <div class="section-label" style="color: var(--accent);">Statewide & Local Leadership</div>
+      <h2 class="section-title" style="color: #FFFFFF;">Texans Deserve Better • Vote Democrat</h2>
+      <div class="section-rule" style="background: var(--gold);"></div>
+
+      <p style="color: #cbd5e1; font-size: 1.1rem; max-width: 800px; line-height: 1.7; margin-bottom: 2rem;">
+        The Democratic slate of candidates for statewide offices has the depth of experience, integrity, and commitment to public service we need to make life better for working families, not billionaires. Vote Democratic all the way down the ballot!
+      </p>
+
+      <!-- Slate Grid: Yard Sign Banner + Candidates Collage -->
+      <div class="slate-grid">
+        <!-- Campaign Sign Box -->
+        <div class="slate-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="background: rgba(56,189,248,0.2); color: #38bdf8; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.75rem; border-radius: 999px; text-transform: uppercase;">Official Campaign Theme</span>
+              <span style="color: #fcd34d; font-size: 0.8rem; font-weight: 700;">Early Voting Oct 19–30</span>
+            </div>
+            <div class="slate-img-container">
+              <img src="texans_deserve_better_sign.png" alt="Texans Deserve Better - Vote Democrat - Early Voting Oct 19-30, Election Day Nov 3">
+            </div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 900; color: #FFFFFF; margin-bottom: 0.5rem;">
+              Texans Deserve Better
+            </h3>
+            <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Make sure your household displays our neighborhood message of hope, unity, and progress! Request an official Democratic yard sign delivered right to your lawn in Precinct 93.
+            </p>
+          </div>
+          <a href="#action" class="btn btn-gold" style="justify-content: center;">
+            🪧 Request This Yard Sign Below
+          </a>
+        </div>
+
+        <!-- Candidate Slate Collage Box -->
+        <div class="slate-card">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+              <span style="background: rgba(16,185,129,0.2); color: #10b981; font-size: 0.75rem; font-weight: 800; padding: 0.25rem 0.75rem; border-radius: 999px; text-transform: uppercase;">2026 Democratic Slate</span>
+              <span style="color: #38bdf8; font-size: 0.8rem; font-weight: 700;">Texas Champions</span>
+            </div>
+            <div class="slate-img-container">
+              <img src="texas_democrats_slate_collage.png" alt="Democratic Candidates: Gina Hinojosa, James Talarico, Vikki Goodwin, Nathan Johnson, Clayton Tucker, Sarah Eckhardt, Ben Flores, John Rosenthal">
+            </div>
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.35rem; font-weight: 900; color: #FFFFFF; margin-bottom: 0.5rem;">
+              Fighting for Texas Working Families
+            </h3>
+            <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Featuring <strong>Gina Hinojosa</strong> for Governor, <strong>James Talarico</strong>, <strong>Vikki Goodwin</strong> for Lt. Governor, <strong>Nathan Johnson</strong> for Attorney General, <strong>Clayton Tucker</strong> for Ag Commissioner, <strong>Sarah Eckhardt</strong> for Comptroller, <strong>Ben Flores</strong> for Land Commissioner, and <strong>John Rosenthal</strong> for Railroad Commission.
+            </p>
+          </div>
+          <a href="#action" class="btn btn-primary" style="justify-content: center;">
+            🤝 Volunteer for the Democratic Slate
+          </a>
+        </div>
+      </div>
+
+      <!-- The Democratic Difference Detailed Flyer Box -->
+      <div class="diff-banner">
+        <div class="diff-img-box">
+          <img src="democratic_difference_slate.png" alt="The Democratic Difference Comparison Slate" style="width: 100%; display: block; border-radius: 8px;">
+        </div>
+        <div>
+          <span style="background: rgba(0,68,201,0.1); color: var(--dem-blue); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 999px; display: inline-block; margin-bottom: 0.75rem;">
+            The Democratic Difference
+          </span>
+          <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.7rem; font-weight: 900; color: var(--navy); margin-bottom: 0.75rem;">
+            Why Your Vote Matters Across Texas
+          </h3>
+          <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">
+            Every vote in Precinct 93 impacts the future of Texas. Compare the Democratic vision of strong public schools, affordable utilities, reproductive healthcare, and clean government against extreme corporate vouchers and budget hoarding:
+          </p>
+
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.5rem; color: var(--ink); font-size: 0.9rem; font-weight: 600;">
+            <li style="display: flex; gap: 0.5rem;"><span style="color: #10B981; font-weight: 900;">✓</span> <strong>Public School Investment:</strong> Fully funding classrooms instead of private voucher schemes.</li>
+            <li style="display: flex; gap: 0.5rem;"><span style="color: #10B981; font-weight: 900;">✓</span> <strong>Affordable Healthcare:</strong> Expanding access and protecting reproductive rights for all families.</li>
+            <li style="display: flex; gap: 0.5rem;"><span style="color: #10B981; font-weight: 900;">✓</span> <strong>Reliable Energy & Lower Bills:</strong> Fixing the Texas power grid and lowering gas utility rates.</li>
+            <li style="display: flex; gap: 0.5rem;"><span style="color: #10B981; font-weight: 900;">✓</span> <strong>Independent Public Service:</strong> Ending no-bid contracts and corrupt corporate giveaways.</li>
+          </ul>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="https://texasdemocrats.org" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Learn More at TexasDemocrats.org ↗
+            </a>
+            <a href="#action" class="btn btn-gold">
+              Get Involved in Mission
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1109,7 +1270,7 @@
         <div class="date-card featured">
           <span class="date-badge" style="background: var(--dem-blue); color: #fff;">Best Time to Vote</span>
           <div class="date-main">Oct 19 – Oct 30, 2026</div>
-          <div class="date-desc"><strong>Early Voting Period</strong><br>Avoid long lines on Election Day! Vote early at any official Hidalgo County early voting center.</div>
+          <div class="date-desc"><strong>Early Voting Period</strong><br>Avoid long lines on Election Day! Vote early at the <strong>Veterans Memorial Pavilion (300 S Inspiration Rd)</strong> or any official county voting center.</div>
           <a href="#polling" style="color: var(--dem-blue); font-weight: 800; font-size: 0.85rem; display: inline-block; margin-top: 1rem;">View Polling Site Hours →</a>
         </div>
 
@@ -1196,7 +1357,7 @@
             🪧 Request a Free Yard Sign
           </h3>
           <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">
-            Show your neighborhood pride! Karen and our volunteer team will deliver an official Democratic yard sign right to your front lawn in Mission Precinct 93.
+            Show your neighborhood pride! Karen and our volunteer team will deliver an official <strong>“Texans Deserve Better • Vote Democrat”</strong> yard sign right to your front lawn in Mission Precinct 93.
           </p>
 
           <form onsubmit="handleYardSign(event)">
@@ -1224,7 +1385,7 @@
             🤝 Join the Precinct 93 Team
           </h3>
           <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;">
-            We need Block Captains, phone bankers, and friendly drivers to give neighbors rides to the polls in Mission. Let’s make a difference together!
+            We need Block Captains, phone bankers, and friendly drivers to give neighbors rides to the Veterans Memorial Pavilion. Let’s make a difference together!
           </p>
 
           <form onsubmit="handleVolunteer(event)">
@@ -1235,7 +1396,7 @@
             <div class="form-group">
               <label for="volRole">How Would You Like to Help?</label>
               <select id="volRole" class="form-control" required>
-                <option value="Giving Rides to Voters">Giving rides to voters (Driver)</option>
+                <option value="Giving Rides to Voters (Veterans Pavilion)">Giving rides to voters (Driver to Veterans Pavilion)</option>
                 <option value="Neighborhood Block Captain">Serving as a Neighborhood Block Captain</option>
                 <option value="Distributing Yard Signs">Distributing yard signs & door hangers</option>
                 <option value="Calling / Texting Neighbors">Calling or texting neighbors</option>
@@ -1264,7 +1425,7 @@
       <div class="priorities-grid">
         <div class="priority-card">
           <h3 class="priority-title">🛡️ Voter Protection & Access</h3>
-          <p class="priority-text">Ensuring every eligible neighbor in Mission Precinct 93 is registered, informed, and has safe transportation to the ballot box without obstruction or confusion.</p>
+          <p class="priority-text">Ensuring every eligible neighbor in Mission Precinct 93 is registered, informed, and has safe transportation to the Veterans Memorial Pavilion without obstruction or confusion.</p>
         </div>
 
         <div class="priority-card">
@@ -1301,7 +1462,8 @@
           <li><a href="precinct_profiles.html">🏛️ Precinct Directory Hub</a></li>
           <li><a href="#message">Letter from Chair</a></li>
           <li><a href="#whatsapp-hub">WhatsApp Group</a></li>
-          <li><a href="#polling">Mission Polling Sites</a></li>
+          <li><a href="#polling">Veterans Memorial Pavilion</a></li>
+          <li><a href="#slate-section">2026 Democratic Slate</a></li>
           <li><a href="#dates">Election Dates</a></li>
           <li><a href="#action">Request Yard Sign</a></li>
         </ul>
@@ -1373,6 +1535,7 @@
         "Form Type": "Yard Sign Request",
         "Precinct": "Precinct 93 (Mission)",
         "Precinct Chair": "Karen Louise Prewitt",
+        "Sign Type": "Texans Deserve Better - Vote Democrat",
         "Full Name": name,
         "Delivery Address": addr,
         "Phone / WhatsApp": phone,
@@ -1394,9 +1557,9 @@
           <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
           <h4 style="color: #10b981; font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem;">Sign Request Sent!</h4>
           <p style="color: #334155; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.25rem;">
-            Thank you, <strong>${name}</strong>! Your request has been sent to <strong>romerodeab@gmail.com</strong>, Karen Prewitt, and HCDP Party leadership.
+            Thank you, <strong>${name}</strong>! Your yard sign request has been sent to <strong>romerodeab@gmail.com</strong>, Karen Prewitt, and HCDP Party leadership.
           </p>
-          <a href="https://wa.me/19569578095?text=${encodeURIComponent('Hello Karen! I requested a yard sign for Precinct 93 at ' + addr)}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
+          <a href="https://wa.me/19569578095?text=${encodeURIComponent('Hello Karen! I requested a Texans Deserve Better yard sign for Precinct 93 at ' + addr)}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 0.65rem 1.25rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
             💬 Text Karen on WhatsApp
           </a>
         </div>
