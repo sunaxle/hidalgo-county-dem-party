@@ -1,0 +1,42 @@
+name: Deploy to Bluehost FTP
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+      
+      - name: 🔒 Set correct file permissions
+        run: |
+          find . -type d -exec chmod 755 {} +
+          find . -type f -exec chmod 644 {} +
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ./
+          local-dir: ./
+          state-name: .ftp-deploy-sync-state-v3.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            Demographic data requests/**
+            2026_Election_Data/**
+            2026primaryvoting data/**
+            Elections_Data/**
+            functions/**
+            **/*.py
+            credentials.json
+            *.offline
+            *.offline/**
