@@ -49,3 +49,16 @@ node_modules/
 npm-debug.log
 yarn-error.log
 yarn-debug.log
+
+# Heavy local data folders
+2026_Election_Data/
+2026primaryvoting data/
+Demographic data requests/
+Elections_Data/
+data/
+functions/node_modules/
+incoming_announcements/
+incoming_screenshots/
+insta_dl/
+images/tmp_hcdp/
+images/legacy_com_export/
