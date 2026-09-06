@@ -831,6 +831,120 @@
       text-transform: uppercase;
     }
 
+    
+    /* ===== MISSION MUNICIPAL CANDIDATES GUIDE ===== */
+    #local-candidates {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+    }
+    .cand-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+      justify-content: center;
+    }
+    .cand-tab-btn {
+      padding: 0.6rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--border);
+      background: var(--light-bg);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cand-tab-btn:hover {
+      border-color: var(--dem-blue);
+      color: var(--dem-blue);
+    }
+    .cand-tab-btn.active {
+      background: var(--dem-blue);
+      color: #FFFFFF;
+      border-color: var(--dem-blue);
+      box-shadow: 0 4px 12px rgba(0,68,201,0.25);
+    }
+    .cand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+    .cand-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .cand-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,68,201,0.08);
+      border-color: var(--dem-blue);
+    }
+    .cand-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .cand-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--dem-blue);
+      background: #0f172a;
+      flex-shrink: 0;
+    }
+    .cand-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+    .badge-mayor { background: rgba(0,68,201,0.12); color: var(--dem-blue); }
+    .badge-place1 { background: rgba(16,185,129,0.15); color: #059669; }
+    .badge-place2 { background: rgba(212,154,55,0.15); color: #B45309; }
+    .badge-place3 { background: rgba(139,92,246,0.15); color: #7C3AED; }
+    .cand-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.15;
+    }
+    .cand-quote {
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.65;
+      font-style: italic;
+      background: var(--light-bg);
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--dem-blue);
+      margin-bottom: 1.25rem;
+    }
+    .cand-action-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
     /* Responsive */
     @media (max-width: 968px) {
       .hero-container, .whatsapp-card, .polling-grid, .slate-grid, .diff-banner, .ride-banner, .action-grid, .footer-container { grid-template-columns: 1fr; gap: 2rem; }
@@ -873,6 +987,7 @@
         <li><a href="home.html" class="nav-pill-link">🏠 Party Home</a></li>
         <li><a href="precinct_profiles.html" class="nav-pill-link">🏛️ Precinct Hub</a></li>
         <li><a href="#message">Letter from Chair</a></li>
+        <li><a href="#local-candidates">Mission Candidates</a></li>
         <li><a href="#polling">Veterans Pavilion Site</a></li>
         <li><a href="#slate-section">Democratic Slate</a></li>
         <li><a href="#action">Rides & Signs</a></li>
@@ -889,6 +1004,7 @@
       <a href="precinct_chairs.html">📋 Precinct Chairs Roster</a>
       <a href="#message" onclick="toggleMenu()">Letter from Chair</a>
       <a href="#whatsapp-hub" onclick="toggleMenu()">Mission Precinct 93 WhatsApp Group</a>
+      <a href="#local-candidates" onclick="toggleMenu()">🏛️ Mission City Candidates Guide</a>
       <a href="#polling" onclick="toggleMenu()">Veterans Memorial Pavilion Site</a>
       <a href="#slate-section" onclick="toggleMenu()">2026 Democratic Slate</a>
       <a href="#dates" onclick="toggleMenu()">2026 Election Dates</a>
@@ -1069,6 +1185,316 @@
           <p style="color: #cbd5e1; font-size: 0.85rem; margin-top: 0.75rem;">
             Open your smartphone camera or WhatsApp scanner to join instantly.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Mission Mayoral & City Council Candidate Guide (November 2026) -->
+  <section id="local-candidates">
+    <div class="container">
+      <div style="text-align: center; max-width: 820px; margin: 0 auto 2rem auto;">
+        <div class="section-label">Your Local Ballot • November 2026</div>
+        <h2 class="section-title">Mission Municipal Election Guide</h2>
+        <div class="section-rule center"></div>
+        <p style="color: var(--muted); font-size: 1.05rem; line-height: 1.7;">
+          Meet the candidates running for <strong>Mayor of Mission</strong> and <strong>Mission City Council (Places 1, 2, and 3)</strong> in the November 2026 election. Stay informed, compare candidate statements, and make your voice heard at the Veterans Memorial Pavilion!
+        </p>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="cand-filter-bar">
+        <button class="cand-tab-btn active" onclick="filterCandidates('all', this)">All Candidates</button>
+        <button class="cand-tab-btn" onclick="filterCandidates('mayor', this)">👑 Mayor of Mission</button>
+        <button class="cand-tab-btn" onclick="filterCandidates('place1', this)">Place 1</button>
+        <button class="cand-tab-btn" onclick="filterCandidates('place2', this)">Place 2</button>
+        <button class="cand-tab-btn" onclick="filterCandidates('place3', this)">Place 3</button>
+      </div>
+
+      <!-- Candidates Grid -->
+      <div class="cand-grid" id="candidatesGrid">
+
+        <!-- MAYOR: Natalie "Nati" Garza -->
+        <div class="cand-card" data-category="mayor">
+          <div>
+            <div class="cand-header">
+              <img src="cand_nati_garza.png" alt="Natalie Nati Garza" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-mayor">Mayor of Mission</span>
+                <h3 class="cand-name">Natalie "Nati" Garza</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Leadership should be about showing up, listening, asking questions, and getting to work. I bring the perspective of a small business owner who has built her life and invested in Mission. My priorities are simple: accountability, supporting small businesses, improving quality of life, and making sure Mission works for the people who call it home. Un Mission para todos.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Mission, TX</span>
+            <span style="color: var(--dem-blue); font-weight: 800;">Candidate for Mayor</span>
+          </div>
+        </div>
+
+        <!-- MAYOR: Rick Salinas -->
+        <div class="cand-card" data-category="mayor">
+          <div>
+            <div class="cand-header">
+              <img src="cand_rick_salinas.png" alt="Rick Salinas" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-mayor">Mayor of Mission</span>
+                <h3 class="cand-name">Rick Salinas</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “I've been a lawyer for the last 33 years. My father was the mayor in this town for 20 years. We have a deep affinity, love, and affection for Mission. I don't represent any special interest, and I have nothing to gain by being mayor. I promise you I'm the only man with the experience and the heart to get the job done.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Mission, TX</span>
+            <span style="color: var(--dem-blue); font-weight: 800;">Candidate for Mayor</span>
+          </div>
+        </div>
+
+        <!-- MAYOR: Ruben Plata -->
+        <div class="cand-card" data-category="mayor">
+          <div>
+            <div class="cand-header">
+              <img src="cand_ruben_plata.png" alt="Ruben Plata" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-mayor">Mayor of Mission</span>
+                <h3 class="cand-name">Ruben Plata</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Bringing nearly two decades of City Council experience and more than 30 years in banking and finance. First elected in 2007 and currently serving as Mayor Pro Tem. Priorities include protecting taxpayer dollars, increasing transparency, dependable city services, strengthening public safety and infrastructure, and managing growth responsibly.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Mission, TX</span>
+            <span style="color: var(--dem-blue); font-weight: 800;">Candidate for Mayor</span>
+          </div>
+        </div>
+
+        <!-- MAYOR: Armando "Doc" Ocaña Sr. -->
+        <div class="cand-card" data-category="mayor">
+          <div>
+            <div class="cand-header">
+              <img src="cand_doc_ocana.png" alt="Armando Doc Ocaña Sr." class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-mayor">Mayor of Mission</span>
+                <h3 class="cand-name">Armando “Doc” Ocaña Sr.</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Previous experience as Mission’s mayor, emphasizing fiscal responsibility, public safety, economic development, and improved city services. Priorities include strengthening police, fire, and EMS, continuing drainage improvements, customer-service city operations, and better wages for city employees.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Mission, TX</span>
+            <span style="color: var(--dem-blue); font-weight: 800;">Candidate for Mayor</span>
+          </div>
+        </div>
+
+        <!-- MAYOR: Noralinda (Norie) Gonzalez Garza -->
+        <div class="cand-card" data-category="mayor">
+          <div>
+            <div class="cand-header">
+              <img src="cand_norie_garza.png" alt="Noralinda Gonzalez Garza" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-mayor">Mayor of Mission</span>
+                <h3 class="cand-name">Noralinda (Norie) Gonzalez Garza</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “My experience in city government is my strongest and most valuable asset. My service began 15 years before being elected to council on the Planning & Zoning committee. Today, I serve as your mayor and represent Mission on regional planning boards securing funding to improve quality of life. Committed to continuing to be your full-time mayor.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Mission, TX</span>
+            <span style="color: var(--dem-blue); font-weight: 800;">Incumbent Mayor</span>
+          </div>
+        </div>
+
+        <!-- PLACE 1: Jessica Ortega -->
+        <div class="cand-card" data-category="place1">
+          <div>
+            <div class="cand-header">
+              <img src="cand_jessica_ortega.png" alt="Jessica Ortega" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place1">City Council Place 1</span>
+                <h3 class="cand-name">Jessica Ortega</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Serving the people of Mission has been one of the greatest honors of my life. My focus remains on improving animal shelter services and animal welfare, investing in infrastructure, and promoting economic development that creates opportunities for Mission families. Together, we can keep building, growing, and Rising Together.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 1</span>
+            <span style="color: #059669; font-weight: 800;">Candidate for Re-election</span>
+          </div>
+        </div>
+
+        <!-- PLACE 1: Tim Brown -->
+        <div class="cand-card" data-category="place1">
+          <div>
+            <div class="cand-header">
+              <img src="cand_tim_brown.png" alt="Tim Brown" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place1">City Council Place 1</span>
+                <h3 class="cand-name">Tim Brown</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Mission is the village that raised me. We have a responsibility to pass the next generation a community of excellence. City government should be transparent, people centered, and fiscally responsible. Someone in our community worked for every tax dollar, and we must be good stewards of those funds.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 1</span>
+            <span style="color: #059669; font-weight: 800;">Candidate for Place 1</span>
+          </div>
+        </div>
+
+        <!-- PLACE 2: Linda Castañeda -->
+        <div class="cand-card" data-category="place2">
+          <div>
+            <div class="cand-header">
+              <img src="cand_linda_castaneda.png" alt="Linda Castañeda" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place2">City Council Place 2</span>
+                <h3 class="cand-name">Linda Castañeda</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Our city deserves leadership built on integrity, transparency, accountability, and collaboration. Together, we can continue moving Mission forward by promoting responsible economic growth, ensuring equal municipal services for every neighborhood, and rebuilding trust between residents and city government.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 2</span>
+            <span style="color: #B45309; font-weight: 800;">Candidate for Place 2</span>
+          </div>
+        </div>
+
+        <!-- PLACE 2: Maira Salinas -->
+        <div class="cand-card" data-category="place2">
+          <div>
+            <div class="cand-header">
+              <img src="cand_maira_salinas.png" alt="Maira Salinas" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place2">City Council Place 2</span>
+                <h3 class="cand-name">Maira Salinas</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Longtime educator and community advocate with more than 18 years of public service. Bringing energetic, accessible leadership focused on listening to residents, supporting local small businesses, strengthening public safety, improving infrastructure and drainage, and protecting quality of life in every neighborhood.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 2</span>
+            <span style="color: #B45309; font-weight: 800;">Candidate for Place 2</span>
+          </div>
+        </div>
+
+        <!-- PLACE 2: Chief Ricardo Saldana -->
+        <div class="cand-card" data-category="place2">
+          <div>
+            <div class="cand-header">
+              <img src="cand_ricardo_saldana.png" alt="Chief Ricardo Saldana" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place2">City Council Place 2</span>
+                <h3 class="cand-name">Chief Ricardo Saldana</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Born and raised in Mission, dedicated 31 years as a firefighter including 17 years as Fire Chief. Continues serving through emergency management as a licensed Texas peace officer. Extensive experience in budget management and local/state boards. Ready to serve Mission once again: MISSION PROUD.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 2</span>
+            <span style="color: #B45309; font-weight: 800;">Candidate for Place 2</span>
+          </div>
+        </div>
+
+        <!-- PLACE 3: Marissa Gerlach -->
+        <div class="cand-card" data-category="place3">
+          <div>
+            <div class="cand-header">
+              <img src="cand_marissa_gerlach.png" alt="Marissa Gerlach" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place3">City Council Place 3</span>
+                <h3 class="cand-name">Marissa Gerlach</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Serving for the past 2½ years as your Place 3 Councilmember with a commitment to being present, accessible, and accountable. Member of the City’s Audit Committee, accountant, and business owner bringing strong financial expertise, transparent use of taxpayer dollars, and stronger public safety.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 3</span>
+            <span style="color: #7C3AED; font-weight: 800;">Incumbent Place 3</span>
+          </div>
+        </div>
+
+        <!-- PLACE 3: Daniel 'Danny' Tijerina -->
+        <div class="cand-card" data-category="place3">
+          <div>
+            <div class="cand-header">
+              <img src="cand_danny_tijerina.png" alt="Daniel Danny Tijerina" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place3">City Council Place 3</span>
+                <h3 class="cand-name">Daniel ‘Danny’ Tijerina</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Ready to bring thoughtful leadership, city planning experience, and practical solutions to Mission. Committed to supporting our small business economy, empowering local families, and passionately supporting the Arts and musicians to make Mission a vibrant cultural hub.”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 3</span>
+            <span style="color: #7C3AED; font-weight: 800;">Candidate for Place 3</span>
+          </div>
+        </div>
+
+        <!-- PLACE 3: Al Perez -->
+        <div class="cand-card" data-category="place3">
+          <div>
+            <div class="cand-header">
+              <img src="cand_al_perez.png" alt="Al Perez" class="cand-avatar">
+              <div>
+                <span class="cand-badge badge-place3">City Council Place 3</span>
+                <h3 class="cand-name">Al Perez</h3>
+              </div>
+            </div>
+            <div class="cand-quote">
+              “Proud Mission resident, U.S. Marine veteran, and law enforcement professional with over 40 years of service. Committed to putting residents first, strengthening public safety, promoting responsible growth, and ensuring transparency. Dedication to community: We can do this, Mission!”
+            </div>
+          </div>
+          <div class="cand-action-strip">
+            <span>📍 Place 3</span>
+            <span style="color: #7C3AED; font-weight: 800;">Candidate for Place 3</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Voter Registration Text Assistance Banner -->
+      <div style="background: linear-gradient(135deg, var(--navy) 0%, var(--dem-blue-dark) 100%); color: #fff; border-radius: var(--radius-lg); padding: 2.25rem; margin-top: 3rem; text-align: center; border: 1px solid rgba(56,189,248,0.3); box-shadow: 0 12px 32px rgba(0,0,0,0.15);">
+        <span style="background: rgba(212,154,55,0.25); color: var(--gold); font-size: 0.8rem; font-weight: 800; padding: 0.35rem 0.9rem; border-radius: 999px; text-transform: uppercase; display: inline-block; margin-bottom: 0.75rem;">
+          ⚠️ Voter Status Verification
+        </span>
+        <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 900; margin-bottom: 0.5rem;">
+          Is Your Voter Registration ACTIVE?
+        </h3>
+        <p style="color: #cbd5e1; font-size: 1rem; max-width: 680px; margin: 0 auto 1.5rem auto;">
+          If your voter registration status is not “ACTIVE” or if you recently moved, text <strong>Karen Prewitt</strong> directly at <strong>(956) 957-8095</strong> to help update and verify your registration before the deadline!
+        </p>
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+          <a href="sms:9569578095?body=Hello%20Karen,%20can%20you%20help%20me%20verify%20my%20voter%20registration%20in%20Mission?" class="btn btn-gold">
+            💬 Text Karen: (956) 957-8095
+          </a>
+          <a href="https://teamrv-mvp.sos.texas.gov/MVP/mvp.do" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.3);">
+            Check Online on VoteTexas.gov ↗
+          </a>
         </div>
       </div>
     </div>
@@ -1490,6 +1916,23 @@
   </footer>
 
   <script>
+    
+    // Candidate Filter Function
+    function filterCandidates(cat, btn) {
+      const buttons = document.querySelectorAll('.cand-tab-btn');
+      buttons.forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.cand-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
     // Language Switcher Function
     function switchLanguage(lang) {
       const msgEn = document.getElementById('msgEn');
