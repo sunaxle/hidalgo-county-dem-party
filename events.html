@@ -5,143 +5,377 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volunteer Hub - Hidalgo Dems</title>
-  <meta name="description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
+  <title>Upcoming Events & Mobilize Schedule | Hidalgo County Democrats</title>
+  <meta name="description" content="Official schedule of upcoming block walks, CEC meetings, phonebanks, candidate forums, and voting dates for the Hidalgo County Democratic Party.">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/state_party_clone.css">
+  <link rel="stylesheet" href="css/a11y.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;700;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q577ZL75XM');
+  </script>
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Upcoming Events & Mobilize Schedule | Hidalgo County Democrats">
+  <meta property="og:description" content="Find upcoming block walks, rallies, trainings, and voter engagement events across Hidalgo County.">
+  <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
+  <meta property="og:type" content="website">
+
   <style>
-    .volunteer-hero {
-      text-align: center;
-      padding-top: 120px;
-      padding-bottom: 4rem;
-    }
-    
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    :root {
+      --event-bg: #0f172a;
+      --event-card-bg: rgba(30, 41, 59, 0.7);
+      --event-card-border: rgba(255, 255, 255, 0.12);
+      --event-accent: #38bdf8;
+      --event-orange: #fd5f00;
+      --event-green: #34d399;
     }
 
-    .action-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 1rem;
-      padding: 2.5rem;
+    body.tx-clone {
+      background-color: var(--event-bg);
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+
+    /* 2026 Election Timeline Ticker */
+    .election-timeline-bar {
+      background: linear-gradient(90deg, #1e3a8a 0%, #0369a1 50%, #1e3a8a 100%);
+      border-bottom: 2px solid var(--event-accent);
+      padding: 1.25rem 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .timeline-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      gap: 1rem;
+    }
+    .timeline-milestone {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .timeline-milestone:hover {
+      transform: translateY(-2px);
+      border-color: var(--event-accent);
+    }
+    .milestone-icon {
+      font-size: 1.5rem;
+    }
+    .milestone-date {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 1.05rem;
+      color: #fcd34d;
+      letter-spacing: 0.5px;
+    }
+    .milestone-label {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Page Header */
+    .events-hero {
+      padding: 3.5rem 1.5rem 2rem 1.5rem;
       text-align: center;
-      transition: var(--transition);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .events-hero h1 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      color: #ffffff;
+      margin-bottom: 0.8rem;
+      line-height: 1.15;
+    }
+    .events-hero p {
+      color: #cbd5e1;
+      font-size: 1.15rem;
+      line-height: 1.6;
+    }
+
+    /* Filters & Controls */
+    .filter-section {
+      max-width: 1200px;
+      margin: 1rem auto 2.5rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--event-card-border);
+      color: #cbd5e1;
+      padding: 0.6rem 1.25rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--event-accent);
+      color: #0f172a;
+      border-color: var(--event-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Featured Events Grid */
+    .events-grid {
+      max-width: 1200px;
+      margin: 0 auto 4rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .event-card {
+      background: var(--event-card-bg);
+      border: 1px solid var(--event-card-border);
+      border-radius: 16px;
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       position: relative;
       overflow: hidden;
     }
-
-    .action-card::before {
+    .event-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    .event-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
+      background: linear-gradient(90deg, #38bdf8, #fd5f00);
     }
 
-    .action-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-      border-color: rgba(34, 211, 238, 0.2);
-    }
-
-    .action-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .action-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: var(--accent);
-    }
-
-    .action-card h3 {
-      font-size: 1.5rem;
+    .event-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 1rem;
-      color: #fff;
+    }
+    .event-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .event-tag.virtual {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border-color: rgba(168, 85, 247, 0.3);
+    }
+    .event-tag.hotspotting {
+      background: rgba(251, 146, 60, 0.15);
+      color: #fb923c;
+      border-color: rgba(251, 146, 60, 0.3);
     }
 
-    .action-card p {
-      flex-grow: 1;
-      margin-bottom: 2rem;
+    .event-date-chip {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fcd34d;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
-    .skills-section {
-      background: rgba(15, 23, 42, 0.8);
-      border-top: 1px solid var(--glass-border);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 5rem 0;
-      margin-top: 5rem;
+    .event-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+      font-family: 'Montserrat', sans-serif;
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+    .event-meta {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .skill-tag {
+    .event-sponsor {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .event-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: auto;
+    }
+    .btn-rsvp {
+      background: linear-gradient(90deg, #fd5f00, #ea580c);
+      color: white;
+      text-align: center;
+      font-weight: 800;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(253, 95, 0, 0.3);
+    }
+    .btn-rsvp:hover {
+      background: #e65600;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(253, 95, 0, 0.5);
+    }
+    .btn-cal {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      padding: 1rem;
-      border-radius: 0.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
       text-align: center;
       font-weight: 600;
-      color: var(--accent);
-      transition: var(--transition);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: all 0.2s ease;
+    }
+    .btn-cal:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
     }
 
-    .skill-tag:hover {
-      background: rgba(34, 211, 238, 0.1);
-      border-color: var(--accent);
+    /* Mobilize Zip Switcher & Iframe Hub */
+    .mobilize-hub-section {
+      max-width: 1200px;
+      margin: 0 auto 5rem auto;
+      padding: 0 1rem;
+    }
+    .mobilize-hub-card {
+      background: var(--event-card-bg);
+      border: 1px solid var(--event-card-border);
+      border-radius: 20px;
+      padding: 2.5rem 1.75rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    .hub-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .hub-header h2 {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 2rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+    .hub-header p {
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .zip-pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 1.75rem 0 2rem 0;
+    }
+    .zip-pill {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f8fafc;
+      padding: 0.6rem 1.1rem;
+      border-radius: 25px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .zip-pill:hover, .zip-pill.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #ffffff;
+    }
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 750px;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .timeline-container { flex-direction: column; align-items: stretch; }
+      .events-hero { padding-top: 2rem; }
+      .iframe-wrapper iframe { height: 600px; }
+      .zip-pill-group { justify-content: flex-start; overflow-x: auto; padding-bottom: 0.5rem; flex-wrap: nowrap; }
+      .zip-pill { flex-shrink: 0; }
+      .event-badge-row { flex-wrap: wrap; gap: 0.5rem; }
+      .events-grid { grid-template-columns: 1fr; }
     }
   </style>
-  <script src="js/gatekeeper.js"></script>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;600;800&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="css/state_party_clone.css" />
-
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q577ZL75XM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Q577ZL75XM');
-</script>
-  <link rel="stylesheet" href="css/a11y.css">
-
-  <!-- Open Graph Tags -->
-  <meta property="og:title" content="Volunteer Hub - Hidalgo Dems">
-  <meta property="og:description" content="Get involved with the Hidalgo County Democratic Party. Find volunteer opportunities, become a precinct chair, or sign up as an election worker.">
-  <meta property="og:image" content="https://hidalgocountydems.org/images/facebook_1656248751972_6946810765393131439.webp">
-  <meta property="og:type" content="website">
 </head>
 <body class="tx-clone">
-<!-- Dynamic Background Shapes -->
-  <div class="shape shape-1"></div>
-  <div class="shape shape-2"></div>
 
-  <!-- Navigation -->
-      <nav class="tx-clone-nav">
+  <!-- Main Navigation Header -->
+  <nav class="tx-clone-nav">
     <div id="google_translate_element" style="position: absolute; right: 1rem; top: 0rem; z-index: 1000; transform: scale(0.8); transform-origin: top right;"></div>
     <div class="tx-clone-nav-socials">
       <a href="https://twitter.com/hidalgocountydp" target="_blank" rel="noopener noreferrer" aria-label="Twitter" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
@@ -149,11 +383,11 @@
       <a href="https://instagram.com/hidalgocountydems" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="color: inherit;"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.88z"/></svg></a>
     </div>
     <div class="tx-clone-nav-center">
-      <a href="home.html" class="tx-clone-logo" id="main-party-logo">
+      <a href="index.html" class="tx-clone-logo" id="main-party-logo">
         <img src="images/facebook_1656248751972_6946810765393131439.webp" alt="Hidalgo County Democratic Party Logo" class="tx-clone-logo-img">
       </a>
       <div class="tx-clone-nav-links">
-        <a href="home.html" class="nav-item">Home</a>
+        <a href="index.html" class="nav-item">Home</a>
         
         <div class="nav-item dropdown">
           <span>About ▼</span>
@@ -168,10 +402,11 @@
           </div>
         </div>
 
-                <div class="nav-item dropdown">
+        <div class="nav-item dropdown">
           <span>Action ▼</span>
           <div class="dropdown-content">
             <div style="padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 800; letter-spacing: 1px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 0.25rem;">For Voters</div>
+            <a href="poll_worker.html" style="color: #ef4444; font-weight: 800;">Become a Poll Worker 🗳️</a>
             <a href="elections_101.html" style="color: #60a5fa; font-weight: 800;">Elections 101 FAQ 💡</a>
             <a href="election_operations.html" style="color: #c084fc; font-weight: 800;">Election Operations 📋</a>
             <a href="vbm.html" style="color: #34d399; font-weight: 800;">Vote by Mail 📬</a>
@@ -183,10 +418,10 @@
             <a href="arena_training.html">The Arena</a>
             <a href="vdr_portal.html" style="color: #a78bfa; font-weight: 800;">VDR Portal 📝</a>
             <a href="precinct_chairs.html">Precinct Chairs</a>
-            </div>
+          </div>
         </div>
 
-                <div class="nav-item dropdown">
+        <div class="nav-item dropdown">
           <a href="community.html" style="color: inherit; text-decoration: none; font-weight: inherit;">Events & Updates ▼</a>
           <div class="dropdown-content">
             <a href="cec_history.html" style="color: #a855f7; font-weight: 800;">CEC Meeting History 📜</a>
@@ -224,40 +459,259 @@
   </nav>
   <div class="tx-clone-nav-accent-bar"></div>
 
-  <header class="page-header container fade-in" style="padding: 4rem 2rem;">
-    <h1>Upcoming Events</h1>
-    <p style="max-width: 800px; margin: 0 auto; font-size: 1.15rem; color: #cbd5e1;">A unified calendar of County Executive Committee meetings, block walks, and community events.</p>
+  <!-- 2026 Key Election Milestones Bar -->
+  <div class="election-timeline-bar">
+    <div class="timeline-container">
+      <div class="timeline-milestone">
+        <div class="milestone-icon">📝</div>
+        <div>
+          <div class="milestone-date">OCTOBER 5, 2026</div>
+          <div class="milestone-label">Voter Registration Deadline</div>
+        </div>
+      </div>
+      <div class="timeline-milestone" style="border-color: #38bdf8; background: rgba(56, 189, 248, 0.15);">
+        <div class="milestone-icon">🗳️</div>
+        <div>
+          <div class="milestone-date" style="color: #38bdf8;">OCT 19 – OCT 30</div>
+          <div class="milestone-label" style="color: #f8fafc;">Early Voting Period</div>
+        </div>
+      </div>
+      <div class="timeline-milestone">
+        <div class="milestone-icon">📬</div>
+        <div>
+          <div class="milestone-date">OCTOBER 23, 2026</div>
+          <div class="milestone-label">Mail Ballot Application Deadline</div>
+        </div>
+      </div>
+      <div class="timeline-milestone" style="border-color: #ef4444; background: rgba(239, 68, 68, 0.15);">
+        <div class="milestone-icon">⭐</div>
+        <div>
+          <div class="milestone-date" style="color: #f87171;">NOVEMBER 3, 2026</div>
+          <div class="milestone-label" style="color: #f8fafc;">General Election Day (7 AM - 7 PM)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Header -->
+  <header class="events-hero fade-in">
+    <h1>Hidalgo Action & Events Calendar</h1>
+    <p>Join grassroots block walks, candidate meet & greets, CEC meetings, and voter registration drives across Hidalgo County. Every door knocked brings South Texas closer to victory.</p>
   </header>
-  <main class="container fade-in" style="min-height: 50vh; margin-bottom: 4rem;">
-    <div class="glass-card" style="padding: 2rem; text-align: center;">
-      <h3 style="margin-bottom: 2rem; color: white;">Unified Events Calendar</h3>
-      <iframe src="https://www.mobilize.us/texasdemocrats/?zip=78539" width="100%" height="800" style="border:none; border-radius: 8px; background: white;"></iframe>
+
+  <!-- Category Filter Pills -->
+  <div class="filter-section">
+    <button class="filter-btn active" onclick="filterCategory('all', this)">All Events (6)</button>
+    <button class="filter-btn" onclick="filterCategory('blockwalk', this)">👟 Block Walks (4)</button>
+    <button class="filter-btn" onclick="filterCategory('hotspot', this)">📍 Hotspotting (1)</button>
+    <button class="filter-btn" onclick="filterCategory('dialogue', this)">🎙️ Senate Dialogue (1)</button>
+  </div>
+
+  <!-- Featured Upcoming Events Grid -->
+  <main class="events-grid" id="events-grid">
+
+    <!-- Event 1: Mission Block Walk -->
+    <div class="event-card" data-category="blockwalk" data-city="mission">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag">👟 Block Walk</span>
+          <span class="event-date-chip">📅 Fri, Sep 18</span>
+        </div>
+        <h3 class="event-title">Texas Together Block Walk - Mission</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>4:00 PM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 Mission, TX</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together / Talarico for Texas</strong>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1029692/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Texas+Together+Block+Walk+-+Mission&dates=20260918T210000Z/20260918T233000Z&details=Join+Texas+Together+to+knock+doors+in+Mission,+TX!+RSVP:+https://www.mobilize.us/talaricofortexas/event/1029692/&location=Mission,+TX" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
     </div>
 
-    <!-- Poll Worker Recruitment Flyer Callout Section -->
-    <div class="glass-card" style="padding: 2.5rem; margin-top: 3rem; text-align: center; border-color: rgba(239,68,68,0.4); background: linear-gradient(135deg, rgba(11,19,41,0.9) 0%, rgba(30,58,138,0.8) 100%);">
-      <div style="display: inline-block; padding: 0.3rem 1rem; background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); border-radius: 20px; color: #f87171; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem;">
-        🚨 URGENT POLL WORKER RECRUITMENT
+    <!-- Event 2: Edinburg Block Walk -->
+    <div class="event-card" data-category="blockwalk" data-city="edinburg">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag">👟 Block Walk</span>
+          <span class="event-date-chip">📅 Fri, Sep 18</span>
+        </div>
+        <h3 class="event-title">Texas Together Block Walk - Edinburg</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>5:30 PM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 Edinburg, TX</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together / Talarico for Texas</strong>
+        </div>
       </div>
-      <h3 style="color: white; font-size: 2rem; font-family: 'Alfa Slab One', cursive; margin-bottom: 1rem;">Serve Your Community on November 3, 2026</h3>
-      <p style="color: #cbd5e1; max-width: 750px; margin: 0 auto 2rem auto; font-size: 1.05rem;">
-        The Hidalgo County Elections Department is hiring Election Judges & Clerks ($15/hr - $19/hr). Help staff the polls on Election Day!
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1032783/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Texas+Together+Block+Walk+-+Edinburg&dates=20260918T223000Z/20260919T010000Z&details=Join+Texas+Together+to+knock+doors+in+Edinburg,+TX!+RSVP:+https://www.mobilize.us/talaricofortexas/event/1032783/&location=Edinburg,+TX" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
+    </div>
+
+    <!-- Event 3: McAllen Block Walk (Saturday) -->
+    <div class="event-card" data-category="blockwalk" data-city="mcallen">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag">👟 Block Walk</span>
+          <span class="event-date-chip">📅 Sat, Sep 19</span>
+        </div>
+        <h3 class="event-title">Texas Together Block Walk - McAllen</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>10:00 AM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 McAllen, TX</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together / Talarico for Texas</strong>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1030656/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Texas+Together+Block+Walk+-+McAllen&dates=20260919T150000Z/20260919T180000Z&details=Join+Texas+Together+to+knock+doors+in+McAllen,+TX!+RSVP:+https://www.mobilize.us/talaricofortexas/event/1030656/&location=McAllen,+TX" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
+    </div>
+
+    <!-- Event 4: McAllen Hotspotting (Saturday) -->
+    <div class="event-card" data-category="hotspot" data-city="mcallen">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag hotspotting">📍 Hotspotting</span>
+          <span class="event-date-chip">📅 Sat, Sep 19</span>
+        </div>
+        <h3 class="event-title">Texas Together Hotspotting - McAllen</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>2:00 PM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 High-Traffic Hubs, McAllen, TX</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together / Talarico for Texas</strong>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1036251/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Texas+Together+Hotspotting+-+McAllen&dates=20260919T190000Z/20260919T213000Z&details=Join+Texas+Together+for+voter+outreach+hotspotting+in+McAllen!+RSVP:+https://www.mobilize.us/talaricofortexas/event/1036251/&location=McAllen,+TX" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
+    </div>
+
+    <!-- Event 5: McAllen Block Walk (Sunday) -->
+    <div class="event-card" data-category="blockwalk" data-city="mcallen">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag">👟 Block Walk</span>
+          <span class="event-date-chip">📅 Sun, Sep 20</span>
+        </div>
+        <h3 class="event-title">Texas Together Block Walk - McAllen</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>9:30 AM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 McAllen, TX</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together / Talarico for Texas</strong>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1031709/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Texas+Together+Sunday+Block+Walk+-+McAllen&dates=20260920T143000Z/20260920T173000Z&details=Join+Texas+Together+for+Sunday+morning+block+walking+in+McAllen!+RSVP:+https://www.mobilize.us/talaricofortexas/event/1031709/&location=McAllen,+TX" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
+    </div>
+
+    <!-- Event 6: Senate Dialogue (Virtual) -->
+    <div class="event-card" data-category="dialogue" data-city="virtual">
+      <div>
+        <div class="event-badge-row">
+          <span class="event-tag virtual">🎙️ Virtual Dialogue</span>
+          <span class="event-date-chip">📅 Wed, Sep 30</span>
+        </div>
+        <h3 class="event-title">Dialogue in Texas: Texas Senate Race</h3>
+        <div class="event-meta">
+          <span>⏰ <strong>11:00 AM CDT</strong></span>
+        </div>
+        <div class="event-meta">
+          <span>📍 Virtual Event / Zoom</span>
+        </div>
+        <div class="event-sponsor">
+          Organized by <strong>Texas Together</strong>
+        </div>
+      </div>
+      <div class="event-actions">
+        <a href="https://www.mobilize.us/talaricofortexas/event/1038515/" target="_blank" rel="noopener noreferrer" class="btn-rsvp">RSVP ON MOBILIZE ➔</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Dialogue+in+Texas:+Texas+Senate+Race&dates=20260930T160000Z/20260930T173000Z&details=Statewide+virtual+forum+on+the+Texas+Senate+race.+RSVP:+https://www.mobilize.us/talaricofortexas/event/1038515/&location=Virtual+(Zoom)" target="_blank" rel="noopener noreferrer" class="btn-cal">📅 Add to Google Calendar</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mobilize Interactive Multi-City Hub -->
+  <section class="mobilize-hub-section">
+    <div class="mobilize-hub-card">
+      <div class="hub-header">
+        <h2>Unified Mobilize Action Feed</h2>
+        <p>Browse live events registered across Texas Democratic Party campaigns. Select your municipality below to switch your local view instantly.</p>
+        
+        <!-- Multi-City Zip Switcher Pills -->
+        <div class="zip-pill-group">
+          <button class="zip-pill active" onclick="switchMobilizeZip('78501', this)">📍 McAllen (78501)</button>
+          <button class="zip-pill" onclick="switchMobilizeZip('78539', this)">📍 Edinburg (78539)</button>
+          <button class="zip-pill" onclick="switchMobilizeZip('78572', this)">📍 Mission (78572)</button>
+          <button class="zip-pill" onclick="switchMobilizeZip('78577', this)">📍 Pharr / PSJA (78577)</button>
+          <button class="zip-pill" onclick="switchMobilizeZip('78596', this)">📍 Weslaco (78596)</button>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <a id="external-mobilize-link" href="https://www.mobilize.us/texasdemocrats/?zip=78501" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; font-weight: 700; text-decoration: underline; font-size: 0.95rem;">
+            Open Mobilize Full Screen in New Tab ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobilize Iframe Container -->
+      <div class="iframe-wrapper">
+        <iframe id="mobilize-iframe" src="https://www.mobilize.us/texasdemocrats/?zip=78501" title="Hidalgo County Democratic Events on Mobilize"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Poll Worker Recruitment Section -->
+  <section class="container" style="max-width: 1200px; margin: 0 auto 5rem auto; padding: 0 1rem;">
+    <div class="glass-card" style="padding: 3rem 2rem; text-align: center; border-color: rgba(239,68,68,0.4); background: linear-gradient(135deg, rgba(11,19,41,0.9) 0%, rgba(30,58,138,0.8) 100%); border-radius: 20px;">
+      <div style="display: inline-block; padding: 0.35rem 1.2rem; background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); border-radius: 20px; color: #f87171; font-weight: 800; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1.25rem;">
+        🚨 ELECTION DAY RECRUITMENT
+      </div>
+      <h2 style="color: white; font-size: clamp(2rem, 4vw, 2.75rem); font-family: 'Alfa Slab One', cursive; margin-bottom: 1rem;">Serve Your Community as a Poll Worker</h2>
+      <p style="color: #cbd5e1; max-width: 750px; margin: 0 auto 2rem auto; font-size: 1.05rem; line-height: 1.6;">
+        The Hidalgo County Elections Department is hiring Election Judges & Clerks ($15/hr - $19/hr). Help ensure fair, free, and accessible elections across all 257 Hidalgo County precincts!
       </p>
       
-      <div style="max-width: 500px; margin: 0 auto 2rem auto;">
-        <a href="poll_worker.html">
-          <img src="images/become_a_poll_worker_flyer.jpg" alt="Become a Poll Worker Official Flyer" style="width: 100%; height: auto; border-radius: 12px; border: 2px solid rgba(56, 189, 248, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        </a>
+      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.95rem;">Judge: $19.00/hr</span>
+        <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.95rem;">Alt Judge: $17.00/hr</span>
+        <span style="background: rgba(252, 211, 77, 0.15); border: 1px solid rgba(252, 211, 77, 0.4); color: #fcd34d; font-weight: 800; padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.95rem;">Clerk: $15.00/hr</span>
       </div>
 
       <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <a href="poll_worker.html" class="btn btn-primary" style="background: #ef4444; border-color: #ef4444;">Read Requirements & Apply ➔</a>
-        <a href="https://www.hidalgocounty.us/105/Elections-Department#docaccess-5cfbc2b9cb9e64c2c864cf74d629c5be" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">County Elections Portal ↗</a>
+        <a href="poll_worker.html" class="btn btn-primary" style="background: #ef4444; border-color: #ef4444; font-weight: 800; padding: 0.9rem 2rem; border-radius: 10px;">Read Requirements & Apply ➔</a>
+        <a href="https://www.hidalgocounty.us/105/Elections-Department#docaccess-5cfbc2b9cb9e64c2c864cf74d629c5be" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-weight: 700; padding: 0.9rem 1.75rem; border-radius: 10px;">Official County Portal ↗</a>
       </div>
     </div>
-  </main>
+  </section>
 
-<footer class="tx-clone-footer">
+  <!-- Footer -->
+  <footer class="tx-clone-footer">
     <div class="tx-clone-footer-logo">HIDALGO COUNTY DEMOCRATS</div>
     <div style="margin-bottom: 2rem; font-weight: 500; font-size: 1.1rem;">
       <p>info@hidalgocountydems.org</p>
@@ -272,7 +726,7 @@
   </footer>
 
   <script src="js/app.js"></script>
-<script src="js/value_counter.js"></script>
+  <script src="js/a11y.js"></script>
 
   <!-- Google Translate -->
   <script>
@@ -282,8 +736,33 @@
   </script>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  <!-- Mobilize Events (Iframe Version) -->
+  <!-- Interactive Filter & Zip Switcher Script -->
+  <script>
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-  <script src="js/a11y.js"></script>
+      const cards = document.querySelectorAll('.event-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function switchMobilizeZip(zip, btn) {
+      document.querySelectorAll('.zip-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+
+      const iframe = document.getElementById('mobilize-iframe');
+      const externalLink = document.getElementById('external-mobilize-link');
+      const newUrl = 'https://www.mobilize.us/texasdemocrats/?zip=' + zip;
+
+      if (iframe) iframe.src = newUrl;
+      if (externalLink) externalLink.href = newUrl;
+    }
+  </script>
 </body>
 </html>

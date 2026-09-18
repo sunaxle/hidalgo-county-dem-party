@@ -23,7 +23,7 @@ try {
   console.warn("Firebase initialized with offline dataset fallback:", e);
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
+async function initDirectory() {
   const grid = document.getElementById("directoryGrid");
   const filterBtns = document.querySelectorAll(".filter-btn");
   const searchInput = document.getElementById("candidateSearchInput");
@@ -58,130 +58,109 @@ document.addEventListener("DOMContentLoaded", async () => {
           firestoreOfficials.forEach(fsItem => {
             const key = fsItem.name.toLowerCase();
             if (idMap.has(key)) {
-              idMap.set(key, { ...idMap.get(key), ...fsItem });
+              officials = officials.map(item => item.name.toLowerCase() === key ? { ...item, ...fsItem } : item);
             } else {
-              idMap.set(key, fsItem);
+              officials.push(fsItem);
             }
           });
           
-          officials = Array.from(idMap.values());
           renderGrid();
         }
       }
     } catch (err) {
-      console.info("Using cached static directory dataset (offline / network fast mode).");
+      console.warn("Could not fetch Firestore officials directory updates, using built-in verified registry:", err);
     }
   }
 
-  // Filter Buttons Click
+  // Filter Buttons
   filterBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       filterBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      currentFilter = btn.getAttribute("data-filter") || "all";
+      currentFilter = btn.getAttribute("data-filter");
       renderGrid();
     });
   });
 
-  // Search Input Listener
+  // Search Input with Debouncing
   if (searchInput) {
+    let debounceTimer;
     searchInput.addEventListener("input", (e) => {
-      searchQuery = e.target.value.trim().toLowerCase();
-      renderGrid();
-    });
-  }
-
-  function getFilteredData() {
-    return officials.filter(official => {
-      // Level & Type filter
-      let matchesFilter = true;
-      const level = (official.level || "").toLowerCase();
-      const type = (official.type || "").toLowerCase();
-
-      if (currentFilter === "federal") {
-        matchesFilter = level === "federal";
-      } else if (currentFilter === "state") {
-        matchesFilter = level === "state";
-      } else if (currentFilter === "county") {
-        matchesFilter = level === "county";
-      } else if (currentFilter === "candidate") {
-        matchesFilter = type.includes("candidate") || type.includes("nominee");
-      } else if (currentFilter === "incumbent") {
-        matchesFilter = type.includes("incumbent") || type.includes("officeholder");
-      }
-
-      if (!matchesFilter) return false;
-
-      // Text search filter
-      if (!searchQuery) return true;
-
-      const name = (official.name || "").toLowerCase();
-      const office = (official.office || official.title || "").toLowerCase();
-      const email = (official.email || "").toLowerCase();
-      const phone = (official.phone || "").toLowerCase();
-
-      return name.includes(searchQuery) ||
-             office.includes(searchQuery) ||
-             email.includes(searchQuery) ||
-             phone.includes(searchQuery);
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderGrid();
+      }, 150);
     });
   }
 
   function renderGrid() {
-    const data = getFilteredData();
-    
-    // Sort: Federal (1) -> State (2) -> County (3), then by Name
-    const levelOrder = { "Federal": 1, "State": 2, "County": 3 };
-    data.sort((a, b) => {
-      const levelA = levelOrder[a.level] || 99;
-      const levelB = levelOrder[b.level] || 99;
-      if (levelA === levelB) {
-        return (a.name || "").localeCompare(b.name || "");
-      }
-      return levelA - levelB;
-    });
-
-    // Update Results Counter
-    if (resultsCount) {
-      resultsCount.textContent = `Showing ${data.length} of ${officials.length} officials & candidates`;
-    }
-
     grid.innerHTML = "";
 
-    if (data.length === 0) {
+    const filtered = officials.filter(official => {
+      // Exclude Colin Allred completely
+      if (official.name && (official.name.toLowerCase().includes("allred") || official.name === "Colin Allred")) {
+        return false;
+      }
+
+      // Filter by Level
+      let matchesFilter = true;
+      if (currentFilter !== "all") {
+        matchesFilter = (official.level && official.level.toLowerCase() === currentFilter.toLowerCase());
+      }
+
+      // Search Query Filter
+      let matchesSearch = true;
+      if (searchQuery) {
+        const nameMatch = official.name && official.name.toLowerCase().includes(searchQuery);
+        const officeMatch = official.office && official.office.toLowerCase().includes(searchQuery);
+        const districtMatch = official.district && official.district.toLowerCase().includes(searchQuery);
+        const levelMatch = official.level && official.level.toLowerCase().includes(searchQuery);
+        matchesSearch = nameMatch || officeMatch || districtMatch || levelMatch;
+      }
+
+      return matchesFilter && matchesSearch;
+    });
+
+    // Update Counter
+    if (resultsCount) {
+      resultsCount.textContent = `Showing ${filtered.length} official${filtered.length === 1 ? '' : 's'}`;
+    }
+
+    if (filtered.length === 0) {
       grid.innerHTML = `
-        <div class="empty-state">
-          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
-          <h3 style="color: #fff; margin-bottom: 0.5rem;">No candidates or officials found</h3>
-          <p style="color: #94a3b8; max-width: 450px; margin: 0 auto;">Try adjusting your search query or switching to another filter category.</p>
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; color: #64748b;">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">No candidates or officials found</h3>
+          <p style="font-size: 0.95rem;">Try adjusting your search terms or filter selection.</p>
         </div>
       `;
       return;
     }
 
-    data.forEach(official => {
+    filtered.forEach(official => {
       const card = document.createElement("div");
       card.className = "candidate-card";
 
-      // Determine level badge class
-      const levelKey = (official.level || "Federal").toLowerCase();
-      let levelClass = "badge-federal";
-      if (levelKey === "state") levelClass = "badge-state";
-      if (levelKey === "county") levelClass = "badge-county";
-
-      // Determine status badge class
-      const typeKey = (official.type || "Candidate").toLowerCase();
-      let statusClass = "type-candidate";
-      let statusLabel = official.type || "2026 Candidate";
-      if (typeKey.includes("nominee")) {
-        statusClass = "type-nominee";
-        statusLabel = "2026 Nominee";
-      } else if (typeKey.includes("incumbent") || typeKey.includes("officeholder")) {
-        statusClass = "type-incumbent";
-        statusLabel = "Elected Incumbent";
+      // Status Badge
+      let statusClass = "badge-general";
+      let statusLabel = "General Election Candidate";
+      if (official.status === "incumbent") {
+        statusClass = "badge-incumbent";
+        statusLabel = "Incumbent";
+      } else if (official.status === "won_primary") {
+        statusClass = "badge-nominee";
+        statusLabel = "Democratic Nominee";
       }
 
-      // Build Action links
+      // Level Badge Styling
+      let levelClass = "level-federal";
+      if (official.level === "State") levelClass = "level-state";
+      if (official.level === "County") levelClass = "level-county";
+      if (official.level === "Judicial") levelClass = "level-judicial";
+      if (official.level === "Municipal") levelClass = "level-municipal";
+
+      // Links Bar
       let actionLinks = "";
       if (official.website) {
         actionLinks += `<a href="${official.website}" target="_blank" rel="noopener noreferrer">🌐 Website</a>`;
@@ -234,4 +213,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       grid.appendChild(card);
     });
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initDirectory);
+} else {
+  initDirectory();
+}

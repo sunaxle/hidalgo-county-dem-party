@@ -155,7 +155,6 @@ body.tx-clone {
     justify-content: center;
     width: 100%;
     margin-top: 2rem;
-    pointer-events: none; /* Prevent static icons from capturing erroneous taps */
   }
   .tx-clone-nav-center {
     width: 100%;
@@ -347,10 +346,10 @@ body.tx-clone {
 /* Mobile Responsiveness for Hero */
 @media (max-width: 768px) {
   .tx-clone-hero {
-    flex-direction: column-reverse;
-    padding: 6rem 5% 4rem 5%;
+    flex-direction: column;
+    padding: 3rem 1.25rem 3rem 1.25rem;
     gap: 2.5rem;
-    text-align: center;
+    text-align: left;
   }
   .tx-clone-hero-left {
     width: 100%;
@@ -413,12 +412,22 @@ body.tx-clone {
 }
 
 @media (max-width: 768px) {
+  .tx-clone-donation {
+    padding: 3rem 1.25rem;
+  }
+  .tx-clone-donation-left,
+  .tx-clone-donation-right {
+    min-width: 100% !important;
+    width: 100%;
+  }
   .tx-clone-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .tx-clone-donation-left h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
     text-align: center;
+    line-height: 1.15;
+    word-break: break-word;
   }
 }
 
@@ -568,19 +577,48 @@ body.tx-clone {
   }
   
   .tx-clone-hero h1 {
-    font-size: 2.5rem !important;
+    font-size: 2.2rem !important;
+  }
+
+  .tx-clone-hero {
+    padding: 2.5rem 1rem !important;
+    gap: 2rem !important;
   }
   
-  .tx-clone-hero-left, .tx-clone-hero-right {
+  .tx-clone-hero-right {
     min-width: 100% !important;
+    order: 1 !important;
   }
-  
+
+  .tx-clone-hero-left {
+    min-width: 100% !important;
+    order: 2 !important;
+  }
+
+  #election-countdown-banner {
+    padding: 0.5rem 0.5rem !important;
+  }
+
+  #election-countdown-banner > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.4rem !important;
+  }
+
+  #election-countdown-banner > div > div {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    font-size: 0.78rem !important;
+  }
+
   .tx-clone-btn-submit, .tx-clone-btn-donate, .tx-clone-btn-outline {
     min-height: 48px;
-    padding: 1rem;
+    padding: 0.85rem 1rem;
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
