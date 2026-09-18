@@ -7,7 +7,7 @@
     Allow from all
 </IfModule>
 
-DirectoryIndex index.html index.htm
+DirectoryIndex index.html index.htm home.html
 
 # Proper MIME types
 AddType text/html .html .htm
@@ -16,3 +16,15 @@ AddType application/javascript .js
 AddType image/png .png
 AddType image/jpeg .jpg .jpeg
 AddType image/svg+xml .svg
+
+# Cache Control to prevent stale caching
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=60, must-revalidate"
+    </FilesMatch>
+</IfModule>

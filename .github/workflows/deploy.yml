@@ -17,15 +17,42 @@ jobs:
           find . -type d -exec chmod 755 {} +
           find . -type f -exec chmod 644 {} +
 
-      - name: 📂 Sync files
+      - name: 📂 Sync files to public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        continue-on-error: true
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: public_html/
+          local-dir: ./
+          state-name: .ftp-deploy-sync-state-publichtml-v1.json
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            Demographic data requests/**
+            2026_Election_Data/**
+            2026primaryvoting data/**
+            Elections_Data/**
+            functions/**
+            **/*.py
+            credentials.json
+            *.offline
+            *.offline/**
+
+      - name: 📂 Sync files to root directory
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        continue-on-error: true
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ./
           local-dir: ./
-          state-name: .ftp-deploy-sync-state-v4.json
+          state-name: .ftp-deploy-sync-state-root-v5.json
           log-level: verbose
           exclude: |
             **/.git*
